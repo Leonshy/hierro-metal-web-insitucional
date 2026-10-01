@@ -7,6 +7,7 @@ use App\Models\Cotizacion;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ListCotizaciones extends ListRecords
@@ -34,8 +35,8 @@ class ListCotizaciones extends ListRecords
             fwrite($salida, "\xEF\xBB\xBF"); // para que Excel abra bien las tildes
             fputcsv($salida, ['Recibida', 'Estado', 'Nombre', 'Empresa', 'Teléfono', 'Correo', 'Rubro', 'Pedido', 'Origen', 'Asignado a', 'Adjuntos', 'Aviso enviado']);
 
-            $consulta->chunk(200, function ($cotizaciones) use ($salida): void {
-                foreach ($cotizaciones as $c) {
+            $consulta->chunk(200, function (Collection $cotizaciones) use ($salida): void {
+                foreach ($cotizaciones->whereInstanceOf(Cotizacion::class) as $c) {
                     fputcsv($salida, array_map([self::class, 'celdaSegura'], [
                         $c->created_at->format('Y-m-d H:i'),
                         Cotizacion::ESTADOS[$c->estado] ?? $c->estado,

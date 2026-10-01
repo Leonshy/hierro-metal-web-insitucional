@@ -29,7 +29,7 @@ class CotizacionesTable
                 $filtros = $livewire->tableFilters ?? [];
                 $verSpam = ($filtros['incluir_spam']['isActive'] ?? false) || in_array('spam', (array) ($filtros['estado']['values'] ?? []), true);
 
-                return $verSpam ? $query : $query->reales();
+                return $verSpam ? $query : $query->scopes('reales');
             })
             ->columns([
                 TextColumn::make('created_at')->label('Recibida')->dateTime('d/m/Y H:i')->timezone('America/Asuncion')->sortable(),
@@ -59,7 +59,7 @@ class CotizacionesTable
                         ->when($data['desde'] ?? null, fn (Builder $query, string $fecha) => $query->whereDate('created_at', '>=', $fecha))
                         ->when($data['hasta'] ?? null, fn (Builder $query, string $fecha) => $query->whereDate('created_at', '<=', $fecha))),
                 Filter::make('aviso_pendiente')->label('Aviso sin enviar')->toggle()
-                    ->query(fn (Builder $query): Builder => $query->conAvisoPendiente()),
+                    ->query(fn (Builder $query): Builder => $query->scopes('conAvisoPendiente')),
                 Filter::make('incluir_spam')->label('Incluir spam')->toggle()->query(fn (Builder $query): Builder => $query),
             ])
             ->recordActions([

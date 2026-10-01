@@ -5,17 +5,34 @@ namespace App\Models;
 use App\Models\Concerns\HasAuditing;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Spatie\Activitylog\LogOptions;
 
 /**
  * Pedido de cotización: el lead del sitio. Se guarda siempre antes de intentar el aviso
  * por correo, así un problema de SMTP no cuesta un pedido (CLAUDE.md regla 8).
+ *
+ * @property string $uuid
+ * @property string $nombre
+ * @property string|null $empresa
+ * @property string $telefono
+ * @property string $email
+ * @property string|null $rubro
+ * @property string $mensaje
+ * @property string|null $origen
+ * @property string $estado
+ * @property Carbon $created_at
+ * @property Carbon|null $mail_enviado_at
+ * @property int $mail_intentos
+ * @property-read Collection<int, CotizacionAdjunto> $adjuntos
+ * @property-read User|null $asignado
  */
 #[Fillable(['uuid', 'nombre', 'empresa', 'telefono', 'email', 'rubro', 'mensaje', 'origen', 'utm', 'estado', 'asignado_a', 'notas_internas', 'ip', 'user_agent', 'mail_enviado_at', 'mail_intentos', 'alertada_at'])]
 class Cotizacion extends Model
@@ -68,12 +85,21 @@ class Cotizacion extends Model
         return $this->belongsTo(User::class, 'asignado_a');
     }
 
+    /**
+     * @param  Builder<Cotizacion>  $query
+     * @return Builder<Cotizacion>
+     */
     public function scopeReales(Builder $query): Builder
     {
         return $query->where('estado', '!=', 'spam');
     }
 
-    /** Pedidos reales cuyo aviso por correo todavía no salió. */
+    /**
+     * Pedidos reales cuyo aviso por correo todavía no salió.
+     *
+     * @param  Builder<Cotizacion>  $query
+     * @return Builder<Cotizacion>
+     */
     public function scopeConAvisoPendiente(Builder $query): Builder
     {
         return $query->reales()->whereNull('mail_enviado_at');

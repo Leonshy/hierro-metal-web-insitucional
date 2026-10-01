@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
+/**
+ * @property array<int, int> $dias días ISO de la semana (1 = lunes … 7 = domingo)
+ */
 #[Fillable(['etiqueta', 'dias', 'abre', 'cierra', 'cerrado', 'orden', 'activo'])]
 class Horario extends Model
 {
