@@ -1,4 +1,5 @@
 import './consent.js';
+import './formulario.js';
 
 // Hallazgo real de Fase 9 (QA, docs/11-qa-testing.md §6), encontrado con
 // Playwright: la premisa original de este archivo ("Alpine.js llega
@@ -7,7 +8,7 @@ import './consent.js';
 // (docs/09-rendimiento.md §5, `x-layouts.app` con prop `livewire`) — home,
 // páginas institucionales, noticias, contacto, calendario, comunicados y
 // documentos NO cargan Livewire, así que tampoco cargaban Alpine. Resultado:
-// el botón de menú móvil (`x-data`/`@click` en site-header.blade.php) y el
+// el botón de menú móvil (`x-data`/`@click` en cabecera.blade.php) y el
 // banner de cookies (`alpine:init` en consent.js) quedaban completamente
 // inertes en casi todo el sitio público — el menú no abría en móvil en
 // ninguna plantilla salvo el buscador. Se agrega Alpine standalone (mucho
