@@ -21,17 +21,17 @@ class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentDuplicate;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
-    protected static ?string $navigationLabel = 'Páginas';
+    protected static ?string $navigationLabel = 'Páginas legales';
 
     protected static string|UnitEnum|null $navigationGroup = 'Contenido';
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 8;
 
-    protected static ?string $modelLabel = 'página';
+    protected static ?string $modelLabel = 'página legal';
 
-    protected static ?string $pluralModelLabel = 'páginas';
+    protected static ?string $pluralModelLabel = 'páginas legales';
 
     public static function form(Schema $schema): Schema
     {
@@ -57,6 +57,15 @@ class PageResource extends Resource
             'create' => CreatePage::route('/create'),
             'edit' => EditPage::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * Sólo las páginas «libres» (política de privacidad, términos y condiciones…). Las páginas de las secciones del
+     * sitio (Inicio, Productos, Servicios…) se editan desde su propia entrada del menú, no desde acá.
+     */
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->whereNotIn('slug', Page::SECCIONES);
     }
 
     public static function getRecordRouteBindingEloquentQuery(): Builder

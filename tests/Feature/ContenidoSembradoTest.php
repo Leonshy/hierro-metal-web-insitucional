@@ -175,7 +175,9 @@ it('Calidad queda publicada y Privacidad queda en borrador hasta la revisión le
 
     expect($calidad->status)->toBe('published')
         ->and($privacidad->status)->toBe('draft')
-        ->and($calidad->blocks[1]['data']['content']['es'])->toContain('Qué significa esto para tu obra');
+        // Calidad se siembra en textos separados: introducción, «Qué significa esto…» y «Ámbito de aplicación».
+        ->and(collect($calidad->blocks)->where('type', 'texto')->pluck('data.content.es')->all())->toHaveCount(3)
+        ->and($calidad->blocks[2]['data']['content']['es'])->toContain('Qué significa esto para tu obra');
 
     $this->get('/calidad')->assertOk()->assertSee('Materia prima certificada');
     $this->get('/privacidad')->assertNotFound();

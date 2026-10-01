@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Compromisos;
 
+use App\Filament\Pages\Secciones\CalidadPage;
 use App\Filament\Resources\Compromisos\Pages\CreateCompromiso;
 use App\Filament\Resources\Compromisos\Pages\EditCompromiso;
 use App\Filament\Resources\Compromisos\Pages\ListCompromisos;
 use App\Filament\Resources\Compromisos\Schemas\CompromisoForm;
 use App\Filament\Resources\Compromisos\Tables\CompromisosTable;
+use App\Filament\Secciones\Concerns\PerteneceAUnaSeccion;
 use App\Models\Compromiso;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -17,6 +19,8 @@ use UnitEnum;
 
 class CompromisoResource extends Resource
 {
+    use PerteneceAUnaSeccion;
+
     protected static ?string $model = Compromiso::class;
 
     protected static ?string $slug = 'compromisos';
@@ -50,5 +54,10 @@ class CompromisoResource extends Resource
             'create' => CreateCompromiso::route('/create'),
             'edit' => EditCompromiso::route('/{record}/edit'),
         ];
+    }
+
+    protected static function seccion(): string
+    {
+        return CalidadPage::class;
     }
 }

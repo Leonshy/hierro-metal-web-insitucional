@@ -24,7 +24,7 @@ class QuickLinksWidget extends Widget
     public function getLinks(): array
     {
         return [
-            ['label' => 'Nueva página', 'url' => PageResource::getUrl('create'), 'icon' => 'heroicon-o-document-duplicate'],
+            ['label' => 'Nueva página legal', 'url' => PageResource::getUrl('create'), 'icon' => 'heroicon-o-document-duplicate'],
             ['label' => 'Ver cotizaciones recibidas', 'url' => CotizacionResource::getUrl('index'), 'icon' => 'heroicon-o-inbox'],
             ['label' => 'Administrar menús', 'url' => MenuResource::getUrl('index'), 'icon' => 'heroicon-o-bars-3'],
         ];

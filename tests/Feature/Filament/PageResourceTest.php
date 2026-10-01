@@ -1,12 +1,15 @@
 <?php
 
+use App\Filament\Resources\Pages\PageResource;
 use App\Filament\Resources\Pages\Pages\CreatePage;
 use App\Filament\Resources\Pages\Pages\EditPage;
 use App\Filament\Resources\Pages\Pages\ListPages;
 use App\Models\Media;
 use App\Models\Page;
 use App\Models\User;
+use Database\Seeders\DatabaseSeeder;
 use Database\Seeders\PermissionSeeder;
+use Illuminate\Support\Facades\Storage;
 
 beforeEach(function () {
     $this->seed(PermissionSeeder::class);
@@ -122,26 +125,67 @@ it('editor ve y edita páginas pero no puede borrarlas (permiso real, no solo el
         ->and($editorGeneral->can('delete', $page))->toBeFalse();
 });
 
-it('elige la portada y la imagen SEO de la biblioteca de medios desde el picker', function () {
-    $cover = Media::factory()->create();
+it('elige la imagen para compartir (SEO) de la biblioteca de medios desde el picker', function () {
     $seoImage = Media::factory()->create();
 
     $this->livewire(CreatePage::class)
         ->fillForm([
-            'title' => ['es' => 'Historia'],
-            'slug' => 'institucion/historia-2',
-            'site_section' => 'institucion',
+            'title' => ['es' => 'Términos y condiciones'],
+            'slug' => 'terminos-y-condiciones',
             'status' => 'draft',
-            'cover_media_id' => $cover->id,
             'seo_image_id' => $seoImage->id,
         ])
         ->call('create')
         ->assertHasNoFormErrors();
 
-    $page = Page::query()->where('slug', 'institucion/historia-2')->firstOrFail();
+    $page = Page::query()->where('slug', 'terminos-y-condiciones')->firstOrFail();
 
-    expect($page->cover_media_id)->toBe($cover->id)
-        ->and($page->seo_image_id)->toBe($seoImage->id);
+    expect($page->seo_image_id)->toBe($seoImage->id)
+        ->and($page->site_section)->toBe('general'); // ya no se elige: es una página legal, sin sección de menú
+});
+
+it('una página legal no ofrece portada, sección de menú ni página padre', function () {
+    $this->livewire(CreatePage::class)
+        ->assertFormFieldDoesNotExist('cover_media_id')
+        ->assertFormFieldDoesNotExist('site_section')
+        ->assertFormFieldDoesNotExist('parent_id');
+});
+
+it('una página legal no puede usar la dirección de una sección del sitio ni del propio sistema', function () {
+    foreach (['servicios', 'productos', 'inicio', 'contacto/gracias', 'panel/algo', 'productos/mi-pagina', 'storage'] as $reservada) {
+        $this->livewire(CreatePage::class)
+            ->fillForm(['title' => ['es' => 'Prueba'], 'slug' => $reservada, 'status' => 'draft'])
+            ->call('create')
+            ->assertHasFormErrors(['slug']);
+    }
+});
+
+it('una dirección libre sí se acepta, también con subcarpetas', function () {
+    $this->livewire(CreatePage::class)
+        ->fillForm(['title' => ['es' => 'Cookies'], 'slug' => 'legal/politica-de-cookies', 'status' => 'draft'])
+        ->call('create')
+        ->assertHasNoFormErrors();
+});
+
+it('las páginas de las secciones del sitio no aparecen en Páginas legales ni se pueden abrir desde ahí', function () {
+    Storage::fake('media');
+    Storage::fake('public');
+    Storage::fake('local');
+    $this->seed(DatabaseSeeder::class);
+
+    $estructural = Page::query()->where('slug', 'servicios')->first();
+    $legal = Page::query()->where('slug', 'privacidad')->first();
+
+    $this->livewire(ListPages::class)
+        ->assertCanSeeTableRecords([$legal])
+        ->assertCanNotSeeTableRecords(Page::query()->whereIn('slug', Page::SECCIONES)->get());
+
+    $this->get(PageResource::getUrl('edit', ['record' => $estructural]))->assertNotFound();
+});
+
+it('el menú dice Páginas legales', function () {
+    expect(PageResource::getNavigationLabel())->toBe('Páginas legales')
+        ->and(PageResource::getPluralModelLabel())->toBe('páginas legales');
 });
 
 it('mantiene la portada existente si el picker no cambia su valor', function () {

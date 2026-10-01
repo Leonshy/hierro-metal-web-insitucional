@@ -7,6 +7,7 @@ use App\Models\Horario;
 use App\Models\Paso;
 use App\Models\Rubro;
 use App\Services\Cotizaciones\GuardarCotizacion;
+use App\Support\Encabezado;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -18,6 +19,7 @@ class CotizacionController extends Controller
         $horarios = Horario::query()->activos()->ordenados()->get();
 
         return view('contact.show', [
+            'encabezado' => Encabezado::de('contacto'),
             'rubros' => Rubro::query()->activos()->ordenados()->get(),
             'horarios' => $horarios,
             'estadoHorario' => Horario::estadoAhora(null, $horarios),

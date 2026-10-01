@@ -50,15 +50,16 @@ class PageForm
                                 ->helperText('Se genera sola a partir del título, pero podés editarla. Ej: "institucion/historia"')
                                 ->required()
                                 ->unique(ignoreRecord: true)
+                                ->rules([fn (): \Closure => self::reglaDireccionLibre()])
                                 ->maxLength(255),
                         ]),
 
                     Section::make('Contenido')
-                        ->description('Armá la página combinando bloques.')
+                        ->description('El encabezado (título y bajada) y los textos, en el orden en que se muestran.')
                         ->schema([
                             Builder::make('blocks')
                                 ->hiddenLabel()
-                                ->blocks(PageBlocks::for())
+                                ->blocks([PageBlocks::bloque('hero'), PageBlocks::bloque('texto')])
                                 ->addActionLabel('Agregar bloque')
                                 ->collapsible()
                                 ->blockNumbers(false),
@@ -68,41 +69,6 @@ class PageForm
                 // Configuración de la página, uno abajo del otro en la
                 // columna derecha.
                 Group::make([
-                    Section::make('Portada')
-                        ->description('Imagen de cabecera de la página. También se usa como miniatura cuando la página se muestra en listados o tarjetas de otras secciones.')
-                        ->schema([
-                            MediaPicker::make('cover_media_id')
-                                ->label('Imagen de portada')
-                                ->tableConfiguration(MediaLibraryTable::class),
-                        ]),
-
-                    Section::make('Ubicación en el sitio')
-                        ->description('Dónde aparece esta página dentro del menú y la navegación.')
-                        ->schema([
-                            Select::make('site_section')
-                                ->label('Sección del menú')
-                                ->options([
-                                    'institucion' => 'Institución',
-                                    'oferta-educativa' => 'Oferta educativa',
-                                    'admisiones' => 'Admisiones',
-                                    'vida-escolar' => 'Vida escolar',
-                                    'general' => 'General (sin sección, ej. Inicio, Contacto)',
-                                ])
-                                ->required(),
-                            Select::make('parent_id')
-                                ->label('Página dentro de (opcional)')
-                                ->helperText('Elegí una página "padre" si esta es una subpágina, por ejemplo "Historia" dentro de "Institución".')
-                                ->relationship('parent', 'slug')
-                                ->searchable()
-                                ->preload()
-                                ->nullable(),
-                            TextInput::make('sort_order')
-                                ->label('Orden dentro del menú')
-                                ->numeric()
-                                ->default(0)
-                                ->helperText('Los números más bajos aparecen primero.'),
-                        ]),
-
                     Section::make('Publicación')
                         ->schema([
                             Select::make('status')
@@ -137,10 +103,27 @@ class PageForm
                                 ->maxLength(255),
                             MediaPicker::make('seo_image_id')
                                 ->label('Imagen para compartir (Open Graph)')
-                                ->helperText('La imagen que se muestra al compartir esta página en redes sociales. Si la dejás vacía, se usa la imagen de portada.')
+                                ->helperText('La imagen que se muestra al compartir esta página en redes sociales. Si la dejás vacía, se usa la imagen por defecto del sitio.')
                                 ->tableConfiguration(MediaLibraryTable::class),
                         ]),
                 ])->columnSpan(1),
             ]);
+    }
+
+    /**
+     * Una página «libre» no puede tomar una dirección que ya usa el sitio: una sección (Productos, Servicios…), la
+     * ficha de una familia, el panel o los archivos del sistema.
+     */
+    private static function reglaDireccionLibre(): \Closure
+    {
+        return function (string $attribute, mixed $value, \Closure $fail): void {
+            $direccion = trim(mb_strtolower((string) $value), '/');
+            $primero = explode('/', $direccion)[0];
+            $reservadas = [...Page::SECCIONES, 'panel', trim((string) config('sitio.admin_path'), '/'), 'storage', 'build', 'livewire', 'catalogo'];
+
+            if (in_array($direccion, Page::SECCIONES, true) || in_array($primero, array_filter($reservadas), true) || $direccion === 'contacto/gracias') {
+                $fail('Esa dirección la usa el propio sitio. Elegí otra (por ejemplo «terminos-y-condiciones»).');
+            }
+        };
     }
 }

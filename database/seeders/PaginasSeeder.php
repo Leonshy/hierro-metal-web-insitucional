@@ -6,6 +6,7 @@ use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\Page;
 use App\Services\Html\HtmlSanitizer;
+use App\Support\TextoEnBloques;
 use Database\Seeders\Concerns\LeeContenido;
 use Illuminate\Database\Seeder;
 
@@ -25,7 +26,13 @@ class PaginasSeeder extends Seeder
 
         foreach ($this->contenido('paginas') as $p) {
             $bloques = [$this->hero($p['titulo'], $p['bajada'] ?? null)];
-            $bloques[] = ['type' => 'texto', 'data' => ['content' => ['es' => $limpiador->clean($p['html'])]]];
+            // La política de calidad se carga en textos separados (introducción y una sección por título), para que
+            // cada uno se pueda editar por su cuenta; el resto de las páginas, en un solo texto.
+            $textos = $p['slug'] === 'calidad' ? TextoEnBloques::partir($p['html']) : [$p['html']];
+
+            foreach ($textos as $texto) {
+                $bloques[] = ['type' => 'texto', 'data' => ['content' => ['es' => $limpiador->clean($texto)]]];
+            }
 
             $this->pagina($p['slug'], $p['titulo'], $bloques, $p['estado'], $p['indexable'], $p['seo_titulo'], $p['seo_descripcion']);
         }
