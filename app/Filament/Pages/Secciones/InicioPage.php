@@ -44,6 +44,11 @@ class InicioPage extends SeccionPage
         return false;
     }
 
+    protected static function urlPublica(): string
+    {
+        return '/';
+    }
+
     protected function clavesExtraDelHero(): array
     {
         return ['insignia', 'nota', 'media_id'];

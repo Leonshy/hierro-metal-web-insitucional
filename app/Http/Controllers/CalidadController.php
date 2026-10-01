@@ -15,7 +15,9 @@ class CalidadController extends Controller
 {
     public function index(): View
     {
-        $pagina = Page::query()->where('slug', 'calidad')->where('status', 'published')->firstOrFail();
+        abort_unless(Page::visible('calidad'), 404);
+
+        $pagina = Page::query()->where('slug', 'calidad')->firstOrFail();
 
         $textos = collect($pagina->blocksForLocale())
             ->where('type', 'texto')

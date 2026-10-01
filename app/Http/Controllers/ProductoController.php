@@ -12,7 +12,7 @@ class ProductoController extends Controller
 {
     public function index(): View
     {
-        abort_unless(Page::seccionPublicada('productos'), 404);
+        abort_unless(Page::visible('productos'), 404);
 
         return view('productos.index', [
             'encabezado' => Encabezado::de('productos'),
@@ -22,7 +22,7 @@ class ProductoController extends Controller
 
     public function show(string $slug): View
     {
-        abort_unless(Page::seccionPublicada('productos'), 404);
+        abort_unless(Page::visible('productos'), 404);
 
         $familias = Familia::paraListado();
         $familia = $familias->firstWhere('slug', $slug);

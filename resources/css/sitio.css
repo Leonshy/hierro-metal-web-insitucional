@@ -56,3 +56,8 @@ body>main{flex:1 0 auto}
 .cookies-opciones input:disabled{opacity:.55}
 .btn-cerrar{background:transparent;color:var(--color-claro);text-decoration:none}
 .btn-cerrar:hover{background:transparent;color:var(--color-marca)}
+
+/* Aviso de vista previa de un borrador (sólo lo ve quien tiene sesión del panel). */
+.vista-previa{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:center;padding:10px var(--margen);background:var(--color-marca);color:var(--color-tinta);font-size:14px;line-height:1.4;text-align:center;border-bottom:var(--borde-boton-marca) solid var(--color-tinta)}
+.vista-previa a{color:var(--color-tinta);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.vista-previa a:hover{color:var(--color-tinta-hover)}

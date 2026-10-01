@@ -37,7 +37,18 @@ class Page extends Model
 
     public array $translatable = ['title', 'seo_title', 'seo_description'];
 
-    /** Dónde se guarda, durante la petición, la lista de secciones en borrador (se reinicia al guardar una página). */
+    /**
+     * Secciones que nunca pueden estar en borrador: la portada, y Contacto porque ahí llegan las cotizaciones (los
+     * botones «Pedir cotización» de todo el sitio llevan a esa página).
+     */
+    public const SIEMPRE_PUBLICAS = ['inicio', 'contacto'];
+
+    /**
+     * Estas dos cosas viven en la petición actual (no en el contenedor de la aplicación): así nunca pasan de una visita
+     * a la siguiente, tampoco en un servidor que mantenga la aplicación en memoria entre peticiones.
+     */
+    private const MEMO_VISTA_PREVIA = 'page.vista_previa';
+
     private const MEMO_BORRADORES = 'page.secciones_en_borrador';
 
     /**
@@ -48,15 +59,55 @@ class Page extends Model
      */
     public static function seccionesEnBorrador(): array
     {
-        if (! app()->bound(self::MEMO_BORRADORES)) {
-            app()->instance(self::MEMO_BORRADORES, self::query()
-                ->whereIn('slug', array_diff(self::SECCIONES, ['inicio']))
+        $atributos = request()->attributes;
+
+        if (! $atributos->has(self::MEMO_BORRADORES)) {
+            $atributos->set(self::MEMO_BORRADORES, self::query()
+                ->whereIn('slug', array_diff(self::SECCIONES, self::SIEMPRE_PUBLICAS))
                 ->where('status', '!=', 'published')
                 ->pluck('slug')
                 ->all());
         }
 
-        return app(self::MEMO_BORRADORES);
+        return $atributos->get(self::MEMO_BORRADORES);
+    }
+
+    /** ¿La persona con sesión puede ver los borradores en el sitio? Sí, quien tiene acceso a las páginas del panel. */
+    public static function puedeVerBorradores(): bool
+    {
+        $usuario = auth()->user();
+
+        return $usuario !== null && (bool) ($usuario->is_active ?? false) && $usuario->can('viewAny', self::class);
+    }
+
+    /**
+     * ¿Se puede mostrar esta sección en el sitio? Si está publicada, para todos; si es un borrador, sólo en vista
+     * previa para quien tiene sesión del panel (y entonces la página lleva un aviso y no se indexa).
+     */
+    public static function visible(string $slug): bool
+    {
+        if (self::seccionPublicada($slug)) {
+            return true;
+        }
+
+        if (self::puedeVerBorradores()) {
+            request()->attributes->set(self::MEMO_VISTA_PREVIA, true);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /** Marca la petición como vista previa de un borrador (para el aviso, el noindex y que no se guarde en caché). */
+    public static function marcarVistaPrevia(): void
+    {
+        request()->attributes->set(self::MEMO_VISTA_PREVIA, true);
+    }
+
+    public static function enVistaPrevia(): bool
+    {
+        return (bool) request()->attributes->get(self::MEMO_VISTA_PREVIA, false);
     }
 
     /** Una sección sin página cargada se considera publicada (se muestra con sus textos de siempre). */
@@ -88,7 +139,7 @@ class Page extends Model
     protected static function booted(): void
     {
         static::saved(function (self $page) {
-            app()->forgetInstance(self::MEMO_BORRADORES);
+            request()->attributes->remove(self::MEMO_BORRADORES);
             PublicContentCache::forgetPageSlug($page->slug);
             PublicContentCache::forgetPageSlug($page->getOriginal('slug'));
         });

@@ -26,7 +26,7 @@
     // se acuerde de "sacar" el bloqueo a mano antes de salir a producción
     // (CLAUDE.md, docs/08-seo.md §4).
     $blockedByEnvironment = (bool) config('sitio.seo.block_indexing');
-    $resolvedIndexable = ($indexable ?? true) && ! $blockedByEnvironment;
+    $resolvedIndexable = ($indexable ?? true) && ! $blockedByEnvironment && ! \App\Models\Page::enVistaPrevia();
     $resolvedOgImage = $ogImage ?: config('sitio.seo.default_og_image');
     // Debe ser una URL absoluta: las redes sociales no resuelven rutas relativas.
     if ($resolvedOgImage && ! preg_match('#^https?://#i', $resolvedOgImage)) {
@@ -93,6 +93,15 @@
 <x-cookie-consent />
 
 <x-whatsapp-float :mensaje="$whatsapp" />
+
+@if(\App\Models\Page::enVistaPrevia())
+    {{-- Un borrador sólo lo ve quien tiene sesión del panel: se avisa para no confundirlo con la página publicada. --}}
+    <div class="vista-previa" role="status">
+        <strong>Vista previa</strong>
+        <span>Esta página está en borrador: no la ve nadie más que vos, con tu sesión del panel.</span>
+        <a href="{{ url(config('sitio.admin_path')) }}">Volver al panel</a>
+    </div>
+@endif
 
 <x-barra-datos />
 

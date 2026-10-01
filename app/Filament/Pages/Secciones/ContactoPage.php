@@ -20,4 +20,10 @@ class ContactoPage extends SeccionPage
     {
         return 'contacto';
     }
+
+    /** Contacto siempre se muestra: ahí llegan las cotizaciones y todos los botones «Pedir cotización» llevan a esa página. */
+    protected static function permiteBorrador(): bool
+    {
+        return false;
+    }
 }

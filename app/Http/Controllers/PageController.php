@@ -27,6 +27,15 @@ class PageController extends Controller
                 ->first()
         );
 
+        // Un borrador sólo lo ve, en vista previa y sin caché, quien tiene sesión del panel.
+        if ($page === null && Page::puedeVerBorradores()) {
+            $page = Page::query()->with('seoImage')->where('slug', $slug)->whereNotIn('slug', Page::SECCIONES)->first();
+
+            if ($page !== null) {
+                Page::marcarVistaPrevia();
+            }
+        }
+
         abort_if($page === null, 404);
 
         $breadcrumbs = $this->breadcrumbsFor($page);

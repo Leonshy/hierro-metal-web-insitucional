@@ -11,7 +11,7 @@ class FaqController extends Controller
 {
     public function index(): View
     {
-        abort_unless(Page::seccionPublicada('preguntas-frecuentes'), 404);
+        abort_unless(Page::visible('preguntas-frecuentes'), 404);
 
         return view('faq', [
             'encabezado' => Encabezado::de('preguntas-frecuentes'),

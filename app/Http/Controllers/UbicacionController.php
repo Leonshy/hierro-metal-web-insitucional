@@ -11,7 +11,7 @@ class UbicacionController extends Controller
 {
     public function index(): View
     {
-        abort_unless(Page::seccionPublicada('ubicacion'), 404);
+        abort_unless(Page::visible('ubicacion'), 404);
 
         $horarios = Horario::query()->activos()->ordenados()->get();
 

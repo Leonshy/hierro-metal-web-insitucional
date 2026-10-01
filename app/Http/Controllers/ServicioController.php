@@ -13,7 +13,7 @@ class ServicioController extends Controller
 {
     public function index(): View
     {
-        abort_unless(Page::seccionPublicada('servicios'), 404);
+        abort_unless(Page::visible('servicios'), 404);
 
         return view('servicios.index', [
             'encabezado' => Encabezado::de('servicios'),
