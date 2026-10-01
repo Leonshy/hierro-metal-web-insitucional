@@ -1,7 +1,7 @@
 {{-- Banner de consentimiento (D5). Bloquea GA4 y Meta hasta que la persona acepta (resources/js/consent.js).
      «Rechazar todo» pesa lo mismo que «Aceptar todo». Texto: docs/07 §3.10. --}}
-<div x-data="sitioCookieConsent()" x-effect="document.body.classList.toggle('cookies-visible', visible)">
-    <div class="cookies" x-show="visible" x-cloak role="dialog" aria-modal="false" aria-label="Preferencias de cookies">
+<div x-data="sitioCookieConsent()" x-effect="document.body.classList.toggle('cookies-visible', visible)" @keydown.escape.window="if (reopened) close()">
+    <div class="cookies" x-ref="panel" x-show="visible" x-cloak role="dialog" aria-modal="false" aria-label="Preferencias de cookies">
         <div class="contenedor">
             <template x-if="! configuring">
                 <div class="cookies-cuerpo">
@@ -17,13 +17,15 @@
                 <div class="cookies-cuerpo">
                     <p>Elegí qué cookies permitís. Las necesarias no se pueden desactivar.</p>
                     <div class="cookies-opciones">
-                        <label><input type="checkbox" checked disabled> Necesarias (siempre activas)</label>
-                        <label><input type="checkbox" x-model="analytics"> Medición de visitas (Google Analytics)</label>
-                        <label><input type="checkbox" x-model="marketing"> Publicidad (Meta: Facebook e Instagram)</label>
+                        <label class="opcion-fija"><input type="checkbox" checked disabled><span>Necesarias <small>(siempre activas)</small></span></label>
+                        <label><input type="checkbox" x-model="analytics"><span>Medición de visitas <small>(Google Analytics)</small></span></label>
+                        <label><input type="checkbox" x-model="marketing"><span>Publicidad <small>(Meta: Facebook e Instagram)</small></span></label>
                     </div>
                     <div class="botonera">
                         <button class="btn btn-linea-amarilla" type="button" @click="rejectAll()">Rechazar todo</button>
                         <button class="btn btn-amarillo" type="button" @click="saveConfigured()">Guardar preferencias</button>
+                        {{-- Sólo al reabrir las preferencias ya elegidas: la primera vez hay que decidir, así que no se puede cerrar sin elegir. --}}
+                        <button class="btn btn-cerrar" type="button" x-show="reopened" x-cloak @click="close()">Cerrar <span aria-hidden="true">✕</span></button>
                     </div>
                 </div>
             </template>
