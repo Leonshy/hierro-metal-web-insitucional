@@ -40,3 +40,16 @@ Thumbs.db
 !/storage/framework/cache/data/.gitkeep
 /storage/framework/sessions/*
 !/storage/framework/sessions/.gitkeep
+
+# Copias sin modificar de archivos que publican los paquetes (se regeneran con `vendor:publish`).
+# Si algún día se personaliza una vista o una traducción publicada, quitá la línea de esa carpeta.
+/lang/vendor/
+/resources/views/vendor/
+
+# Archivos generados o locales
+/bootstrap/cache/*.php
+/coverage
+.eslintcache
+*.tsbuildinfo
+*.swp
+*~
