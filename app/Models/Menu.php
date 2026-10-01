@@ -24,7 +24,7 @@ class Menu extends Model
     }
 
     /**
-     * Estructura consumida por `site-header`/`site-footer` — mismo formato de
+     * Estructura consumida por `cabecera`/`pie` — mismo formato de
      * array que antes servía `config('navigation.*')`, para no tocar las
      * vistas al pasar del archivo fijo al menú administrable desde el panel.
      *

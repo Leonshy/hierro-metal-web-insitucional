@@ -1,6 +1,4 @@
 @props(['data'])
-<div class="section">
-    <div class="container content-block">
-        <div class="body">{!! $data['content'] ?? '' !!}</div>
-    </div>
-</div>
+<section class="seccion-chica">
+    <div class="contenedor"><div class="prosa">{!! $data['content'] ?? '' !!}</div></div>
+</section>

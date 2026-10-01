@@ -105,7 +105,7 @@ return [
     | Lo que cambia por página/noticia vive en el modelo (seo_title,
     | seo_description, canonical_url, is_indexable — Fase 3). Esto es lo
     | que no tiene sentido repetir por registro: identidad de la
-    | organización para el JSON-LD `EducationalOrganization` y la imagen
+    | organización para el JSON-LD `LocalBusiness` y la imagen
     | OG de respaldo cuando ninguna página tiene imagen propia.
     |
     */

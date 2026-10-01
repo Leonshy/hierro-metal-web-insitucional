@@ -21,7 +21,7 @@ it('incluye canonical, Open Graph y JSON-LD de organización en una página publ
         ->assertSee('rel="canonical"', false)
         ->assertSee('og:title', false)
         ->assertSee('og:type" content="website"', false)
-        ->assertSee('"@type":"EducationalOrganization"', false)
+        ->assertSee('"@type":"LocalBusiness"', false)
         ->assertSee('"@type":"BreadcrumbList"', false);
 });
 
