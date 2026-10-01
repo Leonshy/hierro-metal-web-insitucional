@@ -159,7 +159,7 @@ Dante ya trae el componente (`cookie-consent.blade.php`): bloquea GA4 y Meta has
 
 | Elemento | Texto |
 |---|---|
-| Aviso | «Usamos cookies para medir cuánta gente visita el sitio y para saber si nuestros anuncios funcionan. Podés aceptar todas, rechazar todas o elegir cuáles.» · enlace «Más información» (a Privacidad §8) |
+| Aviso | «Usamos cookies para medir cuánta gente visita el sitio y para saber si nuestros anuncios funcionan. Podés aceptar todas, rechazar todas o elegir cuáles.» · enlace «Más información en la política de privacidad» (a Privacidad §8) |
 | Botones | Rechazar todo · Configurar · Aceptar todo |
 | Al configurar | «Elegí qué cookies permitís. Las necesarias no se pueden desactivar.» |
 | Categorías | Necesarias (siempre activas) · Medición de visitas (Google Analytics) · Publicidad (Meta: Facebook e Instagram) |
