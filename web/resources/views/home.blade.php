@@ -1,12 +1,12 @@
 @php
     use App\Support\Catalogo;
     use App\Support\Contacto;
-    use Illuminate\Support\Facades\Storage;
     $catalogo = Catalogo::url();
     $email = Contacto::email();
     $titulo = $encabezado->titulo ?: 'Hierro Metal S.R.L.';
+    $foto = $encabezado->media();
 @endphp
-<x-layouts.app :title="$encabezado->seoTitulo ?: $titulo" :description="$encabezado->seoDescripcion" :og-image="$encabezado->imagen ? Storage::disk('public')->url($encabezado->imagen) : null">
+<x-layouts.app :title="$encabezado->seoTitulo ?: $titulo" :description="$encabezado->seoDescripcion" :og-image="$foto?->conversionUrl('large') ?? $foto?->url()">
     <main id="contenido" tabindex="-1">
         <section class="oscura">
             <div class="contenedor">
@@ -22,9 +22,9 @@
                     <p class="nota-portada">Todas las chapas con certificado de calidad del fabricante</p>
                 </div>
             </div>
-            @if($encabezado->imagen)
+            @if($foto)
                 {{-- Foto del catálogo, editable desde el panel (página «inicio», bloque hero). Decorativa: el texto ya dice qué se vende. --}}
-                <img class="ilustracion ilustracion-portada foto-portada" src="{{ Storage::disk('public')->url($encabezado->imagen) }}" alt="" width="1132" height="859" fetchpriority="high">
+                <x-foto :media="$foto" class="ilustracion ilustracion-portada foto-portada" sizes="100vw" alt="" :carga-diferida="false" fetchpriority="high" />
             @else
                 <x-ilustracion nombre="portada" class="ilustracion ilustracion-portada" />
             @endif

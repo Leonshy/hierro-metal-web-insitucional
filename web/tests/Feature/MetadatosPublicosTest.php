@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Familia;
+use App\Models\Media;
+use App\Support\Encabezado;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Storage;
 
@@ -47,7 +49,8 @@ it('la ficha de una familia comparte la foto de esa familia', function () {
 });
 
 it('la portada comparte la foto de portada y el resto usa la imagen por defecto', function () {
-    $this->get('/')->assertSee('storage/bloques/portada.jpg', false);
+    $foto = Media::query()->find(Encabezado::de('inicio')->mediaId);
+    $this->get('/')->assertSee('<meta property="og:image" content="'.url($foto->conversionUrl('large') ?? $foto->url()).'"', false);
     $this->get('/servicios')->assertSee('images/og-hierro-metal.jpg', false);
 });
 

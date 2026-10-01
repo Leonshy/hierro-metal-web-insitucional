@@ -28,10 +28,12 @@ it('deja una foto del catálogo en cada familia, con texto alternativo', functio
 });
 
 it('pone la foto de portada en el hero de la página inicio', function () {
-    $imagen = Encabezado::de('inicio')->imagen;
+    $foto = Encabezado::de('inicio')->media();
 
-    expect($imagen)->toBe('bloques/portada.jpg');
-    Storage::disk('public')->assertExists($imagen);
+    expect($foto)->not->toBeNull()
+        ->and($foto->alt)->not->toBeEmpty()
+        ->and($foto->srcset())->not->toBeNull(); // variantes WebP para que el móvil no baje el original
+    Storage::disk('media')->assertExists($foto->path);
 });
 
 it('no pisa las fotos que el cliente ya cambió desde el panel', function () {
@@ -39,20 +41,22 @@ it('no pisa las fotos que el cliente ya cambió desde el panel', function () {
     Familia::query()->where('slug', 'chapas')->update(['media_id' => $propia->id]);
     $pagina = Page::query()->where('slug', 'inicio')->first();
     $bloques = $pagina->blocks;
-    $bloques[0]['data']['image'] = 'bloques/otra.jpg';
+    $bloques[0]['data']['media_id'] = $propia->id;
     $pagina->update(['blocks' => $bloques]);
     $totalMedios = Media::count();
 
     $this->seed(FotosSeeder::class);
 
     expect(Familia::query()->where('slug', 'chapas')->value('media_id'))->toBe($propia->id)
-        ->and(Encabezado::de('inicio')->imagen)->toBe('bloques/otra.jpg')
+        ->and(Encabezado::de('inicio')->mediaId)->toBe($propia->id)
         ->and(Media::count())->toBe($totalMedios);
 });
 
 it('muestra las fotos en la portada', function () {
     $this->get('/')
         ->assertOk()
-        ->assertSee('storage/bloques/portada.jpg', false)
+        ->assertSee('foto-portada', false)
+        ->assertSee('fetchpriority="high"', false)
+        ->assertSee('srcset=', false)
         ->assertSee('class="ficha-foto"', false);
 });

@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Models\Media;
 use App\Models\Page;
 
 /**
@@ -17,7 +18,7 @@ final class Encabezado
         public readonly ?string $ctaUrl = null,
         public readonly ?string $seoTitulo = null,
         public readonly ?string $seoDescripcion = null,
-        public readonly ?string $imagen = null,
+        public readonly ?int $mediaId = null,
     ) {}
 
     public static function de(string $slug): self
@@ -37,7 +38,13 @@ final class Encabezado
             ctaUrl: $hero['cta_url'] ?? null,
             seoTitulo: $pagina->getTranslation('seo_title', 'es', false) ?: null,
             seoDescripcion: $pagina->getTranslation('seo_description', 'es', false) ?: null,
-            imagen: ($hero['image'] ?? null) ?: null,
+            mediaId: ($hero['media_id'] ?? null) ?: null,
         );
+    }
+
+    /** Foto del hero, de la biblioteca de medios (con sus variantes responsivas). */
+    public function media(): ?Media
+    {
+        return $this->mediaId ? Media::query()->find($this->mediaId) : null;
     }
 }
