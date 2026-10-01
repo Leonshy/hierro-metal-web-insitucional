@@ -17,6 +17,15 @@ use UnitEnum;
 
 class VendedorResource extends Resource
 {
+    /**
+     * No aplica a este sitio (Vendedores): fuera del menú del panel y sin acceso por URL, tampoco para un administrador.
+     * El módulo (modelo, tabla y permisos) queda intacto para reactivarlo si hiciera falta: bastaría con quitar este método.
+     */
+    public static function canAccess(): bool
+    {
+        return false;
+    }
+
     protected static ?string $model = Vendedor::class;
 
     protected static ?string $slug = 'vendedores';
