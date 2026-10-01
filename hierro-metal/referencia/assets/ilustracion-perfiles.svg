@@ -1,0 +1,13 @@
+<svg role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <!-- Perfil IPN -->
+  <path d="M-35 -45 h70 v13 h-27.5 v64 h27.5 v13 h-70 v-13 h27.5 v-64 h-27.5 z"
+        transform="translate(78 90)" fill="#231f20"/>
+  <!-- Perfil UPN -->
+  <path d="M-27.5 -45 h55 v13 h-40 v64 h40 v13 h-55 z"
+        transform="translate(168 90)" fill="#f9ed31" stroke="#231f20" stroke-width="3"/>
+  <!-- Ángulo -->
+  <path d="M-37.5 -37.5 h15 v60 h45 v15 h-60 z"
+        transform="translate(252 97)" fill="none" stroke="#231f20" stroke-width="5"/>
+</svg>

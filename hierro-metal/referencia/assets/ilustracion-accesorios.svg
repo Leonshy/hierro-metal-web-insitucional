@@ -1,0 +1,20 @@
+<svg role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <!-- Codo 90 grados -->
+  <path d="M40 140 v-40 a48 48 0 0 1 48 -48 h30" fill="none" stroke="#231f20" stroke-width="18" stroke-linecap="butt"/>
+  <!-- Tee -->
+  <g stroke="#231f20" stroke-width="18" stroke-linecap="butt">
+    <path d="M148 132 h84"/>
+    <path d="M190 132 v-52"/>
+  </g>
+  <!-- Brida -->
+  <circle cx="264" cy="72" r="34" fill="#f9ed31" stroke="#231f20" stroke-width="4"/>
+  <circle cx="264" cy="72" r="13" fill="#efeeea" stroke="#231f20" stroke-width="3"/>
+  <g fill="#231f20">
+    <circle cx="264" cy="48" r="4"/>
+    <circle cx="264" cy="96" r="4"/>
+    <circle cx="240" cy="72" r="4"/>
+    <circle cx="288" cy="72" r="4"/>
+  </g>
+</svg>

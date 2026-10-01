@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descarga de catálogo — Wireframe Hierro Metal</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#e0e0e0;display:flex;justify-content:center;padding:20px 0}
+.wf-screen{width:375px;min-height:667px;background:#f5f5f5;border:2px dashed #ccc;position:relative;display:flex;flex-direction:column}
+.wf-topbar{background:#d8d8d8;border-bottom:1px dashed #bbb;padding:6px 12px;font-size:10px;color:#555;display:flex;justify-content:space-between;gap:8px}
+.wf-header{background:#e8e8e8;border-bottom:1px dashed #ccc;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px;position:sticky;top:0;z-index:5}
+.wf-logo{font-weight:700;font-size:15px;color:#333;letter-spacing:.5px}
+.wf-headbtns{display:flex;gap:6px;align-items:center}
+.wf-mini{border:1px dashed #999;background:#ccc;padding:7px 9px;font-size:11px;font-weight:700;color:#333;border-radius:3px;white-space:nowrap}
+.wf-mini.line{background:transparent;color:#555}
+.wf-burger{border:1px dashed #999;padding:6px 9px;font-size:14px;color:#444;border-radius:3px;background:#fff}
+.wf-nav{background:#e8e8e8;border-bottom:1px dashed #ccc;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;font-size:14px;color:#666}
+.wf-content{flex:1;display:flex;flex-direction:column}
+.wf-sec{padding:16px;display:flex;flex-direction:column;gap:10px;border-bottom:1px dashed #ddd}
+.wf-sec.yellow{background:#ece5b4}
+.wf-sec.dark{background:#6a6a6a;color:#f2f2f2}
+.wf-sec.dark .wf-label,.wf-sec.dark .wf-subtitle{color:#ddd}
+.wf-sec.dark .wf-card{background:#7a7a7a;border-color:#aaa;color:#fff}
+.wf-input{border:1px dashed #ccc;background:#fff;padding:12px;font-size:14px;color:#999;border-radius:4px}
+.wf-input.area{min-height:90px}
+.wf-input.filled{color:#444;background:#fbfbfb}
+.wf-button{background:#ccc;border:1px dashed #999;padding:14px;font-size:15px;font-weight:600;color:#444;text-align:center;border-radius:4px;cursor:pointer;min-height:48px}
+.wf-button.yellow{background:#e6d96a;border-color:#a89f3a}
+.wf-button-secondary{background:transparent;border:1px dashed #999;padding:14px;font-size:15px;color:#555;text-align:center;border-radius:4px;cursor:pointer;min-height:48px}
+.wf-card{background:#fff;border:1px dashed #ccc;border-radius:4px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.wf-list-item{background:#fff;border:1px dashed #ccc;padding:12px 14px;display:flex;align-items:center;gap:12px;font-size:14px;color:#555;min-height:48px}
+.wf-list-item+.wf-list-item{border-top:none}
+.wf-icon-placeholder{width:24px;height:24px;background:#ddd;border:1px dashed #bbb;border-radius:4px;flex-shrink:0}
+.wf-illus{height:130px;background:#e2e2e2;border:1px dashed #aaa;display:flex;align-items:center;justify-content:center;font-size:12px;color:#777;text-align:center;padding:8px}
+.wf-illus.big{height:170px}
+.wf-text-placeholder{background:#dcdcdc;height:10px;border-radius:2px}
+.wf-text-placeholder.short{width:40%}.wf-text-placeholder.medium{width:70%}.wf-text-placeholder.full{width:100%}
+.wf-label{font-size:11px;color:#777;font-weight:600;letter-spacing:.6px;text-transform:uppercase}
+.wf-title{font-size:20px;font-weight:700;color:#333;line-height:1.2}
+.wf-subtitle{font-size:13px;color:#666;line-height:1.4}
+.wf-small{font-size:12px;color:#666}
+.wf-tags{display:flex;gap:6px;flex-wrap:wrap}
+.wf-tag{border:1px dashed #aaa;background:#fff;font-size:11px;padding:4px 7px;color:#555}
+.wf-table{width:100%;border-collapse:collapse;font-size:11px;background:#fff}
+.wf-table th,.wf-table td{border:1px dashed #ccc;padding:6px;text-align:left;color:#555}
+.wf-table th{background:#eee}
+.wf-acc{background:#fff;border:1px dashed #ccc;padding:12px 14px;font-size:14px;color:#444;display:flex;justify-content:space-between;gap:8px;min-height:48px;align-items:center}
+.wf-acc+.wf-acc{border-top:none}
+.wf-acc-body{background:#fafafa;border:1px dashed #ccc;border-top:none;padding:12px 14px;font-size:12px;color:#666;display:flex;flex-direction:column;gap:8px}
+.wf-note{border:1px solid #c9a400;background:#fff8cc;color:#6b5800;font-size:11px;padding:6px 8px;line-height:1.35}
+.wf-crumb{font-size:11px;color:#777}
+.wf-wa{position:sticky;bottom:10px;align-self:flex-end;margin:0 10px 10px 0;z-index:6}
+.wf-wa .wf-fab{background:#9ad19a;border:1px dashed #4a8a4a;color:#1d4a1d;font-weight:700;font-size:13px;padding:12px 14px;border-radius:24px;min-height:48px;display:flex;align-items:center}
+.wf-footer-site{background:#555;color:#eee;padding:16px;font-size:12px;display:flex;flex-direction:column;gap:8px}
+.wf-footer-site a{color:#eee}
+.wf-footer{font-size:10px;color:#aaa;text-align:center;padding:8px;border-top:1px dashed #ddd;background:#f5f5f5}
+.wf-divider{border:none;border-top:1px dashed #ccc;margin:4px 0}
+.wf-open{display:inline-block;background:#bfe3bf;border:1px dashed #4a8a4a;color:#1d4a1d;font-size:11px;font-weight:700;padding:3px 7px}
+a.wf-link{color:inherit;text-decoration:none;display:contents}
+a.wf-link:hover{opacity:.7}a.wf-link:active{opacity:.5}
+.wf-back{font-size:14px;color:#666;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wf-screen">
+<div class="wf-nav"><a href="index.html" class="wf-link wf-back">&larr; Volver</a><span>Descarga de catálogo</span><span></span></div>
+<div class="wf-content">
+<div class="wf-sec "><div class="wf-label">Descarga</div><div class="wf-title">Catálogo de materiales 2026.pdf</div><div class="wf-illus big">Se descarga el PDF vigente<br>(URL fija, reemplazable desde el panel)</div><a href="contacto.html" class="wf-link"><div class="wf-button yellow">Pedir cotización</div></a><a href="whatsapp.html" class="wf-link"><div class="wf-button-secondary">Escribir por WhatsApp</div></a><a href="index.html" class="wf-link"><div class="wf-small">← Volver al inicio</div></a><div class="wf-note">Si no hay PDF cargado, el botón «Descargar catálogo» se oculta en todo el sitio.</div></div>
+</div>
+
+<div class="wf-wa"><a href="whatsapp.html" class="wf-link"><div class="wf-fab">● WhatsApp</div></a></div>
+<div class="wf-footer">Descarga de catálogo &mdash; UC-003</div>
+</div>
+</body>
+</html>

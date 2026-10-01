@@ -1,0 +1,9 @@
+<svg role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <g fill="none" stroke-width="7" stroke-linejoin="round">
+    <path stroke="#c9c6c0" d="M10 58 L34 32 L58 32 L82 58 L106 58 L130 32 L154 32 L178 58 L202 58 L226 32 L250 32 L274 58 L298 58"/>
+    <path stroke="#f9ed31" d="M10 100 L34 74 L58 74 L82 100 L106 100 L130 74 L154 74 L178 100 L202 100 L226 74 L250 74 L274 100 L298 100"/>
+    <path stroke="#231f20" d="M10 142 L34 116 L58 116 L82 142 L106 142 L130 116 L154 116 L178 142 L202 142 L226 116 L250 116 L274 142 L298 142"/>
+  </g>
+</svg>

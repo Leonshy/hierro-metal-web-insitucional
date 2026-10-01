@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Componentes · Hierro Metal S.R.L.</title>
+<!-- Guía de diseño. Fuentes desde Google Fonts sólo acá; el sitio real las autohospeda. -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css"><link rel="stylesheet" href="componentes.css">
+<style>
+.guia{max-width:var(--ancho);margin:0 auto;padding:0 var(--margen)}
+.guia h2{font-size:var(--text-familia);text-transform:uppercase;padding-top:48px}
+.guia h3{margin:30px 0 12px;font-family:var(--font-mono);font-size:var(--text-rotulo);font-weight:500;letter-spacing:var(--tracking-rotulo);text-transform:uppercase;color:var(--color-gris)}
+.fila{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start}
+.estado{display:grid;gap:8px;justify-items:start}
+.estado small{font-family:var(--font-mono);font-size:var(--text-rotulo);letter-spacing:.1em;text-transform:uppercase;color:var(--color-gris)}
+.oscura .estado small{color:var(--color-claro-2)}
+.paleta{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;margin-top:20px}
+.paleta li{display:grid;grid-template-columns:56px 1fr;gap:2px 14px;padding:12px;background:var(--color-blanco);box-shadow:0 0 0 1px var(--color-linea);align-items:center}
+.paleta .sw{grid-row:span 2;height:56px;border:1px solid var(--color-linea)}
+.paleta b{font-family:var(--font-mono);font-size:12px;font-weight:500}
+.paleta small{font-size:12px;color:var(--color-texto)}
+.tipo div{padding:16px 0;border-bottom:1px solid var(--color-linea)}
+.tipo small{display:block;font-family:var(--font-mono);font-size:11px;color:var(--color-gris);margin-bottom:6px}
+.sim-hover.btn-amarillo{background:var(--color-marca-hover)}
+.sim-hover.btn-negro{background:var(--color-tinta-hover)}
+.sim-hover.btn-linea{background:var(--color-alterno)}
+.oscura .sim-hover.btn-linea{background:transparent;border-color:var(--color-marca);color:var(--color-marca)}
+.sim-foco{outline:var(--foco-grosor) solid var(--color-tinta);outline-offset:var(--foco-distancia)}
+.oscura .sim-foco{outline-color:var(--color-marca)}
+.estatico .cookies{position:static}
+.ancho-campo{max-width:420px;width:100%}
+.muestra .cabecera{position:static}
+.muestra .whatsapp-flotante{position:static;display:inline-flex}
+.muestra{border:1px solid var(--color-linea)}
+.sim-activo.btn-amarillo{translate:0 1px;background:var(--color-marca-hover)}
+.muestra .menu-movil{display:grid;max-width:420px}
+</style></head><body>
+<header class="amarilla"><div class="guia"><div class="encabezado-pagina" style="padding-bottom:36px"><h1>Componentes y estados</h1>
+<p class="bajada">Todo sale de <code>tokens.css</code>. Sin radios, sin sombras decorativas (la única es la del botón flotante de WhatsApp), retículas de 1&nbsp;px, botones rectos con borde inferior de 3&nbsp;px. Lo marcado [nuevo] o [cambio] no estaba en el sitio original.</p></div></div></header>
+<main class="guia">
+
+<h2>Color</h2>
+<p class="bajada">El amarillo nunca lleva texto blanco. El gris nunca va sobre negro (3,1:1): ahí se usan claro y claro-2. La línea (2,5:1) es decorativa y no lleva texto.</p>
+<ul class="paleta"><li><span class="sw" style="background:var(--color-marca)"></span><b>--color-marca</b><small>#f9ed31 · Amarillo institucional · tinta 13.3:1</small></li><li><span class="sw" style="background:var(--color-marca-hover)"></span><b>--color-marca-hover</b><small>#f3de30 · Hover amarillo · tinta 11.9:1</small></li><li><span class="sw" style="background:var(--color-marca-suave)"></span><b>--color-marca-suave</b><small>#dfd57d · Nota sobre negro · 10.8:1 sobre tinta</small></li><li><span class="sw" style="background:var(--color-tinta)"></span><b>--color-tinta</b><small>#231f20 · Negro y texto principal · 16.3:1 sobre blanco</small></li><li><span class="sw" style="background:var(--color-texto)"></span><b>--color-texto</b><small>#4a4444 · Texto de cuerpo · 9.5:1 sobre blanco</small></li><li><span class="sw" style="background:var(--color-gris)"></span><b>--color-gris</b><small>#706c64 · Rótulos y ayudas [cambio] · 5.2:1 blanco · 4.5:1 panel</small></li><li><span class="sw" style="background:var(--color-linea)"></span><b>--color-linea</b><small>#a3a5a8 · Retículas (decorativo) · 2.5:1: sin texto</small></li><li><span class="sw" style="background:var(--color-alterno)"></span><b>--color-alterno</b><small>#f9f9f9 · Hover, FAQ abierto</small></li><li><span class="sw" style="background:var(--color-panel)"></span><b>--color-panel</b><small>#efeeea · Fondo de ilustraciones</small></li><li><span class="sw" style="background:var(--color-claro)"></span><b>--color-claro</b><small>#cfccc6 · Bajadas sobre negro · 10.2:1</small></li><li><span class="sw" style="background:var(--color-claro-2)"></span><b>--color-claro-2</b><small>#b3afa9 · Secundario sobre negro · 7.5:1</small></li><li><span class="sw" style="background:var(--color-enlace)"></span><b>--color-enlace</b><small>#8a6d00 · Enlaces en prosa · 4.9:1</small></li><li><span class="sw" style="background:var(--color-error)"></span><b>--color-error</b><small>#b00020 · Error y requerido · 7.3:1</small></li><li><span class="sw" style="background:var(--color-error-suave)"></span><b>--color-error-suave</b><small>#fbeaed · Fondo de error [nuevo] · error 6.3:1</small></li><li><span class="sw" style="background:var(--color-exito)"></span><b>--color-exito</b><small>#1e6b3a · Éxito [nuevo] · 6.5:1</small></li><li><span class="sw" style="background:var(--color-exito-suave)"></span><b>--color-exito-suave</b><small>#eaf4ed · Fondo de éxito [nuevo] · éxito 5.8:1</small></li></ul>
+
+<h2>Tipografía</h2>
+<div class="tipo">
+<div><small>Barlow Condensed 700 · títulos, mayúsculas, interlineado .95</small><h1 style="font-size:var(--text-h1-interna);text-transform:uppercase">Materiales metálicos para construir</h1></div>
+<div><small>Barlow Condensed 700 · título de sección y de ficha</small><h2 style="padding:0;font-size:var(--text-seccion);text-transform:uppercase">Qué comercializamos</h2></div>
+<div><small>IBM Plex Sans 400 · bajada 16,5 px / 1,65 · máx. 62 ch</small><p class="bajada" style="margin:0">Cinco familias de materiales metálicos y metalúrgicos con stock permanente. Entrá al catálogo para ver espesores, medidas y normas de cada línea.</p></div>
+<div><small>IBM Plex Mono 500 · rótulo 11 px · tracking .18em</small><p class="rotulo" style="margin:0">01 — Productos</p></div>
+<div><small>Barlow Condensed 600 · botón 19 px · tracking .09em</small><span class="btn btn-amarillo">Pedir cotización</span></div>
+</div>
+
+<h2>Botones</h2>
+<h3>Sobre blanco</h3>
+<div class="fila">
+<div class="estado"><a class="btn btn-amarillo" href="#">Pedir cotización</a><small>Amarillo · reposo</small></div>
+<div class="estado"><a class="btn btn-amarillo sim-hover" href="#">Pedir cotización</a><small>Hover</small></div>
+<div class="estado"><a class="btn btn-amarillo sim-foco" href="#">Pedir cotización</a><small>Foco por teclado (tinta; amarillo sobre negro)</small></div>
+<div class="estado"><a class="btn btn-amarillo sim-activo" href="#">Pedir cotización</a><small>Activo (baja 1 px)</small></div>
+<div class="estado"><button class="btn btn-amarillo cargando" type="button">Enviando tu pedido…</button><small>Cargando</small></div>
+<div class="estado"><button class="btn btn-amarillo" type="button" disabled>Pedir cotización</button><small>Deshabilitado</small></div>
+</div>
+<div class="fila" style="margin-top:14px">
+<div class="estado"><a class="btn btn-negro" href="#">Leer la política</a><small>Negro</small></div>
+<div class="estado"><a class="btn btn-negro sim-hover" href="#">Leer la política</a><small>Hover</small></div>
+<div class="estado"><a class="btn btn-linea" href="#">Ver productos</a><small>Línea</small></div>
+<div class="estado"><a class="btn btn-linea sim-hover" href="#">Ver productos</a><small>Hover</small></div>
+</div>
+<h3>Sobre negro</h3>
+<div class="oscura" style="padding:26px 20px;margin:0 -20px"><div class="fila">
+<div class="estado"><a class="btn btn-amarillo" href="#">Pedir cotización</a><small>Amarillo (borde blanco)</small></div>
+<div class="estado"><a class="btn btn-linea" href="#">Ver productos</a><small>Línea</small></div>
+<div class="estado"><a class="btn btn-linea sim-hover" href="#">Ver productos</a><small>Hover</small></div>
+<div class="estado"><a class="btn btn-linea-amarilla" href="#">Descargar PDF</a><small>Línea amarilla</small></div>
+<div class="estado"><a class="btn btn-linea sim-foco" href="#">Ver productos</a><small>Foco</small></div>
+</div></div>
+
+<h2>Formulario</h2>
+<div class="fila" style="gap:34px">
+<div class="ancho-campo"><div class="campo"><label for="c1">Nombre y apellido <span class="req">*</span></label><input id="c1" type="text"></div><small class="estado"><small>Reposo</small></small></div>
+<div class="ancho-campo"><div class="campo"><label for="c2">Nombre y apellido <span class="req">*</span></label><input id="c2" type="text" class="sim-foco" style="border-color:var(--color-tinta)" value="Marcos"></div><small class="estado"><small>Foco (amarillo 3 px)</small></small></div>
+<div class="ancho-campo"><div class="campo con-error"><label for="c3">Teléfono o WhatsApp <span class="req">*</span></label><input id="c3" type="tel" aria-invalid="true" aria-describedby="e3" value="098"><span class="mensaje-error" id="e3">Revisá el teléfono: parece incompleto.</span></div><small class="estado"><small>Error: borde y fondo, mensaje junto al campo</small></small></div>
+<div class="ancho-campo"><div class="campo"><label for="c4">Empresa u obra</label><input id="c4" type="text" disabled value="No disponible"></div><small class="estado"><small>Deshabilitado</small></small></div>
+<div class="ancho-campo"><div class="campo"><label for="c5">¿Qué necesitás?</label><select id="c5"><option>Chapas de acero</option></select></div><small class="estado"><small>Selector</small></small></div>
+<div class="ancho-campo"><div class="campo campo-archivo"><label>Plano, despiece o lista (opcional)</label><span class="archivo-zona"><svg class="icono-mas" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Elegir archivos</span><ul class="archivo-lista"><li><span>plano-galpon.pdf</span><span>2,4 MB</span></li><li style="border-color:var(--color-error);color:var(--color-error)"><span>despiece.exe</span><span>Ese tipo de archivo no se puede adjuntar.</span></li></ul></div><small class="estado"><small>Adjuntos: lista y error</small></small></div>
+</div>
+
+<h2>Avisos</h2>
+<div class="fila" style="gap:30px">
+<div class="ancho-campo"><div class="aviso" data-tipo="Aviso"><strong>Ventas se centraliza en un único número corporativo.</strong> Verificá con nosotros antes de operar.</div></div>
+<div class="ancho-campo"><div class="aviso aviso-error" data-tipo="Error" role="alert">No pudimos enviar tu pedido. Probá de nuevo o escribinos por WhatsApp.</div></div>
+<div class="ancho-campo"><div class="aviso aviso-exito" data-tipo="Listo" role="status">Recibimos tu pedido. Te respondemos en el día.</div></div>
+</div>
+
+<h2>Horarios</h2>
+<div class="fila"><span class="estado-horario estado-abierto">Abierto ahora · cerramos a las 17:00</span><span class="estado-horario estado-cerrado">Cerrado ahora · abrimos mañana a las 07:00</span></div>
+
+<h2>Medidas y líneas</h2>
+<p class="bajada">Línea desplegable con tabla de líneas finas (nuevo, resuelve «Ver medidas»). En móvil la tabla se desplaza y deja ver el borde que sigue.</p>
+<div style="margin-top:24px">
+<details class="linea-medidas" open><summary><span class="nombre">Laminadas en frío</span><span class="cuenta">10 espesores<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="linea-cuerpo"><p>Chapa negra en distintos espesores, base de casi todo trabajo de herrería y estructura metálica.</p><span class="uso">Estructuras · Herrería · Carrocerías</span>
+<div class="tabla-scroll" role="region" aria-label="Medidas" tabindex="0"><table class="tabla-medidas"><caption>Medidas laminadas en frío</caption><thead><tr><th scope="col">Espesor</th><th scope="col">Largo (mm)</th><th scope="col">Ancho (mm)</th></tr></thead><tbody><tr><th scope="row">N°16 – 1,50</th><td>2000/2400/3000</td><td>1000/1200/1500</td></tr><tr><th scope="row">N°18 – 1,2</th><td>2000/2400/3000</td><td>1000/1200/1500</td></tr><tr><th scope="row">N°20 – 0,90</th><td>2000/2400/3000</td><td>1000/1200/1500</td></tr></tbody></table></div>
+<p class="fuera-lista">¿No ves la medida que necesitás? Consultanos con tu lista y te confirmamos stock y precio en el día.</p></div></details>
+<details class="linea-medidas"><summary><span class="nombre">Galvanizadas</span><span class="cuenta">medidas<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="linea-cuerpo"><p>Con recubrimiento de zinc.</p></div></details>
+</div>
+
+<h2>Preguntas frecuentes</h2>
+<div class="faq"><details open><summary>¿Venden al por mayor y al por menor?</summary><div class="respuesta"><p>Sí. Trabajamos con importación directa, lo que nos permite vender tanto al por mayor como al por menor.</p></div></details><details><summary>¿Cortan el material a medida?</summary><div class="respuesta"><p>Sí.</p></div></details></div>
+
+<h2>Fichas, pasos y compromisos</h2>
+<ul class="rejilla" style="margin-top:20px"><li><a class="ficha" href="#"><img class="ilustracion ficha-ilustracion" src="../referencia/assets/ilustracion-perfiles.svg" alt=""><span class="ficha-cuerpo"><span class="ficha-indice">02 · 3 líneas</span><span class="ficha-titulo">Perfiles y estructurales</span><span class="ficha-texto">Perfil IPN y UPN, perfil C y U en chapa doblada, ángulos, planchuelas y hierro Tee.</span><span class="ficha-enlace">Ver medidas →</span></span></a></li>
+<li class="ficha-destacada"><div class="caja"><span class="ficha-titulo">Catálogo de materiales</span><span class="ficha-texto">Nuestro catálogo general en PDF.</span><a class="btn btn-amarillo" href="#">↓ Descargar PDF</a></div></li></ul>
+<ol class="pasos"><li><strong>Nos mandás el pedido</strong><span>Plano, lista de despiece o el detalle escrito.</span></li><li><strong>Cotizamos</strong><span>Precio, disponibilidad y plazo. En el día.</span></li></ol>
+
+
+<h2>Rótulo, insignia, migas e índice</h2>
+<div class="fila" style="gap:34px;align-items:flex-start">
+<div class="estado"><p class="rotulo" style="margin:0">01 — Productos</p><small>Rótulo (mono · 11 px · tracking .18em)</small></div>
+<div class="estado"><span class="insignia" style="margin:0">Importación y venta · Mayorista y minorista</span><small>Insignia</small></div>
+<div class="estado"><nav class="migas" style="margin:0" aria-label="Migas de pan"><a href="#">Inicio</a> / <a href="#">Productos</a> / <span aria-current="page">Chapas de acero</span></nav><small>Migas de pan</small></div>
+</div>
+<h3>Índice de familias</h3>
+<ul class="indice" style="margin-top:0"><li><a href="#" aria-current="true">01 · Chapas</a></li><li><a href="#">02 · Perfiles</a></li><li><a href="#">03 · Tubos y caños</a></li><li><a href="#">04 · Varillas y barras</a></li><li><a href="#">05 · Accesorios</a></li></ul>
+
+<h2>Compromisos y diferenciales</h2>
+<ul class="compromisos" style="margin-top:20px"><li><strong>Materia prima certificada</strong><span>Trabajamos con materia prima certificada bajo Normas Internacionales del Acero. Las chapas se entregan con el certificado de calidad del fabricante.</span></li><li><strong>Control de calidad estricto</strong><span>Controlamos el material al recibirlo y verificamos las medidas de los trabajos de taller antes de despachar cada pedido.</span></li></ul>
+<div class="amarilla" style="margin-top:20px"><ul class="diferenciales"><li><strong>Stock permanente</strong><span>Medidas comerciales todo el año.</span></li><li><strong>Importación directa</strong><span>Precio mayorista y minorista.</span></li><li><strong>Corte a medida</strong><span>Cortes, plegados y perforaciones.</span></li><li><strong>Flota propia</strong><span>Entrega de materiales en obra.</span></li></ul></div>
+
+<h2>Servicios sobre negro</h2>
+<div class="oscura" style="padding:26px 20px;margin-top:20px"><ul class="rejilla-oscura" style="margin-bottom:0"><li><strong>Cortes y plegados</strong><span>Chapas y barras según tu plano o lista de despiece.</span></li><li><strong>Galvanización</strong><span>Protección contra la corrosión de chapas y perfilería.</span></li></ul><ol class="pasos"><li><strong>Cotizamos</strong><span>Te pasamos precio, disponibilidad y plazo. En el día.</span></li><li><strong>Entregamos</strong><span>Retirás por el depósito o lo llevamos a la obra.</span></li></ol></div>
+
+<h2>Datos de contacto y horarios</h2>
+<div class="dos-columnas" style="margin-top:20px"><ul class="datos"><li><span class="etiqueta">Ventas · WhatsApp y teléfono</span><a class="grande" href="#">+595 981 320 675</a></li><li><span class="etiqueta">Correo</span><a href="#">hierrometalventas@hotmail.com</a></li><li><span class="etiqueta">Dirección · Fernando de la Mora</span><a href="#">Pedro Getto esq. Cadete Sisa →</a></li></ul>
+<div><span class="estado-horario estado-abierto">Abierto ahora · cerramos a las 17:00</span><ul class="horarios"><li><span>Lunes a viernes</span><span>07:00 — 17:00</span></li><li><span>Sábados</span><span>07:00 — 12:00</span></li><li><span>Domingos y feriados</span><span>Cerrado</span></li></ul></div></div>
+
+<h2>Prosa (calidad y privacidad)</h2>
+<div class="prosa"><h2 style="padding-top:0">Qué significa esto para tu obra</h2><h3>Sabés qué acero estás comprando</h3><p>Cuando el material viene certificado, sabés qué resistencia tiene y podés justificarlo ante una dirección de obra, una fiscalización o un cliente final. Si necesitás el certificado de una partida en particular, <a href="#">pedilo al momento de cotizar</a>.</p><ul><li>Control de medidas antes de despachar.</li><li>Certificado del fabricante en las chapas.</li></ul></div>
+
+<h2>Estructura: barra, cabecera, menú móvil, pie y WhatsApp</h2>
+<h3>Barra de datos y cabecera</h3>
+<div class="muestra"><div class="barra-datos"><div class="contenedor"><div class="barra-direccion"><i aria-hidden="true"></i>Pedro Getto esq. Cadete Sisa · Fernando de la Mora, Central</div><div class="barra-enlaces"><a href="#">+595 981 320 675</a><a href="#">Instagram</a><a href="#">Facebook</a></div></div></div>
+<header class="cabecera"><div class="cabecera-fila"><a class="logo" href="#"><img src="logo/hierro-metal-logo.svg" alt="Hierro Metal S.R.L." width="96" height="64"></a><nav class="nav-escritorio" style="display:flex" aria-label="Navegación principal"><a href="#" aria-current="page">Productos</a><a href="#">Servicios</a><a href="#">Calidad</a><a href="#">FAQ</a><a href="#">Ubicación</a><a href="#">Contacto</a></nav><div class="acciones-cabecera"><a class="cabecera-catalogo" style="display:inline-flex" href="#">↓ Catálogo</a><a class="hm-cta" href="#">Pedir cotización</a></div></div></header></div>
+<h3>Cabecera en móvil y menú abierto</h3>
+<div class="muestra" style="max-width:420px"><header class="cabecera"><div class="cabecera-fila"><a class="logo" href="#"><img src="logo/hierro-metal-logo.svg" alt="Hierro Metal S.R.L." width="96" height="64"></a><div class="acciones-cabecera"><a class="hm-cta" href="#">Pedir cotización</a><a class="hm-burger" href="#" aria-label="Abrir menú"><i aria-hidden="true"></i></a></div></div><nav class="menu-movil" aria-label="Navegación móvil"><a href="#">Productos y catálogo</a><a href="#">Servicios industriales</a><a href="#">Política de calidad</a><a href="#">Preguntas frecuentes</a><a href="#">Ubicación</a><a href="#">Contacto</a></nav></header></div>
+<h3>Pie</h3>
+<div class="muestra"><footer class="pie"><div class="pie-rejilla"><div><span class="pie-marca">Hierro <span>Metal</span> S.R.L.</span><p>Importación y venta de materiales de construcción metálicos y metalúrgicos.</p></div><nav><a href="#">Productos y catálogo</a><a href="#">Servicios industriales</a><a href="#">Política de calidad</a></nav><div class="columna"><a href="#">+595 981 320 675</a><a href="#">hierrometalventas@hotmail.com</a></div></div><div class="pie-legal"><div class="contenedor"><p>© 2026 Hierro Metal S.R.L. · Todos los derechos reservados</p><a href="#">Política de privacidad</a></div></div></footer></div>
+<h3>WhatsApp flotante (en el sitio va fijo, abajo a la derecha)</h3>
+<div class="fila"><div class="estado"><a class="whatsapp-flotante muestra" style="border:0;border-bottom:var(--borde-boton-marca) solid var(--color-tinta)" href="#">WhatsApp</a><small>Reposo · única sombra del sistema</small></div></div>
+<h2>Mapa con consentimiento</h2>
+<div class="mapa-consentido" style="margin-top:20px"><p>El mapa lo provee Google Maps. Al cargarlo, Google puede registrar datos de tu navegación; podés ver el detalle en nuestra política de privacidad.</p><a class="btn btn-negro" href="#">Cargar mapa</a><a class="btn btn-linea" href="#">Abrir en Google Maps ↗</a></div>
+
+<h2>Banner de cookies <small style="font-size:14px;color:var(--color-gris)">[nuevo · D5]</small></h2>
+<div class="estatico" style="margin-top:20px"><div class="cookies"><div class="contenedor"><p>Usamos cookies para medir cuánta gente visita el sitio y para saber si nuestros anuncios funcionan. Podés aceptar todas, rechazar todas o elegir cuáles. <a href="#">Más información</a></p><div class="botonera"><button class="btn btn-linea-amarilla" type="button">Rechazar todo</button><button class="btn btn-linea-amarilla" type="button">Configurar</button><button class="btn btn-amarillo" type="button">Aceptar todo</button></div></div></div></div>
+<p class="bajada">«Rechazar todo» tiene el mismo peso que «Aceptar todo». El WhatsApp flotante sube mientras el banner está visible.</p>
+<div style="height:80px"></div>
+</main></body></html>

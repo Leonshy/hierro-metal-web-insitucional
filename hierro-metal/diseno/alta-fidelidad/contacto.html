@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pedí tu cotización · Hierro Metal S.R.L.</title>
+<meta name="description" content="Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día.">
+<!-- Prototipo de diseño. Las fuentes se piden a Google Fonts sólo acá; el sitio real las autohospeda (CLAUDE.md regla 15). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens.css">
+<link rel="stylesheet" href="../componentes.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="barra-datos"><div class="contenedor">
+  <div class="barra-direccion"><i aria-hidden="true"></i>Pedro Getto esq. Cadete Sisa · Fernando de la Mora, Central</div>
+  <div class="barra-enlaces"><a href="tel:+595981320675">+595 981 320 675</a><a href="https://www.instagram.com/hierrometalsrl/">Instagram</a><a href="https://www.facebook.com/p/Hierro-Metal-SRL-100044982888002/">Facebook</a></div>
+</div></div>
+<header class="cabecera"><div class="cabecera-fila">
+  <a class="logo" href="home.html" aria-label="Hierro Metal S.R.L. — inicio"><img src="../logo/hierro-metal-logo.svg" alt="" width="96" height="64"></a>
+  <nav class="nav-escritorio" aria-label="Navegación principal"><a href="ficha-familia.html">Productos</a><a href="#">Servicios</a><a href="#">Calidad</a><a href="#">FAQ</a><a href="#">Ubicación</a><a href="contacto.html" aria-current="page">Contacto</a></nav>
+  <div class="acciones-cabecera">
+    <a class="cabecera-catalogo" href="#">↓ Catálogo</a>
+    <a class="hm-cta" href="contacto.html">Pedir cotización</a>
+    <a class="hm-burger" href="#menu-movil" aria-label="Abrir menú"><i aria-hidden="true"></i></a>
+  </div>
+</div>
+<nav class="menu-movil" id="menu-movil" aria-label="Navegación móvil">
+  <a href="ficha-familia.html">Productos y catálogo</a><a href="#">Servicios industriales</a><a href="#">Política de calidad</a><a href="#">Preguntas frecuentes</a><a href="#">Ubicación</a><a href="contacto.html">Contacto</a>
+</nav></header>
+<main id="contenido">
+<section class="encabezado-pagina amarilla"><div class="contenedor">
+  <p class="rotulo">Contacto</p>
+  <h1>Pedí tu cotización</h1>
+  <p class="bajada">Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día. Si preferís hablar, escribinos por WhatsApp o llamanos.</p>
+</div></section>
+
+<section class="seccion"><div class="contenedor"><div class="dos-columnas" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px">
+  <div>
+    <h2 class="titulo-seccion" style="font-size:var(--text-familia);margin-bottom:26px">Contanos qué necesitás</h2>
+    <form class="formulario" action="gracias.html" method="post" novalidate>
+      <div class="trampa" aria-hidden="true"><label>Sitio web <input type="text" name="sitio_web" tabindex="-1" autocomplete="off"></label></div>
+      <div class="campo"><label for="nombre">Nombre y apellido <span class="req" aria-hidden="true">*</span></label><input id="nombre" name="nombre" type="text" autocomplete="name" required maxlength="120"></div>
+      <div class="campo"><label for="empresa">Empresa u obra</label><input id="empresa" name="empresa" type="text" maxlength="120"></div>
+      <div class="campo"><label for="telefono">Teléfono o WhatsApp <span class="req" aria-hidden="true">*</span></label><input id="telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx xxx xxx" required maxlength="40"></div>
+      <div class="campo"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" maxlength="150"><span class="ayuda">Opcional, pero nos ayuda a mandarte la cotización por escrito.</span></div>
+      <div class="campo"><label for="rubro">¿Qué necesitás?</label><select id="rubro" name="rubro"><option selected>Chapas de acero</option><option>Perfiles y estructurales</option><option>Tubos y caños</option><option>Varillas y barras</option><option>Accesorios de cañería</option><option>Servicio de corte, plegado o perforado</option><option>Galvanización</option><option>Varios materiales / lista completa</option><option>Otra consulta</option></select></div>
+      <div class="campo"><label for="mensaje">Lista de materiales o detalle del pedido <span class="req" aria-hidden="true">*</span></label><textarea id="mensaje" name="mensaje" required maxlength="4000" placeholder="Ejemplo:&#10;- 20 chapas trapezoidales galvanizadas, largo 6 m&#10;- 10 perfiles UPN 100, 12 m&#10;- Corte a medida según plano&#10;- Entrega en obra, zona Luque"></textarea><span class="ayuda">Cuanto más detalle nos des (medidas, espesores, cantidades, zona de entrega), más rápido te cotizamos.</span></div>
+      <div class="campo campo-archivo"><label for="archivos">Plano, despiece o lista (opcional)</label>
+        <label class="archivo-zona" for="archivos" style="text-transform:none;letter-spacing:0;font-family:var(--font-texto);font-size:15px;color:var(--color-tinta);margin:0"><svg class="icono-mas" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Elegir archivos</label>
+        <input id="archivos" name="archivos[]" type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.webp,.dwg,.dxf,.xlsx" class="solo-lectores">
+        <span class="ayuda">PDF, imagen, DWG, DXF o Excel. Hasta 3 archivos de 10 MB cada uno.</span></div>
+      <label class="consentimiento"><input type="checkbox" name="acepto" required><span>Al enviar, aceptás que usemos tus datos para responder esta consulta. Ver la <a href="#">política de privacidad</a>.</span></label>
+      <button class="btn btn-amarillo" type="submit">Enviar pedido</button>
+    </form>
+  </div>
+  <aside aria-label="Canales directos">
+    <h2 class="titulo-seccion" style="font-size:var(--text-familia);margin-bottom:22px">O escribinos ahora</h2>
+    <ul class="datos">
+      <li><span class="etiqueta">Ventas · WhatsApp y teléfono</span><a class="grande" href="tel:+595981320675">+595 981 320 675</a></li>
+      <li><span class="etiqueta">Correo</span><a href="mailto:hierrometalventas@hotmail.com">hierrometalventas@hotmail.com</a></li>
+      <li><span class="etiqueta">Depósito y taller</span><a href="https://maps.app.goo.gl/XpbnH8AFw9iJSExs8">Pedro Getto esq. Cadete Sisa, Fernando de la Mora →</a></li>
+      <li><span class="etiqueta">Horario de atención</span><p><span class="estado-horario estado-abierto">Abierto ahora · cerramos a las 17:00</span></p>
+        <ul class="horarios"><li><span>Lunes a viernes</span><span>07:00 — 17:00</span></li><li><span>Sábados</span><span>07:00 — 12:00</span></li><li><span>Domingos y feriados</span><span>Cerrado</span></li></ul></li>
+    </ul>
+    <div class="botonera"><a class="btn btn-negro" href="https://wa.me/595981320675?text=Hola%2C%20quiero%20pedir%20una%20cotizaci%C3%B3n.">Escribir por WhatsApp</a><a class="btn btn-linea" href="#">↓ Descargar catálogo</a></div>
+    <div class="aviso" data-tipo="Aviso"><strong>Ventas se centraliza en un único número corporativo.</strong> Si alguien te contacta desde otro número diciendo representar a Hierro Metal S.R.L., verificá con nosotros antes de operar.</div>
+  </aside>
+</div></div></section>
+</main>
+<footer class="pie">
+<div class="pie-rejilla">
+  <div><span class="pie-marca">Hierro <span>Metal</span> S.R.L.</span><p>Importación y venta de materiales de construcción metálicos y metalúrgicos.</p></div>
+  <nav aria-label="Pie: productos"><a href="ficha-familia.html">Productos y catálogo</a><a href="#">Servicios industriales</a><a href="#">Política de calidad</a><a href="#">Preguntas frecuentes</a></nav>
+  <nav aria-label="Pie: contacto"><a href="#">Ubicación</a><a href="contacto.html">Contacto</a><a href="#">Descargar catálogo</a></nav>
+  <div class="columna"><a href="tel:+595981320675">+595 981 320 675</a><a href="mailto:hierrometalventas@hotmail.com">hierrometalventas@hotmail.com</a><a href="https://maps.app.goo.gl/XpbnH8AFw9iJSExs8">Pedro Getto esq. Cadete Sisa, Fernando de la Mora, Central →</a></div>
+</div>
+<div class="pie-legal"><div class="contenedor"><p>© 2026 Hierro Metal S.R.L. · Todos los derechos reservados</p><a href="#">Política de privacidad</a></div></div>
+</footer>
+</body></html>

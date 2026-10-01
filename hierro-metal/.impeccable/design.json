@@ -1,0 +1,318 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-01T11:11:04.985627+00:00",
+  "title": "Design System: Hierro Metal S.R.L.",
+  "extensions": {
+    "colorMeta": {
+      "marca": {
+        "role": "primary",
+        "displayName": "Amarillo institucional",
+        "canonical": "#f9ed31",
+        "tonalRamp": [
+          "#4a4602",
+          "#837b04",
+          "#bcb105",
+          "#f4e607",
+          "#f9ee3c",
+          "#fbf375",
+          "#fdf8ae",
+          "#fefde6"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Negro institucional",
+        "canonical": "#231f20",
+        "tonalRamp": [
+          "#292425",
+          "#473f41",
+          "#665b5e",
+          "#85767a",
+          "#a19598",
+          "#bcb4b6",
+          "#d8d3d4",
+          "#f3f1f2"
+        ]
+      },
+      "texto": {
+        "role": "neutral",
+        "displayName": "Texto de cuerpo",
+        "canonical": "#4a4444",
+        "tonalRamp": [
+          "#282525",
+          "#464141",
+          "#655c5c",
+          "#837878",
+          "#9f9797",
+          "#bbb5b5",
+          "#d7d3d3",
+          "#f3f2f2"
+        ]
+      },
+      "gris": {
+        "role": "neutral",
+        "displayName": "Gris de rótulos",
+        "canonical": "#706c64",
+        "tonalRamp": [
+          "#282724",
+          "#474540",
+          "#66625b",
+          "#858077",
+          "#a09d95",
+          "#bcb9b4",
+          "#d7d6d3",
+          "#f3f2f2"
+        ]
+      },
+      "linea": {
+        "role": "neutral",
+        "displayName": "Línea de retícula",
+        "canonical": "#a3a5a8",
+        "tonalRamp": [
+          "#252627",
+          "#424345",
+          "#5e6063",
+          "#7a7d81",
+          "#989a9e",
+          "#b6b8ba",
+          "#d4d5d6",
+          "#f2f2f3"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel",
+        "canonical": "#efeeea",
+        "tonalRamp": [
+          "#2b2921",
+          "#4d493a",
+          "#6e6853",
+          "#8f886d",
+          "#a8a38d",
+          "#c2beae",
+          "#dbd9cf",
+          "#f4f3f1"
+        ]
+      },
+      "error": {
+        "role": "neutral",
+        "displayName": "Error",
+        "canonical": "#b00020",
+        "tonalRamp": [
+          "#4c000e",
+          "#870019",
+          "#c10023",
+          "#fb002e",
+          "#ff375b",
+          "#ff718b",
+          "#ffabba",
+          "#ffe5ea"
+        ]
+      },
+      "exito": {
+        "role": "neutral",
+        "displayName": "Éxito",
+        "canonical": "#1e6b3a",
+        "tonalRamp": [
+          "#113c20",
+          "#1e6939",
+          "#2a9752",
+          "#37c46a",
+          "#63d38b",
+          "#90e0ad",
+          "#beedcf",
+          "#ebf9f0"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Título de portada."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Título de sección."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Título de ficha."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Bajadas y cuerpo."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Rótulos de stock en mono."
+      }
+    },
+    "shadows": [
+      {
+        "name": "flotante",
+        "value": "0 10px 28px rgba(35, 31, 32, .32)",
+        "purpose": "Sólo el botón flotante de WhatsApp."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-salida",
+        "value": "cubic-bezier(.22, 1, .36, 1)",
+        "purpose": "Entrada de textos y apertura de líneas y FAQ."
+      },
+      {
+        "name": "duracion-estado",
+        "value": "150ms",
+        "purpose": "Hover y color."
+      },
+      {
+        "name": "duracion-menu",
+        "value": "200ms",
+        "purpose": "Menú móvil y acordeones."
+      },
+      {
+        "name": "duracion-revelado",
+        "value": "600ms",
+        "purpose": "Entrada del texto de portada."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "chico",
+        "value": "520px"
+      },
+      {
+        "name": "barra",
+        "value": "860px"
+      },
+      {
+        "name": "escritorio",
+        "value": "1040px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón amarillo",
+      "kind": "button",
+      "refersTo": "button-amarillo",
+      "description": "Acción principal: pedir cotización.",
+      "html": "<a class=\"ds-btn-amarillo\" href=\"#\">Pedir cotización</a>",
+      "css": ".ds-btn-amarillo{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;background:#f9ed31;color:#231f20;border-bottom:3px solid #231f20;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:19px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;transition:background-color .15s}.ds-btn-amarillo:hover{background:#f3de30}.ds-btn-amarillo:focus-visible{outline:3px solid #f9ed31;outline-offset:2px}"
+    },
+    {
+      "name": "Botón negro",
+      "kind": "button",
+      "refersTo": "button-negro",
+      "description": "Acción secundaria sobre fondo claro o amarillo.",
+      "html": "<a class=\"ds-btn-negro\" href=\"#\">Leer la política</a>",
+      "css": ".ds-btn-negro{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;background:#231f20;color:#fff;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:19px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;text-decoration:none}.ds-btn-negro:hover{background:#000}.ds-btn-negro:focus-visible{outline:3px solid #f9ed31;outline-offset:2px}"
+    },
+    {
+      "name": "Botón línea",
+      "kind": "button",
+      "refersTo": "button-linea",
+      "description": "Acción terciaria con borde de 1 px.",
+      "html": "<a class=\"ds-btn-linea\" href=\"#\">Ver productos</a>",
+      "css": ".ds-btn-linea{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border:1px solid #231f20;color:#231f20;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:19px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;text-decoration:none}.ds-btn-linea:hover{background:#f9f9f9}.ds-btn-linea:focus-visible{outline:3px solid #f9ed31;outline-offset:2px}"
+    },
+    {
+      "name": "Campo de formulario",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Rótulo mono arriba, borde de 1 px, foco amarillo de 3 px.",
+      "html": "<div class=\"ds-campo\"><label>Teléfono o WhatsApp <span>*</span></label><input type=\"tel\" placeholder=\"09xx xxx xxx\"></div>",
+      "css": ".ds-campo label{display:block;margin-bottom:7px;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#706c64}.ds-campo label span{color:#b00020}.ds-campo input{width:100%;min-height:48px;padding:13px 14px;border:1px solid #a3a5a8;border-radius:0;background:#fff;font-family:'IBM Plex Sans',sans-serif;font-size:16px;color:#231f20}.ds-campo input:hover{border-color:#706c64}.ds-campo input:focus{border-color:#231f20;outline:3px solid #f9ed31;outline-offset:1px}.ds-campo input::placeholder{color:#706c64}"
+    },
+    {
+      "name": "Ficha de familia",
+      "kind": "card",
+      "refersTo": "ficha",
+      "description": "Índice mono, título condensado, texto y «Ver medidas →».",
+      "html": "<a class=\"ds-ficha\" href=\"#\"><span class=\"i\">01 · 7 líneas</span><span class=\"t\">Chapas de acero</span><span class=\"x\">Laminadas en frío y caliente, galvanizadas, inoxidables.</span><span class=\"e\">Ver medidas →</span></a>",
+      "css": ".ds-ficha{display:block;padding:20px 20px 24px;background:#fff;box-shadow:0 0 0 1px #a3a5a8;color:#231f20;text-decoration:none;transition:background-color .15s}.ds-ficha:hover{background:#f9f9f9}.ds-ficha .i{display:block;margin-bottom:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#706c64}.ds-ficha .t{display:block;margin-bottom:8px;font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:29px;font-weight:700;line-height:1.02;text-transform:uppercase}.ds-ficha .x{display:block;font-family:'IBM Plex Sans',sans-serif;font-size:14.5px;line-height:1.6;color:#4a4444}.ds-ficha .e{display:inline-block;margin-top:14px;padding:6px 10px;background:#f9ed31;font-family:'IBM Plex Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}"
+    },
+    {
+      "name": "Insignia",
+      "kind": "chip",
+      "refersTo": "insignia",
+      "description": "Etiqueta amarilla en mono sobre la portada.",
+      "html": "<span class=\"ds-insignia\">Importación y venta · Mayorista y minorista</span>",
+      "css": ".ds-insignia{display:inline-flex;padding:7px 12px;background:#f9ed31;color:#231f20;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}"
+    },
+    {
+      "name": "Tabla de medidas",
+      "kind": "custom",
+      "description": "Líneas finas, encabezado mono, primera columna en condensada.",
+      "html": "<table class=\"ds-tabla\"><thead><tr><th>Espesor</th><th>Largo (mm)</th><th>Ancho (mm)</th></tr></thead><tbody><tr><th>N°16 – 1,50</th><td>2000/2400/3000</td><td>1000/1200/1500</td></tr><tr><th>N°18 – 1,2</th><td>2000/2400/3000</td><td>1000/1200/1500</td></tr></tbody></table>",
+      "css": ".ds-tabla{width:100%;border-collapse:collapse;border:1px solid #a3a5a8;background:#fff}.ds-tabla th,.ds-tabla td{padding:10px 14px;text-align:left;border-bottom:1px solid #a3a5a8}.ds-tabla thead th{background:#efeeea;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#706c64}.ds-tabla tbody th{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-size:19px;font-weight:600;color:#231f20}.ds-tabla td{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#4a4444;font-variant-numeric:tabular-nums}.ds-tabla tbody tr:hover{background:#f9f9f9}"
+    },
+    {
+      "name": "Aviso",
+      "kind": "custom",
+      "description": "Marco de 1 px con pestaña llena que dice el tipo.",
+      "html": "<div class=\"ds-aviso\"><strong>Ventas se centraliza en un único número corporativo.</strong> Verificá con nosotros antes de operar.</div>",
+      "css": ".ds-aviso{position:relative;margin-top:30px;padding:16px 18px;border:1px solid #a3a5a8;background:#f9f9f9;font-family:'IBM Plex Sans',sans-serif;font-size:15px;line-height:1.6;color:#4a4444}.ds-aviso::before{content:'Aviso';position:absolute;top:-1px;left:-1px;padding:3px 9px;transform:translateY(-100%);background:#f9ed31;color:#231f20;font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La etiqueta de stock",
+    "overview": "El sitio se lee como un depósito bien ordenado en el que cada cosa tiene su etiqueta: un rótulo en monoespaciada, un índice, un título condensado en mayúsculas y una acción. Planos de color llenos se alternan para dar ritmo y las retículas de 1 px ordenan el contenido como estantes. Sin radios, sin degradados, sin sombras decorativas. La estética es la que el cliente ya diseñó y se conserva.",
+    "keyCharacteristics": [
+      "Amarillo institucional sobre negro; el amarillo nunca lleva texto blanco.",
+      "Títulos en Barlow Condensed en mayúsculas, interlineado .95.",
+      "Rótulos en IBM Plex Mono, 11 px, mayúsculas, tracking .18em.",
+      "Retículas de 1 px dibujadas con box-shadow.",
+      "Botones rectos con borde inferior de 3 px.",
+      "Sin radios, sin degradados, una sola sombra."
+    ],
+    "rules": [
+      {
+        "name": "The Yellow-Is-Never-White Rule",
+        "body": "Sobre el amarillo sólo van tinta o texto sobre amarillo. Nunca texto blanco.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Gray-On-Black Rule",
+        "body": "El gris de rótulos no se usa sobre negro (3,1:1). Sobre negro: claro y claro 2.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Climates Rule",
+        "body": "Cada sección es clara, oscura o amarilla, y se alternan. No hay un cuarto fondo de sección.",
+        "section": "colors"
+      },
+      {
+        "name": "The Stock Label Rule",
+        "body": "Todo lo que clasifica va en mono, 11 px, mayúsculas. No se usa para texto corrido.",
+        "section": "typography"
+      },
+      {
+        "name": "The Numerals Rule",
+        "body": "Las medidas se escriben en la condensada o en mono con cifras tabulares, nunca en la sans de cuerpo.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Ninguna ficha, botón, campo o aviso lleva sombra. El estado se comunica con color, no con elevación.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do usar sólo tokens: ningún color, tipografía ni medida de marca literal en un componente.",
+      "Do alternar los tres climas de sección (blanco, negro, amarillo) para dar ritmo.",
+      "Do escribir los rótulos en mono, 11 px, mayúsculas, con tracking .18em.",
+      "Do dibujar las retículas con box-shadow: 0 0 0 1px.",
+      "Do mantener 48 px de alto táctil y respetar prefers-reduced-motion.",
+      "Do terminar cada página con una acción: cotizar o escribir por WhatsApp."
+    ],
+    "donts": [
+      "Don't usar radios, degradados ni sombras (salvo la del botón de WhatsApp).",
+      "Don't poner texto blanco sobre amarillo, ni gris de rótulos sobre negro.",
+      "Don't reemplazar las ilustraciones SVG de secciones de acero por fotos de stock o iconos genéricos.",
+      "Don't usar bordes laterales gruesos en avisos o tarjetas.",
+      "Don't inventar pruebas: no hay fotos propias, testimonios ni clientes citables.",
+      "Don't cargar Google Fonts en el sitio real: las fuentes se autohospedan."
+    ]
+  }
+}

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tres lecturas del sistema visual — Hierro Metal</title>
+<!-- Página de revisión interna. Carga las fuentes desde Google Fonts sólo para esta comparación;
+     el sitio real las autohospeda (CLAUDE.md regla 15). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--color-panel);font-family:var(--font-texto);color:var(--color-tinta)}
+.cabecera-pagina{max-width:1280px;margin:0 auto;padding:28px 20px 8px}
+.cabecera-pagina h1{font-family:var(--font-condensada);font-size:40px;text-transform:uppercase;margin:0 0 6px;line-height:1}
+.cabecera-pagina p{margin:0;max-width:78ch;line-height:1.55;color:var(--color-texto)}
+.modelos{max-width:1280px;margin:0 auto;padding:20px;display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-start}
+.modelo{width:375px;flex:none}
+.modelo>h2{font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin:0 0 4px;color:var(--color-gris)}
+.modelo>h3{font-family:var(--font-condensada);font-size:30px;text-transform:uppercase;margin:0 0 6px;line-height:1}
+.modelo>p{font-size:13.5px;line-height:1.5;color:var(--color-texto);margin:0 0 12px;min-height:60px}
+.pantalla{background:var(--color-blanco);border:1px solid var(--color-linea);overflow:hidden}
+
+/* ---- piezas compartidas (iguales en los tres modelos) ---- */
+.barra{background:var(--color-tinta);color:#fff;padding:7px 14px;font-size:11.5px;display:flex;justify-content:space-between;gap:8px}
+.barra span:first-child{color:var(--color-barra)}
+.cab{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;border-bottom:1px solid var(--color-linea);background:var(--color-blanco)}
+.cab .logo{font-family:var(--font-condensada);font-weight:700;font-size:22px;text-transform:uppercase;letter-spacing:.01em}
+.cab .logo span{background:var(--color-marca);padding:0 5px}
+.cab .acc{display:flex;gap:8px;align-items:center}
+.cta-mini{display:inline-flex;align-items:center;min-height:46px;padding:0 13px;background:var(--color-marca);color:var(--color-tinta);font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;border-bottom:var(--borde-boton-marca) solid var(--color-tinta)}
+.burger{width:46px;height:46px;background:var(--color-tinta);display:grid;place-items:center}
+.burger i{display:block;width:18px;height:2px;background:#fff;box-shadow:0 -6px 0 #fff,0 6px 0 #fff}
+.btn{display:inline-flex;align-items:center;min-height:var(--alto-boton);padding:0 22px;font-family:var(--font-condensada);font-size:var(--text-boton);font-weight:600;letter-spacing:var(--tracking-boton);text-transform:uppercase}
+.btn-amarillo{background:var(--color-marca);color:var(--color-tinta);border-bottom:var(--borde-boton-marca) solid var(--color-tinta)}
+.btn-negro{background:var(--color-tinta);color:#fff}
+.btn-linea{border:1px solid currentColor}
+.botonera{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.insignia{display:inline-flex;margin-bottom:18px;padding:7px 11px;background:var(--color-marca);color:var(--color-tinta);font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}
+.rotulo{font-family:var(--font-mono);font-size:var(--text-rotulo);font-weight:500;letter-spacing:var(--tracking-rotulo);text-transform:uppercase;color:var(--color-gris)}
+h4{margin:0}
+.h1{font-family:var(--font-condensada);font-weight:700;text-transform:uppercase;line-height:var(--leading-titulo);letter-spacing:-.005em;font-size:52px;margin:0}
+.bajada{margin-top:16px;font-size:15.5px;line-height:1.6}
+.ficha-titulo{font-family:var(--font-condensada);font-weight:700;text-transform:uppercase;font-size:var(--text-ficha);line-height:1.02}
+.wa{position:relative;display:flex;justify-content:flex-end;padding:12px 14px;background:inherit}
+.wa b{display:inline-flex;align-items:center;min-height:54px;padding:0 20px;background:var(--color-marca);color:var(--color-tinta);font-size:13px;font-weight:700;letter-spacing:.04em;border-bottom:var(--borde-boton-marca) solid var(--color-tinta);box-shadow:var(--sombra-flotante)}
+img{display:block;max-width:100%}
+
+/* ========== A · LA ETIQUETA DE STOCK ========== */
+.A .hero{background:var(--color-tinta);color:#fff;padding:28px 16px 22px}
+.A .hero .bajada{color:var(--color-claro)}
+.A .hero .nota{margin-top:16px;font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--color-marca-suave)}
+.A .btn-linea{color:#fff;border-color:rgba(255,255,255,.4)}
+.A .btn-amarillo{border-bottom-color:#fff}
+.A .etiquetas{display:grid;grid-template-columns:1fr 1fr;background:var(--color-marca)}
+.A .etiquetas div{padding:14px 12px;border-right:1px solid rgba(35,31,32,.25);border-bottom:1px solid rgba(35,31,32,.25)}
+.A .etiquetas div:nth-child(2n){border-right:0}
+.A .etiquetas div:nth-child(n+3){border-bottom:0}
+.A .etiquetas .rotulo{color:var(--color-texto-sobre-marca);display:block;margin-bottom:4px;font-size:10px}
+.A .etiquetas b{font-family:var(--font-condensada);font-size:21px;text-transform:uppercase;line-height:1}
+.A .bloque{padding:24px 16px}
+.A .ficha{margin-top:14px;box-shadow:0 0 0 1px var(--color-linea)}
+.A .ficha-ilu{background:var(--color-panel)}
+.A .ficha-c{padding:16px 16px 18px}
+.A .ficha-ind{font-family:var(--font-mono);font-size:11px;color:var(--color-gris);display:block;margin-bottom:6px}
+.A .ficha dl{margin:14px 0 0;font-family:var(--font-mono);font-size:11.5px}
+.A .ficha dl div{display:flex;gap:8px;padding:7px 0;border-top:1px dashed var(--color-linea)}
+.A .ficha dt{color:var(--color-gris);flex:none;width:76px;text-transform:uppercase;letter-spacing:.06em}
+.A .ficha dd{margin:0;color:var(--color-tinta)}
+.A .ver{display:inline-block;margin-top:12px;padding:6px 10px;background:var(--color-marca);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+
+/* ========== B · EL PLANO DE TALLER ========== */
+.B .hero{background:var(--color-panel);padding:26px 16px 0}
+.B .h1{font-size:50px}
+.B .bajada{color:var(--color-texto)}
+.B .marca{background:linear-gradient(transparent 62%, var(--color-marca) 62%)}
+.B .plano{position:relative;margin:24px 0 0;padding:34px 34px 30px 34px;background:var(--color-blanco);border:1px solid var(--color-tinta)}
+.B .plano img{border:1px solid var(--color-linea)}
+.B .cota-h,.B .cota-v{position:absolute;font-family:var(--font-mono);font-size:10px;letter-spacing:.06em;color:var(--color-tinta)}
+.B .cota-h{left:34px;right:34px;top:9px;text-align:center;border-bottom:1px solid var(--color-tinta);height:16px;line-height:12px}
+.B .cota-h::before,.B .cota-h::after{content:"";position:absolute;bottom:-5px;width:1px;height:9px;background:var(--color-tinta)}
+.B .cota-h::before{left:0}.B .cota-h::after{right:0}
+.B .cota-v{top:34px;bottom:30px;left:9px;width:16px;border-right:1px solid var(--color-tinta)}
+.B .cota-v span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-90deg);white-space:nowrap}
+.B .cota-v::before,.B .cota-v::after{content:"";position:absolute;right:-5px;height:1px;width:9px;background:var(--color-tinta)}
+.B .cota-v::before{top:0}.B .cota-v::after{bottom:0}
+.B .cajetin{display:grid;grid-template-columns:1.4fr 1fr 1fr;border:1px solid var(--color-tinta);border-top:0;background:var(--color-blanco);margin:0 0 0}
+.B .cajetin div{padding:8px 10px;border-right:1px solid var(--color-tinta);font-size:12px;font-weight:600}
+.B .cajetin div:last-child{border-right:0}
+.B .cajetin .rotulo{display:block;font-size:9px;margin-bottom:3px}
+.B .hero .botonera{padding-bottom:22px}
+.B .bloque{padding:24px 16px}
+.B .tabla{width:100%;border-collapse:collapse;margin-top:14px;font-size:12px}
+.B .tabla th,.B .tabla td{border:1px solid var(--color-tinta);padding:7px 8px;text-align:left}
+.B .tabla th{font-family:var(--font-mono);font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:var(--color-panel);color:var(--color-tinta)}
+.B .ver{display:inline-block;margin-top:14px;padding:6px 10px;background:var(--color-marca);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+
+/* ========== C · EL CARTEL DE OBRA ========== */
+.C .hero{background:var(--color-marca);color:var(--color-tinta);padding:26px 16px 0}
+.C .insignia{background:var(--color-tinta);color:var(--color-marca)}
+.C .h1{font-size:76px;line-height:.88}
+.C .bajada{color:var(--color-texto-sobre-marca);font-weight:600}
+.C .btn-negro{min-height:60px;font-size:22px}
+.C .btn-linea{color:var(--color-tinta);border:2px solid var(--color-tinta)}
+.C .hero img{margin:24px -16px 0;width:calc(100% + 32px);max-width:none;border-top:3px solid var(--color-tinta)}
+.C .franja{background:var(--color-tinta);color:var(--color-marca);display:flex;flex-wrap:wrap}
+.C .franja b{flex:1 1 50%;padding:13px 14px;font-family:var(--font-condensada);font-size:22px;text-transform:uppercase;border-right:1px solid rgba(249,237,49,.35);border-bottom:1px solid rgba(249,237,49,.35)}
+.C .bloque{padding:24px 16px}
+.C .ficha{margin-top:14px;background:var(--color-tinta);color:#fff}
+.C .ficha-ind{display:block;font-family:var(--font-condensada);font-size:96px;font-weight:700;line-height:.8;color:var(--color-marca);padding:18px 16px 0}
+.C .ficha .ficha-titulo{padding:8px 16px 0;font-size:40px}
+.C .ficha p{padding:8px 16px 0;margin:0;color:var(--color-claro);font-size:14.5px;line-height:1.55}
+.C .ficha .medidas{margin:14px 16px 0;padding:10px 0;border-top:1px solid rgba(255,255,255,.2);font-family:var(--font-mono);font-size:11.5px;color:var(--color-claro-2);line-height:1.7}
+.C .ficha .ver{display:flex;align-items:center;min-height:52px;margin-top:14px;padding:0 16px;background:var(--color-marca);color:var(--color-tinta);font-family:var(--font-condensada);font-size:19px;font-weight:600;letter-spacing:.09em;text-transform:uppercase}
+.nota-final{max-width:1280px;margin:0 auto;padding:8px 20px 40px;color:var(--color-texto);line-height:1.6;font-size:14.5px}
+.nota-final b{color:var(--color-tinta)}
+</style>
+</head>
+<body>
+
+<div class="cabecera-pagina">
+  <h1>Tres lecturas del sistema visual</h1>
+  <p>Las tres usan <b>exactamente los mismos tokens</b> (colores, tipografías, botones rectos con borde inferior de 3&nbsp;px, sin radios ni sombras) y el mismo contenido del cliente. Lo que cambia es qué rasgo del sitio original se vuelve protagonista. Se muestran en pantalla de móvil (375&nbsp;px), el uso principal. Datos de la ficha tomados del catálogo 2026.</p>
+</div>
+
+<main class="modelos">
+
+<!-- ================= A ================= -->
+<section class="modelo A">
+  <h2>Opción A</h2>
+  <h3>La etiqueta de stock</h3>
+  <p>El protagonista es el rótulo mono y el índice: cada cosa tiene su etiqueta, como en un depósito ordenado. Es lo más cercano al sitio del cliente.</p>
+  <div class="pantalla">
+    <div class="barra"><span>Pedro Getto esq. Cadete Sisa</span><span>+595 981 320 675</span></div>
+    <div class="cab"><div class="logo"><span>Hierro</span> Metal</div><div class="acc"><span class="cta-mini">Pedir cotización</span><span class="burger"><i></i></span></div></div>
+    <div class="hero">
+      <span class="insignia">Importación y venta · Mayorista y minorista</span>
+      <h1 class="h1">Materiales metálicos para construir Paraguay</h1>
+      <p class="bajada">Chapas, perfiles, tubos, varillas y accesorios de acero con stock permanente. Cortamos, plegamos, perforamos y galvanizamos según tu plano, y entregamos en obra con flota propia de camiones.</p>
+      <div class="botonera"><span class="btn btn-amarillo">Pedir cotización</span><span class="btn btn-linea">Ver productos y medidas</span></div>
+      <p class="nota">Todas las chapas con certificado de calidad del fabricante</p>
+    </div>
+    <div class="etiquetas">
+      <div><span class="rotulo">Medidas comerciales todo el año</span><b>Stock permanente</b></div>
+      <div><span class="rotulo">Precio mayorista y minorista</span><b>Importación directa</b></div>
+      <div><span class="rotulo">Cortes, plegados y perforaciones</span><b>Corte a medida</b></div>
+      <div><span class="rotulo">Entrega de materiales en obra</span><b>Flota propia</b></div>
+    </div>
+    <div class="bloque">
+      <span class="rotulo">01 — Productos</span>
+      <article class="ficha">
+        <div class="ficha-ilu"><img src="../referencia/assets/ilustracion-chapas.svg" alt=""></div>
+        <div class="ficha-c">
+          <span class="ficha-ind">01 · 7 líneas</span>
+          <div class="ficha-titulo">Chapas de acero</div>
+          <dl>
+            <div><dt>Espesor</dt><dd>N°16 – 1,50 a N°30 – 0,30</dd></div>
+            <div><dt>Largo</dt><dd>2000 / 2400 / 3000 mm</dd></div>
+            <div><dt>Ancho</dt><dd>1000 / 1200 / 1500 mm</dd></div>
+          </dl>
+          <span class="ver">Ver medidas →</span>
+        </div>
+      </article>
+    </div>
+    <div class="wa"><b>WhatsApp</b></div>
+  </div>
+</section>
+
+<!-- ================= B ================= -->
+<section class="modelo B">
+  <h2>Opción B</h2>
+  <h3>El plano de taller</h3>
+  <p>El protagonista es la medida: líneas finas, cotas y un cajetín como el de un plano. Un sitio que se lee como algo que se puede cotizar. Hace más técnica la estética.</p>
+  <div class="pantalla">
+    <div class="barra"><span>Pedro Getto esq. Cadete Sisa</span><span>+595 981 320 675</span></div>
+    <div class="cab"><div class="logo"><span>Hierro</span> Metal</div><div class="acc"><span class="cta-mini">Pedir cotización</span><span class="burger"><i></i></span></div></div>
+    <div class="hero">
+      <span class="insignia">Importación y venta · Mayorista y minorista</span>
+      <h1 class="h1">Materiales metálicos para <span class="marca">construir</span> Paraguay</h1>
+      <p class="bajada">Chapas, perfiles, tubos, varillas y accesorios de acero con stock permanente. Cortamos, plegamos, perforamos y galvanizamos según tu plano, y entregamos en obra con flota propia de camiones.</p>
+      <div class="botonera"><span class="btn btn-amarillo">Pedir cotización</span><span class="btn btn-linea">Ver productos y medidas</span></div>
+      <figure class="plano" style="margin-bottom:0">
+        <div class="cota-h">ANCHO 1000 / 1200 / 1500</div>
+        <div class="cota-v"><span>LARGO 2000 / 2400 / 3000</span></div>
+        <img src="../referencia/assets/ilustracion-chapas.svg" alt="">
+      </figure>
+      <div class="cajetin">
+        <div><span class="rotulo">Empresa</span>Hierro Metal S.R.L.</div>
+        <div><span class="rotulo">Familia</span>01 · Chapas</div>
+        <div><span class="rotulo">Hoja</span>1 / 5</div>
+      </div>
+      <div style="height:22px"></div>
+    </div>
+    <div class="bloque">
+      <span class="rotulo">01 — Productos</span>
+      <div class="ficha-titulo" style="margin-top:8px">Chapas laminadas en frío</div>
+      <table class="tabla">
+        <tr><th>Espesor</th><th>Largo (mm)</th><th>Ancho (mm)</th></tr>
+        <tr><td>N°16 – 1,50</td><td>2000/2400/3000</td><td>1000/1200/1500</td></tr>
+        <tr><td>N°18 – 1,2</td><td>2000/2400/3000</td><td>1000/1200/1500</td></tr>
+        <tr><td>N°20 – 0,90</td><td>2000/2400/3000</td><td>1000/1200/1500</td></tr>
+      </table>
+      <span class="ver">Ver todas las medidas →</span>
+    </div>
+    <div class="wa" style="background:var(--color-blanco)"><b>WhatsApp</b></div>
+  </div>
+</section>
+
+<!-- ================= C ================= -->
+<section class="modelo C">
+  <h2>Opción C</h2>
+  <h3>El cartel de obra</h3>
+  <p>El protagonista es el plano de amarillo y el título enorme: se lee de un vistazo, como una señal. Es la lectura más audaz y se aleja más del sitio original.</p>
+  <div class="pantalla">
+    <div class="barra"><span>Pedro Getto esq. Cadete Sisa</span><span>+595 981 320 675</span></div>
+    <div class="cab"><div class="logo"><span>Hierro</span> Metal</div><div class="acc"><span class="cta-mini">Pedir cotización</span><span class="burger"><i></i></span></div></div>
+    <div class="hero">
+      <span class="insignia">Importación y venta · Mayorista y minorista</span>
+      <h1 class="h1">Materiales metálicos para construir Paraguay</h1>
+      <p class="bajada">Chapas, perfiles, tubos, varillas y accesorios de acero con stock permanente. Cortamos, plegamos, perforamos y galvanizamos según tu plano, y entregamos en obra con flota propia de camiones.</p>
+      <div class="botonera"><span class="btn btn-negro">Pedir cotización</span><span class="btn btn-linea">Ver productos y medidas</span></div>
+      <img src="../referencia/assets/ilustracion-portada.svg" alt="">
+    </div>
+    <div class="franja"><b>Stock permanente</b><b>Importación directa</b><b>Corte a medida</b><b>Flota propia</b></div>
+    <div class="bloque">
+      <span class="rotulo">01 — Productos</span>
+      <article class="ficha">
+        <span class="ficha-ind">01</span>
+        <div class="ficha-titulo">Chapas de acero</div>
+        <p>Laminadas en frío y caliente, galvanizadas, termoacústicas, inoxidables, antideslizantes y desplegadas.</p>
+        <div class="medidas">ESPESOR N°16 – 1,50 A N°30 – 0,30<br>LARGO 2000 / 2400 / 3000 MM<br>ANCHO 1000 / 1200 / 1500 MM</div>
+        <span class="ver">Ver medidas →</span>
+      </article>
+    </div>
+    <div class="wa" style="background:var(--color-blanco)"><b>WhatsApp</b></div>
+  </div>
+</section>
+
+</main>
+
+<div class="nota-final">
+  <p><b>Cómo leer esto.</b> No son tres diseños distintos: es el mismo sistema con distinto énfasis. La <b>A</b> es la más fiel al sitio del cliente. La <b>B</b> ayuda más a quien viene a buscar una medida. La <b>C</b> es la más llamativa, pero es la que más cambia lo que el cliente ya aprobó. Sea cual sea la elegida, los componentes (botones, fichas, retículas, formulario) son los mismos del original.</p>
+</div>
+</body>
+</html>

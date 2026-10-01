@@ -1,0 +1,2184 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Hierro Metal S.R.L.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;600&display=swap">
+
+<style>
+/* =========================================================================
+   HIERRO METAL S.R.L. — hoja de estilos principal
+   Paleta y tipografía tomadas del diseño aprobado.
+   --y  amarillo institucional   --ink  negro institucional
+   ========================================================================= */
+
+:root {
+  --y: #f9ed31;
+  --y2: #f3de30;
+  --y3: #dfd57d;
+  --ink: #231f20;
+  --grey: #837f76;
+  --hair: #a3a5a8;
+  --alt: #f9f9f9;
+  --texto: #4a4444;
+  --claro: #cfccc6;
+  --claro2: #b3afa9;
+  --ancho: 1300px;
+  --cond: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --sans: 'IBM Plex Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---------- Base ---------- */
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+table { max-width: 100%; }
+p, ul, ol, figure, table { margin: 0; }
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--cond);
+  font-weight: 700;
+  line-height: .95;
+  letter-spacing: -.005em;
+}
+a { color: #8a6d00; text-decoration: none; }
+a:hover { color: var(--ink); }
+button, input, textarea, select { font: inherit; color: inherit; }
+input, select, textarea { font-size: 16px; }
+a, button { -webkit-tap-highlight-color: rgba(249, 237, 49, .4); touch-action: manipulation; }
+:focus-visible { outline: 3px solid var(--y); outline-offset: 2px; }
+::selection { background: var(--y); color: var(--ink); }
+
+@keyframes hmRise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* ---------- Utilidades de estructura ---------- */
+
+.contenedor { max-width: var(--ancho); margin: 0 auto; padding: 0 20px; }
+.seccion { padding: 60px 0 70px; }
+.seccion-chica { padding: 44px 0 48px; }
+.oscura { background: var(--ink); color: #fff; }
+.amarilla { background: var(--y); }
+.linea-abajo { border-bottom: 1px solid var(--hair); }
+.solo-lectores {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+.rotulo {
+  margin-bottom: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.oscura .rotulo { color: var(--y); }
+.amarilla .rotulo { color: var(--texto); }
+
+.titulo-seccion { font-size: clamp(34px, 7vw, 62px); text-transform: uppercase; }
+.bajada {
+  margin-top: 14px;
+  max-width: 62ch;
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--texto);
+}
+.oscura .bajada { color: var(--claro); }
+.amarilla .bajada { color: #3d3838; }
+
+/* ---------- Botones ---------- */
+
+.btn {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  font-family: var(--cond);
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  border: 0;
+  cursor: pointer;
+  transition: background-color .15s, color .15s, border-color .15s;
+}
+.btn-amarillo {
+  background: var(--y);
+  color: var(--ink);
+  border-bottom: 3px solid var(--ink);
+}
+.btn-amarillo:hover { background: var(--y2); color: var(--ink); }
+.oscura .btn-amarillo { border-bottom-color: #fff; }
+
+.btn-negro { background: var(--ink); color: #fff; }
+.btn-negro:hover { background: #000; color: #fff; }
+
+.btn-linea { border: 1px solid var(--ink); color: var(--ink); }
+.btn-linea:hover { background: var(--alt); color: var(--ink); }
+
+.oscura .btn-linea { border-color: rgba(255, 255, 255, .4); color: #fff; }
+.oscura .btn-linea:hover { background: transparent; border-color: var(--y); color: var(--y); }
+
+.btn-linea-amarilla { border: 1px solid var(--y); color: var(--y); }
+.btn-linea-amarilla:hover { background: var(--y); color: var(--ink); }
+
+.botonera { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+
+/* ---------- Barra superior de datos ---------- */
+
+.barra-datos { background: var(--ink); color: #fff; }
+.barra-datos .contenedor {
+  padding: 8px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+}
+.barra-direccion {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #d9d6d0;
+  line-height: 1.4;
+}
+.barra-direccion span[aria-hidden] { flex: none; width: 8px; height: 8px; background: var(--y); }
+.barra-enlaces { display: flex; flex: none; gap: 18px; align-items: center; white-space: nowrap; }
+.barra-enlaces a { color: #fff; font-weight: 500; }
+.barra-enlaces a:hover { color: var(--y); }
+
+/* ---------- Cabecera ---------- */
+
+.saltar {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 200;
+  padding: 12px 18px;
+  background: var(--y);
+  color: var(--ink);
+  font-weight: 600;
+}
+.saltar:focus { left: 12px; }
+
+.cabecera {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, .96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--hair);
+}
+.cabecera-fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 10px 20px;
+}
+.hm-logo { height: 84px; width: auto; object-fit: contain; }
+
+.nav-escritorio { display: none; gap: 22px; align-items: center; }
+.nav-escritorio a {
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.nav-escritorio a:hover { color: var(--grey); }
+.nav-escritorio a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--y); }
+
+.acciones-cabecera { display: flex; align-items: center; gap: 10px; }
+.hm-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 0 20px;
+  background: var(--y);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  border-bottom: 3px solid var(--ink);
+  transition: background-color .15s;
+}
+.hm-cta:hover { background: var(--y2); color: var(--ink); }
+
+.hm-burger {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  background: var(--ink);
+  border: none;
+  cursor: pointer;
+}
+.hm-burger span[aria-hidden] {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #fff;
+  box-shadow: 0 -6px 0 #fff, 0 6px 0 #fff;
+}
+
+#menu-movil {
+  display: none;
+  border-top: 1px solid var(--hair);
+  padding: 6px 20px 22px;
+}
+#menu-movil.abierto { display: grid; }
+#menu-movil a {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--hair);
+  color: var(--ink);
+  font-family: var(--cond);
+  font-size: 24px;
+  text-transform: uppercase;
+}
+#menu-movil a:last-of-type { border-bottom: 0; }
+.menu-movil-contacto { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.menu-movil-contacto a {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 16px;
+  border: 1px solid var(--hair);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 14px;
+  text-transform: none;
+}
+
+/* ---------- Portada ---------- */
+
+.portada-texto { padding: 54px 0 46px; max-width: 780px; animation: hmRise .6s ease both; }
+.insignia {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  padding: 7px 12px;
+  background: var(--y);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.portada-texto h1 { font-size: clamp(42px, 9.5vw, 88px); text-transform: uppercase; }
+.portada-texto .bajada { margin-top: 24px; max-width: 58ch; font-size: 17px; }
+.nota-portada {
+  margin-top: 26px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--y3);
+}
+
+/* Encabezado de páginas internas */
+.encabezado-pagina { padding: 46px 0 44px; }
+.encabezado-pagina h1 { font-size: clamp(38px, 8vw, 74px); text-transform: uppercase; }
+
+/* ---------- Ilustraciones de acero (SVG) ---------- */
+
+.ilustracion {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--ink);
+  border-top: 3px solid var(--y);
+}
+.ilustracion-portada { aspect-ratio: 16 / 7; }
+.ficha-ilustracion { aspect-ratio: 16 / 9; background: #efeeea; border-top: 0; }
+
+/* ---------- Franja de diferenciales ---------- */
+
+.diferenciales {
+  list-style: none;
+  padding: 0;
+  max-width: var(--ancho);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.diferenciales li { padding: 24px 20px; border-right: 1px solid rgba(35, 31, 32, .18); }
+.diferenciales li:last-child { border-right: 0; }
+.diferenciales strong {
+  display: block;
+  margin-bottom: 3px;
+  font-family: var(--cond);
+  font-size: 26px;
+  text-transform: uppercase;
+}
+.diferenciales span { font-size: 13.5px; line-height: 1.5; color: var(--texto); }
+
+/* ---------- Retícula de fichas ---------- */
+
+/* Las retículas dibujan sus líneas con box-shadow, no con el fondo del
+   contenedor: así las celdas que sobran en la última fila quedan vacías
+   en lugar de verse como bloques grises. */
+.rejilla {
+  list-style: none;
+  padding: 0;
+  margin-top: 34px;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.rejilla > li { background: #fff; box-shadow: 0 0 0 1px var(--hair); }
+.rejilla a.ficha {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100%;
+  color: var(--ink);
+  transition: background-color .15s;
+}
+.rejilla a.ficha:hover { background: var(--alt); color: var(--ink); }
+.ficha-cuerpo { display: block; padding: 20px 20px 24px; }
+.ficha-indice {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--grey);
+}
+.ficha-titulo {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--cond);
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 1.02;
+  text-transform: uppercase;
+}
+.ficha-texto { display: block; font-size: 14.5px; line-height: 1.6; color: var(--texto); }
+.ficha-enlace {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 6px 10px;
+  background: var(--y);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.rejilla > li.ficha-destacada { background: var(--ink); color: #fff; box-shadow: none; }
+.ficha-destacada .caja {
+  display: grid;
+  align-content: center;
+  height: 100%;
+  padding: 30px 22px;
+}
+.ficha-destacada .ficha-titulo { font-size: 30px; }
+.ficha-destacada .ficha-texto { color: var(--claro2); margin-bottom: 20px; }
+
+/* Rejilla oscura (servicios en portada) */
+.rejilla-oscura {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-bottom: 32px;
+}
+.rejilla-oscura li {
+  background: var(--ink);
+  padding: 24px 20px 28px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .16);
+}
+.rejilla-oscura strong {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--cond);
+  font-size: 27px;
+  text-transform: uppercase;
+}
+.rejilla-oscura span { display: block; font-size: 14.5px; line-height: 1.6; color: var(--claro2); }
+
+/* ---------- Bloques de producto (página Productos) ---------- */
+
+.familia { padding: 52px 0; border-bottom: 1px solid var(--hair); scroll-margin-top: 120px; }
+.familia:last-of-type { border-bottom: 0; }
+.familia-cabecera {
+  display: grid;
+  gap: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  align-items: center;
+  margin-bottom: 30px;
+}
+.familia h2 { font-size: clamp(30px, 5.6vw, 50px); text-transform: uppercase; }
+
+.lineas {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.lineas li {
+  background: #fff;
+  padding: 22px 20px 24px;
+  box-shadow: 0 0 0 1px var(--hair);
+}
+.lineas strong {
+  display: block;
+  margin-bottom: 7px;
+  font-family: var(--cond);
+  font-size: 25px;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.lineas span { display: block; font-size: 14.5px; line-height: 1.6; color: var(--texto); }
+.lineas .uso {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+/* Índice de anclas */
+.indice {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+.indice a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid var(--hair);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.indice a:hover { background: var(--y); border-color: var(--y); }
+
+/* ---------- Pasos del proceso ---------- */
+
+.pasos {
+  list-style: none;
+  padding: 0;
+  counter-reset: paso;
+  display: grid;
+  gap: 1px;
+  background: var(--hair);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: 32px;
+}
+.pasos li {
+  background: #fff;
+  padding: 26px 20px 28px;
+  counter-increment: paso;
+  box-shadow: 0 0 0 1px var(--hair);
+}
+.oscura .pasos li {
+  background: var(--ink);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .16);
+}
+.oscura .pasos span { color: var(--claro2); }
+.pasos li::before {
+  content: counter(paso, decimal-leading-zero);
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .16em;
+  color: var(--ink);
+  background: var(--y);
+  width: fit-content;
+  padding: 5px 9px;
+}
+.pasos strong {
+  display: block;
+  margin-bottom: 7px;
+  font-family: var(--cond);
+  font-size: 24px;
+  text-transform: uppercase;
+}
+.pasos span { display: block; font-size: 14.5px; line-height: 1.6; color: var(--texto); }
+
+/* ---------- Texto largo (calidad, privacidad) ---------- */
+
+.prosa { max-width: 68ch; }
+.prosa h2 {
+  margin-top: 40px;
+  margin-bottom: 12px;
+  font-size: clamp(26px, 4.6vw, 38px);
+  text-transform: uppercase;
+}
+.prosa h3 {
+  margin-top: 28px;
+  margin-bottom: 8px;
+  font-family: var(--sans);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.prosa p { margin-top: 14px; font-size: 16.5px; line-height: 1.7; color: var(--texto); }
+.prosa ul { margin-top: 14px; padding-left: 20px; }
+.prosa li { font-size: 16.5px; line-height: 1.7; color: var(--texto); margin-bottom: 8px; }
+.prosa strong { color: var(--ink); }
+
+.compromisos {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 32px;
+}
+.compromisos li {
+  background: #fff;
+  padding: 24px 20px 26px;
+  box-shadow: 0 0 0 1px var(--hair);
+}
+.compromisos strong {
+  display: block;
+  margin-bottom: 8px;
+  font-family: var(--cond);
+  font-size: 25px;
+  text-transform: uppercase;
+}
+.compromisos span { display: block; font-size: 14.5px; line-height: 1.6; color: var(--texto); }
+
+/* ---------- Preguntas frecuentes ---------- */
+
+.faq { max-width: 78ch; margin-top: 30px; }
+.faq details {
+  border-bottom: 1px solid var(--hair);
+  padding: 4px 0;
+}
+.faq details[open] { background: var(--alt); }
+.faq summary {
+  padding: 20px 46px 20px 14px;
+  position: relative;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--cond);
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--sans);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--grey);
+}
+.faq details[open] summary::after { content: "\2212"; }
+.faq summary:hover { color: var(--grey); }
+.faq .respuesta { padding: 0 14px 22px; }
+.faq .respuesta p { font-size: 16px; line-height: 1.7; color: var(--texto); margin-top: 0; }
+.faq .respuesta p + p { margin-top: 12px; }
+
+/* ---------- Datos de contacto ---------- */
+
+.datos {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  align-content: start;
+}
+.datos li {
+  background: #fff;
+  padding: 18px 20px;
+  box-shadow: 0 0 0 1px var(--hair);
+}
+.datos .etiqueta {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.datos .grande {
+  font-family: var(--cond);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: .01em;
+  color: var(--ink);
+}
+.datos .grande:hover { color: var(--grey); }
+.datos a:not(.grande) { font-size: 16px; font-weight: 600; color: var(--ink); }
+.datos a:not(.grande):hover { color: var(--grey); }
+.datos p { font-size: 16px; font-weight: 600; }
+
+.dos-columnas {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* ---------- Formulario ---------- */
+
+.formulario { max-width: 640px; }
+.campo { margin-bottom: 18px; }
+.campo label {
+  display: block;
+  margin-bottom: 7px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+.campo label .req { color: #b00020; }
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--hair);
+  border-radius: 0;
+  background: #fff;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--ink);
+}
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus { border-color: var(--ink); outline: 3px solid var(--y); outline-offset: 1px; }
+.campo textarea { min-height: 150px; resize: vertical; line-height: 1.55; }
+.campo .ayuda { display: block; margin-top: 6px; font-size: 13px; line-height: 1.5; color: var(--grey); }
+.trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.aviso {
+  padding: 16px 18px;
+  margin-bottom: 24px;
+  border-left: 4px solid var(--y);
+  background: var(--alt);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--texto);
+}
+.aviso-error { border-left-color: #b00020; }
+
+/* ---------- Mapa ---------- */
+
+.mapa {
+  width: 100%;
+  height: clamp(300px, 50vw, 460px);
+  border: 1px solid var(--hair);
+  display: block;
+}
+
+.horarios { list-style: none; padding: 0; margin-top: 16px; }
+.horarios li {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--hair);
+  font-size: 15.5px;
+}
+.horarios li span:first-child { font-weight: 600; }
+.horarios li span:last-child { font-family: var(--mono); font-size: 14px; color: var(--texto); }
+
+/* ---------- Pie ---------- */
+
+.pie { background: var(--ink); color: #fff; }
+.pie-rejilla {
+  max-width: var(--ancho);
+  margin: 0 auto;
+  padding: 40px 20px 34px;
+  display: grid;
+  gap: 26px;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+.pie-marca {
+  display: block;
+  margin-bottom: 14px;
+  font-family: var(--cond);
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #fff;
+}
+.pie-marca span { color: var(--y); }
+.pie p { font-size: 14px; line-height: 1.65; color: var(--claro2); }
+.pie nav, .pie .columna { display: grid; gap: 9px; align-content: start; }
+.pie a { font-size: 14px; color: #e4e1dc; }
+.pie a:hover { color: var(--y); }
+.pie .direccion { font-size: 14px; line-height: 1.6; color: var(--claro2); }
+.pie-legal { border-top: 1px solid rgba(255, 255, 255, .16); }
+.pie-legal .contenedor {
+  padding: 18px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: space-between;
+}
+.pie-legal p, .pie-legal a { font-size: 12.5px; color: #8b8681; }
+
+.whatsapp-flotante {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 90;
+  display: inline-flex;
+  align-items: center;
+  min-height: 54px;
+  padding: 0 22px;
+  background: var(--y);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  border-bottom: 3px solid var(--ink);
+  box-shadow: 0 10px 28px rgba(35, 31, 32, .32);
+  transition: background-color .15s;
+}
+.whatsapp-flotante:hover { background: var(--y2); color: var(--ink); }
+
+/* ---------- Adaptación a pantallas ---------- */
+
+@media (max-width: 860px) {
+  .barra-direccion { display: none; }
+}
+@media (max-width: 520px) {
+  .hm-logo { height: 58px; }
+  .hm-cta { padding: 0 13px; font-size: 11.5px; letter-spacing: .04em; }
+  .whatsapp-flotante { padding: 0 18px; font-size: 13px; }
+}
+@media (min-width: 1040px) {
+  .nav-escritorio { display: flex; }
+  .hm-burger { display: none; }
+  #menu-movil, #menu-movil.abierto { display: none; }
+}
+
+@media print {
+  .cabecera, .barra-datos, .whatsapp-flotante, .saltar, #menu-movil { display: none !important; }
+  body { font-size: 12pt; }
+}
+
+
+/* ====== Sólo para esta vista previa de revisión ====== */
+
+.barra-revision {
+  background: #efeeea;
+  border-bottom: 1px solid var(--hair);
+  color: var(--ink);
+}
+.barra-revision .contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.barra-revision b {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  background: var(--ink);
+  color: #fff;
+}
+.barra-revision p { font-size: 13px; line-height: 1.5; color: #504a4a; max-width: 78ch; }
+
+.pagina[hidden] { display: none !important; }
+
+/* Sustituto del mapa */
+.mapa-sustituto {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+  padding: 30px 20px;
+  background: repeating-linear-gradient(135deg, #efeeea 0 10px, #f7f6f3 10px 20px);
+}
+.mapa-sustituto p { font-size: 15px; line-height: 1.6; color: var(--texto); margin: 0; }
+.mapa-sustituto .rotulo { margin: 0; }
+
+/* Aviso flotante para lo que no funciona acá */
+.aviso-flotante {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translate(-50%, 20px);
+  z-index: 200;
+  max-width: min(440px, calc(100vw - 32px));
+  padding: 14px 18px;
+  background: var(--ink);
+  color: #fff;
+  border-bottom: 3px solid var(--y);
+  box-shadow: 0 12px 34px rgba(35, 31, 32, .34);
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease;
+}
+.aviso-flotante.visible { opacity: 1; transform: translate(-50%, 0); }
+
+/* Respuesta del formulario dentro de la vista previa */
+#respuesta-formulario { margin-top: 20px; }
+#respuesta-formulario:not([hidden]) { display: block; }
+</style>
+
+<a class="saltar" href="#contenido">Ir al contenido</a>
+
+<div class="barra-revision">
+  <div class="contenedor">
+    <b>Vista previa</b>
+    <p>Sitio completo para revisión del equipo. El formulario, el mapa y la descarga del catálogo funcionan recién una vez publicado en el dominio. Todo lo demás — las 8 páginas, el menú, el diseño en celular — es exactamente lo que se va a publicar.</p>
+  </div>
+</div>
+
+<div class="barra-datos">
+  <div class="contenedor">
+    <p class="barra-direccion"><span aria-hidden="true"></span>Pedro Getto esq. Cadete Sisa · Fernando de la Mora, Central</p>
+    <div class="barra-enlaces">
+      <a href="tel:+595981320675">+595 981 320 675</a>
+      <a href="https://www.instagram.com/hierrometalsrl/" rel="noopener" target="_blank">Instagram</a>
+      <a href="https://www.facebook.com/p/Hierro-Metal-SRL-100044982888002/?locale=es_LA" rel="noopener" target="_blank">Facebook</a>
+    </div>
+  </div>
+</div>
+
+<header class="cabecera">
+  <div class="cabecera-fila">
+    <a href="#/inicio" aria-label="Hierro Metal S.R.L. — inicio">
+      <img class="hm-logo" src="data:image/jpeg;base64,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" alt="Hierro Metal S.R.L." width="84" height="84">
+    </a>
+
+    <nav class="nav-escritorio" aria-label="Navegación principal">
+      <a href="#/productos">Productos</a>
+      <a href="#/servicios">Servicios</a>
+      <a href="#/calidad">Calidad</a>
+      <a href="#/faq">FAQ</a>
+      <a href="#/ubicacion">Ubicación</a>
+      <a href="#/contacto">Contacto</a>
+    </nav>
+
+    <div class="acciones-cabecera">
+      <a class="hm-cta" href="#/contacto/cotizar">Pedir cotización</a>
+      <button class="hm-burger" type="button" aria-expanded="false" aria-controls="menu-movil">
+        <span aria-hidden="true"></span>
+        <span class="solo-lectores">Abrir menú</span>
+      </button>
+    </div>
+  </div>
+
+  <nav id="menu-movil" aria-label="Navegación móvil">
+    <a href="#/productos">Productos y catálogo</a>
+    <a href="#/servicios">Servicios industriales</a>
+    <a href="#/calidad">Política de calidad</a>
+    <a href="#/faq">Preguntas frecuentes</a>
+    <a href="#/ubicacion">Ubicación</a>
+    <a href="#/contacto">Contacto</a>
+    <div class="menu-movil-contacto">
+      <a href="tel:+595981320675">+595 981 320 675</a>
+      <a href="mailto:admin@hierrometal.com">Correo</a>
+    </div>
+  </nav>
+</header>
+
+<main id="contenido">
+<div class="pagina" id="pagina-inicio" data-pagina="inicio" hidden>
+
+
+<section id="inicio" class="oscura" aria-labelledby="h-inicio">
+  <div class="contenedor">
+    <div class="portada-texto">
+      <p class="insignia">Importación y venta · Mayorista y minorista</p>
+      <h1 id="h-inicio">Materiales metálicos para construir Paraguay</h1>
+      <p class="bajada">Chapas, perfiles, tubos, varillas y accesorios de acero con stock permanente. Cortamos, plegamos, perforamos y galvanizamos según tu plano, y entregamos en obra con flota propia de camiones.</p>
+      <div class="botonera">
+        <a class="btn btn-amarillo" href="#/contacto/cotizar" data-cta="hero-cotizar">Pedir cotización</a>
+        <a class="btn btn-linea" href="#/productos">Ver productos y medidas</a>
+      </div>
+      <p class="nota-portada">Todas las chapas con certificado de calidad del fabricante</p>
+    </div>
+  </div>
+  <svg class="ilustracion ilustracion-portada" role="img" aria-label="Secciones de acero: perfiles IPN y UPN, ángulo, caño redondo, tubos cuadrado y rectangular, y varillas de construcción" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice">
+  
+  <defs>
+    <pattern id="rayas" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(115)">
+      <rect width="28" height="28" fill="#231f20"/>
+      <rect width="14" height="28" fill="#2b2728"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="700" fill="url(#rayas)"/>
+
+  <!-- Chapas trapezoidales apiladas al fondo -->
+  <g fill="none" stroke-width="8" stroke-linejoin="round">
+    <path stroke="#3d3939" d="M52 210 L77 156 L102 156 L127 210 L152 210 L177 156 L202 156 L227 210 L252 210 L277 156 L302 156 L327 210 L352 210 L377 156 L402 156 L427 210 L452 210 L477 156 L502 156 L527 210 L552 210 L577 156 L602 156 L627 210 L652 210 L677 156 L702 156 L727 210 L752 210 L777 156 L802 156 L827 210 L852 210 L877 156 L902 156 L927 210 L952 210 L977 156 L1002 156 L1027 210 L1052 210 L1077 156 L1102 156 L1127 210 L1152 210 L1177 156 L1202 156 L1227 210 L1252 210 L1277 156 L1302 156 L1327 210 L1352 210 L1377 156 L1402 156 L1427 210 L1452 210 L1477 156 L1502 156 L1527 210 L1552 210"/>
+    <path stroke="#4a4644" d="M52 272 L77 218 L102 218 L127 272 L152 272 L177 218 L202 218 L227 272 L252 272 L277 218 L302 218 L327 272 L352 272 L377 218 L402 218 L427 272 L452 272 L477 218 L502 218 L527 272 L552 272 L577 218 L602 218 L627 272 L652 272 L677 218 L702 218 L727 272 L752 272 L777 218 L802 218 L827 272 L852 272 L877 218 L902 218 L927 272 L952 272 L977 218 L1002 218 L1027 272 L1052 272 L1077 218 L1102 218 L1127 272 L1152 272 L1177 218 L1202 218 L1227 272 L1252 272 L1277 218 L1302 218 L1327 272 L1352 272 L1377 218 L1402 218 L1427 272 L1452 272 L1477 218 L1502 218 L1527 272 L1552 272"/>
+    <path stroke="#5a5552" d="M52 334 L77 280 L102 280 L127 334 L152 334 L177 280 L202 280 L227 334 L252 334 L277 280 L302 280 L327 334 L352 334 L377 280 L402 280 L427 334 L452 334 L477 280 L502 280 L527 334 L552 334 L577 280 L602 280 L627 334 L652 334 L677 280 L702 280 L727 334 L752 334 L777 280 L802 280 L827 334 L852 334 L877 280 L902 280 L927 334 L952 334 L977 280 L1002 280 L1027 334 L1052 334 L1077 280 L1102 280 L1127 334 L1152 334 L1177 280 L1202 280 L1227 334 L1252 334 L1277 280 L1302 280 L1327 334 L1352 334 L1377 280 L1402 280 L1427 334 L1452 334 L1477 280 L1502 280 L1527 334 L1552 334"/>
+  </g>
+
+  <!-- Piso -->
+  <rect x="0" y="574" width="1600" height="10" fill="#f9ed31"/>
+  <rect x="0" y="584" width="1600" height="116" fill="#1c1819"/>
+
+  <g fill="none" stroke="#8b8681" stroke-width="5">
+    <!-- Perfil IPN (relleno amarillo) -->
+    <path d="M-72 -92 h144 v27 h-57 v130 h57 v27 h-144 v-27 h57 v-130 h-57 z"
+          transform="translate(214 482)" fill="#f9ed31" stroke="none"/>
+    <!-- Perfil UPN -->
+    <path d="M-57 -92 h114 v27 h-83 v130 h83 v27 h-114 z" transform="translate(432 482)"/>
+    <!-- Ángulo -->
+    <path d="M-77 -77 h31 v123 h92 v31 h-123 z" transform="translate(618 497)"/>
+    <!-- Caño redondo -->
+    <circle cx="818" cy="482" r="77" stroke-width="27"/>
+    <!-- Tubo cuadrado -->
+    <rect x="-69" y="-69" width="138" height="138" transform="translate(1032 482)" stroke-width="27"/>
+    <!-- Tubo rectangular -->
+    <rect x="-95" y="-54" width="190" height="108" transform="translate(1268 482)" stroke-width="25"/>
+  </g>
+
+  <!-- Varillas -->
+  <g stroke="#8b8681" stroke-width="15" stroke-linecap="round">
+    <path d="M1452 390 v184"/>
+    <path d="M1494 390 v184"/>
+    <path d="M1536 390 v184"/>
+  </g>
+  <g stroke="#231f20" stroke-width="5">
+    <path d="M1443 414 l18 -12 M1443 454 l18 -12 M1443 494 l18 -12 M1443 534 l18 -12"/>
+    <path d="M1485 426 l18 -12 M1485 466 l18 -12 M1485 506 l18 -12 M1485 546 l18 -12"/>
+    <path d="M1527 410 l18 -12 M1527 450 l18 -12 M1527 490 l18 -12 M1527 530 l18 -12"/>
+  </g>
+</svg>
+</section>
+
+<section class="amarilla" aria-label="Diferenciales">
+  <ul class="diferenciales">
+    <li>
+      <strong>Stock permanente</strong>
+      <span>Medidas comerciales todo el año.</span>
+    </li>
+    <li>
+      <strong>Importación directa</strong>
+      <span>Precio mayorista y minorista.</span>
+    </li>
+    <li>
+      <strong>Corte a medida</strong>
+      <span>Cortes, plegados y perforaciones.</span>
+    </li>
+    <li>
+      <strong>Flota propia</strong>
+      <span>Entrega de materiales en obra.</span>
+    </li>
+  </ul>
+</section>
+
+<section class="seccion linea-abajo" aria-labelledby="h-familias">
+  <div class="contenedor">
+    <p class="rotulo">01 — Productos</p>
+    <h2 id="h-familias" class="titulo-seccion">Qué comercializamos</h2>
+    <p class="bajada">Cinco familias de materiales metálicos y metalúrgicos con stock permanente. Entrá al catálogo para ver espesores, medidas y normas de cada línea.</p>
+
+    <ul class="rejilla">
+      <li>
+        <a class="ficha" href="#/productos/chapas">
+          <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <g fill="none" stroke-width="7" stroke-linejoin="round">
+    <path stroke="#c9c6c0" d="M10 58 L34 32 L58 32 L82 58 L106 58 L130 32 L154 32 L178 58 L202 58 L226 32 L250 32 L274 58 L298 58"/>
+    <path stroke="#f9ed31" d="M10 100 L34 74 L58 74 L82 100 L106 100 L130 74 L154 74 L178 100 L202 100 L226 74 L250 74 L274 100 L298 100"/>
+    <path stroke="#231f20" d="M10 142 L34 116 L58 116 L82 142 L106 142 L130 116 L154 116 L178 142 L202 142 L226 116 L250 116 L274 142 L298 142"/>
+  </g>
+</svg>
+          <span class="ficha-cuerpo">
+            <span class="ficha-indice">01 · 7 líneas</span>
+            <strong class="ficha-titulo">Chapas de acero</strong>
+            <span class="ficha-texto">Laminadas en frío y caliente, galvanizadas, termoacústicas, inoxidables, antideslizantes, desplegadas y para techo.</span>
+            <span class="ficha-enlace">Ver medidas →</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="ficha" href="#/productos/perfiles">
+          <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <!-- Perfil IPN -->
+  <path d="M-35 -45 h70 v13 h-27.5 v64 h27.5 v13 h-70 v-13 h27.5 v-64 h-27.5 z"
+        transform="translate(78 90)" fill="#231f20"/>
+  <!-- Perfil UPN -->
+  <path d="M-27.5 -45 h55 v13 h-40 v64 h40 v13 h-55 z"
+        transform="translate(168 90)" fill="#f9ed31" stroke="#231f20" stroke-width="3"/>
+  <!-- Ángulo -->
+  <path d="M-37.5 -37.5 h15 v60 h45 v15 h-60 z"
+        transform="translate(252 97)" fill="none" stroke="#231f20" stroke-width="5"/>
+</svg>
+          <span class="ficha-cuerpo">
+            <span class="ficha-indice">02 · 3 líneas</span>
+            <strong class="ficha-titulo">Perfiles y estructurales</strong>
+            <span class="ficha-texto">Perfil IPN y UPN, perfil C y U en chapa doblada, ángulos, planchuelas y hierro Tee.</span>
+            <span class="ficha-enlace">Ver medidas →</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="ficha" href="#/productos/tubos">
+          <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <circle cx="76" cy="90" r="38" fill="none" stroke="#231f20" stroke-width="14"/>
+  <rect x="140" y="52" width="76" height="76" fill="none" stroke="#f9ed31" stroke-width="14"/>
+  <rect x="140" y="52" width="76" height="76" fill="none" stroke="#231f20" stroke-width="2"/>
+  <rect x="147" y="59" width="62" height="62" fill="none" stroke="#231f20" stroke-width="2"/>
+  <rect x="238" y="64" width="64" height="52" fill="none" stroke="#231f20" stroke-width="13"/>
+</svg>
+          <span class="ficha-cuerpo">
+            <span class="ficha-indice">03 · 2 líneas</span>
+            <strong class="ficha-titulo">Tubos y caños</strong>
+            <span class="ficha-texto">Caños redondos, cuadrados y rectangulares; tubos estructurales con y sin costura SCH10 a SCH80.</span>
+            <span class="ficha-enlace">Ver medidas →</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="ficha" href="#/productos/varillas">
+          <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <g stroke-linecap="round">
+    <g stroke="#231f20" stroke-width="16">
+      <path d="M60 26 v128"/>
+      <path d="M120 26 v128"/>
+    </g>
+    <g stroke="#f9ed31" stroke-width="16">
+      <path d="M180 26 v128"/>
+    </g>
+    <g stroke="#231f20" stroke-width="16">
+      <path d="M240 26 v128"/>
+    </g>
+  </g>
+  <!-- Nervaduras -->
+  <g stroke="#efeeea" stroke-width="4">
+    <path d="M51 44 l18 -11 M51 72 l18 -11 M51 100 l18 -11 M51 128 l18 -11"/>
+    <path d="M111 54 l18 -11 M111 82 l18 -11 M111 110 l18 -11 M111 138 l18 -11"/>
+  </g>
+  <g stroke="#231f20" stroke-width="4">
+    <path d="M171 44 l18 -11 M171 72 l18 -11 M171 100 l18 -11 M171 128 l18 -11"/>
+  </g>
+</svg>
+          <span class="ficha-cuerpo">
+            <span class="ficha-indice">04 · 3 líneas</span>
+            <strong class="ficha-titulo">Varillas y barras</strong>
+            <span class="ficha-texto">Varillas lisas, de construcción y cuadradas; barras trafiladas SAE 1045/1050/1060 y barras de bronce.</span>
+            <span class="ficha-enlace">Ver medidas →</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="ficha" href="#/productos/accesorios">
+          <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <!-- Codo 90 grados -->
+  <path d="M40 140 v-40 a48 48 0 0 1 48 -48 h30" fill="none" stroke="#231f20" stroke-width="18" stroke-linecap="butt"/>
+  <!-- Tee -->
+  <g stroke="#231f20" stroke-width="18" stroke-linecap="butt">
+    <path d="M148 132 h84"/>
+    <path d="M190 132 v-52"/>
+  </g>
+  <!-- Brida -->
+  <circle cx="264" cy="72" r="34" fill="#f9ed31" stroke="#231f20" stroke-width="4"/>
+  <circle cx="264" cy="72" r="13" fill="#efeeea" stroke="#231f20" stroke-width="3"/>
+  <g fill="#231f20">
+    <circle cx="264" cy="48" r="4"/>
+    <circle cx="264" cy="96" r="4"/>
+    <circle cx="240" cy="72" r="4"/>
+    <circle cx="288" cy="72" r="4"/>
+  </g>
+</svg>
+          <span class="ficha-cuerpo">
+            <span class="ficha-indice">05 · 1 línea</span>
+            <strong class="ficha-titulo">Accesorios de cañería</strong>
+            <span class="ficha-texto">Válvulas, codos, tee, bridas, bujes y uniones en inoxidable, galvanizado, acero al carbono y anti-incendio.</span>
+            <span class="ficha-enlace">Ver medidas →</span>
+          </span>
+        </a>
+      </li>
+      <li class="ficha-destacada">
+        <div class="caja">
+          <strong class="ficha-titulo">Catálogo de materiales</strong>
+          <span class="ficha-texto">Nuestro catálogo general en PDF. Confirmá medidas, espesores y stock actual por WhatsApp antes de comprar.</span>
+          <a class="btn btn-amarillo" href="#/contacto" data-aviso="catalogo" data-cta="descarga-catalogo-home" target="_blank" rel="noopener" style="justify-self: start; min-height: 48px; padding: 0 20px; font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: .09em;">Descargar PDF</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="seccion oscura" aria-labelledby="h-serv-home">
+  <div class="contenedor">
+    <p class="rotulo">02 — Servicios industriales</p>
+    <h2 id="h-serv-home" class="titulo-seccion" style="margin-bottom: 12px">Trabajamos el material por vos</h2>
+    <p class="bajada" style="margin-bottom: 32px">Cortes sobre medida, plegados, perforaciones, fabricación especial de perfiles C y U, galvanización y entrega en obra con flota propia.</p>
+    <ul class="rejilla-oscura">
+      <li>
+        <strong>Cortes y plegados</strong>
+        <span>Chapas y barras según tu plano o lista de despiece.</span>
+      </li>
+      <li>
+        <strong>Fabricación especial</strong>
+        <span>Perfiles C y U en chapa doblada, a medida.</span>
+      </li>
+      <li>
+        <strong>Galvanización</strong>
+        <span>Protección contra la corrosión de chapas y perfilería.</span>
+      </li>
+    </ul>
+    <a class="btn btn-linea-amarilla" href="#/servicios">Ver los servicios</a>
+  </div>
+</section>
+
+<section class="seccion-chica amarilla" aria-labelledby="h-calidad-home">
+  <div class="contenedor" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+    <div style="max-width: 62ch">
+      <p class="rotulo">03 — Política de calidad</p>
+      <h2 id="h-calidad-home" style="font-size: clamp(28px, 5.4vw, 44px); text-transform: uppercase">Materia prima certificada bajo Normas Internacionales del Acero</h2>
+      <p class="bajada" style="margin-top: 12px; font-size: 16px">Control de calidad estricto, infraestructura mantenida y mejora continua de productos y procesos.</p>
+    </div>
+    <a class="btn btn-negro" href="#/calidad">Leer la política completa</a>
+  </div>
+</section>
+
+<section class="seccion linea-abajo" aria-labelledby="h-cta-home">
+  <div class="contenedor dos-columnas">
+    <div>
+      <p class="rotulo">04 — Contacto</p>
+      <h2 id="h-cta-home" style="font-size: clamp(30px, 6vw, 52px); text-transform: uppercase">¿Necesitás un presupuesto?</h2>
+      <p class="bajada" style="max-width: 50ch">Cargá tu lista de materiales y te respondemos con precio y disponibilidad en el día. Ventas se centraliza en un único número corporativo.</p>
+      <div class="botonera">
+        <a class="btn btn-amarillo" href="#/contacto/cotizar" data-cta="home-cta-cotizar">Pedir cotización</a>
+        <a class="btn btn-linea" href="#/faq">Preguntas frecuentes</a>
+      </div>
+    </div>
+    <ul class="datos">
+      <li>
+        <span class="etiqueta">Ventas · WhatsApp y teléfono</span>
+        <a class="grande" href="tel:+595981320675">+595 981 320 675</a>
+      </li>
+      <li>
+        <span class="etiqueta">Administración</span>
+        <a href="mailto:admin@hierrometal.com">admin@hierrometal.com</a>
+      </li>
+      <li>
+        <span class="etiqueta">Dirección · Fernando de la Mora</span>
+        <a href="#/ubicacion">Pedro Getto esq. Cadete Sisa →</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+</div>
+
+<div class="pagina" id="pagina-productos" data-pagina="productos" hidden>
+
+
+<section class="encabezado-pagina linea-abajo">
+  <div class="contenedor">
+    <p class="rotulo">Productos</p>
+    <h1>Materiales metálicos y metalúrgicos</h1>
+    <p class="bajada">Cinco familias con stock permanente en nuestro depósito de Fernando de la Mora. Trabajamos con importación directa, por eso vendemos tanto al por mayor como al por menor. Las medidas y espesores disponibles varían según la línea y el momento: escribinos con tu lista y te confirmamos stock y precio en el día.</p>
+    <ul class="indice">
+      <li><a href="#chapas">01 · Chapas</a></li>
+      <li><a href="#perfiles">02 · Perfiles</a></li>
+      <li><a href="#tubos">03 · Tubos y caños</a></li>
+      <li><a href="#varillas">04 · Varillas y barras</a></li>
+      <li><a href="#accesorios">05 · Accesorios</a></li>
+    </ul>
+    <div class="botonera">
+      <a class="btn btn-amarillo" href="#/contacto/cotizar" data-cta="productos-cotizar">Pedir cotización</a>
+      <a class="btn btn-linea" href="#/contacto" data-aviso="catalogo" target="_blank" rel="noopener" data-cta="descarga-catalogo-productos">Descargar catálogo PDF</a>
+    </div>
+  </div>
+</section>
+
+<div class="contenedor">
+
+  <section id="chapas" class="familia" aria-labelledby="h-chapas">
+    <div class="familia-cabecera">
+      <div>
+        <p class="rotulo">01 — 7 líneas</p>
+        <h2 id="h-chapas">Chapas de acero</h2>
+        <p class="bajada">Para cubiertas, cerramientos, estructuras, carrocerías, pisos industriales y trabajos de herrería. Todas nuestras chapas llegan con el certificado de calidad del fabricante.</p>
+      </div>
+      <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <g fill="none" stroke-width="7" stroke-linejoin="round">
+    <path stroke="#c9c6c0" d="M10 58 L34 32 L58 32 L82 58 L106 58 L130 32 L154 32 L178 58 L202 58 L226 32 L250 32 L274 58 L298 58"/>
+    <path stroke="#f9ed31" d="M10 100 L34 74 L58 74 L82 100 L106 100 L130 74 L154 74 L178 100 L202 100 L226 74 L250 74 L274 100 L298 100"/>
+    <path stroke="#231f20" d="M10 142 L34 116 L58 116 L82 142 L106 142 L130 116 L154 116 L178 142 L202 142 L226 116 L250 116 L274 142 L298 142"/>
+  </g>
+</svg>
+    </div>
+    <ul class="lineas">
+      <li>
+        <strong>Laminadas en frío y en caliente</strong>
+        <span>Chapa negra en distintos espesores, base de casi todo trabajo de herrería y estructura metálica.</span>
+        <span class="uso">Estructuras · Herrería · Carrocerías</span>
+      </li>
+      <li>
+        <strong>Galvanizadas</strong>
+        <span>Con recubrimiento de zinc para resistir la corrosión en ambientes húmedos o a la intemperie.</span>
+        <span class="uso">Cerramientos · Intemperie</span>
+      </li>
+      <li>
+        <strong>Para techo (trapezoidal y ondulada)</strong>
+        <span>Láminas metálicas para cubiertas: durables, livianas, fáciles de instalar y disponibles en varios colores.</span>
+        <span class="uso">Techos · Galpones · Tinglados</span>
+      </li>
+      <li>
+        <strong>Termoacústicas</strong>
+        <span>Paneles con aislación que reducen el calor y el ruido de la lluvia respecto de una chapa simple.</span>
+        <span class="uso">Techos habitables · Depósitos</span>
+      </li>
+      <li>
+        <strong>Inoxidables</strong>
+        <span>Acero inoxidable para ambientes exigentes en higiene o con exposición química permanente.</span>
+        <span class="uso">Alimentación · Industria · Mobiliario</span>
+      </li>
+      <li>
+        <strong>Antideslizantes</strong>
+        <span>Chapa con relieve tipo damero, para superficies transitables donde se necesita agarre.</span>
+        <span class="uso">Escaleras · Pisos · Plataformas</span>
+      </li>
+      <li>
+        <strong>Desplegadas</strong>
+        <span>Chapa cortada y estirada en forma de malla, liviana y con paso de aire y luz.</span>
+        <span class="uso">Rejas · Cerramientos · Protecciones</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="perfiles" class="familia" aria-labelledby="h-perfiles">
+    <div class="familia-cabecera">
+      <div>
+        <p class="rotulo">02 — 3 líneas</p>
+        <h2 id="h-perfiles">Perfiles y estructurales</h2>
+        <p class="bajada">La perfilería que sostiene la obra. Además de las medidas comerciales de stock, fabricamos perfiles C y U en chapa doblada según la medida que necesites.</p>
+      </div>
+      <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <!-- Perfil IPN -->
+  <path d="M-35 -45 h70 v13 h-27.5 v64 h27.5 v13 h-70 v-13 h27.5 v-64 h-27.5 z"
+        transform="translate(78 90)" fill="#231f20"/>
+  <!-- Perfil UPN -->
+  <path d="M-27.5 -45 h55 v13 h-40 v64 h40 v13 h-55 z"
+        transform="translate(168 90)" fill="#f9ed31" stroke="#231f20" stroke-width="3"/>
+  <!-- Ángulo -->
+  <path d="M-37.5 -37.5 h15 v60 h45 v15 h-60 z"
+        transform="translate(252 97)" fill="none" stroke="#231f20" stroke-width="5"/>
+</svg>
+    </div>
+    <ul class="lineas">
+      <li>
+        <strong>Perfil IPN y UPN</strong>
+        <span>Perfiles laminados doble T y U, para vigas, columnas y estructuras portantes.</span>
+        <span class="uso">Vigas · Columnas · Entrepisos</span>
+      </li>
+      <li>
+        <strong>Perfil C y U en chapa doblada</strong>
+        <span>Perfilería conformada en frío. La fabricamos a medida en nuestro taller a partir de tu plano.</span>
+        <span class="uso">Correas · Bastidores · Steel framing</span>
+      </li>
+      <li>
+        <strong>Ángulos, planchuelas y hierro Tee</strong>
+        <span>Complementos de estructura y herrería en distintas secciones y espesores.</span>
+        <span class="uso">Herrería · Refuerzos · Marcos</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="tubos" class="familia" aria-labelledby="h-tubos">
+    <div class="familia-cabecera">
+      <div>
+        <p class="rotulo">03 — 2 líneas</p>
+        <h2 id="h-tubos">Tubos y caños</h2>
+        <p class="bajada">Tubería estructural y de conducción, en acabado profesional y amplia gama de diámetros y espesores de pared.</p>
+      </div>
+      <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <circle cx="76" cy="90" r="38" fill="none" stroke="#231f20" stroke-width="14"/>
+  <rect x="140" y="52" width="76" height="76" fill="none" stroke="#f9ed31" stroke-width="14"/>
+  <rect x="140" y="52" width="76" height="76" fill="none" stroke="#231f20" stroke-width="2"/>
+  <rect x="147" y="59" width="62" height="62" fill="none" stroke="#231f20" stroke-width="2"/>
+  <rect x="238" y="64" width="64" height="52" fill="none" stroke="#231f20" stroke-width="13"/>
+</svg>
+    </div>
+    <ul class="lineas">
+      <li>
+        <strong>Caños redondos, cuadrados y rectangulares</strong>
+        <span>Tubería metálica para estructuras livianas, cerramientos, barandas y mobiliario.</span>
+        <span class="uso">Estructuras · Barandas · Portones</span>
+      </li>
+      <li>
+        <strong>Tubos estructurales con y sin costura · SCH10 a SCH80</strong>
+        <span>Distintos schedules de espesor de pared, para conducción y estructuras que trabajan a presión o carga.</span>
+        <span class="uso">Conducción · Industria · Estructura pesada</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="varillas" class="familia" aria-labelledby="h-varillas">
+    <div class="familia-cabecera">
+      <div>
+        <p class="rotulo">04 — 3 líneas</p>
+        <h2 id="h-varillas">Varillas y barras</h2>
+        <p class="bajada">Desde la varilla de construcción de obra civil hasta barras trafiladas para mecanizado.</p>
+      </div>
+      <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <g stroke-linecap="round">
+    <g stroke="#231f20" stroke-width="16">
+      <path d="M60 26 v128"/>
+      <path d="M120 26 v128"/>
+    </g>
+    <g stroke="#f9ed31" stroke-width="16">
+      <path d="M180 26 v128"/>
+    </g>
+    <g stroke="#231f20" stroke-width="16">
+      <path d="M240 26 v128"/>
+    </g>
+  </g>
+  <!-- Nervaduras -->
+  <g stroke="#efeeea" stroke-width="4">
+    <path d="M51 44 l18 -11 M51 72 l18 -11 M51 100 l18 -11 M51 128 l18 -11"/>
+    <path d="M111 54 l18 -11 M111 82 l18 -11 M111 110 l18 -11 M111 138 l18 -11"/>
+  </g>
+  <g stroke="#231f20" stroke-width="4">
+    <path d="M171 44 l18 -11 M171 72 l18 -11 M171 100 l18 -11 M171 128 l18 -11"/>
+  </g>
+</svg>
+    </div>
+    <ul class="lineas">
+      <li>
+        <strong>Varillas lisas, de construcción y cuadradas</strong>
+        <span>Varilla nervurada para hormigón armado, más varilla lisa y cuadrada para herrería y rejas.</span>
+        <span class="uso">Hormigón armado · Rejas · Herrería</span>
+      </li>
+      <li>
+        <strong>Barras trafiladas SAE 1045, 1050 y 1060</strong>
+        <span>Aceros al carbono de mayor resistencia, con tolerancia dimensional apta para mecanizado.</span>
+        <span class="uso">Ejes · Piezas mecanizadas · Repuestos</span>
+      </li>
+      <li>
+        <strong>Barras de bronce</strong>
+        <span>Para bujes, casquillos y piezas donde se necesita menor fricción y buena maquinabilidad.</span>
+        <span class="uso">Bujes · Casquillos · Mantenimiento</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="accesorios" class="familia" aria-labelledby="h-accesorios">
+    <div class="familia-cabecera">
+      <div>
+        <p class="rotulo">05 — 1 línea</p>
+        <h2 id="h-accesorios">Accesorios de cañería</h2>
+        <p class="bajada">Todo lo que une, deriva y corta una línea de cañería, en los cuatro materiales que más se piden en obra e industria.</p>
+      </div>
+      <svg class="ilustracion ficha-ilustracion" role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" fill="#efeeea"/>
+  <!-- Codo 90 grados -->
+  <path d="M40 140 v-40 a48 48 0 0 1 48 -48 h30" fill="none" stroke="#231f20" stroke-width="18" stroke-linecap="butt"/>
+  <!-- Tee -->
+  <g stroke="#231f20" stroke-width="18" stroke-linecap="butt">
+    <path d="M148 132 h84"/>
+    <path d="M190 132 v-52"/>
+  </g>
+  <!-- Brida -->
+  <circle cx="264" cy="72" r="34" fill="#f9ed31" stroke="#231f20" stroke-width="4"/>
+  <circle cx="264" cy="72" r="13" fill="#efeeea" stroke="#231f20" stroke-width="3"/>
+  <g fill="#231f20">
+    <circle cx="264" cy="48" r="4"/>
+    <circle cx="264" cy="96" r="4"/>
+    <circle cx="240" cy="72" r="4"/>
+    <circle cx="288" cy="72" r="4"/>
+  </g>
+</svg>
+    </div>
+    <ul class="lineas">
+      <li>
+        <strong>Válvulas, codos, tee, bridas, bujes y uniones</strong>
+        <span>Disponibles en acero inoxidable, galvanizado, acero al carbono y línea anti-incendio.</span>
+        <span class="uso">Instalaciones · Industria · Anti-incendio</span>
+      </li>
+    </ul>
+  </section>
+
+</div>
+
+<section class="seccion oscura" aria-labelledby="h-cta-prod">
+  <div class="contenedor dos-columnas">
+    <div>
+      <p class="rotulo">Siguiente paso</p>
+      <h2 id="h-cta-prod" class="titulo-seccion">Pasanos tu lista de materiales</h2>
+      <p class="bajada">Mandanos el despiece, el plano o simplemente la lista escrita. Te respondemos con precio, disponibilidad y plazo de entrega en el día.</p>
+      <div class="botonera">
+        <a class="btn btn-amarillo" href="#/contacto/cotizar" data-cta="productos-cta-final">Pedir cotización</a>
+        <a class="btn btn-linea" href="https://wa.me/595981320675" rel="noopener" target="_blank">Escribir por WhatsApp</a>
+      </div>
+    </div>
+    <ul class="rejilla-oscura" style="margin-bottom: 0">
+      <li>
+        <strong>¿Necesitás corte a medida?</strong>
+        <span>Cortamos, plegamos y perforamos el material antes de entregarlo.</span>
+      </li>
+      <li>
+        <strong>¿Lo llevamos a la obra?</strong>
+        <span>Entregamos con flota propia de camiones.</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+</div>
+
+<div class="pagina" id="pagina-servicios" data-pagina="servicios" hidden>
+
+
+<section class="encabezado-pagina linea-abajo">
+  <div class="contenedor">
+    <p class="rotulo">Servicios industriales</p>
+    <h1>Trabajamos el material por vos</h1>
+    <p class="bajada">No vendemos solamente el material: lo preparamos. Cortamos, plegamos, perforamos, fabricamos perfilería a medida, galvanizamos y lo dejamos en tu obra. Así llegás al montaje con las piezas listas y sin desperdicio.</p>
+    <div class="botonera">
+      <a class="btn btn-amarillo" href="#/contacto/cotizar" data-cta="servicios-cotizar">Pedir cotización</a>
+      <a class="btn btn-linea" href="#/productos">Ver productos</a>
+    </div>
+  </div>
+</section>
+
+<section class="seccion linea-abajo" aria-labelledby="h-serv">
+  <div class="contenedor">
+    <p class="rotulo">Qué hacemos</p>
+    <h2 id="h-serv" class="titulo-seccion">Los cinco servicios</h2>
+
+    <ul class="lineas" style="margin-top: 34px">
+      <li>
+        <strong>Cortes a medida</strong>
+        <span>Cortamos chapas, barras, perfiles y tubos según tu plano o tu lista de despiece. Pagás el material que vas a usar y llegás a la obra sin tener que cortar en el lugar.</span>
+        <span class="uso">Chapas · Barras · Perfiles · Tubos</span>
+      </li>
+      <li>
+        <strong>Plegados</strong>
+        <span>Doblamos la chapa a los ángulos que necesites, para cerramientos, cubiertas, babetas, cenefas y piezas de terminación.</span>
+        <span class="uso">Cubiertas · Cerramientos · Terminaciones</span>
+      </li>
+      <li>
+        <strong>Perforado</strong>
+        <span>Hacemos las perforaciones donde las marca el plano, listas para bulonar en el montaje.</span>
+        <span class="uso">Uniones bulonadas · Montaje</span>
+      </li>
+      <li>
+        <strong>Fabricación especial de perfiles</strong>
+        <span>Fabricamos perfiles C y U en chapa doblada en la medida y el espesor que pidas, cuando la medida comercial no te sirve.</span>
+        <span class="uso">Correas · Bastidores · Medidas no comerciales</span>
+      </li>
+      <li>
+        <strong>Galvanización</strong>
+        <span>Recubrimiento de zinc sobre chapas y perfilería para protegerlas de la corrosión, especialmente en obras a la intemperie o en ambientes húmedos.</span>
+        <span class="uso">Intemperie · Ambientes húmedos · Larga duración</span>
+      </li>
+      <li>
+        <strong>Entrega en obra</strong>
+        <span>Tenemos flota propia de camiones: coordinamos el día y dejamos el material en el lugar, sin depender de fletes de terceros.</span>
+        <span class="uso">Flota propia · Todo Paraguay</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="seccion oscura" aria-labelledby="h-proceso">
+  <div class="contenedor">
+    <p class="rotulo">Cómo trabajamos</p>
+    <h2 id="h-proceso" class="titulo-seccion">De tu plano a la obra</h2>
+    <p class="bajada">Un pedido con servicio de taller sigue siempre los mismos cuatro pasos.</p>
+
+    <ul class="pasos">
+      <li>
+        <strong>Nos mandás el pedido</strong>
+        <span>Plano, lista de despiece o el detalle escrito por WhatsApp, correo o el formulario del sitio.</span>
+      </li>
+      <li>
+        <strong>Cotizamos</strong>
+        <span>Te pasamos precio del material más el trabajo de taller, la disponibilidad y el plazo. En el día.</span>
+      </li>
+      <li>
+        <strong>Preparamos el material</strong>
+        <span>Cortamos, plegamos, perforamos o galvanizamos según lo acordado, y controlamos las medidas.</span>
+      </li>
+      <li>
+        <strong>Entregamos</strong>
+        <span>Retirás por el depósito o lo llevamos a la obra con nuestros camiones, en la fecha coordinada.</span>
+      </li>
+    </ul>
+
+    <div class="botonera" style="margin-top: 34px">
+      <a class="btn btn-amarillo" href="#/contacto/cotizar" data-cta="servicios-proceso-cotizar">Empezar un pedido</a>
+      <a class="btn btn-linea-amarilla" href="https://wa.me/595981320675" rel="noopener" target="_blank">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section class="seccion-chica amarilla" aria-labelledby="h-calidad-serv">
+  <div class="contenedor" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+    <div style="max-width: 62ch">
+      <p class="rotulo">Calidad</p>
+      <h2 id="h-calidad-serv" style="font-size: clamp(28px, 5.4vw, 44px); text-transform: uppercase">El trabajo de taller se controla igual que el material</h2>
+      <p class="bajada" style="margin-top: 12px; font-size: 16px">Materia prima certificada bajo Normas Internacionales del Acero, control de medidas antes de despachar e infraestructura mantenida.</p>
+    </div>
+    <a class="btn btn-negro" href="#/calidad">Leer la política de calidad</a>
+  </div>
+</section>
+
+
+</div>
+
+<div class="pagina" id="pagina-calidad" data-pagina="calidad" hidden>
+
+
+<section class="encabezado-pagina amarilla">
+  <div class="contenedor">
+    <p class="rotulo">Política de calidad</p>
+    <h1>Materia prima certificada bajo Normas Internacionales del Acero</h1>
+    <p class="bajada" style="max-width: 60ch">El acero no se compra por el precio de la tonelada: se compra por lo que aguanta. Por eso todo lo que entra a nuestro depósito llega con el respaldo del fabricante.</p>
+  </div>
+</section>
+
+<section class="seccion linea-abajo">
+  <div class="contenedor">
+    <div class="prosa">
+      <p>En <strong>Hierro Metal S.R.L.</strong> importamos y comercializamos materiales de construcción metálicos y metalúrgicos. Nuestro compromiso es que cada chapa, perfil, tubo, varilla y accesorio que sale de nuestro depósito cumpla con lo que el cliente necesita para su obra, y que pueda demostrarlo con documentación del fabricante.</p>
+
+      <h2>Nuestros compromisos</h2>
+    </div>
+
+    <ul class="compromisos">
+      <li>
+        <strong>Materia prima certificada</strong>
+        <span>Trabajamos con materia prima certificada bajo Normas Internacionales del Acero. Las chapas se entregan con el certificado de calidad del fabricante.</span>
+      </li>
+      <li>
+        <strong>Control de calidad estricto</strong>
+        <span>Controlamos el material al recibirlo y verificamos las medidas de los trabajos de taller antes de despachar cada pedido.</span>
+      </li>
+      <li>
+        <strong>Infraestructura mantenida</strong>
+        <span>Mantenemos el depósito, las máquinas de corte y plegado y la flota de camiones en condiciones de operar de forma segura y precisa.</span>
+      </li>
+      <li>
+        <strong>Mejora continua</strong>
+        <span>Revisamos de forma permanente nuestros productos y procesos para responder mejor y más rápido a lo que pide el mercado.</span>
+      </li>
+    </ul>
+
+    <div class="prosa">
+      <h2>Qué significa esto para tu obra</h2>
+
+      <h3>Sabés qué acero estás comprando</h3>
+      <p>Cuando el material viene certificado, sabés qué resistencia tiene y podés justificarlo ante una dirección de obra, una fiscalización o un cliente final. Si necesitás el certificado de una partida en particular, pedilo al momento de cotizar y lo entregamos con el material.</p>
+
+      <h3>Las medidas llegan como las pediste</h3>
+      <p>Los cortes, plegados y perforaciones se verifican contra el plano o la lista de despiece antes de cargar el camión. Es el paso que evita tener que rehacer piezas en el lugar de montaje.</p>
+
+      <h3>Si algo no está bien, lo resolvemos</h3>
+      <p>Si recibís un material que no corresponde con lo cotizado o con lo que pediste, avisanos apenas lo detectes. Es la única manera de corregirlo rápido y de que el problema no se repita con el próximo pedido.</p>
+
+      <h2>Ámbito de aplicación</h2>
+      <p>Esta política alcanza a todas nuestras actividades: la importación y compra de materiales, el almacenamiento en depósito, los servicios de corte, plegado, perforado, fabricación de perfiles y galvanización, y la entrega en obra con flota propia.</p>
+    </div>
+
+    <div class="botonera" style="margin-top: 34px">
+      <a class="btn btn-amarillo" href="#/contacto/cotizar" data-cta="calidad-cotizar">Pedir cotización</a>
+      <a class="btn btn-linea" href="#/productos">Ver productos</a>
+    </div>
+  </div>
+</section>
+
+
+</div>
+
+<div class="pagina" id="pagina-faq" data-pagina="faq" hidden>
+
+
+<section class="encabezado-pagina linea-abajo">
+  <div class="contenedor">
+    <p class="rotulo">Preguntas frecuentes</p>
+    <h1>Lo que más nos preguntan</h1>
+    <p class="bajada">Si tu consulta no está acá, escribinos por WhatsApp y te respondemos.</p>
+
+    <div class="faq">
+      <details>
+        <summary>¿Venden al por mayor y al por menor?</summary>
+        <div class="respuesta">
+          <p>Sí. Trabajamos con importación directa, lo que nos permite vender tanto al por mayor como al por menor. Atendemos a constructoras, herrerías e industrias, y también a clientes particulares que necesitan una cantidad chica.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Cortan el material a medida?</summary>
+        <div class="respuesta">
+          <p>Sí. Cortamos, plegamos y perforamos chapas, barras, perfiles y tubos según tu plano o tu lista de despiece. Así pagás solo el material que vas a usar y llegás al montaje con las piezas listas.</p>
+          <p>Podés ver el detalle en la página de <a href="#/servicios">servicios industriales</a>.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Entregan el material en obra?</summary>
+        <div class="respuesta">
+          <p>Sí. Tenemos flota propia de camiones: coordinamos el día de entrega y dejamos el material en el lugar, sin depender de fletes de terceros.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Las chapas vienen con certificado de calidad?</summary>
+        <div class="respuesta">
+          <p>Sí. Trabajamos con materia prima certificada bajo Normas Internacionales del Acero, y las chapas se entregan con el certificado de calidad del fabricante.</p>
+          <p>Si necesitás el certificado de una partida en particular para presentar ante una dirección de obra o una fiscalización, pedilo al momento de cotizar y lo entregamos junto con el material.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Fabrican perfiles en medidas no comerciales?</summary>
+        <div class="respuesta">
+          <p>Sí. Fabricamos perfiles C y U en chapa doblada en la medida y el espesor que necesites, para cuando la medida comercial de stock no se adapta a tu proyecto.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Ofrecen galvanización?</summary>
+        <div class="respuesta">
+          <p>Sí. Galvanizamos chapas y perfilería para protegerlas de la corrosión. Es especialmente recomendable en obras a la intemperie o en ambientes húmedos, donde el acero sin protección se deteriora rápido.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Cómo pido una cotización?</summary>
+        <div class="respuesta">
+          <p>De tres maneras, la que te quede más cómoda: completás el <a href="#/contacto/cotizar">formulario de contacto</a>, nos escribís por WhatsApp al <a href="https://wa.me/595981320675" rel="noopener" target="_blank">+595 981 320 675</a>, o nos mandás un correo a <a href="mailto:admin@hierrometal.com">admin@hierrometal.com</a>.</p>
+          <p>Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Cuál es el horario de atención?</summary>
+        <div class="respuesta">
+          <p>De lunes a viernes, de 07:00 a 17:00. Los sábados, de 07:00 a 12:00.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Dónde están ubicados?</summary>
+        <div class="respuesta">
+          <p>Nuestra casa matriz está en Pedro Getto esquina Cadete Sisa, Fernando de la Mora, departamento Central. Podés ver el mapa y cómo llegar en la página de <a href="#/ubicacion">ubicación</a>.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿A qué zonas del país llegan?</summary>
+        <div class="respuesta">
+          <p>Operamos en todo Paraguay. Para entregas en el interior, avisanos al momento de cotizar y coordinamos el envío según el volumen del pedido.</p>
+        </div>
+      </details>
+    </div>
+
+    <div class="botonera" style="margin-top: 34px">
+      <a class="btn btn-amarillo" href="#/contacto/cotizar" data-cta="faq-cotizar">Pedir cotización</a>
+      <a class="btn btn-linea" href="https://wa.me/595981320675" rel="noopener" target="_blank">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+
+</div>
+
+<div class="pagina" id="pagina-ubicacion" data-pagina="ubicacion" hidden>
+
+
+<section class="encabezado-pagina linea-abajo">
+  <div class="contenedor">
+    <p class="rotulo">Ubicación</p>
+    <h1>Casa matriz en Fernando de la Mora</h1>
+    <p class="bajada">Depósito, taller y atención comercial en el mismo lugar. Podés venir a retirar tu pedido o coordinamos la entrega en tu obra con nuestros camiones.</p>
+  </div>
+</section>
+
+<section class="seccion linea-abajo">
+  <div class="contenedor dos-columnas">
+    <div>
+      <p class="rotulo">Dirección</p>
+      <h2 style="font-size: clamp(28px, 5vw, 42px); text-transform: uppercase">Pedro Getto esq. Cadete Sisa</h2>
+      <p class="bajada" style="max-width: 44ch">Fernando de la Mora, departamento Central, Paraguay.</p>
+
+      <div class="botonera">
+        <a class="btn btn-amarillo" href="https://maps.app.goo.gl/aV2wRxNf9gknmhEz6" rel="noopener" target="_blank" data-cta="ubicacion-mapa">Cómo llegar</a>
+        <a class="btn btn-linea" href="tel:+595981320675">Llamar antes de venir</a>
+      </div>
+
+      <p class="rotulo" style="margin-top: 40px">Horarios de atención</p>
+      <ul class="horarios">
+        <li><span>Lunes a viernes</span><span>07:00 — 17:00</span></li>
+        <li><span>Sábados</span><span>07:00 — 12:00</span></li>
+        <li><span>Domingos y feriados</span><span>Cerrado</span></li>
+      </ul>
+    </div>
+
+    <ul class="datos">
+      <li>
+        <span class="etiqueta">Ventas · WhatsApp y teléfono</span>
+        <a class="grande" href="tel:+595981320675">+595 981 320 675</a>
+      </li>
+      <li>
+        <span class="etiqueta">Administración</span>
+        <a href="mailto:admin@hierrometal.com">admin@hierrometal.com</a>
+      </li>
+      <li>
+        <span class="etiqueta">Instagram</span>
+        <a href="https://www.instagram.com/hierrometalsrl/" rel="noopener" target="_blank">@hierrometalsrl</a>
+      </li>
+      <li>
+        <span class="etiqueta">Facebook</span>
+        <a href="https://www.facebook.com/p/Hierro-Metal-SRL-100044982888002/?locale=es_LA" rel="noopener" target="_blank">Hierro Metal SRL</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="seccion" aria-labelledby="h-mapa">
+  <div class="contenedor">
+    <p class="rotulo">Mapa</p>
+    <h2 id="h-mapa" class="titulo-seccion" style="margin-bottom: 24px">Dónde estamos</h2>
+    <div class="mapa mapa-sustituto"><p class="rotulo">Mapa de Google</p><p>Se ve en el sitio publicado.<br>Acá quedaría el mapa interactivo con el pin del depósito.</p><a class="btn btn-linea" href="https://maps.app.goo.gl/aV2wRxNf9gknmhEz6" rel="noopener" target="_blank">Abrir en Google Maps</a></div>
+    <p class="bajada" style="font-size: 14px">El mapa lo provee Google Maps. Al cargarlo, Google puede registrar datos de tu navegación; podés ver el detalle en nuestra <a href="#/privacidad">política de privacidad</a>.</p>
+  </div>
+</section>
+
+<section class="seccion-chica amarilla" aria-labelledby="h-cta-ubi">
+  <div class="contenedor" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px">
+    <div style="max-width: 58ch">
+      <h2 id="h-cta-ubi" style="font-size: clamp(26px, 5vw, 40px); text-transform: uppercase">¿Preferís que lo llevemos nosotros?</h2>
+      <p class="bajada" style="margin-top: 12px; font-size: 16px">Tenemos flota propia de camiones y entregamos en obra en todo Paraguay.</p>
+    </div>
+    <a class="btn btn-negro" href="#/contacto/cotizar">Pedir cotización</a>
+  </div>
+</section>
+
+
+</div>
+
+<div class="pagina" id="pagina-contacto" data-pagina="contacto" hidden>
+
+
+<section class="encabezado-pagina linea-abajo">
+  <div class="contenedor">
+    <p class="rotulo">Contacto</p>
+    <h1>Pedí tu cotización</h1>
+    <p class="bajada">Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día. Si preferís hablar, escribinos por WhatsApp o llamanos.</p>
+  </div>
+</section>
+
+<section id="cotizar" class="seccion linea-abajo" aria-labelledby="h-form" style="scroll-margin-top: 120px">
+  <div class="contenedor dos-columnas">
+
+    <div>
+      <p class="rotulo">Formulario</p>
+      <h2 id="h-form" style="font-size: clamp(28px, 5vw, 42px); text-transform: uppercase; margin-bottom: 24px">Contanos qué necesitás</h2>
+
+      <form class="formulario" id="formulario-cotizacion" novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre y apellido <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="nombre" name="nombre" required maxlength="120" autocomplete="name">
+        </div>
+
+        <div class="campo">
+          <label for="empresa">Empresa u obra</label>
+          <input type="text" id="empresa" name="empresa" maxlength="120" autocomplete="organization">
+        </div>
+
+        <div class="campo">
+          <label for="telefono">Teléfono o WhatsApp <span class="req" aria-hidden="true">*</span></label>
+          <input type="tel" id="telefono" name="telefono" required maxlength="40" autocomplete="tel" placeholder="09xx xxx xxx">
+        </div>
+
+        <div class="campo">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" maxlength="150" autocomplete="email">
+          <span class="ayuda">Opcional, pero nos ayuda a mandarte la cotización por escrito.</span>
+        </div>
+
+        <div class="campo">
+          <label for="rubro">¿Qué necesitás?</label>
+          <select id="rubro" name="rubro">
+            <option value="">Elegí una opción</option>
+            <option>Chapas de acero</option>
+            <option>Perfiles y estructurales</option>
+            <option>Tubos y caños</option>
+            <option>Varillas y barras</option>
+            <option>Accesorios de cañería</option>
+            <option>Servicio de corte, plegado o perforado</option>
+            <option>Galvanización</option>
+            <option>Varios materiales / lista completa</option>
+            <option>Otra consulta</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">Lista de materiales o detalle del pedido <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="mensaje" name="mensaje" required maxlength="4000" placeholder="Ejemplo:&#10;- 20 chapas trapezoidales galvanizadas, largo 6 m&#10;- 10 perfiles UPN 100, 12 m&#10;- Corte a medida según plano&#10;- Entrega en obra, zona Luque"></textarea>
+          <span class="ayuda">Cuanto más detalle nos des (medidas, espesores, cantidades, zona de entrega), más rápido te cotizamos.</span>
+        </div>
+
+        <!-- Campo trampa contra robots de spam: si se completa, el envío se descarta. -->
+        <div class="trampa" aria-hidden="true">
+          <label for="sitio-web">No completar este campo</label>
+          <input type="text" id="sitio-web" name="sitio_web" tabindex="-1" autocomplete="off">
+        </div>
+
+        <p class="bajada" style="font-size: 13.5px; margin-top: 0; margin-bottom: 20px">Al enviar, aceptás que usemos tus datos para responder esta consulta. Ver la <a href="#/privacidad">política de privacidad</a>.</p>
+
+        <button class="btn btn-amarillo" type="submit" data-cta="form-enviar">Enviar pedido</button>
+      </form>
+    </div>
+
+    <div>
+      <p class="rotulo">Canales directos</p>
+      <h2 style="font-size: clamp(28px, 5vw, 42px); text-transform: uppercase; margin-bottom: 24px">O escribinos ahora</h2>
+
+      <ul class="datos">
+        <li>
+          <span class="etiqueta">Ventas · WhatsApp y teléfono</span>
+          <a class="grande" href="tel:+595981320675">+595 981 320 675</a>
+        </li>
+        <li>
+          <span class="etiqueta">Administración</span>
+          <a href="mailto:admin@hierrometal.com">admin@hierrometal.com</a>
+        </li>
+        <li>
+          <span class="etiqueta">Depósito y taller</span>
+          <a href="#/ubicacion">Pedro Getto esq. Cadete Sisa,<br>Fernando de la Mora →</a>
+        </li>
+        <li>
+          <span class="etiqueta">Horario de atención</span>
+          <p>Lunes a viernes 07:00 — 17:00<br>Sábados 07:00 — 12:00</p>
+        </li>
+      </ul>
+
+      <div class="botonera">
+        <a class="btn btn-amarillo" href="https://wa.me/595981320675" rel="noopener" target="_blank" data-cta="contacto-whatsapp">Escribir por WhatsApp</a>
+        <a class="btn btn-linea" href="#/contacto" data-aviso="catalogo" target="_blank" rel="noopener">Descargar catálogo</a>
+      </div>
+
+      <div class="aviso" style="margin-top: 34px">
+        <strong>Ventas se centraliza en un único número corporativo.</strong> Si alguien te contacta desde otro número diciendo representar a Hierro Metal S.R.L., verificá con nosotros antes de operar.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+</div>
+
+<div class="pagina" id="pagina-privacidad" data-pagina="privacidad" hidden>
+
+
+<section class="encabezado-pagina linea-abajo">
+  <div class="contenedor">
+    <p class="rotulo">Legal</p>
+    <h1>Política de privacidad</h1>
+    <p class="bajada" style="max-width: 58ch">Cómo tratamos los datos personales que nos dejás en este sitio.</p>
+  </div>
+</section>
+
+<section class="seccion">
+  <div class="contenedor">
+    <div class="prosa">
+      <p><strong>Última actualización:</strong> septiembre de 2026.</p>
+
+      <h2>1. Quiénes somos</h2>
+      <p>El responsable del tratamiento de los datos es <strong>Hierro Metal S.R.L.</strong>, con domicilio en Pedro Getto esquina Cadete Sisa, Fernando de la Mora, departamento Central, Paraguay. Podés contactarnos por correo a <a href="mailto:admin@hierrometal.com">admin@hierrometal.com</a> o por teléfono al <a href="tel:+595981320675">+595 981 320 675</a>.</p>
+
+      <h2>2. Qué datos recopilamos</h2>
+      <p>Solamente los que vos nos entregás al completar el formulario de cotización:</p>
+      <ul>
+        <li><strong>Nombre y apellido</strong> (obligatorio).</li>
+        <li><strong>Teléfono o WhatsApp</strong> (obligatorio).</li>
+        <li><strong>Empresa u obra</strong> (opcional).</li>
+        <li><strong>Correo electrónico</strong> (opcional).</li>
+        <li><strong>El detalle de tu pedido</strong>: la lista de materiales o la consulta que escribas.</li>
+      </ul>
+      <p>Junto con el envío se registra también la fecha, la hora y la dirección IP desde la que se hizo, como medida técnica contra el envío automatizado de spam.</p>
+      <p>Este sitio <strong>no</strong> pide ni procesa datos de tarjetas, cuentas bancarias ni documentos de identidad. Nunca te vamos a pedir ese tipo de información por el formulario.</p>
+
+      <h2>3. Para qué los usamos</h2>
+      <p>Usamos tus datos con una única finalidad: <strong>responder tu consulta y elaborar la cotización que pediste</strong>, y hacer el seguimiento comercial de ese pedido concreto.</p>
+      <p>No usamos tus datos para enviarte publicidad no solicitada, no los vendemos, no los alquilamos y no los cedemos a terceros con fines comerciales.</p>
+
+      <h2>4. Base legal</h2>
+      <p>Tratamos tus datos sobre la base de tu consentimiento, que otorgás al enviar voluntariamente el formulario, y del interés legítimo en atender una consulta comercial que vos iniciaste. Este tratamiento se realiza conforme a la <strong>Ley N.º 6534/2020 de Protección de Datos Personales Crediticios</strong> y a las demás normas aplicables en la República del Paraguay.</p>
+
+      <h2>5. Con quién los compartimos</h2>
+      <p>Tus datos son tratados por el personal de Hierro Metal S.R.L. que interviene en la atención comercial. Además intervienen técnicamente:</p>
+      <ul>
+        <li><strong>Nuestro proveedor de hosting y correo</strong>, que aloja el sitio y transmite el mensaje del formulario hasta nuestra casilla.</li>
+        <li><strong>Google Maps</strong>, en la página de ubicación. Al cargarse el mapa, Google puede recoger datos de tu navegación (dirección IP, navegador) según sus propias políticas. Si no querés que eso ocurra, no abras la página de ubicación o bloqueá el contenido de terceros en tu navegador.</li>
+      </ul>
+      <p>Fuera de esos casos, no compartimos tus datos con nadie, salvo requerimiento de autoridad competente.</p>
+
+      <h2>6. Cuánto tiempo los conservamos</h2>
+      <p>Conservamos las consultas por el tiempo necesario para atenderlas y, si se concreta una operación, por el plazo que exijan las obligaciones contables y tributarias. Pasado ese período, los eliminamos.</p>
+
+      <h2>7. Tus derechos</h2>
+      <p>Podés pedirnos en cualquier momento:</p>
+      <ul>
+        <li><strong>Acceder</strong> a los datos que tenemos sobre vos.</li>
+        <li><strong>Rectificarlos</strong> si están equivocados o incompletos.</li>
+        <li><strong>Suprimirlos</strong>, cuando ya no sean necesarios para la finalidad por la que los diste.</li>
+        <li><strong>Retirar tu consentimiento</strong> para futuros contactos comerciales.</li>
+      </ul>
+      <p>Para ejercer cualquiera de estos derechos, escribinos a <a href="mailto:admin@hierrometal.com">admin@hierrometal.com</a> indicando qué querés hacer. Te respondemos en un plazo razonable.</p>
+
+      <h2>8. Cookies</h2>
+      <p>Este sitio <strong>no instala cookies propias</strong> de seguimiento ni de publicidad. El mapa de Google, en la página de ubicación, puede instalar cookies de terceros al cargarse.</p>
+      <p>Si en el futuro incorporamos herramientas de medición de audiencia, actualizaremos esta política y lo informaremos en esta misma página.</p>
+
+      <h2>9. Seguridad</h2>
+      <p>El sitio se sirve mediante conexión cifrada (HTTPS) y aplicamos medidas razonables para proteger la información. Aun así, ningún sistema es infalible: te pedimos que no envíes por el formulario información sensible que no sea necesaria para cotizar tu pedido.</p>
+
+      <h2>10. Cambios en esta política</h2>
+      <p>Si modificamos esta política, publicaremos la versión actualizada en esta página con su nueva fecha. Te recomendamos revisarla cada tanto.</p>
+
+      <h2>11. Contacto</h2>
+      <p>Cualquier duda sobre esta política podés dirigirla a:</p>
+      <p><strong>Hierro Metal S.R.L.</strong><br>
+      Pedro Getto esq. Cadete Sisa, Fernando de la Mora, Central, Paraguay<br>
+      <a href="mailto:admin@hierrometal.com">admin@hierrometal.com</a> · <a href="tel:+595981320675">+595 981 320 675</a></p>
+    </div>
+
+    <div class="botonera" style="margin-top: 34px">
+      <a class="btn btn-linea" href="#/inicio">Volver al inicio</a>
+    </div>
+  </div>
+</section>
+
+
+</div>
+</main>
+
+<footer class="pie">
+  <div class="pie-rejilla">
+    <div>
+      <span class="pie-marca">Hierro<br>Metal <span>S.R.L.</span></span>
+      <p>Importación y venta de materiales de construcción metálicos y metalúrgicos.</p>
+    </div>
+    <nav aria-label="Páginas">
+      <a href="#/productos">Productos y catálogo</a>
+      <a href="#/servicios">Servicios industriales</a>
+      <a href="#/calidad">Política de calidad</a>
+      <a href="#/faq">Preguntas frecuentes</a>
+    </nav>
+    <div class="columna">
+      <a href="#/ubicacion">Ubicación</a>
+      <a href="#/contacto">Contacto</a>
+      <a href="#/contacto" data-aviso="catalogo">Descargar catálogo</a>
+    </div>
+    <div class="columna">
+      <a href="tel:+595981320675">+595 981 320 675</a>
+      <a href="mailto:admin@hierrometal.com">admin@hierrometal.com</a>
+      <a class="direccion" href="https://maps.app.goo.gl/aV2wRxNf9gknmhEz6" rel="noopener" target="_blank">Pedro Getto esq. Cadete Sisa,<br>Fernando de la Mora, Central →</a>
+    </div>
+  </div>
+  <div class="pie-legal">
+    <div class="contenedor">
+      <p>© <span id="anio">2026</span> Hierro Metal S.R.L. · Todos los derechos reservados</p>
+      <a href="#/privacidad">Política de privacidad</a>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-flotante" href="https://wa.me/595981320675" rel="noopener" target="_blank" aria-label="Escribir por WhatsApp al +595 981 320 675">WhatsApp</a>
+
+<div class="aviso-flotante" id="aviso" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var PAGINAS = ["inicio","productos","servicios","calidad","faq","ubicacion","contacto","privacidad"];
+  var PREDETERMINADA = 'inicio';
+
+  function mostrarAviso(texto) {
+    var a = document.getElementById('aviso');
+    a.textContent = texto;
+    a.classList.add('visible');
+    clearTimeout(a._t);
+    a._t = setTimeout(function () { a.classList.remove('visible'); }, 4200);
+  }
+
+  function irA(id, ancla, saltar) {
+    if (PAGINAS.indexOf(id) < 0) id = PREDETERMINADA;
+
+    document.querySelectorAll('.pagina').forEach(function (p) {
+      p.hidden = p.dataset.pagina !== id;
+    });
+
+    document.querySelectorAll('.nav-escritorio a').forEach(function (a) {
+      var suyo = a.getAttribute('href') === '#/' + id;
+      if (suyo) { a.setAttribute('aria-current', 'page'); }
+      else { a.removeAttribute('aria-current'); }
+    });
+
+    var menu = document.getElementById('menu-movil');
+    menu.classList.remove('abierto');
+    document.querySelector('.hm-burger').setAttribute('aria-expanded', 'false');
+
+    document.title = 'Hierro Metal S.R.L.';
+
+    // Se espera un cuadro para que la página recién mostrada tenga layout
+    // antes de medir dónde está el ancla.
+    requestAnimationFrame(function () {
+      if (ancla) {
+        var destino = document.getElementById(ancla);
+        if (destino) { destino.scrollIntoView({ block: 'start' }); return; }
+      }
+      if (!saltar) window.scrollTo(0, 0);
+    });
+  }
+
+  function desdeHash(saltar) {
+    var h = location.hash;
+    if (h.indexOf('#/') !== 0) { irA(PREDETERMINADA, null, saltar); return; }
+    var partes = h.slice(2).split('/');
+    irA(partes[0], partes[1], saltar);
+  }
+
+  window.addEventListener('hashchange', function () { desdeHash(false); });
+
+  // Enlaces con aviso (descarga del catálogo)
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-aviso]');
+    if (!a) return;
+    if (a.dataset.aviso === 'catalogo') {
+      mostrarAviso('La descarga del catálogo en PDF funciona en el sitio publicado.');
+    }
+  });
+
+  // Menú móvil
+  var boton = document.querySelector('.hm-burger');
+  var menu = document.getElementById('menu-movil');
+  boton.addEventListener('click', function () {
+    var abierto = menu.classList.toggle('abierto');
+    boton.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && menu.classList.contains('abierto')) {
+      menu.classList.remove('abierto');
+      boton.setAttribute('aria-expanded', 'false');
+      boton.focus();
+    }
+  });
+
+  // Formulario: acá no se envía, se explica qué pasaría.
+  var form = document.getElementById('formulario-cotizacion');
+  if (form) {
+    var respuesta = document.createElement('div');
+    respuesta.id = 'respuesta-formulario';
+    respuesta.className = 'aviso';
+    respuesta.hidden = true;
+    form.appendChild(respuesta);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var nombre = form.nombre.value.trim();
+      var telefono = form.telefono.value.trim();
+      var mensaje = form.mensaje.value.trim();
+      if (!nombre || !telefono || !mensaje) {
+        respuesta.className = 'aviso aviso-error';
+        respuesta.innerHTML = '<strong>Faltan datos.</strong> En el sitio publicado, el formulario pide nombre, teléfono y el detalle del pedido antes de enviar.';
+      } else {
+        respuesta.className = 'aviso';
+        respuesta.innerHTML = '<strong>Así funciona en el sitio publicado:</strong> este pedido se enviaría por correo a admin@hierrometal.com y ' + nombre.split(' ')[0] + ' vería la página de confirmación. Acá, en la vista previa, no se envía nada.';
+      }
+      respuesta.hidden = false;
+      respuesta.scrollIntoView({ block: 'nearest' });
+    });
+  }
+
+  document.getElementById('anio').textContent = new Date().getFullYear();
+
+  desdeHash(true);
+})();
+</script>
+
+</body></html>
