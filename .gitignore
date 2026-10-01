@@ -3,7 +3,6 @@
 .env.*
 !.env.example
 node_modules/
-vendor/
 /storage/*.key
 .idea/
 .vscode/
@@ -13,3 +12,10 @@ vendor/
 **/.impeccable/build/
 **/.impeccable/mocks/
 **/.impeccable/live/
+
+# Archivos locales de herramientas y editores
+.claude/settings.local.json
+.playwright-cli/
+.playwright-mcp/
+*.swp
+*~
