@@ -23,3 +23,12 @@ body>main{flex:1 0 auto}
 
 /* El botón flotante de WhatsApp queda en un espacio libre al final del pie, sin tapar enlaces ni la dirección. */
 .pie-legal{padding-bottom:112px}
+
+/* Portada (ilustración de respaldo): las secciones de acero «se apoyan» en el piso amarillo, una tras otra.
+   Sólo transform y opacity (no cuestan layout), curva de salida fuerte y escalonado corto. Con
+   `prefers-reduced-motion` la ilustración se muestra quieta y completa. La foto de portada NO se anima:
+   es el elemento más grande de la pantalla y animarla retrasaría su aparición. */
+@keyframes hm-apoyar{from{opacity:0;transform:translateY(-40px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:no-preference){
+    .ilustracion-portada .pieza{animation:hm-apoyar 560ms var(--ease-salida) both;animation-delay:calc(var(--i) * 70ms + 150ms)}
+}
