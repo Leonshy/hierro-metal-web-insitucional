@@ -1,0 +1,51 @@
+<svg role="img" aria-label="Secciones de acero: perfiles IPN y UPN, ángulo, caño redondo, tubos cuadrado y rectangular, y varillas de construcción" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice">
+  
+  <defs>
+    <pattern id="rayas" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(115)">
+      <rect width="28" height="28" style="fill:var(--color-tinta)"/>
+      <rect width="14" height="28" style="fill:var(--color-acero-fondo)"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="700" fill="url(#rayas)"/>
+
+  <!-- Chapas trapezoidales apiladas al fondo -->
+  <g fill="none" stroke-width="8" stroke-linejoin="round">
+    <path d="M52 210 L77 156 L102 156 L127 210 L152 210 L177 156 L202 156 L227 210 L252 210 L277 156 L302 156 L327 210 L352 210 L377 156 L402 156 L427 210 L452 210 L477 156 L502 156 L527 210 L552 210 L577 156 L602 156 L627 210 L652 210 L677 156 L702 156 L727 210 L752 210 L777 156 L802 156 L827 210 L852 210 L877 156 L902 156 L927 210 L952 210 L977 156 L1002 156 L1027 210 L1052 210 L1077 156 L1102 156 L1127 210 L1152 210 L1177 156 L1202 156 L1227 210 L1252 210 L1277 156 L1302 156 L1327 210 L1352 210 L1377 156 L1402 156 L1427 210 L1452 210 L1477 156 L1502 156 L1527 210 L1552 210" style="stroke:var(--color-acero-1)"/>
+    <path d="M52 272 L77 218 L102 218 L127 272 L152 272 L177 218 L202 218 L227 272 L252 272 L277 218 L302 218 L327 272 L352 272 L377 218 L402 218 L427 272 L452 272 L477 218 L502 218 L527 272 L552 272 L577 218 L602 218 L627 272 L652 272 L677 218 L702 218 L727 272 L752 272 L777 218 L802 218 L827 272 L852 272 L877 218 L902 218 L927 272 L952 272 L977 218 L1002 218 L1027 272 L1052 272 L1077 218 L1102 218 L1127 272 L1152 272 L1177 218 L1202 218 L1227 272 L1252 272 L1277 218 L1302 218 L1327 272 L1352 272 L1377 218 L1402 218 L1427 272 L1452 272 L1477 218 L1502 218 L1527 272 L1552 272" style="stroke:var(--color-acero-2)"/>
+    <path d="M52 334 L77 280 L102 280 L127 334 L152 334 L177 280 L202 280 L227 334 L252 334 L277 280 L302 280 L327 334 L352 334 L377 280 L402 280 L427 334 L452 334 L477 280 L502 280 L527 334 L552 334 L577 280 L602 280 L627 334 L652 334 L677 280 L702 280 L727 334 L752 334 L777 280 L802 280 L827 334 L852 334 L877 280 L902 280 L927 334 L952 334 L977 280 L1002 280 L1027 334 L1052 334 L1077 280 L1102 280 L1127 334 L1152 334 L1177 280 L1202 280 L1227 334 L1252 334 L1277 280 L1302 280 L1327 334 L1352 334 L1377 280 L1402 280 L1427 334 L1452 334 L1477 280 L1502 280 L1527 334 L1552 334" style="stroke:var(--color-acero-3)"/>
+  </g>
+
+  <!-- Piso -->
+  <rect x="0" y="574" width="1600" height="10" style="fill:var(--color-marca)"/>
+  <rect x="0" y="584" width="1600" height="116" style="fill:var(--color-acero-sombra)"/>
+
+  <g fill="none" stroke-width="5" style="stroke:var(--color-pie-legal)">
+    <!-- Perfil IPN (relleno amarillo) -->
+    <g class="pieza" style="--i:0"><path d="M-72 -92 h144 v27 h-57 v130 h57 v27 h-144 v-27 h57 v-130 h-57 z"
+          transform="translate(214 482)" stroke="none" style="fill:var(--color-marca)"/></g>
+    <!-- Perfil UPN -->
+    <g class="pieza" style="--i:1"><path d="M-57 -92 h114 v27 h-83 v130 h83 v27 h-114 z" transform="translate(432 482)"/></g>
+    <!-- Ángulo -->
+    <g class="pieza" style="--i:2"><path d="M-77 -77 h31 v123 h92 v31 h-123 z" transform="translate(618 497)"/></g>
+    <!-- Caño redondo -->
+    <g class="pieza" style="--i:3"><circle cx="818" cy="482" r="77" stroke-width="27"/></g>
+    <!-- Tubo cuadrado -->
+    <g class="pieza" style="--i:4"><rect x="-69" y="-69" width="138" height="138" transform="translate(1032 482)" stroke-width="27"/></g>
+    <!-- Tubo rectangular -->
+    <g class="pieza" style="--i:5"><rect x="-95" y="-54" width="190" height="108" transform="translate(1268 482)" stroke-width="25"/></g>
+  </g>
+
+  <!-- Varillas -->
+  <g class="pieza" style="--i:6">
+  <g stroke-width="15" stroke-linecap="round" style="stroke:var(--color-pie-legal)">
+    <path d="M1452 390 v184"/>
+    <path d="M1494 390 v184"/>
+    <path d="M1536 390 v184"/>
+  </g>
+  <g stroke-width="5" style="stroke:var(--color-tinta)">
+    <path d="M1443 414 l18 -12 M1443 454 l18 -12 M1443 494 l18 -12 M1443 534 l18 -12"/>
+    <path d="M1485 426 l18 -12 M1485 466 l18 -12 M1485 506 l18 -12 M1485 546 l18 -12"/>
+    <path d="M1527 410 l18 -12 M1527 450 l18 -12 M1527 490 l18 -12 M1527 530 l18 -12"/>
+  </g></g>
+</svg>

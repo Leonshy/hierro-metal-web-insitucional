@@ -3,9 +3,8 @@
    Origen: hoja de estilos del sitio del cliente (referencia/sitio-cliente-original.html)
    y docs/02-sistema-diseno.md. Los valores se conservan; cambios marcados con [NUEVO].
 
-   Uso en el prototipo: <link rel="stylesheet" href="tokens.css">
-   Uso en Laravel (Fase 4): el mismo contenido va dentro de `@theme { … }` de Tailwind v4,
-   con estos nombres. Ningún componente usa un color o una fuente literal: sólo estos tokens.
+   Fuente: hierro-metal/diseno/tokens.css. Ningún componente usa un color o una fuente literal: sólo estos tokens.
+   Las fuentes se descargan al compilar (vite.config.js) y se sirven desde el propio sitio.
    ========================================================================== */
 
 :root {

@@ -202,6 +202,9 @@ Una paleta corta y de alto contraste: dos colores de marca (amarillo y negro), u
 - **Enlace** (#8a6d00): enlaces en prosa (4.9:1).
 - **Pie y barra sobre negro:** enlaces del pie **#e4e1dc**, dirección de la barra superior **#d9d6d0** y línea legal **#8b8681** (4.5:1). **Negro de hover** (#000000) para el botón negro.
 
+### Ilustraciones
+- Las seis ilustraciones SVG de secciones de acero del cliente usan sus propios grises (**acero claro** #c9c6c0, y cinco tonos oscuros para la portada: #3d3939, #4a4644, #5a5552, #2b2728 y #1c1819). Son tokens (`--color-acero-*`), no valores sueltos.
+
 ### Estado
 - **Error** (#b00020) con fondo **#fbeaed**. **Éxito** (#1e6b3a) con fondo **#eaf4ed**. Ambos pares pasan AA.
 
