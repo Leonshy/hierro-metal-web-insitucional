@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ContenidoSeeder::class,
             VendedoresSeeder::class,
             PaginasSeeder::class,
+            FotosSeeder::class,
         ]);
     }
 }

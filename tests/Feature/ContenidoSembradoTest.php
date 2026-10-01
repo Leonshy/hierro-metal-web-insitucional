@@ -16,9 +16,13 @@ use App\Models\SiteSetting;
 use App\Models\Vendedor;
 use App\Rules\MaxWords;
 use Database\Seeders\DatabaseSeeder;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 beforeEach(function () {
+    // La siembra también carga las fotos del catálogo: nunca a los discos reales.
+    Storage::fake('media');
+    Storage::fake('public');
     $this->seed(DatabaseSeeder::class);
 });
 
