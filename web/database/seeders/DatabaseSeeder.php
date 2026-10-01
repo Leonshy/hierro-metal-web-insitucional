@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             VendedoresSeeder::class,
             PaginasSeeder::class,
             FotosSeeder::class,
+            CatalogoPdfSeeder::class,
         ]);
     }
 }
