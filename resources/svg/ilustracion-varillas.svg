@@ -1,0 +1,24 @@
+<svg role="presentation" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180">
+  
+  <rect width="320" height="180" style="fill:var(--color-panel)"/>
+  <g stroke-linecap="round">
+    <g stroke-width="16" style="stroke:var(--color-tinta)">
+      <path d="M60 26 v128"/>
+      <path d="M120 26 v128"/>
+    </g>
+    <g stroke-width="16" style="stroke:var(--color-marca)">
+      <path d="M180 26 v128"/>
+    </g>
+    <g stroke-width="16" style="stroke:var(--color-tinta)">
+      <path d="M240 26 v128"/>
+    </g>
+  </g>
+  <!-- Nervaduras -->
+  <g stroke-width="4" style="stroke:var(--color-panel)">
+    <path d="M51 44 l18 -11 M51 72 l18 -11 M51 100 l18 -11 M51 128 l18 -11"/>
+    <path d="M111 54 l18 -11 M111 82 l18 -11 M111 110 l18 -11 M111 138 l18 -11"/>
+  </g>
+  <g stroke-width="4" style="stroke:var(--color-tinta)">
+    <path d="M171 44 l18 -11 M171 72 l18 -11 M171 100 l18 -11 M171 128 l18 -11"/>
+  </g>
+</svg>

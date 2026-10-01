@@ -1,0 +1,25 @@
+/* Estilos propios de las plantillas del sitio (se completan con las vistas). */
+
+/* El pie queda pegado al fondo aunque la página sea corta. */
+body{min-height:100dvh;display:flex;flex-direction:column}
+body>main{flex:1 0 auto}
+
+/* Ilustraciones en línea (resources/svg): llenan su caja y se recortan con `slice`. */
+.ilustracion-caja{overflow:hidden}
+.ilustracion-caja svg{display:block;width:100%;height:100%}
+
+/* Fotos del catálogo: recortadas a la caja, sin deformarse. */
+.foto-portada{width:100%;height:auto;aspect-ratio:16/7;object-fit:cover;object-position:center 40%}
+.ficha-foto{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--color-panel)}
+
+/* Contacto: dos columnas con el formulario más ancho que los canales directos. */
+.dos-columnas-contacto{grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px}
+.titulo-familia{font-size:var(--text-familia);margin-bottom:26px}
+.btn[aria-disabled=true]{pointer-events:none}
+
+/* Servicios: seis tarjetas en 3 × 2 (en cuatro columnas quedaría una fila coja). */
+.lineas-servicios{margin-top:34px}
+@media (min-width:900px){.lineas-servicios{grid-template-columns:repeat(3,1fr)}}
+
+/* El botón flotante de WhatsApp queda en un espacio libre al final del pie, sin tapar enlaces ni la dirección. */
+.pie-legal{padding-bottom:112px}

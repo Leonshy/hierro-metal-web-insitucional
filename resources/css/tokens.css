@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Hierro Metal S.R.L. — tokens de diseño
+   Origen: hoja de estilos del sitio del cliente (referencia/sitio-cliente-original.html)
+   y docs/02-sistema-diseno.md. Los valores se conservan; cambios marcados con [NUEVO].
+
+   Fuente: hierro-metal/diseno/tokens.css. Ningún componente usa un color o una fuente literal: sólo estos tokens.
+   Las fuentes se descargan al compilar (vite.config.js) y se sirven desde el propio sitio.
+   ========================================================================== */
+
+:root {
+  /* ---- Color: marca ---- */
+  --color-marca: #f9ed31;          /* amarillo institucional (del logo) */
+  --color-marca-hover: #f3de30;    /* hover de botones amarillos */
+  --color-marca-claro: #fdf8b8;    /* borde claro del degradado del logo */
+  --color-marca-suave: #dfd57d;    /* nota de portada sobre negro · 10.8:1 */
+  --color-tinta: #231f20;          /* negro institucional y texto principal */
+  --color-tinta-hover: #000000;    /* hover del botón negro (igual que el original) */
+
+  /* ---- Color: texto y neutros ---- */
+  --color-texto: #4a4444;          /* cuerpo · 9.5:1 sobre blanco */
+  --color-texto-sobre-marca: #3d3838; /* bajada sobre amarillo · 9.4:1 */
+  --color-gris: #706c64;           /* [CAMBIO] era #837f76 (3.99:1). Rótulos y ayudas · 5.2:1 blanco · 4.5:1 panel */
+  --color-linea: #a3a5a8;          /* retículas de 1 px y bordes. Decorativo: no lleva texto */
+  --color-alterno: #f9f9f9;        /* hover de fichas, FAQ abierto, aviso */
+  --color-panel: #efeeea;          /* fondo de ilustraciones de ficha */
+  --color-blanco: #ffffff;
+
+  /* ---- Color: sobre negro ---- */
+  --color-claro: #cfccc6;          /* bajadas sobre negro · 10.2:1 */
+  --color-claro-2: #b3afa9;        /* textos secundarios sobre negro · 7.5:1 */
+  --color-claro-3: #e4e1dc;        /* enlaces del pie */
+  --color-barra: #d9d6d0;          /* dirección en la barra superior */
+  --color-pie-legal: #8b8681;      /* línea legal del pie · 4.5:1 */
+
+  /* ---- Ilustraciones de acero del cliente ---- */
+  --color-acero-claro: #c9c6c0;    /* chapa clara de la ilustración de Chapas */
+  --color-acero-1: #3d3939;        /* chapas apiladas al fondo de la portada */
+  --color-acero-2: #4a4644;
+  --color-acero-3: #5a5552;
+  --color-acero-fondo: #2b2728;    /* rayado del fondo de la portada */
+  --color-acero-sombra: #1c1819;   /* piso de la portada */
+
+  /* ---- Color: estados ---- */
+  --color-enlace: #8a6d00;         /* enlaces en prosa · 4.9:1 */
+  --color-error: #b00020;          /* requerido y errores · 7.3:1 */
+  --color-error-suave: #fbeaed;    /* [NUEVO] fondo del aviso de error · texto error 6.3:1 */
+  --color-exito: #1e6b3a;          /* [NUEVO] confirmación · 6.5:1 blanco */
+  --color-exito-suave: #eaf4ed;    /* [NUEVO] fondo del aviso de éxito · texto éxito 5.8:1 */
+  --color-whatsapp: var(--color-marca); /* el botón flotante usa el amarillo, no el verde de WhatsApp */
+
+  /* Reglas de uso:
+     - El amarillo NUNCA lleva texto blanco. Texto sobre amarillo: tinta (13.3:1) o texto-sobre-marca.
+     - --color-gris NUNCA va sobre negro (3.1:1). Sobre negro: claro, claro-2.
+     - --color-linea (2.5:1) es sólo decorativo. */
+
+  /* ---- Tipografía (autohospedadas, licencia OFL) ---- */
+  --font-condensada: 'Barlow Condensed', 'Arial Narrow', Arial, sans-serif;
+  --font-texto: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Escala (valores del original) */
+  --text-h1-portada: clamp(42px, 9.5vw, 88px);
+  --text-h1-interna: clamp(38px, 8vw, 74px);
+  --text-seccion: clamp(34px, 7vw, 62px);
+  --text-familia: clamp(30px, 5.6vw, 50px);
+  --text-ficha: 29px;
+  --text-linea: 25px;
+  --text-paso: 24px;
+  --text-faq: 25px;
+  --text-bajada: 16.5px;
+  --text-cuerpo: 14.5px;
+  --text-prosa: 16.5px;
+  --text-rotulo: 11px;
+  --text-boton: 19px;
+  --tracking-rotulo: .18em;
+  --tracking-boton: .09em;
+  --leading-titulo: .95;
+  --leading-bajada: 1.65;
+  --leading-cuerpo: 1.6;
+
+  /* ---- Estructura ---- */
+  --ancho: 1300px;
+  --margen: 20px;
+  --seccion-y: 60px 70px;           /* arriba / abajo */
+  --seccion-chica-y: 44px 48px;
+  --encabezado-y: 46px 44px;
+  --medida-lectura: 62ch;           /* bajadas */
+  --medida-prosa: 68ch;
+
+  /* ---- Forma: sin radios, sin sombras decorativas ---- */
+  --radio: 0;
+  --borde-boton-marca: 3px;         /* borde inferior de los botones amarillos */
+  --borde-linea: 1px;
+  --foco-grosor: 3px;
+  --foco-distancia: 2px;
+  --alto-tactil: 48px;              /* mínimo en botones y filas táctiles (CLAUDE.md regla 13) */
+  --alto-boton: 52px;
+
+  /* La única sombra del sistema es la del botón flotante de WhatsApp */
+  --sombra-flotante: 0 10px 28px rgba(35, 31, 32, .32);
+
+  /* ---- Movimiento ---- */
+  --ease-salida: cubic-bezier(.22, 1, .36, 1);
+  --duracion-estado: 150ms;         /* hover, color */
+  --duracion-menu: 200ms;
+  --duracion-revelado: 600ms;
+
+  /* ---- Breakpoints (para media queries; no se pueden usar var() en @media) ---- */
+  /* 520px logo y CTA chicos · 860px se oculta la dirección en la barra · 1040px navegación de escritorio */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --duracion-estado: .01ms; --duracion-menu: .01ms; --duracion-revelado: .01ms; }
+}
