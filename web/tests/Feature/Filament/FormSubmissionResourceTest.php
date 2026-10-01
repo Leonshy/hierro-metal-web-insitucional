@@ -47,17 +47,17 @@ it('permite marcar un envío como leído o respondido, sin editar los datos del 
 });
 
 it('un usuario sin el permiso de form_submissions no puede ver los envíos', function () {
-    $editorAcademico = User::factory()->create(['is_active' => true]);
-    $editorAcademico->assignRole('editor_academico');
+    $usuarioVentas = User::factory()->create(['is_active' => true]);
+    $usuarioVentas->assignRole('editor');
 
-    $this->actingAs($editorAcademico);
+    $this->actingAs($usuarioVentas);
 
     $this->livewire(ListFormSubmissions::class)->assertForbidden();
 });
 
-it('el editor general sí puede ver los envíos de formularios', function () {
+it('el rol ventas sí puede ver los envíos de formularios', function () {
     $editorGeneral = User::factory()->create(['is_active' => true]);
-    $editorGeneral->assignRole('editor_general');
+    $editorGeneral->assignRole('ventas');
 
     $this->actingAs($editorGeneral);
 

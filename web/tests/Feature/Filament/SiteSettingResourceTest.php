@@ -93,10 +93,10 @@ it('el formulario de edición muestra el nombre humano de la configuración, no 
 });
 
 it('un usuario sin permiso no puede ver la configuración global', function () {
-    $editorAcademico = User::factory()->create(['is_active' => true]);
-    $editorAcademico->assignRole('editor_academico');
+    $usuarioVentas = User::factory()->create(['is_active' => true]);
+    $usuarioVentas->assignRole('ventas');
 
-    $this->actingAs($editorAcademico);
+    $this->actingAs($usuarioVentas);
 
     $this->livewire(ListSiteSettings::class)->assertForbidden();
 });

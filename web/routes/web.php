@@ -13,9 +13,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
 Route::get('/robots.txt', [RobotsController::class, 'index'])->name('robots.index');
 
-
 Route::get('/contacto', [ContactController::class, 'show'])->name('contact.show');
-
 
 // Formularios públicos — honeypot + rate limiting (ausentes en IPG, docs/01 §A.3).
 // 5 envíos por hora por IP (docs/10-seguridad.md §6) — antes era `throttle:5,1`

@@ -87,4 +87,3 @@ it('no repite consultas por fila al mostrar noticias con categoría e imagen en 
     // el total de consultas de la petición no depende de cuántas noticias haya.
     expect(count($queries))->toBeLessThan(40);
 });
-

@@ -61,17 +61,17 @@ it('edita el texto alternativo de un medio existente', function () {
 });
 
 it('un usuario sin permiso de medios no puede ver la biblioteca', function () {
-    $editorAcademico = User::factory()->create(['is_active' => true]);
-    $editorAcademico->assignRole('editor_academico');
+    $usuarioVentas = User::factory()->create(['is_active' => true]);
+    $usuarioVentas->assignRole('ventas');
 
-    $this->actingAs($editorAcademico);
+    $this->actingAs($usuarioVentas);
 
     $this->livewire(ListMedia::class)->assertForbidden();
 });
 
-it('el editor de noticias y marketing sí puede ver y subir medios', function () {
+it('el editor sí puede ver y subir medios', function () {
     $editorNoticias = User::factory()->create(['is_active' => true]);
-    $editorNoticias->assignRole('editor_noticias_marketing');
+    $editorNoticias->assignRole('editor');
 
     $this->actingAs($editorNoticias);
 

@@ -104,17 +104,17 @@ it('bloquea imágenes de dominios externos en el bloque de texto', function () {
 });
 
 it('un usuario sin permiso no puede ver el listado de páginas', function () {
-    $editorAcademico = User::factory()->create(['is_active' => true]);
-    $editorAcademico->assignRole('editor_academico');
+    $usuarioVentas = User::factory()->create(['is_active' => true]);
+    $usuarioVentas->assignRole('ventas');
 
-    $this->actingAs($editorAcademico);
+    $this->actingAs($usuarioVentas);
 
     $this->livewire(ListPages::class)->assertForbidden();
 });
 
-it('editor_general ve y edita páginas pero no puede borrarlas (permiso real, no solo el botón oculto)', function () {
+it('editor ve y edita páginas pero no puede borrarlas (permiso real, no solo el botón oculto)', function () {
     $editorGeneral = User::factory()->create(['is_active' => true]);
-    $editorGeneral->assignRole('editor_general');
+    $editorGeneral->assignRole('editor');
     $page = Page::factory()->create();
 
     expect($editorGeneral->can('viewAny', Page::class))->toBeTrue()

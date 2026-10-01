@@ -72,10 +72,10 @@ it('guarda los campos SEO y de indexación de la noticia', function () {
 });
 
 it('un usuario sin permiso no puede ver el listado de noticias', function () {
-    $editorAcademico = User::factory()->create(['is_active' => true]);
-    $editorAcademico->assignRole('editor_academico');
+    $usuarioVentas = User::factory()->create(['is_active' => true]);
+    $usuarioVentas->assignRole('ventas');
 
-    $this->actingAs($editorAcademico);
+    $this->actingAs($usuarioVentas);
 
     $this->livewire(ListPosts::class)->assertForbidden();
 });

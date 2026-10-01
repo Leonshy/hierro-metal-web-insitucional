@@ -23,7 +23,7 @@ it('lista los usuarios del panel', function () {
 });
 
 it('crea un usuario con un rol asignado', function () {
-    $role = Role::findByName('editor_academico');
+    $role = Role::findByName('ventas');
 
     $this->livewire(CreateUser::class)
         ->fillForm([
@@ -38,7 +38,7 @@ it('crea un usuario con un rol asignado', function () {
 
     $user = User::query()->where('email', 'editora@dante.edu.py')->firstOrFail();
 
-    expect($user->hasRole('editor_academico'))->toBeTrue();
+    expect($user->hasRole('ventas'))->toBeTrue();
 });
 
 it('exige nombre, correo y rol', function () {
@@ -54,10 +54,10 @@ it('exige nombre, correo y rol', function () {
 });
 
 it('un usuario sin permiso no puede ver el listado de usuarios', function () {
-    $editorAcademico = User::factory()->create(['is_active' => true]);
-    $editorAcademico->assignRole('editor_academico');
+    $usuarioVentas = User::factory()->create(['is_active' => true]);
+    $usuarioVentas->assignRole('ventas');
 
-    $this->actingAs($editorAcademico);
+    $this->actingAs($usuarioVentas);
 
     $this->livewire(ListUsers::class)->assertForbidden();
 });

@@ -68,19 +68,19 @@ it('apagar una integración la deja inactiva aunque los datos sigan guardados', 
 });
 
 it('un usuario sin permiso no puede ver las integraciones', function () {
-    $editorAcademico = User::factory()->create(['is_active' => true]);
-    $editorAcademico->assignRole('editor_academico');
+    $usuarioVentas = User::factory()->create(['is_active' => true]);
+    $usuarioVentas->assignRole('ventas');
 
-    $this->actingAs($editorAcademico);
+    $this->actingAs($usuarioVentas);
 
     expect(IntegrationSettings::canAccess())->toBeFalse();
 });
 
-it('el editor de noticias y marketing sí puede ver y editar las integraciones', function () {
-    $marketing = User::factory()->create(['is_active' => true]);
-    $marketing->assignRole('editor_noticias_marketing');
+it('el editor de contenido no puede ver las integraciones (sólo el administrador)', function () {
+    $editor = User::factory()->create(['is_active' => true]);
+    $editor->assignRole('editor');
 
-    $this->actingAs($marketing);
+    $this->actingAs($editor);
 
-    expect(IntegrationSettings::canAccess())->toBeTrue();
+    expect(IntegrationSettings::canAccess())->toBeFalse();
 });

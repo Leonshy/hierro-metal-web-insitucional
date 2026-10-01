@@ -1,5 +1,6 @@
 <?php
 
+use App\Filament\Blocks\PageBlocks;
 use App\Filament\Resources\Pages\Pages\EditPage;
 use App\Models\Page;
 use App\Models\User;
@@ -49,7 +50,7 @@ it('guarda los bloques del catálogo vigentes (preguntas frecuentes y mapa)', fu
 });
 
 it('ya no ofrece los bloques que eran del colegio', function () {
-    $types = collect(\App\Filament\Blocks\PageBlocks::for())->map(fn ($block) => $block->getName());
+    $types = collect(PageBlocks::for())->map(fn ($block) => $block->getName());
 
     expect($types->all())->not->toContain('galeria', 'testimonios', 'formulario', 'listado_comunicados', 'documentos', 'selector_sede', 'listado_noticias');
 });
