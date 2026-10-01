@@ -1,42 +1,24 @@
 <?php
 
-use App\Filament\Resources\Redirects\Pages\CreateRedirect;
-use App\Filament\Resources\Redirects\Pages\ListRedirects;
-use App\Models\Redirect;
+use App\Filament\Resources\Redirects\RedirectResource;
 use App\Models\User;
 use Database\Seeders\PermissionSeeder;
 
 beforeEach(function () {
     $this->seed(PermissionSeeder::class);
-    $admin = User::factory()->create(['is_active' => true]);
-    $admin->assignRole('administrador');
-    $this->actingAs($admin);
+    $this->admin = User::factory()->create(['is_active' => true]);
+    $this->admin->assignRole('administrador');
+    $this->actingAs($this->admin);
 });
 
-it('lista las redirecciones', function () {
-    Redirect::factory()->count(3)->create();
-
-    $this->livewire(ListRedirects::class)->assertSuccessful();
+it('Redirecciones no aplica a este sitio: no está en el menú del panel', function () {
+    $this->get('/'.trim(config('sitio.admin_path'), '/'))->assertOk()->assertDontSee('Redirecciones');
 });
 
-it('crea una redirección 301', function () {
-    $this->livewire(CreateRedirect::class)
-        ->fillForm([
-            'from_path' => '/pagina-vieja',
-            'to_path' => '/pagina-nueva',
-            'status_code' => 301,
-        ])
-        ->call('create')
-        ->assertHasNoFormErrors();
+it('Redirecciones no se puede abrir por URL ni siendo administrador', function () {
+    expect(RedirectResource::canAccess())->toBeFalse();
 
-    expect(Redirect::query()->where('from_path', '/pagina-vieja')->exists())->toBeTrue();
-});
-
-it('un rol sin permiso sobre redirecciones no puede ver el listado', function () {
-    $editorGeneral = User::factory()->create(['is_active' => true]);
-    $editorGeneral->assignRole('editor');
-
-    $this->actingAs($editorGeneral);
-
-    $this->livewire(ListRedirects::class)->assertForbidden();
+    foreach (['/redirects', '/redirects/create', '/redirects/1/edit'] as $ruta) {
+        expect($this->get('/'.trim(config('sitio.admin_path'), '/').$ruta)->status())->toBeIn([403, 404]);
+    }
 });
