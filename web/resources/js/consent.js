@@ -112,11 +112,14 @@ document.addEventListener('alpine:init', () => {
             }
 
             window.addEventListener('sitio:reopen-consent', () => {
-                const current = readConsent() ?? { analytics: false, marketing: false };
+                const saved = readConsent();
+                const current = saved ?? { analytics: false, marketing: false };
                 this.analytics = current.analytics;
                 this.marketing = current.marketing;
                 this.configuring = true;
-                this.reopened = true;
+                // «Cerrar» depende de que ya exista una elección guardada, no de cómo se abrió el panel:
+                // mientras la persona no haya aceptado ni rechazado nada, tiene que decidir.
+                this.reopened = saved !== null;
                 this.visible = true;
             });
 
