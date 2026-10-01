@@ -12,7 +12,7 @@
     <main id="contenido" tabindex="-1">
         <x-encabezado-pagina :titulo="$titulo" :bajada="$encabezado->bajada" :migas="[['Inicio', '/'], ['Servicios', null]]">
             <a class="btn btn-amarillo" href="{{ url($encabezado->ctaUrl ?: '/contacto') }}">{{ $encabezado->ctaTexto ?: 'Pedir cotización' }}</a>
-            <a class="btn btn-linea" href="{{ url('/productos') }}">Ver productos</a>
+            @if(\App\Models\Page::seccionPublicada('productos'))<a class="btn btn-linea" href="{{ url('/productos') }}">Ver productos</a>@endif
         </x-encabezado-pagina>
 
         <section class="seccion">

@@ -38,7 +38,7 @@
                 <p class="bajada">Cargá tu lista de materiales y te respondemos con precio y disponibilidad en el día.</p>
                 <div class="botonera">
                     <a class="btn btn-amarillo" href="{{ url('/contacto') }}">Pedir cotización</a>
-                    <a class="btn btn-linea" href="{{ url('/productos') }}">Ver productos</a>
+                    @if(\App\Models\Page::seccionPublicada('productos'))<a class="btn btn-linea" href="{{ url('/productos') }}">Ver productos</a>@endif
                     <a class="btn btn-linea" href="{{ Contacto::whatsappUrl($mensaje) }}" target="_blank" rel="noopener">Escribir por WhatsApp</a>
                 </div>
             </div>
