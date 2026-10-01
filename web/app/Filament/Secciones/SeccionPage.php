@@ -259,7 +259,7 @@ abstract class SeccionPage extends PaginaDelPanel
         ];
     }
 
-    /** @return array<string, mixed>|string|null */
+    /** @param  array<string, mixed>  $datos */
     private static function es(array $datos, string $clave): ?string
     {
         $valor = $datos[$clave] ?? null;

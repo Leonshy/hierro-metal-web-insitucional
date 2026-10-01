@@ -42,6 +42,9 @@ class CotizacionController extends Controller
     public function gracias(): View
     {
         // El primer paso del cliente es «Nos mandás el pedido»: ya ocurrió, así que se muestran los que siguen.
-        return view('contact.gracias', ['pasos' => Paso::query()->activos()->ordenados()->get()->slice(1)->values()]);
+        $pasos = Paso::query()->activos()->ordenados()->get();
+        $pasos->shift();
+
+        return view('contact.gracias', ['pasos' => $pasos]);
     }
 }

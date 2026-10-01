@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Cotizaciones\Schemas;
 
 use App\Models\Cotizacion;
+use App\Models\CotizacionAdjunto;
 use App\Models\User;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
@@ -54,7 +55,7 @@ class CotizacionForm
             return new HtmlString('<span>Sin archivos.</span>');
         }
 
-        $items = $cotizacion->adjuntos->map(fn ($adjunto): string => sprintf(
+        $items = $cotizacion->adjuntos->map(fn (CotizacionAdjunto $adjunto): string => sprintf(
             '<li><a href="%s" style="text-decoration:underline">%s</a> <span style="opacity:.7">(%s)</span></li>',
             e(route('cotizaciones.adjunto', $adjunto)),
             e($adjunto->nombre_original),

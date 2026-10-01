@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Pages\Pages;
 
 use App\Filament\Resources\Pages\Concerns\SanitizesPageBlocks;
 use App\Filament\Resources\Pages\PageResource;
+use App\Models\Page;
 use Filament\Actions\Action;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
@@ -16,14 +17,21 @@ class EditPage extends EditRecord
 
     protected static string $resource = PageResource::class;
 
+    private function pagina(): Page
+    {
+        $registro = $this->getRecord();
+
+        return $registro instanceof Page ? $registro : abort(404);
+    }
+
     protected function getHeaderActions(): array
     {
         return [
             Action::make('ver')
-                ->label(fn (): string => $this->record->status === 'published' ? 'Ver en el sitio' : 'Vista previa')
-                ->icon(fn (): string => $this->record->status === 'published' ? 'heroicon-o-arrow-top-right-on-square' : 'heroicon-o-eye')
+                ->label(fn (): string => $this->pagina()->status === 'published' ? 'Ver en el sitio' : 'Vista previa')
+                ->icon(fn (): string => $this->pagina()->status === 'published' ? 'heroicon-o-arrow-top-right-on-square' : 'heroicon-o-eye')
                 ->color('gray')
-                ->url(fn (): string => url('/'.$this->record->urlPath()))
+                ->url(fn (): string => url('/'.$this->pagina()->urlPath()))
                 ->openUrlInNewTab(),
             DeleteAction::make(),
             ForceDeleteAction::make(),

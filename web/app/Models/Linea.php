@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * `medidas` guarda una lista de tablas tal como se editan en el panel:
  * [{titulo, modo: tabla|lista, columnas: string[], filas_texto: string}].
  * `tablas()` las convierte a filas listas para mostrar.
+ *
+ * @property array<int, array<string, mixed>>|null $medidas
  */
 #[Fillable(['familia_id', 'nombre', 'descripcion', 'usos', 'medidas', 'nota_medidas', 'orden', 'activo'])]
 class Linea extends Model
