@@ -5,6 +5,7 @@ use App\Filament\Resources\Compromisos\Pages\EditCompromiso;
 use App\Filament\Secciones\Widgets\CompromisosTabla;
 use App\Models\Compromiso;
 use App\Models\Page;
+use App\Models\SeccionInicio;
 use App\Models\User;
 use App\Support\TextoEnBloques;
 use Database\Seeders\DatabaseSeeder;
@@ -139,4 +140,62 @@ it('los compromisos se ven al pie de la sección y su módulo vuelve a ella', fu
 
     $this->livewire(EditCompromiso::class, ['record' => Compromiso::query()->first()->getRouteKey()])
         ->call('save')->assertRedirect(CalidadPage::getUrl());
+});
+
+// ---- La franja amarilla de calidad (portada y Servicios) -------------------------------------------------------
+
+it('la franja de calidad se ve con sus textos de siempre mientras no se edite', function () {
+    $this->get('/')->assertSee('Materia prima certificada bajo Normas Internacionales del Acero')->assertSee('Leer la política completa');
+    $this->get('/servicios')->assertSee('El trabajo de taller se controla igual que el material')->assertSee('Leer la política de calidad');
+});
+
+it('el formulario de Calidad ofrece los campos de las dos franjas', function () {
+    $componente = $this->livewire(CalidadPage::class);
+
+    foreach (['inicio', 'servicios'] as $donde) {
+        foreach (['titulo', 'bajada', 'boton'] as $campo) {
+            $componente->assertFormFieldExists("franja_{$donde}_{$campo}");
+        }
+    }
+});
+
+it('al editar la franja de la portada cambia sólo en la portada', function () {
+    $this->livewire(CalidadPage::class)
+        ->fillForm(['franja_inicio_titulo' => 'Acero con respaldo', 'franja_inicio_bajada' => 'Certificado por el fabricante.', 'franja_inicio_boton' => 'Ver la política'])
+        ->call('save')->assertHasNoFormErrors();
+
+    $this->get('/')->assertSee('Acero con respaldo')->assertSee('Certificado por el fabricante.')->assertSee('Ver la política');
+    $this->get('/servicios')->assertSee('El trabajo de taller se controla igual que el material')->assertDontSee('Acero con respaldo');
+});
+
+it('al editar la franja de Servicios cambia sólo en Servicios', function () {
+    $this->livewire(CalidadPage::class)
+        ->fillForm(['franja_servicios_titulo' => 'Taller controlado', 'franja_servicios_boton' => 'Más sobre calidad'])
+        ->call('save')->assertHasNoFormErrors();
+
+    $this->get('/servicios')->assertSee('Taller controlado')->assertSee('Más sobre calidad');
+    $this->get('/')->assertSee('Materia prima certificada bajo Normas Internacionales del Acero')->assertDontSee('Taller controlado');
+});
+
+it('un campo vacío de la franja vuelve al texto de siempre, sin tocar los demás', function () {
+    $this->livewire(CalidadPage::class)->fillForm(['franja_inicio_titulo' => 'Título propio', 'franja_inicio_bajada' => 'Bajada propia.'])->call('save');
+    $this->livewire(CalidadPage::class)->fillForm(['franja_inicio_titulo' => ''])->call('save');
+
+    $this->get('/')->assertSee('Materia prima certificada bajo Normas Internacionales del Acero')->assertSee('Bajada propia.');
+});
+
+it('guardar la franja no pierde el título, la bajada ni los textos de la política', function () {
+    $antes = textosDeCalidad();
+
+    $this->livewire(CalidadPage::class)->fillForm(['franja_inicio_titulo' => 'Otro'])->call('save');
+
+    expect(textosDeCalidad())->toBe($antes)
+        ->and(Page::query()->where('slug', 'calidad')->first()->blocks[0]['data']['title']['es'])->toBe('Materia prima certificada bajo Normas Internacionales del Acero');
+});
+
+it('las franjas siguen la regla de la sección: se ven en la portada sólo si la sección de calidad está activa', function () {
+    SeccionInicio::query()->where('clave', 'calidad')->update(['activo' => false]);
+
+    $this->get('/')->assertDontSee('Leer la política completa');
+    $this->get('/servicios')->assertSee('Leer la política de calidad');
 });
