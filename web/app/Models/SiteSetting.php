@@ -18,31 +18,55 @@ class SiteSetting extends Model
 
     public const CACHE_PREFIX = 'site_setting:';
 
+    /** Todos los ajustes juntos en una sola entrada de caché (ver `todos()`). */
+    private const CACHE_TODOS = self::CACHE_PREFIX.'__todos';
+
+    private const MEMO = 'site_settings.todos';
+
+    protected static function booted(): void
+    {
+        // Cualquier cambio (panel, seeders, código) invalida la lectura; no hace falta acordarse de hacerlo a mano.
+        static::saved(fn () => self::olvidar());
+        static::deleted(fn () => self::olvidar());
+    }
+
+    public static function olvidar(): void
+    {
+        Cache::forget(self::CACHE_TODOS);
+        app()->forgetInstance(self::MEMO);
+    }
+
     public static function get(string $key, mixed $default = null): mixed
     {
-        return Cache::remember(self::CACHE_PREFIX.$key, 3600, function () use ($key, $default) {
-            $setting = self::query()->where('key', $key)->first();
+        $todos = self::todos();
 
-            if (! $setting) {
-                return $default;
-            }
-
-            return $setting->type === 'boolean'
-                ? (bool) $setting->value
-                : $setting->value;
-        });
+        return array_key_exists($key, $todos) ? $todos[$key] : $default;
     }
 
     public static function set(string $key, mixed $value, string $type = 'text', string $group = 'general'): self
     {
-        $setting = self::query()->updateOrCreate(
+        // El evento `saved` se ocupa de invalidar la lectura.
+        return self::query()->updateOrCreate(
             ['key' => $key],
             ['value' => $value, 'type' => $type, 'group' => $group],
         );
+    }
 
-        Cache::forget(self::CACHE_PREFIX.$key);
+    /**
+     * Una página lee 20–30 ajustes (contacto, redes, aviso…). Con la caché en base de datos, pedir cada uno
+     * por separado cuesta una consulta cada vez: acá se leen todos juntos, una sola vez por petición.
+     *
+     * @return array<string, mixed>
+     */
+    private static function todos(): array
+    {
+        if (! app()->bound(self::MEMO)) {
+            app()->instance(self::MEMO, Cache::remember(self::CACHE_TODOS, 3600, fn (): array => self::query()->get()
+                ->mapWithKeys(fn (self $ajuste): array => [$ajuste->key => $ajuste->type === 'boolean' ? (bool) $ajuste->value : $ajuste->value])
+                ->all()));
+        }
 
-        return $setting;
+        return app(self::MEMO);
     }
 
     /**

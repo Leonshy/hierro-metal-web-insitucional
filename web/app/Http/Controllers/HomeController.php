@@ -16,7 +16,7 @@ class HomeController extends Controller
         return view('home', [
             'encabezado' => Encabezado::de('inicio'),
             'diferenciales' => Diferencial::query()->activos()->ordenados()->get(),
-            'familias' => Familia::query()->with('media')->activos()->ordenados()->get(),
+            'familias' => Familia::paraListado(),
             'servicios' => Servicio::query()->activos()->where('destacado_home', true)->ordenados()->get(),
         ]);
     }

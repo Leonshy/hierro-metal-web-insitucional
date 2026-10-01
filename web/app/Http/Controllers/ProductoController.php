@@ -13,18 +13,21 @@ class ProductoController extends Controller
     {
         return view('productos.index', [
             'encabezado' => Encabezado::de('productos'),
-            'familias' => Familia::query()->with('media')->activos()->ordenados()->get(),
+            'familias' => Familia::paraListado(),
         ]);
     }
 
     public function show(string $slug): View
     {
-        $familia = Familia::query()->with('media')->activos()->where('slug', $slug)->firstOrFail();
+        $familias = Familia::paraListado();
+        $familia = $familias->firstWhere('slug', $slug);
+
+        abort_if($familia === null, 404);
 
         return view('productos.show', [
             'familia' => $familia,
             'lineas' => $familia->lineas()->where('activo', true)->get(),
-            'familias' => Familia::query()->activos()->ordenados()->get(),
+            'familias' => $familias,
         ]);
     }
 }
