@@ -23,3 +23,26 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+# --- Rendimiento (Fase 7) ---------------------------------------------------------------------------------
+# Compresión de texto: HTML, CSS, JS, JSON, SVG y XML (no se recomprimen imágenes ni fuentes woff2).
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/xml application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/javascript text/javascript application/json application/ld+json
+    AddOutputFilterByType DEFLATE image/svg+xml font/woff font/ttf application/vnd.ms-fontobject
+</IfModule>
+
+# Caché de archivos estáticos. /build lleva el hash del contenido en el nombre, así que un cambio genera otra
+# URL: se puede cachear un año como inmutable. Las imágenes subidas llevan nombre aleatorio (uuid) y el logo y
+# las ilustraciones cambian poco: 30 días.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^build/ - [E=HM_INMUTABLE:1]
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^(storage|images|fonts)/ - [E=HM_ESTATICO:1]
+</IfModule>
+<IfModule mod_headers.c>
+    Header set Cache-Control "public, max-age=31536000, immutable" env=HM_INMUTABLE
+    Header set Cache-Control "public, max-age=2592000" env=HM_ESTATICO
+</IfModule>
