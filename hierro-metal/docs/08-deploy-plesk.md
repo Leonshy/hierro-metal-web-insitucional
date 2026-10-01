@@ -64,7 +64,7 @@ git status                             # árbol limpio; .env y .env.* NO están 
    Document root de Plesk: **`httpdocs/public`**.
 3. `composer install --no-dev --optimize-autoloader` (con el binario de Plesk).
 4. Crear el `.env` de producción **en el servidor** (lo escribe el cliente, nadie más lo ve):
-   `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://…`, `DB_*` (MySQL), `MAIL_*`,
+   `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://…`, `SESSION_SECURE_COOKIE=true`, `DB_*` (MySQL), `MAIL_*`,
    `SITIO_COTIZACIONES_EMAIL`, `SITIO_ADMIN_EMAIL` y `SITIO_ADMIN_PASSWORD`.
    En **staging** además `SITIO_BLOCK_INDEXING=true` (robots.txt y meta noindex); en producción, `false`.
 5. `php artisan key:generate`, `php artisan migrate --force`, `php artisan db:seed --force` (sólo esta vez),
