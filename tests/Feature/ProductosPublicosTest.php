@@ -105,3 +105,30 @@ it('la cantidad de servicios del título sigue a los servicios visibles', functi
 
     $this->get('/servicios')->assertOk()->assertSee('Los cinco servicios')->assertDontSee('Los seis servicios');
 });
+
+it('la cantidad de consultas no crece al agregar familias (sin N+1 en las tarjetas)', function () {
+    $contar = function (string $ruta): int {
+        DB::flushQueryLog();
+        DB::enableQueryLog();
+        $this->get($ruta)->assertOk();
+        $total = count(DB::getQueryLog());
+        DB::disableQueryLog();
+
+        return $total;
+    };
+
+    $this->get('/'); // calienta cachés (ajustes) para comparar en igualdad de condiciones
+    $this->get('/productos');
+    $antes = ['/' => $contar('/'), '/productos' => $contar('/productos')];
+
+    Familia::factory()->count(4)->create(['activo' => true]);
+
+    expect($contar('/'))->toBe($antes['/'])
+        ->and($contar('/productos'))->toBe($antes['/productos']);
+});
+
+it('el rótulo de cada tarjeta muestra su posición y la cantidad de líneas visibles', function () {
+    Linea::query()->where('familia_id', Familia::where('slug', 'chapas')->value('id'))->first()->update(['activo' => false]);
+
+    $this->get('/productos')->assertOk()->assertSee('01 · 6 líneas')->assertSee('02 · 3 líneas')->assertSee('05 · 1 línea');
+});

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * Familia del catálogo (Chapas, Perfiles, Tubos, Varillas, Accesorios).
@@ -46,10 +47,27 @@ class Familia extends Model
         return $this->belongsTo(Media::class);
     }
 
+    /**
+     * Familias visibles y en orden, con todo lo que necesita su tarjeta calculado en una sola pasada
+     * (foto, cantidad de líneas y posición): así la cantidad de consultas no crece con cada familia.
+     *
+     * @return Collection<int, static>
+     */
+    public static function paraListado(): Collection
+    {
+        return static::query()
+            ->with('media')
+            ->withCount(['lineas as lineas_visibles_count' => fn ($q) => $q->where('activo', true)])
+            ->activos()
+            ->ordenados()
+            ->get()
+            ->each(fn (self $familia, int $i) => $familia->setAttribute('posicion_calculada', $i + 1));
+    }
+
     /** Posición de la familia entre las visibles (1, 2, 3…). Se calcula, no se edita. */
     public function posicion(): int
     {
-        return static::query()->activos()->where(
+        return $this->attributes['posicion_calculada'] ?? static::query()->activos()->where(
             fn ($q) => $q->where('orden', '<', $this->orden)->orWhere(fn ($q) => $q->where('orden', $this->orden)->where('id', '<', $this->id))
         )->count() + 1;
     }
@@ -57,7 +75,7 @@ class Familia extends Model
     /** Rótulo «01 · 7 líneas»: posición y cantidad de líneas visibles. */
     public function rotulo(): string
     {
-        $lineas = $this->lineas()->where('activo', true)->count();
+        $lineas = $this->attributes['lineas_visibles_count'] ?? $this->lineas()->where('activo', true)->count();
 
         return sprintf('%02d · %d %s', $this->posicion(), $lineas, $lineas === 1 ? 'línea' : 'líneas');
     }
