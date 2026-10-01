@@ -14,10 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             AdminUserSeeder::class,
-            SiteSettingSeeder::class,
-            PageTreeSeeder::class,
-            MenuSeeder::class,
-            LocationSeeder::class,
         ]);
     }
 }

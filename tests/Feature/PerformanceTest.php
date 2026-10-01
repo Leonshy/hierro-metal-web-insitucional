@@ -11,40 +11,6 @@ use Illuminate\Support\Facades\DB;
 // inicio y el listado de noticias no vuelvan a generar N+1 (regla de
 // CLAUDE.md §6.5: nada se da por terminado sin test).
 
-it('sirve páginas y noticias cacheadas con el driver `database` real (no solo `array`)', function () {
-    // Regresión real: `config('cache.serializable_classes')` (Laravel 13)
-    // por defecto es `false`, lo que hace que `unserialize()` descarte
-    // CUALQUIER objeto PHP al leer de la caché (para prevenir gadget chains,
-    // ver config/cache.php) y devuelva `__PHP_Incomplete_Class` — rompía
-    // esta página con un 500 en la segunda lectura, ya que las demás pruebas
-    // de esta fase corren con `CACHE_STORE=array` (`phpunit.xml`), que nunca
-    // serializa de verdad y por eso nunca lo detectó. Se prueba acá
-    // explícitamente con el driver `database`, el mismo que se usaría en
-    // Plesk sin Redis (CLAUDE.md §3).
-    config(['cache.default' => 'database']);
-
-    $page = Page::factory()->create([
-        'slug' => 'institucion/pagina-cache-database',
-        'title' => ['es' => 'Página real'],
-        'status' => 'published',
-        'cover_media_id' => Media::factory()->create(['type' => 'image'])->id,
-    ]);
-
-    $post = Post::factory()->create([
-        'slug' => 'noticia-cache-database',
-        'title' => ['es' => 'Noticia real'],
-        'status' => 'published',
-        'category_id' => Category::factory()->create(['type' => 'news'])->id,
-        'featured_media_id' => Media::factory()->create(['type' => 'image'])->id,
-    ]);
-
-    $this->get('/'.$page->slug)->assertOk()->assertSee('Página real'); // primera lectura: cachea
-    $this->get('/'.$page->slug)->assertOk()->assertSee('Página real'); // segunda lectura: desde caché real
-
-    $this->get('/noticias/'.$post->slug)->assertOk()->assertSee('Noticia real');
-    $this->get('/noticias/'.$post->slug)->assertOk()->assertSee('Noticia real');
-});
-
 it('sirve una página desde la caché de consulta tras la primera lectura', function () {
     $page = Page::factory()->create([
         'slug' => 'institucion/una-pagina-cacheada',
@@ -98,23 +64,6 @@ it('invalida la caché de la página en el slug viejo si se le cambia el slug', 
     $this->get('/institucion/slug-nuevo')->assertOk();
 });
 
-it('invalida la caché de una noticia al editarla', function () {
-    $post = Post::factory()->create([
-        'slug' => 'una-noticia-cacheada',
-        'title' => ['es' => 'Título original de la noticia'],
-        'status' => 'published',
-    ]);
-
-    $this->get('/noticias/'.$post->slug)->assertOk()->assertSee('Título original de la noticia');
-
-    $post->update(['title' => ['es' => 'Título editado de la noticia']]);
-
-    $this->get('/noticias/'.$post->slug)
-        ->assertOk()
-        ->assertSee('Título editado de la noticia')
-        ->assertDontSee('Título original de la noticia');
-});
-
 it('no repite consultas por fila al mostrar noticias con categoría e imagen en el inicio', function () {
     $this->get('/')->assertOk(); // calienta las cachés de configuración global, ver test de abajo
 
@@ -139,45 +88,3 @@ it('no repite consultas por fila al mostrar noticias con categoría e imagen en 
     expect(count($queries))->toBeLessThan(40);
 });
 
-it('no repite consultas por fila en el listado de noticias', function () {
-    // `SiteSetting::get()` y otras configuraciones globales usan su propia
-    // caché (Cache::remember con TTL largo, patrón de IPG) que una vez
-    // "tibia" ya no vuelve a consultar la base — se descarta una primera
-    // petición de calentamiento para que no distorsione la comparación de
-    // abajo, que solo quiere medir el costo de listar noticias.
-    $this->get('/noticias')->assertOk();
-
-    // Cada noticia con su propia categoría y su propia imagen (no la misma
-    // para todas): si `category`/`featuredMedia` no estuvieran precargadas,
-    // cada fila dispararía su propia consulta al acceder a `$post->category`
-    // y a `$post->featuredMedia` en la vista.
-    Post::factory()->count(6)->create([
-        'status' => 'published',
-        'published_at' => now(),
-        'category_id' => fn () => Category::factory()->create(['type' => 'news'])->id,
-        'featured_media_id' => fn () => Media::factory()->create(['type' => 'image'])->id,
-    ]);
-
-    DB::enableQueryLog();
-    $this->get('/noticias')->assertOk();
-    $queriesWithSix = count(DB::getQueryLog());
-    DB::disableQueryLog();
-    DB::flushQueryLog();
-
-    Post::factory()->count(3)->create([
-        'status' => 'published',
-        'published_at' => now(),
-        'category_id' => fn () => Category::factory()->create(['type' => 'news'])->id,
-        'featured_media_id' => fn () => Media::factory()->create(['type' => 'image'])->id,
-    ]);
-
-    DB::enableQueryLog();
-    $this->get('/noticias')->assertOk();
-    $queriesWithNine = count(DB::getQueryLog());
-    DB::disableQueryLog();
-
-    // El número de consultas no debe crecer con la cantidad de noticias
-    // listadas (eager loading de `category`/`featuredMedia`) — antes de la
-    // corrección, cada noticia extra agregaba hasta 2 consultas más.
-    expect($queriesWithNine)->toBe($queriesWithSix);
-});

@@ -1,4 +1,4 @@
-@props(['url' => null, 'title' => 'Ubicación del Colegio Dante Alighieri'])
+@props(['url' => null, 'title' => 'Ubicación del Hierro Metal S.R.L.'])
 
 @php
     $embedUrl = $url ?? \App\Models\SiteSetting::get('google_maps_embed_url');

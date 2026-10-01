@@ -87,26 +87,6 @@ class PageForm
                                 ->tableConfiguration(MediaLibraryTable::class),
                         ]),
 
-                    Section::make('Adelanto en el inicio')
-                        ->description('Si activás esto, la página aparece como tarjeta en la sección "Páginas destacadas" del inicio (si esa sección está activada desde el panel de Inicio). Usa la misma imagen de portada de arriba.')
-                        ->schema([
-                            Toggle::make('is_featured_home')
-                                ->label('Destacar en el inicio'),
-                            Tabs::make('home_excerpt_idiomas')
-                                ->tabs([
-                                    Tab::make('Español')->schema([
-                                        Textarea::make('home_excerpt.es')
-                                            ->label('Bajada corta para la tarjeta del inicio')
-                                            ->rows(2),
-                                    ]),
-                                    Tab::make('Italiano')->schema([
-                                        Textarea::make('home_excerpt.it')
-                                            ->label('Bajada corta para la tarjeta del inicio')
-                                            ->rows(2),
-                                    ])->visible(fn () => SiteSetting::italianEnabled()),
-                                ]),
-                        ]),
-
                     Section::make('Ubicación en el sitio')
                         ->description('Dónde aparece esta página dentro del menú y la navegación.')
                         ->schema([

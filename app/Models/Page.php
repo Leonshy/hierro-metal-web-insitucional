@@ -20,16 +20,16 @@ use Spatie\Translatable\HasTranslations;
  * @property array<int, array<string, mixed>>|null $blocks
  */
 #[Fillable([
-    'wp_legacy_id', 'created_by', 'updated_by', 'parent_id', 'cover_media_id', 'seo_image_id',
+    'created_by', 'updated_by', 'parent_id', 'cover_media_id', 'seo_image_id',
     'title', 'slug', 'template', 'site_section', 'site', 'blocks',
     'seo_title', 'seo_description', 'canonical_url', 'is_indexable',
-    'status', 'published_at', 'sort_order', 'is_featured_home', 'home_excerpt',
+    'status', 'published_at', 'sort_order',
 ])]
 class Page extends Model
 {
     use HasAuditing, HasFactory, HasTranslations, ResolvesLocaleFields, SoftDeletes;
 
-    public array $translatable = ['title', 'seo_title', 'seo_description', 'home_excerpt'];
+    public array $translatable = ['title', 'seo_title', 'seo_description'];
 
     /**
      * Invalida la caché de consulta pública (`PublicContentCache`, Fase 7,
@@ -53,7 +53,6 @@ class Page extends Model
     {
         return [
             'is_indexable' => 'boolean',
-            'is_featured_home' => 'boolean',
             'published_at' => 'datetime',
             'blocks' => 'array',
         ];

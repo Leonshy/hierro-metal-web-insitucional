@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "webparaguay/hierro-metal-web",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Sitio institucional y de cotización de Hierro Metal S.R.L. Backend y panel (Laravel 13 + Filament 5), derivado del panel de Dante.",
+    "keywords": ["laravel", "filament", "hierro-metal"],
     "license": "MIT",
     "require": {
         "php": "^8.3",

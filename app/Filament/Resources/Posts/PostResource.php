@@ -29,6 +29,12 @@ class PostResource extends Resource
 
     protected static ?int $navigationSort = 8;
 
+    /** Noticias queda apagado en Hierro Metal (ADR 0001): el código se conserva, el menú lo oculta. */
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return PostForm::configure($schema);

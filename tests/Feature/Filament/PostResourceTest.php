@@ -24,13 +24,6 @@ it('lista las noticias en el panel', function () {
         ->assertSuccessful();
 });
 
-it('muestra el enlace público de una noticia para copiar', function () {
-    $post = Post::factory()->create(['slug' => 'aniversario-129']);
-
-    $this->livewire(ListPosts::class)
-        ->assertTableColumnStateSet('public_url', route('posts.show', 'aniversario-129'), record: $post);
-});
-
 it('crea una noticia con título, bajada y contenido en español', function () {
     $this->livewire(CreatePost::class)
         ->fillForm([

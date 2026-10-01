@@ -1,5 +1,5 @@
 <x-layouts.app
-    :title="$page->effectiveSeoTitle().' — Colegio Dante Alighieri'"
+    :title="$page->effectiveSeoTitle().' — Hierro Metal S.R.L.'"
     :description="$page->getTranslation('seo_description', app()->getLocale())"
     :indexable="$page->is_indexable"
     :canonical="$page->canonical_url ?: null"

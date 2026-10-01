@@ -3,7 +3,7 @@
     // contacto reales desde SiteSetting, no inventados. Los campos vacíos se
     // omiten en vez de escribir cadenas vacías (evita advertencias del
     // validador de schema.org).
-    $siteName = \App\Models\SiteSetting::get('site_name', 'Colegio Dante Alighieri');
+    $siteName = \App\Models\SiteSetting::get('site_name', 'Hierro Metal S.R.L.');
     $phone = \App\Models\SiteSetting::get('contact_phone');
     $email = \App\Models\SiteSetting::get('contact_email');
     $address = \App\Models\SiteSetting::get('address_asuncion');

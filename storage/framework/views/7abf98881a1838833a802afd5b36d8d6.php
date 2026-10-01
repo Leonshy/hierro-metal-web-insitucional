@@ -173,56 +173,6 @@ unset($__defined_vars, $__key, $__value); ?>
 <?php unset($__componentOriginal9ce424ed5c3652911177b733f1c49e33); ?>
 <?php endif; ?>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
-        <?php case ('listado_noticias'): ?>
-            <div class="section"><div class="container"><?php if (isset($component)) { $__componentOriginal4a098c213f6cedf488130b8cbd763cd2 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal4a098c213f6cedf488130b8cbd763cd2 = $attributes; } ?>
-<?php $component = App\View\Components\Blocks\NewsList::resolve(['count' => (int) ($block['data']['count'] ?? 3)] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('blocks.news-list'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\Blocks\NewsList::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
-<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
-
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal4a098c213f6cedf488130b8cbd763cd2)): ?>
-<?php $attributes = $__attributesOriginal4a098c213f6cedf488130b8cbd763cd2; ?>
-<?php unset($__attributesOriginal4a098c213f6cedf488130b8cbd763cd2); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal4a098c213f6cedf488130b8cbd763cd2)): ?>
-<?php $component = $__componentOriginal4a098c213f6cedf488130b8cbd763cd2; ?>
-<?php unset($__componentOriginal4a098c213f6cedf488130b8cbd763cd2); ?>
-<?php endif; ?></div></div>
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
-        <?php case ('galeria'): ?>
-            <div class="section"><div class="container">
-                <?php if (isset($component)) { $__componentOriginald02a44ec8e39aae9703230b7b72a5bd6 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginald02a44ec8e39aae9703230b7b72a5bd6 = $attributes; } ?>
-<?php $component = App\View\Components\Blocks\GalleryBlock::resolve(['galleryId' => $block['data']['gallery_id'] ?? null,'layout' => $block['data']['layout'] ?? 'grid'] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('blocks.gallery-block'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\Blocks\GalleryBlock::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
-<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
-
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginald02a44ec8e39aae9703230b7b72a5bd6)): ?>
-<?php $attributes = $__attributesOriginald02a44ec8e39aae9703230b7b72a5bd6; ?>
-<?php unset($__attributesOriginald02a44ec8e39aae9703230b7b72a5bd6); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginald02a44ec8e39aae9703230b7b72a5bd6)): ?>
-<?php $component = $__componentOriginald02a44ec8e39aae9703230b7b72a5bd6; ?>
-<?php unset($__componentOriginald02a44ec8e39aae9703230b7b72a5bd6); ?>
-<?php endif; ?>
-            </div></div>
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
         <?php case ('faq'): ?>
             <?php if (isset($component)) { $__componentOriginal64596914d7163a4bbd3912f8ee3b845d = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal64596914d7163a4bbd3912f8ee3b845d = $attributes; } ?>
@@ -271,30 +221,6 @@ unset($__defined_vars, $__key, $__value); ?>
 <?php unset($__componentOriginalba1b418f0521c79a05b9690ae7aa9317); ?>
 <?php endif; ?>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
-        <?php case ('testimonios'): ?>
-            <?php if (isset($component)) { $__componentOriginald0ce2e540f94b733c259961d6848ff28 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginald0ce2e540f94b733c259961d6848ff28 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.blocks.testimonios','data' => ['data' => $block['data']]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('blocks.testimonios'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['data' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($block['data'])]); ?>
-<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
-
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginald0ce2e540f94b733c259961d6848ff28)): ?>
-<?php $attributes = $__attributesOriginald0ce2e540f94b733c259961d6848ff28; ?>
-<?php unset($__attributesOriginald0ce2e540f94b733c259961d6848ff28); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginald0ce2e540f94b733c259961d6848ff28)): ?>
-<?php $component = $__componentOriginald0ce2e540f94b733c259961d6848ff28; ?>
-<?php unset($__componentOriginald0ce2e540f94b733c259961d6848ff28); ?>
-<?php endif; ?>
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
         <?php case ('mapa'): ?>
             <?php if (isset($component)) { $__componentOriginal36bbed59c4dd98223cc80f178faa334a = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal36bbed59c4dd98223cc80f178faa334a = $attributes; } ?>
@@ -317,102 +243,6 @@ unset($__defined_vars, $__key, $__value); ?>
 <?php if (isset($__componentOriginal36bbed59c4dd98223cc80f178faa334a)): ?>
 <?php $component = $__componentOriginal36bbed59c4dd98223cc80f178faa334a; ?>
 <?php unset($__componentOriginal36bbed59c4dd98223cc80f178faa334a); ?>
-<?php endif; ?>
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
-        <?php case ('formulario'): ?>
-            <?php if (isset($component)) { $__componentOriginal8418fc3b2f35579833a1ba7e2df87943 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal8418fc3b2f35579833a1ba7e2df87943 = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.blocks.formulario','data' => ['data' => $block['data']]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('blocks.formulario'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['data' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($block['data'])]); ?>
-<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
-
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal8418fc3b2f35579833a1ba7e2df87943)): ?>
-<?php $attributes = $__attributesOriginal8418fc3b2f35579833a1ba7e2df87943; ?>
-<?php unset($__attributesOriginal8418fc3b2f35579833a1ba7e2df87943); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal8418fc3b2f35579833a1ba7e2df87943)): ?>
-<?php $component = $__componentOriginal8418fc3b2f35579833a1ba7e2df87943; ?>
-<?php unset($__componentOriginal8418fc3b2f35579833a1ba7e2df87943); ?>
-<?php endif; ?>
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
-        <?php case ('listado_comunicados'): ?>
-            <div class="section"><div class="container"><?php if (isset($component)) { $__componentOriginale47ba6acb2c5ca87b16957cc430732ca = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginale47ba6acb2c5ca87b16957cc430732ca = $attributes; } ?>
-<?php $component = App\View\Components\Blocks\AnnouncementsList::resolve(['count' => (int) ($block['data']['count'] ?? 5)] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('blocks.announcements-list'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\Blocks\AnnouncementsList::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
-<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
-
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginale47ba6acb2c5ca87b16957cc430732ca)): ?>
-<?php $attributes = $__attributesOriginale47ba6acb2c5ca87b16957cc430732ca; ?>
-<?php unset($__attributesOriginale47ba6acb2c5ca87b16957cc430732ca); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginale47ba6acb2c5ca87b16957cc430732ca)): ?>
-<?php $component = $__componentOriginale47ba6acb2c5ca87b16957cc430732ca; ?>
-<?php unset($__componentOriginale47ba6acb2c5ca87b16957cc430732ca); ?>
-<?php endif; ?></div></div>
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
-        <?php case ('documentos'): ?>
-            <div class="section"><div class="container"><?php if (isset($component)) { $__componentOriginalaa156d99f93939235b3a555fde952645 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginalaa156d99f93939235b3a555fde952645 = $attributes; } ?>
-<?php $component = App\View\Components\Blocks\DocumentsList::resolve(['categoryId' => $block['data']['category_id'] ?? null] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('blocks.documents-list'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\Blocks\DocumentsList::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
-<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
-
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginalaa156d99f93939235b3a555fde952645)): ?>
-<?php $attributes = $__attributesOriginalaa156d99f93939235b3a555fde952645; ?>
-<?php unset($__attributesOriginalaa156d99f93939235b3a555fde952645); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalaa156d99f93939235b3a555fde952645)): ?>
-<?php $component = $__componentOriginalaa156d99f93939235b3a555fde952645; ?>
-<?php unset($__componentOriginalaa156d99f93939235b3a555fde952645); ?>
-<?php endif; ?></div></div>
-            <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
-        <?php case ('selector_sede'): ?>
-            <?php if (isset($component)) { $__componentOriginal2440778677e434fb68df25f018d2985a = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal2440778677e434fb68df25f018d2985a = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.blocks.selector-sede','data' => ['data' => $block['data']]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('blocks.selector-sede'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes(['data' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($block['data'])]); ?>
-<?php \Livewire\Features\SupportCompiledWireKeys\SupportCompiledWireKeys::processComponentKey($component); ?>
-
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal2440778677e434fb68df25f018d2985a)): ?>
-<?php $attributes = $__attributesOriginal2440778677e434fb68df25f018d2985a; ?>
-<?php unset($__attributesOriginal2440778677e434fb68df25f018d2985a); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal2440778677e434fb68df25f018d2985a)): ?>
-<?php $component = $__componentOriginal2440778677e434fb68df25f018d2985a; ?>
-<?php unset($__componentOriginal2440778677e434fb68df25f018d2985a); ?>
 <?php endif; ?>
             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?><?php break; ?>
     <?php endswitch; ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>

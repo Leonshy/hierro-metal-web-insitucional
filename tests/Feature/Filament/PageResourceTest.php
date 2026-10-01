@@ -154,20 +154,3 @@ it('mantiene la portada existente si el picker no cambia su valor', function () 
 
     expect($page->refresh()->cover_media_id)->toBe($media->id);
 });
-
-it('destaca una página en el inicio con su adelanto', function () {
-    $page = Page::factory()->create(['is_featured_home' => false]);
-
-    $this->livewire(EditPage::class, ['record' => $page->getRouteKey()])
-        ->fillForm([
-            'is_featured_home' => true,
-            'home_excerpt' => ['es' => 'Bajada corta para el inicio'],
-        ])
-        ->call('save')
-        ->assertHasNoFormErrors();
-
-    $page->refresh();
-
-    expect($page->is_featured_home)->toBeTrue()
-        ->and($page->home_excerpt)->toBe('Bajada corta para el inicio');
-});

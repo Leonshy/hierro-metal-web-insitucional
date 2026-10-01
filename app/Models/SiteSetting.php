@@ -45,10 +45,14 @@ class SiteSetting extends Model
         return $setting;
     }
 
-    /** El toggle de italiano vive acá, ver ADR-002. */
+    /**
+     * Segundo idioma: sólo si está en `sitio.locales` (apagado en Hierro Metal) y activado
+     * en la configuración. Con locale fijo `es`, los controles de idioma no se muestran.
+     */
     public static function italianEnabled(): bool
     {
-        return (bool) self::get('italian_enabled', false);
+        return in_array('it', config('sitio.locales', ['es']), true)
+            && (bool) self::get('italian_enabled', false);
     }
 
     /**

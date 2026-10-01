@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
-use App\Models\Post;
 use Illuminate\Contracts\Support\Responsable;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
@@ -40,21 +39,6 @@ class SitemapController extends Controller
                 );
             });
 
-        Post::query()
-            ->where('status', 'published')
-            ->where('is_indexable', true)
-            ->get()
-            ->each(function (Post $post) use ($sitemap): void {
-                $sitemap->add(
-                    Url::create(route('posts.show', $post->slug))
-                        ->setLastModificationDate($post->updated_at)
-                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
-                        ->setPriority(0.6)
-                );
-            });
-
-        $sitemap->add(Url::create(route('posts.index'))->setChangeFrequency(Url::CHANGE_FREQUENCY_WEEKLY));
-        $sitemap->add(Url::create(route('documents.index'))->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY));
         $sitemap->add(Url::create(route('contact.show'))->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
 
         return $sitemap;

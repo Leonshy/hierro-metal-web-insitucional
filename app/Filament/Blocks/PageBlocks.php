@@ -2,8 +2,6 @@
 
 namespace App\Filament\Blocks;
 
-use App\Models\Category;
-use App\Models\Gallery;
 use App\Models\SiteSetting;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\FileUpload;
@@ -93,31 +91,6 @@ class PageBlocks
                         ->columns(2),
                 ]),
 
-            Block::make('listado_noticias')
-                ->label('Listado de noticias')
-                ->icon('heroicon-o-newspaper')
-                ->schema([
-                    TextInput::make('count')->label('Cantidad de noticias a mostrar')->numeric()->default(3),
-                ]),
-
-            Block::make('galeria')
-                ->label('Galería de fotos')
-                ->icon('heroicon-o-photo')
-                ->schema([
-                    Select::make('gallery_id')
-                        ->label('Álbum')
-                        ->options(fn () => Gallery::query()->pluck('title', 'id')->map(fn ($title) => is_array($title) ? ($title['es'] ?? reset($title)) : $title))
-                        ->searchable()
-                        ->required()
-                        ->helperText('Los álbumes se cargan primero desde la sección Galerías.'),
-                    Select::make('layout')
-                        ->label('Disposición')
-                        ->options(['grid' => 'Cuadrícula', 'carrusel' => 'Carrusel'])
-                        ->default('grid')
-                        ->required(),
-                    self::siteSelect(),
-                ]),
-
             Block::make('faq')
                 ->label('Acordeón / Preguntas frecuentes')
                 ->icon('heroicon-o-question-mark-circle')
@@ -140,21 +113,6 @@ class PageBlocks
                     FileUpload::make('cover')->label('Imagen de portada (opcional)')->image()->directory('bloques'),
                 ]),
 
-            Block::make('testimonios')
-                ->label('Testimonios')
-                ->icon('heroicon-o-chat-bubble-left-right')
-                ->schema([
-                    Repeater::make('items')
-                        ->label('Testimonios')
-                        ->schema([
-                            FileUpload::make('photo')->label('Foto')->image()->directory('bloques'),
-                            TextInput::make('name')->label('Nombre')->required(),
-                            TextInput::make('role')->label('Rol (ej: madre de alumno, exalumno)'),
-                            self::bilingual('text', fn (string $name) => RichEditor::make($name)->label('Testimonio')->required($name === 'text.es')),
-                        ])
-                        ->columns(1),
-                ]),
-
             Block::make('mapa')
                 ->label('Mapa')
                 ->icon('heroicon-o-map-pin')
@@ -163,58 +121,9 @@ class PageBlocks
                     TextInput::make('latitude')->label('Latitud')->numeric(),
                     TextInput::make('longitude')->label('Longitud')->numeric(),
                 ]),
-
-            Block::make('formulario')
-                ->label('Formulario')
-                ->icon('heroicon-o-envelope')
-                ->schema([
-                    Select::make('form_type')
-                        ->label('Formulario a mostrar')
-                        ->options(['contacto' => 'Contacto', 'preinscripcion' => 'Pre-inscripción'])
-                        ->required(),
-                ]),
-
-            Block::make('listado_comunicados')
-                ->label('Listado de comunicados')
-                ->icon('heroicon-o-speaker-wave')
-                ->schema([
-                    TextInput::make('count')->label('Cantidad de comunicados a mostrar')->numeric()->default(5),
-                    self::siteSelect(),
-                ]),
-
-            Block::make('documentos')
-                ->label('Documentos descargables')
-                ->icon('heroicon-o-document-arrow-down')
-                ->schema([
-                    Select::make('category_id')
-                        ->label('Categoría de documentos')
-                        ->options(fn () => Category::query()->where('type', 'document')->pluck('name', 'id')->map(fn ($name) => is_array($name) ? ($name['es'] ?? reset($name)) : $name))
-                        ->searchable()
-                        ->required()
-                        ->helperText('Se listan todos los documentos vigentes de esta categoría (gestionada en la sección Documentos).'),
-                ]),
-
-            Block::make('selector_sede')
-                ->label('Selector de sede')
-                ->icon('heroicon-o-map')
-                ->schema([
-                    self::siteSelect(),
-                ]),
         ];
     }
 
-    private static function siteSelect(): Select
-    {
-        return Select::make('site')
-            ->label('Sede')
-            ->options([
-                'asuncion' => 'Asunción',
-                'fernando-de-la-mora' => 'Fernando de la Mora',
-                'ambas' => 'Ambas sedes',
-            ])
-            ->default('ambas')
-            ->required();
-    }
 
     private static function bilingual(string $field, \Closure $factory): Tabs
     {
