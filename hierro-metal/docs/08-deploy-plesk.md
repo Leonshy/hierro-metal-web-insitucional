@@ -26,7 +26,7 @@
 | Tema | Cateura | Hierro Metal |
 |---|---|---|
 | **Cron** | Sin cron (se difería a la VPS) | **Obligatorio.** Los avisos de cotización van en cola y se procesan con `schedule:run` (ver §5). Sin cron, el cliente no recibe ningún correo. También corre los reintentos y los respaldos. |
-| **Carpeta de la app** | Raíz del repo | La app está en `web/` dentro de un repo que también tiene documentación del proyecto. Document root de Plesk: `httpdocs/<carpeta-de-la-app>/public`. |
+| **Carpeta de la app** | Raíz del repo | La app está en `web/` dentro de un repo que también tiene documentación del proyecto. Document root de Plesk: `httpdocs/public`. |
 | **Repositorio** | Público, clon por HTTPS | **Privado** (`git@github.com:Leonshy/hierro-metal-web-insitucional.git`). El servidor usa una *deploy key* de sólo lectura y un clon *sparse* de `web/` (decidido: los documentos internos no van al servidor). |
 | **Seeders** | `db:seed` | El contenido se siembra **una sola vez**. Los siguientes deploys **no** corren seeders. |
 | **Administrador** | `app:crear-admin` | `AdminUserSeeder` (seguro de repetir: no cambia la contraseña de un admin existente). |
@@ -47,20 +47,21 @@ git status                             # árbol limpio; .env y .env.* NO están 
 ## 4. Primer deploy (una sola vez)
 
 1. En Plesk: crear la suscripción/dominio, **PHP 8.3**, base de datos MySQL, SSL (Let's Encrypt) y poner el
-   **document root en `<carpeta-de-la-app>/public`** (si queda más arriba, Plesk sirve un 403 y se expondría el `.env`).
-2. **Repositorio privado, sólo `web/` en el servidor.** Generar en el servidor una clave y agregarla en GitHub
-   como *deploy key* **de sólo lectura**; luego clonar sin traer los documentos internos del proyecto (plan,
-   legajo, presupuesto):
+   **document root en `httpdocs/public`** (si queda más arriba, Plesk sirve un 403 y se expondría el `.env`).
+2. **Repositorio privado: el servidor sólo recibe la app, directo en `httpdocs/`.** La rama `deploy-web` es el
+   contenido de `web/` como raíz (la genera `web/deploy/rama-deploy.sh`) y no incluye los documentos internos
+   (plan, legajo, presupuesto). En el servidor se genera una clave, se agrega en GitHub como *deploy key* **de
+   sólo lectura** y se clona esa rama:
 
    ```bash
-   cd /var/www/vhosts/<dominio>/httpdocs
-   git clone --no-checkout --filter=blob:none git@github.com:Leonshy/hierro-metal-web-insitucional.git .
-   git sparse-checkout set web          # sólo la carpeta de la app
-   git checkout main
+   ssh-keygen -t ed25519 -N "" -f ~/.ssh/github_hierro -C "hierro-deploy-solo-lectura"
+   cat ~/.ssh/github_hierro.pub        # copiar a GitHub → repo → Settings → Deploy keys (SIN permiso de escritura)
+   printf 'Host github.com\n  IdentityFile ~/.ssh/github_hierro\n  IdentitiesOnly yes\n' >> ~/.ssh/config
+   cd ~/httpdocs && ls -A               # vaciar el placeholder de Plesk si lo hay (verificar antes de borrar)
+   git clone --branch deploy-web --single-branch git@github.com:Leonshy/hierro-metal-web-insitucional.git .
    ```
 
-   `git pull` seguirá trayendo únicamente `web/`. La app queda en `httpdocs/web/`, así que el
-   **document root de Plesk es `httpdocs/web/public`** y `<carpeta-de-la-app>` = `web`.
+   Document root de Plesk: **`httpdocs/public`**.
 3. `composer install --no-dev --optimize-autoloader` (con el binario de Plesk).
 4. Crear el `.env` de producción **en el servidor** (lo escribe el cliente, nadie más lo ve):
    `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://…`, `DB_*` (MySQL), `MAIL_*`,
@@ -77,7 +78,7 @@ git status                             # árbol limpio; .env y .env.* NO están 
 En Plesk → Tareas programadas, cada minuto:
 
 ```
-/opt/plesk/php/8.3/bin/php /var/www/vhosts/<dominio>/httpdocs/<carpeta-de-la-app>/artisan schedule:run >> /dev/null 2>&1
+/opt/plesk/php/8.3/bin/php /var/www/vhosts/<dominio>/httpdocs/artisan schedule:run >> /dev/null 2>&1
 ```
 
 Procesa la cola de correos (cada minuto), reintenta avisos fallidos (cada 5) y corre los respaldos (de noche).
@@ -87,11 +88,12 @@ Procesa la cola de correos (cada minuto), reintenta avisos fallidos (cada 5) y c
 ```bash
 # 1) Local: assets, sólo si cambió CSS/JS
 cd web && npm ci && npm run build
-scp -P <puerto> -r public/build/ <usuario>@<ip>:/var/www/vhosts/<dominio>/httpdocs/<carpeta-de-la-app>/public/
+scp -P <puerto> -r public/build/ <usuario>@<ip>:/var/www/vhosts/<dominio>/httpdocs/public/
 #    OJO: si public/build ya existe en el destino, scp -r anida la carpeta. Verificar con ls y, si hace falta,
 #    subir el contenido: scp -r public/build/* … public/build/
 
-# 2) Código (después de merge a main y de un push pedido explícitamente): dispara el script del servidor
+# 2) Código: en local `web/deploy/rama-deploy.sh` regenera `deploy-web`; el push (`git push origin deploy-web`)
+#    se pide explícitamente cada vez; después se dispara el script del servidor
 ssh -i ~/.ssh/<clave-de-deploy> -p <puerto> <usuario>@<ip>
 ```
 
