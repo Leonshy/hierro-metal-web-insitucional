@@ -2,6 +2,8 @@
 
 namespace App\Filament\Blocks;
 
+use App\Filament\Forms\Components\MediaPicker;
+use App\Filament\Tables\MediaLibraryTable;
 use App\Models\SiteSetting;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\FileUpload;
@@ -32,7 +34,8 @@ class PageBlocks
                 ->schema([
                     self::bilingual('title', fn (string $name) => TextInput::make($name)->label('Título')->required($name === 'title.es')),
                     self::bilingual('subtitle', fn (string $name) => TextInput::make($name)->label('Bajada')),
-                    FileUpload::make('image')->label('Imagen de fondo')->image()->disk('public')->directory('bloques'),
+                    MediaPicker::make('media_id')->label('Foto de la portada')->tableConfiguration(MediaLibraryTable::class)
+                        ->helperText('Se sirve en WebP y en varios tamaños según el dispositivo.'),
                     self::bilingual('cta_label', fn (string $name) => TextInput::make($name)->label('Texto del botón')),
                     TextInput::make('cta_url')->label('Enlace del botón'),
                 ]),
