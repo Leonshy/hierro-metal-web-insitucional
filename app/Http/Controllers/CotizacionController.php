@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CotizacionRequest;
 use App\Models\Horario;
+use App\Models\Page;
 use App\Models\Paso;
 use App\Models\Rubro;
 use App\Services\Cotizaciones\GuardarCotizacion;
@@ -16,6 +17,8 @@ class CotizacionController extends Controller
 {
     public function create(): View
     {
+        abort_unless(Page::seccionPublicada('contacto'), 404);
+
         $horarios = Horario::query()->activos()->ordenados()->get();
 
         return view('contact.show', [

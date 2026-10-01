@@ -44,14 +44,21 @@ class Menu extends Model
             return [];
         }
 
-        return $menu->items->map(fn (MenuItem $item) => [
-            'label' => $item->label,
-            'url' => $item->resolvedUrl(),
-            'linkable' => $item->resolvedUrl() !== '#',
-            'children' => $item->children->map(fn (MenuItem $child) => [
-                'label' => $child->label,
-                'url' => $child->resolvedUrl(),
-            ])->all(),
-        ])->all();
+        // Un enlace a una sección en borrador no se muestra: llevaría a una página que no existe en el sitio.
+        return $menu->items
+            ->reject(fn (MenuItem $item): bool => Page::direccionEnBorrador($item->resolvedUrl()))
+            ->map(fn (MenuItem $item) => [
+                'label' => $item->label,
+                'url' => $item->resolvedUrl(),
+                'linkable' => $item->resolvedUrl() !== '#',
+                'children' => $item->children
+                    ->reject(fn (MenuItem $child): bool => Page::direccionEnBorrador($child->resolvedUrl()))
+                    ->map(fn (MenuItem $child) => [
+                        'label' => $child->label,
+                        'url' => $child->resolvedUrl(),
+                    ])->values()->all(),
+            ])
+            ->values()
+            ->all();
     }
 }

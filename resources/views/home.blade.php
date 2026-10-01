@@ -21,7 +21,7 @@
                     @if($encabezado->bajada)<p class="bajada">{{ $encabezado->bajada }}</p>@endif
                     <div class="botonera">
                         <a class="btn btn-amarillo" href="{{ url($encabezado->ctaUrl ?: '/contacto') }}">{{ $encabezado->ctaTexto ?: 'Pedir cotización' }}</a>
-                        <a class="btn btn-linea" href="{{ url('/productos') }}">Ver productos y medidas</a>
+                        @if(\App\Models\Page::seccionPublicada('productos'))<a class="btn btn-linea" href="{{ url('/productos') }}">Ver productos y medidas</a>@endif
                         @if($catalogo)<a class="btn btn-linea" href="{{ $catalogo }}">↓ {{ Catalogo::textoBoton() }}</a>@endif
                     </div>
                     <p class="nota-portada">{{ $encabezado->dato('nota', 'Todas las chapas con certificado de calidad del fabricante') }}</p>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use App\Models\Paso;
 use App\Models\Servicio;
 use App\Support\Encabezado;
@@ -12,6 +13,8 @@ class ServicioController extends Controller
 {
     public function index(): View
     {
+        abort_unless(Page::seccionPublicada('servicios'), 404);
+
         return view('servicios.index', [
             'encabezado' => Encabezado::de('servicios'),
             'servicios' => Servicio::query()->activos()->ordenados()->get(),

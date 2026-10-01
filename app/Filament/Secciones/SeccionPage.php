@@ -4,6 +4,7 @@ namespace App\Filament\Secciones;
 
 use App\Models\Page;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -39,6 +40,12 @@ abstract class SeccionPage extends PaginaDelPanel
     protected static function conBoton(): bool
     {
         return false;
+    }
+
+    /** ¿La página puede estar en borrador? La portada no: siempre se muestra. */
+    protected static function permiteBorrador(): bool
+    {
+        return true;
     }
 
     /** ¿Se puede decidir si Google indexa la página? La portada siempre se indexa. */
@@ -120,6 +127,7 @@ abstract class SeccionPage extends PaginaDelPanel
             'seo_titulo' => $pagina->getTranslation('seo_title', 'es', false) ?: null,
             'seo_descripcion' => $pagina->getTranslation('seo_description', 'es', false) ?: null,
             'indexable' => (bool) $pagina->is_indexable,
+            'estado' => $pagina->status === 'published' ? 'published' : 'draft',
         ];
 
         foreach ($this->clavesExtraDelHero() as $clave) {
@@ -145,6 +153,20 @@ abstract class SeccionPage extends PaginaDelPanel
                             ] : []),
                         ]),
                     ...$this->camposDeLaSeccion(),
+                    ...(static::permiteBorrador() ? [
+                        Section::make('Publicación')
+                            ->schema([
+                                Select::make('estado')
+                                    ->label('Estado de la página')
+                                    ->options([
+                                        'published' => 'Publicada (visible en el sitio)',
+                                        'draft' => 'Borrador (no se ve en el sitio)',
+                                    ])
+                                    ->required()
+                                    ->native(false)
+                                    ->helperText('En borrador, la página deja de verse en el sitio: su dirección da «no encontrada» y desaparece de los menús, de la portada y del buscador. Todo lo cargado se conserva.'),
+                            ]),
+                    ] : []),
                     Section::make('Buscadores (SEO)')
                         ->description('Cómo se ve esta página en Google. Si lo dejás vacío, se usa el título de la página.')
                         ->collapsed()
@@ -196,9 +218,25 @@ abstract class SeccionPage extends PaginaDelPanel
             'is_indexable' => static::permiteIndexacion() ? (bool) ($estado['indexable'] ?? true) : $pagina->is_indexable,
             'blocks' => [['type' => 'hero', 'data' => array_filter($datos, fn ($v) => $v !== null)], ...$this->bloquesDeLaSeccion($estado, $resto)],
             'updated_by' => auth()->id(),
-        ]);
+        ] + (static::permiteBorrador() ? $this->estadoDePublicacion($estado, $pagina) : []));
 
         Notification::make()->success()->title('Guardado')->send();
+    }
+
+    /**
+     * El estado de la página y, al publicarla, la fecha de publicación (se conserva la primera vez que se publicó).
+     *
+     * @param  array<string, mixed>  $estado
+     * @return array<string, mixed>
+     */
+    private function estadoDePublicacion(array $estado, Page $pagina): array
+    {
+        $publicada = ($estado['estado'] ?? 'published') === 'published';
+
+        return [
+            'status' => $publicada ? 'published' : 'draft',
+            'published_at' => $publicada ? ($pagina->published_at ?? now()) : $pagina->published_at,
+        ];
     }
 
     /** @return array<string, mixed>|string|null */

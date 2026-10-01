@@ -37,6 +37,48 @@ class Page extends Model
 
     public array $translatable = ['title', 'seo_title', 'seo_description'];
 
+    /** Dónde se guarda, durante la petición, la lista de secciones en borrador (se reinicia al guardar una página). */
+    private const MEMO_BORRADORES = 'page.secciones_en_borrador';
+
+    /**
+     * Slugs de las secciones del sitio que están en borrador: no se ven en el sitio, ni en los menús ni en el sitemap.
+     * La portada no tiene estado: siempre se muestra.
+     *
+     * @return array<int, string>
+     */
+    public static function seccionesEnBorrador(): array
+    {
+        if (! app()->bound(self::MEMO_BORRADORES)) {
+            app()->instance(self::MEMO_BORRADORES, self::query()
+                ->whereIn('slug', array_diff(self::SECCIONES, ['inicio']))
+                ->where('status', '!=', 'published')
+                ->pluck('slug')
+                ->all());
+        }
+
+        return app(self::MEMO_BORRADORES);
+    }
+
+    /** Una sección sin página cargada se considera publicada (se muestra con sus textos de siempre). */
+    public static function seccionPublicada(string $slug): bool
+    {
+        return ! in_array($slug, self::seccionesEnBorrador(), true);
+    }
+
+    /** ¿Esta dirección (/servicios, /productos/chapas…) pertenece a una sección en borrador? */
+    public static function direccionEnBorrador(string $url): bool
+    {
+        $ruta = trim((string) parse_url($url, PHP_URL_PATH), '/');
+
+        foreach (self::seccionesEnBorrador() as $slug) {
+            if ($ruta === $slug || str_starts_with($ruta, $slug.'/')) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /**
      * Invalida la caché de consulta pública (`PublicContentCache`, Fase 7,
      * docs/09-rendimiento.md §6) al guardar o borrar — se limpia tanto el slug
@@ -46,6 +88,7 @@ class Page extends Model
     protected static function booted(): void
     {
         static::saved(function (self $page) {
+            app()->forgetInstance(self::MEMO_BORRADORES);
             PublicContentCache::forgetPageSlug($page->slug);
             PublicContentCache::forgetPageSlug($page->getOriginal('slug'));
         });

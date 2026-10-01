@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Familia;
+use App\Models\Page;
 use App\Support\Encabezado;
 use Illuminate\View\View;
 
@@ -11,6 +12,8 @@ class ProductoController extends Controller
 {
     public function index(): View
     {
+        abort_unless(Page::seccionPublicada('productos'), 404);
+
         return view('productos.index', [
             'encabezado' => Encabezado::de('productos'),
             'familias' => Familia::paraListado(),
@@ -19,6 +22,8 @@ class ProductoController extends Controller
 
     public function show(string $slug): View
     {
+        abort_unless(Page::seccionPublicada('productos'), 404);
+
         $familias = Familia::paraListado();
         $familia = $familias->firstWhere('slug', $slug);
 

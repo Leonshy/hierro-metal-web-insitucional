@@ -32,6 +32,12 @@ class InicioPage extends SeccionPage
         return true;
     }
 
+    /** La portada siempre se muestra: es la página principal del sitio. */
+    protected static function permiteBorrador(): bool
+    {
+        return false;
+    }
+
     /** La portada siempre se indexa: es la página principal del sitio. */
     protected static function permiteIndexacion(): bool
     {

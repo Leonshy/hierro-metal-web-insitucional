@@ -63,7 +63,7 @@ class SitemapController extends Controller
             });
 
         // Fichas de familia: cambian cuando se edita la familia o cualquiera de sus líneas.
-        Familia::query()->activos()->ordenados()->get()->each(function (Familia $familia) use ($sitemap): void {
+        Familia::query()->activos()->ordenados()->get()->filter(fn () => Page::seccionPublicada('productos'))->each(function (Familia $familia) use ($sitemap): void {
             $sitemap->add(
                 Url::create(route('productos.show', $familia->slug))
                     ->setLastModificationDate($this->ultimaModificacion($familia->updated_at, [], $familia->lineas()->max('updated_at')))
@@ -72,7 +72,9 @@ class SitemapController extends Controller
             );
         });
 
-        $sitemap->add(Url::create(route('contact.show'))->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
+        if (Page::seccionPublicada('contacto')) {
+            $sitemap->add(Url::create(route('contact.show'))->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));
+        }
 
         return $sitemap;
     }
