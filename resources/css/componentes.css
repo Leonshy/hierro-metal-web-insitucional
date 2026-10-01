@@ -316,12 +316,10 @@ input,textarea{caret-color:var(--color-tinta)}
 .cookies .contenedor{padding-top:12px;padding-bottom:12px;display:grid;gap:10px}
 .cookies p{font-size:13px;line-height:1.45;color:var(--color-claro);max-width:80ch}
 .cookies a{color:var(--color-marca);text-decoration:underline;text-underline-offset:3px}
-.cookies .botonera{margin-top:0;gap:6px;display:grid;grid-template-columns:repeat(3,1fr)}
+.cookies .botonera{margin-top:0;gap:6px;display:grid;grid-auto-flow:column;grid-auto-columns:1fr}
 .cookies .btn{min-height:var(--alto-tactil);font-size:15px;letter-spacing:.04em;padding:0 6px;text-align:center}
 @media (min-width:860px){.cookies .contenedor{grid-template-columns:1fr auto;align-items:center}.cookies p{font-size:14px}.cookies .botonera{display:flex;gap:8px}.cookies .btn{font-size:17px;padding:0 18px}}
-.cookies-visible{--cookies-alto:150px}
-.cookies-visible .whatsapp-flotante{bottom:calc(var(--cookies-alto) + 16px)}
-@media (min-width:860px){.cookies-visible{--cookies-alto:84px}}
+.cookies-visible .whatsapp-flotante{bottom:calc(var(--cookies-alto,150px) + 16px)}
 .cookies-abrir{position:fixed;left:16px;bottom:16px;z-index:80;min-height:var(--alto-tactil);padding:0 14px;background:var(--color-blanco);border:var(--borde-linea) solid var(--color-tinta);font-family:var(--font-mono);font-size:var(--text-rotulo);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
 
 /* ---------- Escritorio ---------- */

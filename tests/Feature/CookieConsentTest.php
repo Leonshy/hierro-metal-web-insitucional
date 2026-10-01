@@ -49,3 +49,20 @@ it('con las integraciones apagadas no expone ningún ID, aunque esté guardado',
         ->assertSee('data-gtm-id=""', false)
         ->assertSee('data-meta-pixel-id=""', false);
 });
+
+it('el panel de preferencias tiene botón Cerrar, pero sólo visible al reabrir preferencias ya elegidas', function () {
+    $html = $this->get('/')->assertOk()->getContent();
+
+    // El botón existe en el panel de preferencias y se muestra únicamente cuando `reopened` es verdadero:
+    // la primera vez la persona tiene que decidir, así que no hay forma de cerrar sin elegir.
+    expect($html)->toContain('x-show="reopened"')
+        ->and($html)->toContain('@click="close()"')
+        ->and($html)->toContain('@keydown.escape.window="if (reopened) close()"');
+});
+
+it('las casillas de preferencias usan los textos aprobados', function () {
+    $this->get('/')
+        ->assertSee('Necesarias <small>(siempre activas)</small>', false)
+        ->assertSee('Medición de visitas <small>(Google Analytics)</small>', false)
+        ->assertSee('Publicidad <small>(Meta: Facebook e Instagram)</small>', false);
+});

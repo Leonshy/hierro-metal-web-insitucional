@@ -98,6 +98,8 @@ document.addEventListener('alpine:init', () => {
         configuring: false,
         analytics: false,
         marketing: false,
+        // Verdadero sólo cuando la persona vuelve a abrir preferencias que ya había elegido: ahí se puede cerrar sin cambiar nada.
+        reopened: false,
 
         init() {
             const saved = readConsent();
@@ -114,8 +116,28 @@ document.addEventListener('alpine:init', () => {
                 this.analytics = current.analytics;
                 this.marketing = current.marketing;
                 this.configuring = true;
+                this.reopened = true;
                 this.visible = true;
             });
+
+            // El botón de WhatsApp se acomoda según la altura real del panel (cambia entre el aviso y las preferencias).
+            this.$watch('visible', () => this.syncHeight());
+            this.$watch('configuring', () => this.syncHeight());
+            this.syncHeight();
+        },
+
+        syncHeight() {
+            this.$nextTick(() => {
+                const height = this.visible && this.$refs.panel ? this.$refs.panel.offsetHeight : 0;
+                document.documentElement.style.setProperty('--cookies-alto', `${height}px`);
+            });
+        },
+
+        // Cierra sin tocar lo que ya estaba guardado.
+        close() {
+            this.visible = false;
+            this.configuring = false;
+            this.reopened = false;
         },
 
         acceptAll() {
@@ -123,12 +145,14 @@ document.addEventListener('alpine:init', () => {
             writeConsent(consent);
             applyConsent(consent);
             this.visible = false;
+            this.reopened = false;
         },
 
         rejectAll() {
             const consent = { analytics: false, marketing: false };
             writeConsent(consent);
             this.visible = false;
+            this.reopened = false;
         },
 
         saveConfigured() {
@@ -136,6 +160,7 @@ document.addEventListener('alpine:init', () => {
             writeConsent(consent);
             applyConsent(consent);
             this.visible = false;
+            this.reopened = false;
         },
     }));
 });
