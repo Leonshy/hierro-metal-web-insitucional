@@ -6,7 +6,7 @@
     $email = Contacto::email();
     $titulo = $encabezado->titulo ?: 'Hierro Metal S.R.L.';
 @endphp
-<x-layouts.app :title="$encabezado->seoTitulo ?: $titulo" :description="$encabezado->seoDescripcion">
+<x-layouts.app :title="$encabezado->seoTitulo ?: $titulo" :description="$encabezado->seoDescripcion" :og-image="$encabezado->imagen ? Storage::disk('public')->url($encabezado->imagen) : null">
     <main id="contenido" tabindex="-1">
         <section class="oscura">
             <div class="contenedor">

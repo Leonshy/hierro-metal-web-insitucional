@@ -6,7 +6,7 @@
     $corto = mb_strtolower(['chapas' => 'chapas', 'perfiles' => 'perfiles', 'tubos' => 'tubos y caños', 'varillas' => 'varillas y barras', 'accesorios' => 'accesorios de cañería'][$familia->slug] ?? $familia->nombre);
     $eleccion = ['chapas' => 'Elegí tu chapa', 'perfiles' => 'Elegí tu perfil', 'tubos' => 'Elegí tu tubo o caño', 'varillas' => 'Elegí tu varilla o barra', 'accesorios' => 'Elegí tu accesorio'][$familia->slug] ?? 'Elegí tu línea';
 @endphp
-<x-layouts.app :title="$familia->seo_titulo ?: $familia->nombre.' · Hierro Metal S.R.L.'" :description="$familia->seo_descripcion" :whatsapp="$familia->mensajeWhatsapp()">
+<x-layouts.app :title="$familia->seo_titulo ?: $familia->nombre.' · Hierro Metal S.R.L.'" :description="$familia->seo_descripcion" :whatsapp="$familia->mensajeWhatsapp()" :og-image="$familia->media?->conversionUrl('large') ?? $familia->media?->url()">
     <main id="contenido" tabindex="-1">
         <section class="seccion-chica linea-abajo">
             <div class="contenedor">

@@ -712,6 +712,20 @@
       "label": "Aviso de número único"
     },
     {
+      "key": "geo_latitud",
+      "value": "",
+      "type": "text",
+      "group": "contacto",
+      "label": "Latitud del depósito (opcional, para Google)"
+    },
+    {
+      "key": "geo_longitud",
+      "value": "",
+      "type": "text",
+      "group": "contacto",
+      "label": "Longitud del depósito (opcional, para Google)"
+    },
+    {
       "key": "catalogo_texto_boton",
       "value": "Descargar catálogo",
       "type": "text",

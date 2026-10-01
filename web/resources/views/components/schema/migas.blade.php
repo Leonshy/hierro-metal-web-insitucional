@@ -8,6 +8,8 @@
             'name' => $m[0],
             'item' => url($m[1] ?? request()->path()),
         ]))->all();
+        // Se arma dentro de @php: fuera de un bloque PHP, Blade tomaría «@context» por una directiva y rompería el JSON.
+        $json = json_encode(['@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => $elementos], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG);
     @endphp
-    <script type="application/ld+json">{!! json_encode(['@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => $elementos], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+    <script type="application/ld+json">{!! $json !!}</script>
 @endif
