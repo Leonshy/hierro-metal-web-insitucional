@@ -6,7 +6,6 @@ use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\Page;
 use App\Models\Post;
-use App\Models\SiteSetting;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -15,8 +14,6 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Notifications\Notification;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Concerns\InteractsWithSchemas;
 use Filament\Schemas\Contracts\HasSchemas;
@@ -167,18 +164,10 @@ class ManageMenuItems extends Component implements HasActions, HasSchemas
     private function itemForm(): array
     {
         return [
-            Tabs::make('label_idiomas')
-                ->tabs([
-                    Tab::make('Español')->schema([
-                        TextInput::make('label.es')
-                            ->label('Texto del enlace')
-                            ->required()
-                            ->maxLength(255),
-                    ]),
-                    Tab::make('Italiano')
-                        ->schema([TextInput::make('label.it')->label('Texto del enlace')->maxLength(255)])
-                        ->visible(fn () => SiteSetting::italianEnabled()),
-                ]),
+            TextInput::make('label.es')
+                ->label('Texto del enlace')
+                ->required()
+                ->maxLength(255),
 
             Radio::make('link_type')
                 ->label('Este enlace apunta a')

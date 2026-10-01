@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\HandleRedirects;
 use App\Http\Middleware\PublicMaintenanceMode;
 use App\Http\Middleware\SecurityHeaders;
 use App\Http\Middleware\SetLocale;
@@ -30,7 +29,6 @@ return Application::configure(basePath: dirname(__DIR__))
         // no `prepend` como PublicMaintenanceMode (que no toca la sesión).
         $middleware->web(append: [
             SetLocale::class,
-            HandleRedirects::class,
         ]);
 
         // Las cookies de consentimiento las escribe el JavaScript del banner, en texto plano

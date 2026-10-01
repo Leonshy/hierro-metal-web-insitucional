@@ -6,7 +6,6 @@ use App\Filament\Blocks\PageBlocks;
 use App\Filament\Forms\Components\MediaPicker;
 use App\Filament\Tables\MediaLibraryTable;
 use App\Models\Page;
-use App\Models\SiteSetting;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -14,8 +13,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Str;
 
@@ -38,34 +35,26 @@ class PageForm
                 Group::make([
                     Section::make('Título')
                         ->schema([
-                            Tabs::make('titulo_idiomas')
-                                ->tabs([
-                                    Tab::make('Español')->schema([
-                                        TextInput::make('title.es')
-                                            ->label('Título')
-                                            ->required()
-                                            ->live(onBlur: true)
-                                            ->afterStateUpdated(function ($state, callable $set, ?Page $record) {
-                                                if (! $record) {
-                                                    $set('slug', Str::slug($state));
-                                                }
-                                            })
-                                            ->maxLength(255),
-                                    ]),
-                                    Tab::make('Italiano')
-                                        ->schema([TextInput::make('title.it')->label('Título')->maxLength(255)])
-                                        ->visible(fn () => SiteSetting::italianEnabled()),
-                                ]),
+                            TextInput::make('title.es')
+                                ->label('Título')
+                                ->required()
+                                ->live(onBlur: true)
+                                ->afterStateUpdated(function ($state, callable $set, ?Page $record) {
+                                    if (! $record) {
+                                        $set('slug', Str::slug($state));
+                                    }
+                                })
+                                ->maxLength(255),
                             TextInput::make('slug')
                                 ->label('Dirección web de la página (URL)')
-                                ->helperText('Se genera sola a partir del título en español, pero podés editarla. Ej: "institucion/historia"')
+                                ->helperText('Se genera sola a partir del título, pero podés editarla. Ej: "institucion/historia"')
                                 ->required()
                                 ->unique(ignoreRecord: true)
                                 ->maxLength(255),
                         ]),
 
                     Section::make('Contenido')
-                        ->description('Armá la página combinando bloques. El italiano es opcional dentro de cada bloque — si lo dejás vacío, se muestra el texto en español.')
+                        ->description('Armá la página combinando bloques.')
                         ->schema([
                             Builder::make('blocks')
                                 ->hiddenLabel()
@@ -131,22 +120,13 @@ class PageForm
                         ->description('Cómo se ve esta página en Google. Si lo dejás vacío, se usa el título de la página.')
                         ->collapsed()
                         ->schema([
-                            Tabs::make('seo_idiomas')
-                                ->tabs([
-                                    Tab::make('Español')->schema([
-                                        TextInput::make('seo_title.es')
-                                            ->label('Título para buscadores')
-                                            ->maxLength(60),
-                                        Textarea::make('seo_description.es')
-                                            ->label('Descripción para buscadores')
-                                            ->maxLength(160)
-                                            ->rows(2),
-                                    ]),
-                                    Tab::make('Italiano')->schema([
-                                        TextInput::make('seo_title.it')->label('Título para buscadores')->maxLength(60),
-                                        Textarea::make('seo_description.it')->label('Descripción para buscadores')->maxLength(160)->rows(2),
-                                    ])->visible(fn () => SiteSetting::italianEnabled()),
-                                ]),
+                            TextInput::make('seo_title.es')
+                                ->label('Título para buscadores')
+                                ->maxLength(60),
+                            Textarea::make('seo_description.es')
+                                ->label('Descripción para buscadores')
+                                ->maxLength(160)
+                                ->rows(2),
                             Toggle::make('is_indexable')
                                 ->label('Permitir que Google indexe esta página')
                                 ->default(true),
