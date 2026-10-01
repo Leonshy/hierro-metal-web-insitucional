@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Cache;
 
 class SiteSettingsTable
 {
+    /** Nombres de las secciones de ajustes. */
+    private const SECCIONES = [
+        'general' => 'General',
+        'contacto' => 'Contacto',
+        'redes' => 'Redes sociales',
+        'catalogo' => 'Catálogo',
+        'formularios' => 'Formularios',
+    ];
+
     public static function configure(Table $table): Table
     {
         return $table
@@ -38,12 +47,12 @@ class SiteSettingsTable
             ->defaultSort('group')
             ->paginated(false)
             ->filters([
-                SelectFilter::make('group')->label('Sección')->options([
-                    'general' => 'General',
-                    'contacto' => 'Contacto',
-                    'idioma' => 'Idioma',
-                    'formularios' => 'Formularios',
-                ]),
+                // Las secciones salen de los ajustes que existen de verdad (antes era una lista fija heredada, con un
+                // «Idioma» que no tiene nada y sin «Redes» ni «Catálogo»).
+                SelectFilter::make('group')->label('Sección')->options(fn (): array => SiteSetting::query()
+                    ->whereNotNull('group')->distinct()->orderBy('group')->pluck('group')
+                    ->mapWithKeys(fn (string $grupo): array => [$grupo => self::SECCIONES[$grupo] ?? ucfirst($grupo)])
+                    ->all()),
             ])
             ->recordActions([
                 // El interruptor sí/no vive acá mismo, sin abrir Editar —

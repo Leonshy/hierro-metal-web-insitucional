@@ -58,3 +58,19 @@ it('el .htaccess comprime el texto y cachea los archivos estáticos', function (
 it('el enlace del aviso de cookies dice a dónde lleva', function () {
     $this->get('/')->assertSee('Más información en la política de privacidad');
 });
+
+it('ya no hay un middleware que consulte redirecciones en cada visita', function () {
+    $middlewares = collect(app('router')->getMiddlewareGroups()['web'])->implode(' ');
+
+    expect($middlewares)->not->toContain('HandleRedirects')
+        ->and(file_exists(app_path('Http/Middleware/HandleRedirects.php')))->toBeFalse();
+});
+
+it('una visita a una página que no existe se resuelve sin consultar la tabla de redirecciones', function () {
+    DB::enableQueryLog();
+    $this->get('/pagina-que-no-existe')->assertNotFound();
+    $tablas = collect(DB::getQueryLog())->pluck('query')->filter(fn ($q) => str_contains($q, 'redirects'))->count();
+    DB::disableQueryLog();
+
+    expect($tablas)->toBe(0);
+});

@@ -28,6 +28,8 @@ class SiteSettingResource extends Resource
 
     protected static ?string $modelLabel = 'configuración';
 
+    protected static ?string $pluralModelLabel = 'configuraciones';
+
     public static function form(Schema $schema): Schema
     {
         return SiteSettingForm::configure($schema);

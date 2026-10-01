@@ -4,23 +4,19 @@ namespace App\Filament\Blocks;
 
 use App\Filament\Forms\Components\MediaPicker;
 use App\Filament\Tables\MediaLibraryTable;
-use App\Models\SiteSetting;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Tabs;
-use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Component;
 
 /**
  * Catálogo de bloques del constructor de páginas — implementa los 16 bloques
  * de docs/02-ux-arquitectura-informacion.md §8, cubriendo todo el inventario
  * de contenido real migrado.
  *
- * Cada bloque envuelve sus campos de texto en pestañas Español/Italiano —
- * el italiano solo se muestra si está habilitado en la configuración global
- * (ADR-002). Los campos quedan guardados como {"es": "...", "it": "..."}.
+ * Los campos de texto de cada bloque quedan guardados como {"es": "..."} (el sitio es sólo en español).
  */
 class PageBlocks
 {
@@ -126,13 +122,9 @@ class PageBlocks
         ];
     }
 
-    private static function bilingual(string $field, \Closure $factory): Tabs
+    /** El sitio es sólo en español: el campo se guarda como {"es": "…"} (formato heredado) sin selector de idioma. */
+    private static function bilingual(string $field, \Closure $factory): Component
     {
-        return Tabs::make($field)
-            ->contained(false)
-            ->tabs([
-                Tab::make('Español')->schema([$factory("{$field}.es")]),
-                Tab::make('Italiano')->schema([$factory("{$field}.it")])->visible(fn () => SiteSetting::italianEnabled()),
-            ]);
+        return $factory("{$field}.es");
     }
 }

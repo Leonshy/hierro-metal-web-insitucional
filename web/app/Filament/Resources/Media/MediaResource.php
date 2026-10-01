@@ -25,6 +25,10 @@ class MediaResource extends Resource
 
     protected static ?string $navigationLabel = 'Biblioteca de medios';
 
+    protected static ?string $modelLabel = 'archivo';
+
+    protected static ?string $pluralModelLabel = 'archivos';
+
     protected static string|UnitEnum|null $navigationGroup = 'General';
 
     protected static ?int $navigationSort = 2;
