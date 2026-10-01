@@ -50,13 +50,6 @@
             </section>
         @endif
 
-        <section class="seccion-chica amarilla">
-            <div class="contenedor">
-                <p class="rotulo">Calidad</p>
-                <h2 class="titulo-seccion">El trabajo de taller se controla igual que el material</h2>
-                <p class="bajada">Materia prima certificada bajo Normas Internacionales del Acero, control de medidas antes de despachar e infraestructura mantenida.</p>
-                <div class="botonera"><a class="btn btn-negro" href="{{ url('/calidad') }}">Leer la política de calidad</a></div>
-            </div>
-        </section>
+        <x-franja-calidad donde="servicios" rotulo="Calidad" />
     </main>
 </x-layouts.app>

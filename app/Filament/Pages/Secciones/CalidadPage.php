@@ -7,8 +7,11 @@ use App\Filament\Secciones\SeccionPage;
 use App\Filament\Secciones\Widgets\CompromisosTabla;
 use App\Models\Page;
 use App\Services\Html\HtmlSanitizer;
+use App\Support\FranjaCalidad;
 use BackedEnum;
 use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Section;
 use Filament\Support\Icons\Heroicon;
 
@@ -41,7 +44,30 @@ class CalidadPage extends SeccionPage
                         ->collapsible()
                         ->blockNumbers(false),
                 ]),
+            $this->camposDeFranja('inicio', 'Franja de calidad en la portada', 'La franja amarilla de la portada (si esa sección está activa en Inicio).'),
+            $this->camposDeFranja('servicios', 'Franja de calidad en Servicios', 'La franja amarilla con la que cierra la página de Servicios.'),
         ];
+    }
+
+    protected function clavesExtraDelHero(): array
+    {
+        return FranjaCalidad::claves();
+    }
+
+    /** Un grupo de campos (título, bajada, botón) de una de las franjas, con el texto de siempre como ayuda. */
+    private function camposDeFranja(string $donde, string $titulo, string $descripcion): Section
+    {
+        $porDefecto = FranjaCalidad::POR_DEFECTO[$donde];
+
+        return Section::make($titulo)
+            ->description($descripcion)
+            ->collapsed()
+            ->schema([
+                TextInput::make("franja_{$donde}_titulo")->label('Título')->placeholder($porDefecto['titulo'])->maxLength(160),
+                Textarea::make("franja_{$donde}_bajada")->label('Bajada')->placeholder($porDefecto['bajada'])->rows(2)->maxLength(300),
+                TextInput::make("franja_{$donde}_boton")->label('Texto del botón')->placeholder($porDefecto['boton'])->maxLength(60)
+                    ->helperText('El botón lleva a la página de política de calidad. Si dejás un campo vacío, se muestra el texto que aparece de ejemplo.'),
+            ]);
     }
 
     protected function estadoExtra(Page $pagina): array
