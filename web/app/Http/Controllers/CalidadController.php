@@ -17,14 +17,27 @@ class CalidadController extends Controller
     {
         $pagina = Page::query()->where('slug', 'calidad')->where('status', 'published')->firstOrFail();
 
-        $html = collect($pagina->blocksForLocale())->where('type', 'texto')->map(fn (array $b): string => (string) ($b['data']['content'] ?? ''))->implode('');
-        $corte = preg_match('/<h2\b/i', $html, $m, PREG_OFFSET_CAPTURE) ? $m[0][1] : strlen($html);
+        $textos = collect($pagina->blocksForLocale())
+            ->where('type', 'texto')
+            ->map(fn (array $b): string => (string) ($b['data']['content'] ?? ''))
+            ->filter(fn (string $html): bool => trim(strip_tags($html)) !== '')
+            ->values();
+
+        // El primer texto es la introducción (va antes de los compromisos); los demás, después. Una página vieja con un
+        // solo texto largo se parte en su primer subtítulo, como antes.
+        if ($textos->count() === 1) {
+            $html = (string) $textos->first();
+            $corte = preg_match('/<h2\b/i', $html, $m, PREG_OFFSET_CAPTURE) ? $m[0][1] : strlen($html);
+            [$introduccion, $resto] = [substr($html, 0, $corte), substr($html, $corte)];
+        } else {
+            [$introduccion, $resto] = [(string) $textos->first(), $textos->slice(1)->implode('')];
+        }
 
         return view('calidad', [
             'encabezado' => Encabezado::de('calidad'),
             'pagina' => $pagina,
-            'introduccion' => substr($html, 0, $corte),
-            'resto' => substr($html, $corte),
+            'introduccion' => $introduccion,
+            'resto' => $resto,
             'compromisos' => Compromiso::query()->activos()->ordenados()->get(),
         ]);
     }

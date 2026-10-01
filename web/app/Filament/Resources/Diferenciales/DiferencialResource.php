@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Diferenciales;
 
+use App\Filament\Pages\Secciones\InicioPage;
 use App\Filament\Resources\Diferenciales\Pages\CreateDiferencial;
 use App\Filament\Resources\Diferenciales\Pages\EditDiferencial;
 use App\Filament\Resources\Diferenciales\Pages\ListDiferenciales;
 use App\Filament\Resources\Diferenciales\Schemas\DiferencialForm;
 use App\Filament\Resources\Diferenciales\Tables\DiferencialesTable;
+use App\Filament\Secciones\Concerns\PerteneceAUnaSeccion;
 use App\Models\Diferencial;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -17,6 +19,8 @@ use UnitEnum;
 
 class DiferencialResource extends Resource
 {
+    use PerteneceAUnaSeccion;
+
     protected static ?string $model = Diferencial::class;
 
     protected static ?string $slug = 'diferenciales';
@@ -50,5 +54,10 @@ class DiferencialResource extends Resource
             'create' => CreateDiferencial::route('/create'),
             'edit' => EditDiferencial::route('/{record}/edit'),
         ];
+    }
+
+    protected static function seccion(): string
+    {
+        return InicioPage::class;
     }
 }

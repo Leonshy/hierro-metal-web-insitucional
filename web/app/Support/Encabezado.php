@@ -19,6 +19,8 @@ final class Encabezado
         public readonly ?string $seoTitulo = null,
         public readonly ?string $seoDescripcion = null,
         public readonly ?int $mediaId = null,
+        /** @var array<string, mixed> Todos los campos del bloque hero, ya en español (insignia, nota, textos de bloques…). */
+        public readonly array $datos = [],
     ) {}
 
     public static function de(string $slug): self
@@ -39,6 +41,7 @@ final class Encabezado
             seoTitulo: $pagina->getTranslation('seo_title', 'es', false) ?: null,
             seoDescripcion: $pagina->getTranslation('seo_description', 'es', false) ?: null,
             mediaId: ($hero['media_id'] ?? null) ?: null,
+            datos: $hero,
         );
     }
 
@@ -46,5 +49,13 @@ final class Encabezado
     public function media(): ?Media
     {
         return $this->mediaId ? Media::query()->find($this->mediaId) : null;
+    }
+
+    /** Un campo extra del encabezado editable desde el panel; si está vacío se usa el texto por defecto. */
+    public function dato(string $clave, ?string $porDefecto = null): ?string
+    {
+        $valor = $this->datos[$clave] ?? null;
+
+        return is_string($valor) && trim($valor) !== '' ? $valor : $porDefecto;
     }
 }

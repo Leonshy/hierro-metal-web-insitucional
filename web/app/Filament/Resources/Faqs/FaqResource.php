@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Faqs;
 
+use App\Filament\Pages\Secciones\PreguntasFrecuentesPage;
 use App\Filament\Resources\Faqs\Pages\CreateFaq;
 use App\Filament\Resources\Faqs\Pages\EditFaq;
 use App\Filament\Resources\Faqs\Pages\ListFaqs;
 use App\Filament\Resources\Faqs\Schemas\FaqForm;
 use App\Filament\Resources\Faqs\Tables\FaqsTable;
+use App\Filament\Secciones\Concerns\PerteneceAUnaSeccion;
 use App\Models\Faq;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -17,6 +19,8 @@ use UnitEnum;
 
 class FaqResource extends Resource
 {
+    use PerteneceAUnaSeccion;
+
     protected static ?string $model = Faq::class;
 
     protected static ?string $slug = 'preguntas-frecuentes';
@@ -50,5 +54,10 @@ class FaqResource extends Resource
             'create' => CreateFaq::route('/create'),
             'edit' => EditFaq::route('/{record}/edit'),
         ];
+    }
+
+    protected static function seccion(): string
+    {
+        return PreguntasFrecuentesPage::class;
     }
 }

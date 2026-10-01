@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Servicios;
 
+use App\Filament\Pages\Secciones\ServiciosPage;
 use App\Filament\Resources\Servicios\Pages\CreateServicio;
 use App\Filament\Resources\Servicios\Pages\EditServicio;
 use App\Filament\Resources\Servicios\Pages\ListServicios;
 use App\Filament\Resources\Servicios\Schemas\ServicioForm;
 use App\Filament\Resources\Servicios\Tables\ServiciosTable;
+use App\Filament\Secciones\Concerns\PerteneceAUnaSeccion;
 use App\Models\Servicio;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -17,6 +19,8 @@ use UnitEnum;
 
 class ServicioResource extends Resource
 {
+    use PerteneceAUnaSeccion;
+
     protected static ?string $model = Servicio::class;
 
     protected static ?string $slug = 'servicios';
@@ -50,5 +54,10 @@ class ServicioResource extends Resource
             'create' => CreateServicio::route('/create'),
             'edit' => EditServicio::route('/{record}/edit'),
         ];
+    }
+
+    protected static function seccion(): string
+    {
+        return ServiciosPage::class;
     }
 }

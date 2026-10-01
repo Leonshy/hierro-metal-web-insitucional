@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Pasos;
 
+use App\Filament\Pages\Secciones\ServiciosPage;
 use App\Filament\Resources\Pasos\Pages\CreatePaso;
 use App\Filament\Resources\Pasos\Pages\EditPaso;
 use App\Filament\Resources\Pasos\Pages\ListPasos;
 use App\Filament\Resources\Pasos\Schemas\PasoForm;
 use App\Filament\Resources\Pasos\Tables\PasosTable;
+use App\Filament\Secciones\Concerns\PerteneceAUnaSeccion;
 use App\Models\Paso;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -17,6 +19,8 @@ use UnitEnum;
 
 class PasoResource extends Resource
 {
+    use PerteneceAUnaSeccion;
+
     protected static ?string $model = Paso::class;
 
     protected static ?string $slug = 'pasos';
@@ -50,5 +54,10 @@ class PasoResource extends Resource
             'create' => CreatePaso::route('/create'),
             'edit' => EditPaso::route('/{record}/edit'),
         ];
+    }
+
+    protected static function seccion(): string
+    {
+        return ServiciosPage::class;
     }
 }

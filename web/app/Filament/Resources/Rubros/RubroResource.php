@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Rubros;
 
+use App\Filament\Pages\Secciones\ContactoPage;
 use App\Filament\Resources\Rubros\Pages\CreateRubro;
 use App\Filament\Resources\Rubros\Pages\EditRubro;
 use App\Filament\Resources\Rubros\Pages\ListRubros;
 use App\Filament\Resources\Rubros\Schemas\RubroForm;
 use App\Filament\Resources\Rubros\Tables\RubrosTable;
+use App\Filament\Secciones\Concerns\PerteneceAUnaSeccion;
 use App\Models\Rubro;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -17,6 +19,8 @@ use UnitEnum;
 
 class RubroResource extends Resource
 {
+    use PerteneceAUnaSeccion;
+
     protected static ?string $model = Rubro::class;
 
     protected static ?string $slug = 'rubros';
@@ -50,5 +54,10 @@ class RubroResource extends Resource
             'create' => CreateRubro::route('/create'),
             'edit' => EditRubro::route('/{record}/edit'),
         ];
+    }
+
+    protected static function seccion(): string
+    {
+        return ContactoPage::class;
     }
 }

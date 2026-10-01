@@ -2,12 +2,14 @@
 
 namespace App\Filament\Resources\Familias;
 
+use App\Filament\Pages\Secciones\ProductosPage;
 use App\Filament\Resources\Familias\Pages\CreateFamilia;
 use App\Filament\Resources\Familias\Pages\EditFamilia;
 use App\Filament\Resources\Familias\Pages\ListFamilias;
 use App\Filament\Resources\Familias\RelationManagers\LineasRelationManager;
 use App\Filament\Resources\Familias\Schemas\FamiliaForm;
 use App\Filament\Resources\Familias\Tables\FamiliasTable;
+use App\Filament\Secciones\Concerns\PerteneceAUnaSeccion;
 use App\Models\Familia;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -18,6 +20,8 @@ use UnitEnum;
 
 class FamiliaResource extends Resource
 {
+    use PerteneceAUnaSeccion;
+
     protected static ?string $model = Familia::class;
 
     protected static ?string $slug = 'productos';
@@ -56,5 +60,10 @@ class FamiliaResource extends Resource
             'create' => CreateFamilia::route('/create'),
             'edit' => EditFamilia::route('/{record}/edit'),
         ];
+    }
+
+    protected static function seccion(): string
+    {
+        return ProductosPage::class;
     }
 }

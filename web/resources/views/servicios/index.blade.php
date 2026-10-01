@@ -35,8 +35,8 @@
             <section class="seccion oscura">
                 <div class="contenedor">
                     <p class="rotulo">Cómo trabajamos</p>
-                    <h2 class="titulo-seccion">De tu plano a la obra</h2>
-                    <p class="bajada">Un pedido con servicio de taller sigue siempre los mismos {{ $numeros[$pasos->count()] ?? $pasos->count() }} pasos.</p>
+                    <h2 class="titulo-seccion">{{ $encabezado->dato('pasos_titulo', 'De tu plano a la obra') }}</h2>
+                    <p class="bajada">{{ $encabezado->dato('pasos_bajada', 'Un pedido con servicio de taller sigue siempre los mismos '.($numeros[$pasos->count()] ?? $pasos->count()).' pasos.') }}</p>
                     <ol class="pasos">
                         @foreach($pasos as $paso)
                             <li><strong>{{ $paso->titulo }}</strong><span>{{ $paso->texto }}</span></li>

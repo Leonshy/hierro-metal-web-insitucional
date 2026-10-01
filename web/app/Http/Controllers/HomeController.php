@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Diferencial;
 use App\Models\Familia;
+use App\Models\SeccionInicio;
 use App\Models\Servicio;
 use App\Support\Encabezado;
 use Illuminate\View\View;
@@ -17,6 +18,7 @@ class HomeController extends Controller
             'encabezado' => Encabezado::de('inicio'),
             'diferenciales' => Diferencial::query()->activos()->ordenados()->get(),
             'familias' => Familia::paraListado(),
+            'secciones' => SeccionInicio::query()->activos()->ordenados()->get(),
             'servicios' => Servicio::query()->activos()->where('destacado_home', true)->ordenados()->get(),
         ]);
     }

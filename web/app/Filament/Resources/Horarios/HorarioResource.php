@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Horarios;
 
+use App\Filament\Pages\Secciones\UbicacionPage;
 use App\Filament\Resources\Horarios\Pages\CreateHorario;
 use App\Filament\Resources\Horarios\Pages\EditHorario;
 use App\Filament\Resources\Horarios\Pages\ListHorarios;
 use App\Filament\Resources\Horarios\Schemas\HorarioForm;
 use App\Filament\Resources\Horarios\Tables\HorariosTable;
+use App\Filament\Secciones\Concerns\PerteneceAUnaSeccion;
 use App\Models\Horario;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -17,6 +19,8 @@ use UnitEnum;
 
 class HorarioResource extends Resource
 {
+    use PerteneceAUnaSeccion;
+
     protected static ?string $model = Horario::class;
 
     protected static ?string $slug = 'horarios';
@@ -50,5 +54,10 @@ class HorarioResource extends Resource
             'create' => CreateHorario::route('/create'),
             'edit' => EditHorario::route('/{record}/edit'),
         ];
+    }
+
+    protected static function seccion(): string
+    {
+        return UbicacionPage::class;
     }
 }

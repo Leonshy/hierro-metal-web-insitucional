@@ -30,7 +30,6 @@ class PagesTable
                     ->copyable()
                     ->copyMessage('¡Enlace copiado!')
                     ->icon('heroicon-o-link'),
-                TextColumn::make('site_section')->label('Sección')->badge(),
                 TextColumn::make('status')
                     ->label('Estado')
                     ->badge()
@@ -48,17 +47,8 @@ class PagesTable
                     }),
                 TextColumn::make('updated_at')->label('Última edición')->dateTime('d/m/Y H:i')->sortable(),
             ])
-            ->defaultSort('sort_order')
+            ->defaultSort('title')
             ->filters([
-                SelectFilter::make('site_section')
-                    ->label('Sección')
-                    ->options([
-                        'institucion' => 'Institución',
-                        'oferta-educativa' => 'Oferta educativa',
-                        'admisiones' => 'Admisiones',
-                        'vida-escolar' => 'Vida escolar',
-                        'general' => 'General',
-                    ]),
                 SelectFilter::make('status')
                     ->label('Estado')
                     ->options(['draft' => 'Borrador', 'published' => 'Publicada', 'archived' => 'Archivada']),

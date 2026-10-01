@@ -6,13 +6,16 @@
     $aviso = Contacto::avisoNumeroUnico();
     $maximo = config('sitio.cotizaciones.maximo_adjuntos');
     $rubroElegido = old('rubro', request('rubro'));
+    // Textos editables desde el panel (sección Contacto); si faltan, los de siempre.
+    $titulo = $encabezado->titulo ?: 'Pedí tu cotización';
+    $bajada = $encabezado->bajada ?: 'Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día. Si preferís hablar, escribinos por WhatsApp o llamanos.';
 @endphp
-<x-layouts.app title="Pedí tu cotización · Hierro Metal S.R.L." description="Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día.">
+<x-layouts.app :title="$encabezado->seoTitulo ?: $titulo.' · Hierro Metal S.R.L.'" :description="$encabezado->seoDescripcion ?: 'Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día.'">
     <main id="contenido" tabindex="-1">
         <section class="encabezado-pagina amarilla">
             <div class="contenedor">
-                <h1>Pedí tu cotización</h1>
-                <p class="bajada">Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día. Si preferís hablar, escribinos por WhatsApp o llamanos.</p>
+                <h1>{{ $titulo }}</h1>
+                <p class="bajada">{{ $bajada }}</p>
             </div>
         </section>
 

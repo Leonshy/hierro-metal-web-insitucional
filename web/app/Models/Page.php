@@ -29,6 +29,12 @@ class Page extends Model
 {
     use HasAuditing, HasFactory, HasTranslations, ResolvesLocaleFields, SoftDeletes;
 
+    /**
+     * Páginas estructurales del sitio: cada una tiene su propia ruta y su propia pantalla en el panel (menú «Contenido»).
+     * No son «páginas libres»: no se crean ni se borran, y no aparecen en «Páginas legales».
+     */
+    public const SECCIONES = ['inicio', 'productos', 'servicios', 'calidad', 'preguntas-frecuentes', 'ubicacion', 'contacto'];
+
     public array $translatable = ['title', 'seo_title', 'seo_description'];
 
     /**
