@@ -1,14 +1,11 @@
 <?php
 
-use App\Models\Category;
-use App\Models\Media;
 use App\Models\Page;
-use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 
 // Fase 7 — docs/09-rendimiento.md §6. Cobertura de la caché de consulta
 // (invalidación al guardar/borrar desde el panel) y de que las secciones del
-// inicio y el listado de noticias no vuelvan a generar N+1 (regla de
+// inicio no vuelva a generar N+1 (regla de
 // CLAUDE.md §6.5: nada se da por terminado sin test).
 
 it('sirve una página desde la caché de consulta tras la primera lectura', function () {
@@ -62,28 +59,4 @@ it('invalida la caché de la página en el slug viejo si se le cambia el slug', 
 
     $this->get('/institucion/slug-viejo')->assertNotFound();
     $this->get('/institucion/slug-nuevo')->assertOk();
-});
-
-it('no repite consultas por fila al mostrar noticias con categoría e imagen en el inicio', function () {
-    $this->get('/')->assertOk(); // calienta las cachés de configuración global, ver test de abajo
-
-    $category = Category::factory()->create(['type' => 'news']);
-    $image = Media::factory()->create(['type' => 'image']);
-
-    Post::factory()->count(3)->create([
-        'status' => 'published',
-        'category_id' => $category->id,
-        'featured_media_id' => $image->id,
-        'published_at' => now(),
-    ]);
-
-    DB::enableQueryLog();
-    $this->get('/')->assertOk();
-    $queries = DB::getQueryLog();
-    DB::disableQueryLog();
-
-    // Con 3 noticias, `category`/`featuredMedia` no eager-cargadas dispararían
-    // 3+3 consultas extra (una por fila y por relación). Con eager loading,
-    // el total de consultas de la petición no depende de cuántas noticias haya.
-    expect(count($queries))->toBeLessThan(40);
 });

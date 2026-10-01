@@ -70,16 +70,6 @@ class SiteSetting extends Model
     }
 
     /**
-     * Segundo idioma: sólo si está en `sitio.locales` (apagado en Hierro Metal) y activado
-     * en la configuración. Con locale fijo `es`, los controles de idioma no se muestran.
-     */
-    public static function italianEnabled(): bool
-    {
-        return in_array('it', config('sitio.locales', ['es']), true)
-            && (bool) self::get('italian_enabled', false);
-    }
-
-    /**
      * Mantenimiento del sitio público — no toca el panel (Fase 10, pedido del
      * cliente): es un interruptor de contenido, no el `php artisan down` de
      * infraestructura. `App\Http\Middleware\PublicMaintenanceMode` lo lee.

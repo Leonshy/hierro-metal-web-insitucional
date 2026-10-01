@@ -5,7 +5,6 @@ namespace App\Livewire;
 use App\Models\Menu;
 use App\Models\MenuItem;
 use App\Models\Page;
-use App\Models\Post;
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
@@ -173,7 +172,6 @@ class ManageMenuItems extends Component implements HasActions, HasSchemas
                 ->label('Este enlace apunta a')
                 ->options([
                     'page' => 'Una página del sitio',
-                    'post' => 'Una noticia',
                     'url' => 'Una dirección web escrita a mano',
                 ])
                 ->default('url')
@@ -189,16 +187,6 @@ class ManageMenuItems extends Component implements HasActions, HasSchemas
                 ->preload()
                 ->required(fn (Get $get) => $get('link_type') === 'page')
                 ->visible(fn (Get $get) => $get('link_type') === 'page'),
-
-            Select::make('linkable_post_id')
-                ->label('Noticia')
-                ->options(fn () => Post::query()->get()->mapWithKeys(
-                    fn (Post $post) => [$post->id => $post->getTranslation('title', 'es')]
-                ))
-                ->searchable()
-                ->preload()
-                ->required(fn (Get $get) => $get('link_type') === 'post')
-                ->visible(fn (Get $get) => $get('link_type') === 'post'),
 
             TextInput::make('url')
                 ->label('Dirección web (URL)')
@@ -222,13 +210,11 @@ class ManageMenuItems extends Component implements HasActions, HasSchemas
 
         $data['linkable_type'] = match ($linkType) {
             'page' => Page::class,
-            'post' => Post::class,
             default => null,
         };
 
         $data['linkable_id'] = match ($linkType) {
             'page' => $data['linkable_page_id'] ?? null,
-            'post' => $data['linkable_post_id'] ?? null,
             default => null,
         };
 
@@ -236,7 +222,7 @@ class ManageMenuItems extends Component implements HasActions, HasSchemas
             $data['url'] = null;
         }
 
-        unset($data['link_type'], $data['linkable_page_id'], $data['linkable_post_id']);
+        unset($data['link_type'], $data['linkable_page_id']);
 
         return $data;
     }
@@ -249,12 +235,10 @@ class ManageMenuItems extends Component implements HasActions, HasSchemas
     {
         $data['link_type'] = match ($data['linkable_type'] ?? null) {
             Page::class => 'page',
-            Post::class => 'post',
             default => 'url',
         };
 
         $data['linkable_page_id'] = $data['linkable_type'] === Page::class ? $data['linkable_id'] : null;
-        $data['linkable_post_id'] = $data['linkable_type'] === Post::class ? $data['linkable_id'] : null;
 
         return $data;
     }

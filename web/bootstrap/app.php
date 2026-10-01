@@ -2,7 +2,6 @@
 
 use App\Http\Middleware\PublicMaintenanceMode;
 use App\Http\Middleware\SecurityHeaders;
-use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -22,13 +21,6 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->web(prepend: [
             PublicMaintenanceMode::class,
-        ]);
-
-        // SetLocale necesita la sesión ya iniciada (`StartSession`, que
-        // corre dentro del propio grupo `web`) — por eso va con `append`,
-        // no `prepend` como PublicMaintenanceMode (que no toca la sesión).
-        $middleware->web(append: [
-            SetLocale::class,
         ]);
 
         // Las cookies de consentimiento las escribe el JavaScript del banner, en texto plano

@@ -48,30 +48,30 @@ it('actualiza el valor de una configuración de texto', function () {
 
 it('activa/desactiva un booleano con la acción de la tabla, sin pasar por Editar', function () {
     $setting = SiteSetting::query()->create([
-        'key' => 'italian_enabled',
+        'key' => 'maintenance_mode',
         'value' => '0',
         'type' => 'boolean',
-        'group' => 'idioma',
-        'label' => 'Mostrar el sitio en italiano',
+        'group' => 'general',
+        'label' => 'Sitio en mantenimiento',
     ]);
 
-    Cache::put(SiteSetting::CACHE_PREFIX.'italian_enabled', false, 3600);
+    Cache::put(SiteSetting::CACHE_PREFIX.'maintenance_mode', false, 3600);
 
     $this->livewire(ListSiteSettings::class)
         ->assertTableActionExists('toggle', record: $setting)
         ->callTableAction('toggle', $setting);
 
     expect($setting->refresh()->value)->toBe('1')
-        ->and(Cache::get(SiteSetting::CACHE_PREFIX.'italian_enabled'))->toBeNull();
+        ->and(Cache::get(SiteSetting::CACHE_PREFIX.'maintenance_mode'))->toBeNull();
 });
 
 it('un booleano no tiene botón de Editar en el listado — se activa con la acción de la propia tabla', function () {
     $setting = SiteSetting::query()->create([
-        'key' => 'italian_enabled',
+        'key' => 'maintenance_mode',
         'value' => '0',
         'type' => 'boolean',
-        'group' => 'idioma',
-        'label' => 'Mostrar el sitio en italiano',
+        'group' => 'general',
+        'label' => 'Sitio en mantenimiento',
     ]);
 
     $this->livewire(ListSiteSettings::class)

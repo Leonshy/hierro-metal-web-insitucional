@@ -20,7 +20,7 @@ class PermissionSeeder extends Seeder
     ];
 
     private array $modules = [
-        'pages', 'posts', 'media', 'categories', 'menus', 'redirects',
+        'pages', 'media', 'menus',
         'settings', 'users', 'activity_log',
         'familias', 'servicios', 'pasos', 'compromisos', 'faqs', 'diferenciales',
         'horarios', 'vendedores', 'rubros', 'cotizaciones',

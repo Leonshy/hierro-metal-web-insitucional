@@ -7,7 +7,7 @@ import './eventos.js';
 // empaquetado con Livewire, no hace falta una copia propia") era falsa en la
 // práctica. Livewire es opt-in por plantilla desde la Fase 7
 // (docs/09-rendimiento.md §5, `x-layouts.app` con prop `livewire`) — home,
-// páginas institucionales, noticias, contacto, calendario, comunicados y
+// páginas institucionales, contacto y
 // documentos NO cargan Livewire, así que tampoco cargaban Alpine. Resultado:
 // el botón de menú móvil (`x-data`/`@click` en cabecera.blade.php) y el
 // banner de cookies (`alpine:init` en consent.js) quedaban completamente

@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\Category;
 use App\Models\Media;
 use App\Models\Page;
-use App\Models\Post;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
@@ -135,9 +133,9 @@ return [
     | cache to prevent gadget chain attacks if your APP_KEY is leaked.
     |
     | Fase 7 (rendimiento, docs/09-rendimiento.md §6): `App\Services\Cache\
-    | PublicContentCache` cachea instancias de `Page`/`Post` (con sus
-    | relaciones `coverMedia`/`seoImage`/`category`/`featuredMedia` de tipo
-    | `Media`/`Category`) para no repetir la consulta en cada lectura pública.
+    | PublicContentCache` cachea instancias de `Page` (con sus
+    | relaciones `coverMedia`/`seoImage` de tipo
+    | `Media`) para no repetir la consulta en cada lectura pública.
     | En vez de desactivar la protección con `true` (permitiría deserializar
     | CUALQUIER clase, reabriendo la puerta a gadget chains que este control
     | existe para cerrar — antecedente real de compromiso del WordPress
@@ -149,9 +147,7 @@ return [
 
     'serializable_classes' => [
         Page::class,
-        Post::class,
         Media::class,
-        Category::class,
         Carbon::class,
     ],
 
