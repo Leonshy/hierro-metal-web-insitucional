@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Users\Pages;
 
 use App\Filament\Resources\Users\UserResource;
+use App\Models\User;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
@@ -15,8 +16,8 @@ class EditUser extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
-            ForceDeleteAction::make(),
+            DeleteAction::make()->hidden(fn (User $record): bool => $record->isProtected()),
+            ForceDeleteAction::make()->hidden(fn (User $record): bool => $record->isProtected()),
             RestoreAction::make(),
         ];
     }

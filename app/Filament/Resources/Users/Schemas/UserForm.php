@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Users\Schemas;
 
+use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -20,7 +21,9 @@ class UserForm
     {
         return $schema->components([
             TextInput::make('name')->label('Nombre')->required(),
-            TextInput::make('email')->label('Correo')->email()->required()->unique(ignoreRecord: true),
+            TextInput::make('email')->label('Correo')->email()->required()->unique(ignoreRecord: true)
+                ->disabled(fn (?User $record): bool => $record?->isProtected() ?? false)
+                ->helperText(fn (?User $record): ?string => $record?->isProtected() ? 'Cuenta de mantenimiento: el correo no se puede cambiar.' : null),
             TextInput::make('password')
                 ->label('Contraseña')
                 ->password()
@@ -36,9 +39,13 @@ class UserForm
                     fn (Role $role) => [$role->id => self::ROLE_LABELS[$role->name] ?? $role->name]
                 ))
                 ->required()
-                ->preload(),
+                ->preload()
+                ->disabled(fn (?User $record): bool => $record?->isProtected() ?? false),
             Toggle::make('is_active')->label('Cuenta activa')->default(true)
-                ->helperText('Desactivarla en vez de borrarla si la persona deja el colegio.'),
+                ->disabled(fn (?User $record): bool => $record?->isProtected() ?? false)
+                ->helperText(fn (?User $record): string => $record?->isProtected()
+                    ? 'Cuenta de mantenimiento: no se puede desactivar.'
+                    : 'Desactivarla en vez de borrarla si la persona deja la empresa.'),
         ]);
     }
 }
