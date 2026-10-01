@@ -12,9 +12,8 @@ class UserForm
 {
     private const ROLE_LABELS = [
         'administrador' => 'Administrador',
-        'editor_general' => 'Editor general',
-        'editor_noticias_marketing' => 'Editor de noticias y marketing',
-        'editor_academico' => 'Editor académico',
+        'editor' => 'Editor de contenido',
+        'ventas' => 'Ventas (cotizaciones)',
     ];
 
     public static function configure(Schema $schema): Schema

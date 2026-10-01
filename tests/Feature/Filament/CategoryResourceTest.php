@@ -48,10 +48,10 @@ it('exige el tipo y el nombre', function () {
 });
 
 it('un usuario sin permiso no puede ver el listado de categorías', function () {
-    $editorAcademico = User::factory()->create(['is_active' => true]);
-    $editorAcademico->assignRole('editor_academico');
+    $usuarioVentas = User::factory()->create(['is_active' => true]);
+    $usuarioVentas->assignRole('ventas');
 
-    $this->actingAs($editorAcademico);
+    $this->actingAs($usuarioVentas);
 
     $this->livewire(ListCategories::class)->assertForbidden();
 });

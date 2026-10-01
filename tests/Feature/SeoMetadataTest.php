@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Page;
-use App\Models\Post;
 
 beforeEach(function () {
     config(['sitio.seo.block_indexing' => false]);

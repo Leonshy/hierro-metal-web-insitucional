@@ -34,7 +34,7 @@ it('crea una redirección 301', function () {
 
 it('un rol sin permiso sobre redirecciones no puede ver el listado', function () {
     $editorGeneral = User::factory()->create(['is_active' => true]);
-    $editorGeneral->assignRole('editor_general');
+    $editorGeneral->assignRole('editor');
 
     $this->actingAs($editorGeneral);
 

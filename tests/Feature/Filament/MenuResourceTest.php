@@ -157,10 +157,10 @@ it('no deja anidar un enlace que ya tiene submenús propios (no más de 2 nivele
 });
 
 it('un usuario sin permiso no puede ver el listado de menús', function () {
-    $editorAcademico = User::factory()->create(['is_active' => true]);
-    $editorAcademico->assignRole('editor_academico');
+    $usuarioVentas = User::factory()->create(['is_active' => true]);
+    $usuarioVentas->assignRole('ventas');
 
-    $this->actingAs($editorAcademico);
+    $this->actingAs($usuarioVentas);
 
     $this->livewire(ListMenus::class)->assertForbidden();
 });

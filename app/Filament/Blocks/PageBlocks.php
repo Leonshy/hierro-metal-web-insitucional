@@ -7,7 +7,6 @@ use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -123,7 +122,6 @@ class PageBlocks
                 ]),
         ];
     }
-
 
     private static function bilingual(string $field, \Closure $factory): Tabs
     {

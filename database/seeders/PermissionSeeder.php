@@ -7,16 +7,23 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 /**
- * 4 roles reales del panel (docs/01-analisis-descubrimiento.md §E pregunta #2):
- * administrador, editor general, editor de noticias/banners + marketing,
- * editor académico. No son 2 roles binarios como en IPG.
+ * Tres roles del panel de Hierro Metal:
+ *  - administrador: todo, incluidas integraciones, usuarios y redirecciones.
+ *  - editor: contenido del sitio (páginas, catálogo, servicios, FAQ…) y medios.
+ *  - ventas: atiende las cotizaciones; ve los vendedores. No toca contenido.
  */
 class PermissionSeeder extends Seeder
 {
+    /** Contenido que edita el rol `editor`. */
+    private const CONTENIDO = [
+        'familias', 'servicios', 'pasos', 'compromisos', 'faqs', 'diferenciales', 'horarios',
+    ];
+
     private array $modules = [
-        'pages', 'posts', 'documents', 'announcements', 'calendar_events',
-        'galleries', 'media', 'categories', 'menus', 'redirects',
-        'settings', 'users', 'form_submissions', 'activity_log', 'locations',
+        'pages', 'posts', 'media', 'categories', 'menus', 'redirects',
+        'settings', 'users', 'form_submissions', 'activity_log',
+        'familias', 'servicios', 'pasos', 'compromisos', 'faqs', 'diferenciales',
+        'horarios', 'vendedores', 'rubros', 'cotizaciones',
     ];
 
     private array $actions = ['view', 'create', 'update', 'delete', 'publish'];
@@ -29,24 +36,18 @@ class PermissionSeeder extends Seeder
             }
         }
 
-        $admin = Role::findOrCreate('administrador');
-        $admin->syncPermissions(Permission::all());
+        Role::findOrCreate('administrador')->syncPermissions(Permission::all());
 
-        $editorGeneral = Role::findOrCreate('editor_general');
-        $editorGeneral->syncPermissions($this->permissionsFor([
-            'pages', 'documents', 'categories', 'media', 'galleries', 'form_submissions', 'locations',
-        ], ['view', 'create', 'update', 'publish']));
-
-        $editorNoticiasMarketing = Role::findOrCreate('editor_noticias_marketing');
-        $editorNoticiasMarketing->syncPermissions([
-            ...$this->permissionsFor(['posts', 'media'], ['view', 'create', 'update', 'delete', 'publish']),
-            ...$this->permissionsFor(['settings'], ['view', 'update']), // IDs de Analytics/Ads/Meta
+        Role::findOrCreate('editor')->syncPermissions([
+            ...$this->permissionsFor(['pages'], ['view', 'create', 'update', 'publish']),
+            ...$this->permissionsFor(['media'], ['view', 'create', 'update', 'delete', 'publish']),
+            ...$this->permissionsFor(self::CONTENIDO, ['view', 'create', 'update', 'delete']),
         ]);
 
-        $editorAcademico = Role::findOrCreate('editor_academico');
-        $editorAcademico->syncPermissions($this->permissionsFor([
-            'calendar_events', 'announcements', 'documents',
-        ], ['view', 'create', 'update', 'publish']));
+        Role::findOrCreate('ventas')->syncPermissions([
+            ...$this->permissionsFor(['cotizaciones', 'form_submissions'], ['view', 'update']),
+            ...$this->permissionsFor(['vendedores'], ['view']),
+        ]);
     }
 
     private function permissionsFor(array $modules, array $actions): array
