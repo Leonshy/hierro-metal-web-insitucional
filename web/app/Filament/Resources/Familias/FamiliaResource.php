@@ -20,6 +20,8 @@ class FamiliaResource extends Resource
 {
     protected static ?string $model = Familia::class;
 
+    protected static ?string $slug = 'productos';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedSquares2x2;
 
     protected static ?string $navigationLabel = 'Productos (familias)';

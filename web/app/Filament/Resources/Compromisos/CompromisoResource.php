@@ -19,6 +19,8 @@ class CompromisoResource extends Resource
 {
     protected static ?string $model = Compromiso::class;
 
+    protected static ?string $slug = 'compromisos';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShieldCheck;
 
     protected static ?string $navigationLabel = 'Compromisos de calidad';

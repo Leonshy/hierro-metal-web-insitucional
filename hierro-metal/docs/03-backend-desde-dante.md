@@ -227,3 +227,30 @@ de página** editables, no fijos en Blade.
 - Adjunto no accesible por URL pública.
 - Throttle: el sexto envío en un minuto se rechaza.
 - `/catalogo.pdf` sirve el archivo vigente; 404 amable si no hay catálogo cargado.
+
+
+## 6. Cotizaciones: cómo quedó implementado (Fase 3, octubre 2026)
+
+- **Modelo:** `cotizaciones` (con `uuid`, estados nueva/en_curso/cotizada/ganada/perdida/spam, intentos de aviso y soft delete),
+  `cotizacion_adjuntos` y `rubros`. Reemplaza al formulario genérico de Dante (`FormSubmission`), que se eliminó.
+- **Orden del flujo (regla 8):** `POST /contacto` valida → `GuardarCotizacion` guarda el pedido y los adjuntos → recién entonces
+  encola el aviso. Un fallo de correo, de cola o de un adjunto nunca cuesta el pedido.
+- **Anti-spam en capas (regla 9):** campo señuelo `sitio_web` + marca de tiempo firmada `_t` (menos de 3 s, ausente o falsificada =
+  spam) + límite de 5 envíos por hora por IP (429 al sexto) + Turnstile (apagado). El spam se **guarda** con estado `spam`, sin
+  archivos, sin aviso y sin Meta, y el visitante recibe la misma respuesta que un pedido real.
+- **Adjuntos (regla 10):** lista blanca `pdf, jpg, jpeg, png, webp, dwg, dxf, xlsx`, 10 MB, 3 archivos. Se validan por **contenido**:
+  firma `%PDF-`, `finfo`+`getimagesize` en imágenes, firma `PK` en xlsx, cabecera `AC10xx` en DWG y `SECTION`/`AutoCAD Binary DXF`
+  en DXF (su MIME no es fiable). Se guardan en el disco privado `local` bajo `cotizaciones/{uuid}/{uuid}.ext` y se descargan
+  sólo con sesión y permiso `cotizaciones.view`, siempre como archivo (`octet-stream`, `nosniff`). El nombre original sólo se muestra.
+- **Aviso por correo:** el SMTP y el remitente salen de `MAIL_*` del `.env` (se cargan después); el destinatario, del panel
+  (`email_notificacion_cotizaciones`, hasta 3) con respaldo `SITIO_COTIZACIONES_EMAIL`. Sin destinatario el pedido queda pendiente.
+  Reintentos del job (1, 5, 15 y 60 min) y el comando `cotizaciones:reintentar-avisos` cada 5 min; alerta única tras 3 intentos.
+  Los archivos no viajan por correo.
+- **Plesk sin Supervisor:** el cron de `schedule:run` también procesa la cola (`queue:work --stop-when-empty`) cada minuto.
+- **Bandeja:** contador de nuevas en el menú, filtros por estado, rubro, fecha y «aviso sin enviar», spam oculto, búsqueda,
+  «Responder por WhatsApp», cambio de estado, asignación, notas y exportación a CSV (con las fórmulas de Excel neutralizadas).
+  La auditoría registra el seguimiento y **no** copia los datos personales del pedido.
+- **Hallazgo heredado de Dante, corregido:** las cookies de consentimiento las escribe el JavaScript en texto plano y Laravel
+  descarta las cookies que no cifró, así que el servidor nunca veía el consentimiento y el evento a Meta no se habría enviado
+  jamás. Se eximieron de cifrado (`bootstrap/app.php`).
+- **Meta:** por defecto el evento no lleva teléfono ni correo (`SITIO_META_ENVIAR_DATOS=false`), y sólo sale con el consentimiento.

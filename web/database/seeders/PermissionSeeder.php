@@ -21,7 +21,7 @@ class PermissionSeeder extends Seeder
 
     private array $modules = [
         'pages', 'posts', 'media', 'categories', 'menus', 'redirects',
-        'settings', 'users', 'form_submissions', 'activity_log',
+        'settings', 'users', 'activity_log',
         'familias', 'servicios', 'pasos', 'compromisos', 'faqs', 'diferenciales',
         'horarios', 'vendedores', 'rubros', 'cotizaciones',
     ];
@@ -45,7 +45,7 @@ class PermissionSeeder extends Seeder
         ]);
 
         Role::findOrCreate('ventas')->syncPermissions([
-            ...$this->permissionsFor(['cotizaciones', 'form_submissions'], ['view', 'update']),
+            ...$this->permissionsFor(['cotizaciones'], ['view', 'update']),
             ...$this->permissionsFor(['vendedores'], ['view']),
         ]);
     }

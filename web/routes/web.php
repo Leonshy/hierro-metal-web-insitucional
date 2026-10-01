@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\FormSubmissionController;
+use App\Http\Controllers\AdjuntoController;
+use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RobotsController;
@@ -13,7 +13,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap.index');
 Route::get('/robots.txt', [RobotsController::class, 'index'])->name('robots.index');
 
-Route::get('/contacto', [ContactController::class, 'show'])->name('contact.show');
+Route::get('/contacto', [CotizacionController::class, 'create'])->name('contact.show');
 
 // Formularios públicos — honeypot + rate limiting (ausentes en IPG, docs/01 §A.3).
 // 5 envíos por hora por IP (docs/10-seguridad.md §6) — antes era `throttle:5,1`
@@ -29,9 +29,19 @@ Route::get('/contacto', [ContactController::class, 'show'])->name('contact.show'
 // enviar el formulario de contacto sin haberlo tocado nunca, y viceversa.
 // Reproducido con Playwright (dos envíos de formulario devolvían 429) y
 // corregido dándole un prefijo propio a cada grupo.
-Route::middleware(['honeypot', 'throttle:5,60,forms'])->group(function () {
-    Route::post('/contacto', [FormSubmissionController::class, 'contact'])->name('forms.contact');
-});
+// Formulario de cotización. Protecciones en capas (CLAUDE.md regla 9): honeypot y marca de
+// tiempo firmada (se evalúan en la acción, para guardar el intento como «spam» y medirlo),
+// límite por IP y, si se activa desde el panel, Turnstile. Prefijo `forms` propio para que el
+// contador no se comparta con otros límites (hallazgo de Dante, Fase 9).
+Route::post('/contacto', [CotizacionController::class, 'store'])
+    ->middleware('throttle:5,60,forms')
+    ->name('cotizaciones.store');
+
+Route::get('/contacto/gracias', [CotizacionController::class, 'gracias'])->name('cotizaciones.gracias');
+
+// Adjuntos de cotización: viven en disco privado y sólo se descargan con sesión del panel.
+Route::get('/'.trim(config('sitio.admin_path'), '/').'/cotizaciones/adjuntos/{adjunto}', [AdjuntoController::class, 'descargar'])
+    ->name('cotizaciones.adjunto');
 
 // Catch-all de páginas públicas (institucionales / landings de sección) — el
 // middleware de redirecciones corre antes (bootstrap/app.php). Va al final

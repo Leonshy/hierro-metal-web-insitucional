@@ -14,3 +14,11 @@ Artisan::command('inspire', function () {
 Schedule::command('backup:run')->daily()->at('02:00')->onOneServer();
 Schedule::command('backup:clean')->daily()->at('03:00')->onOneServer();
 Schedule::command('backup:monitor')->daily()->at('04:00')->onOneServer();
+
+// Cotizaciones (CLAUDE.md regla 8). Sin Supervisor en Plesk, el cron de `schedule:run` también procesa
+// la cola cada minuto, y cada cinco reintenta los avisos que no salieron.
+Schedule::command('queue:work --stop-when-empty --max-time=50 --tries=3')
+    ->everyMinute()
+    ->withoutOverlapping()
+    ->when(fn (): bool => config('queue.default') !== 'sync');
+Schedule::command('cotizaciones:reintentar-avisos')->everyFiveMinutes()->withoutOverlapping();

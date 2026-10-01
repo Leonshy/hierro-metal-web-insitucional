@@ -19,6 +19,8 @@ class PasoResource extends Resource
 {
     protected static ?string $model = Paso::class;
 
+    protected static ?string $slug = 'pasos';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedListBullet;
 
     protected static ?string $navigationLabel = 'Pasos «De tu plano a la obra»';

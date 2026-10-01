@@ -19,6 +19,8 @@ class ServicioResource extends Resource
 {
     protected static ?string $model = Servicio::class;
 
+    protected static ?string $slug = 'servicios';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWrenchScrewdriver;
 
     protected static ?string $navigationLabel = 'Servicios';
