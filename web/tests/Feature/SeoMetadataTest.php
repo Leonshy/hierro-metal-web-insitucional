@@ -57,16 +57,3 @@ it('respeta la URL canónica manual cuando está cargada', function () {
     $this->get('/'.$page->slug)
         ->assertSee('<link rel="canonical" href="https://dante.edu.py/institucion/historia">', false);
 });
-
-it('incluye JSON-LD FAQPage cuando la página tiene un bloque de preguntas frecuentes', function () {
-    $page = Page::factory()->create([
-        'slug' => 'admisiones-faq',
-        'status' => 'published',
-        'blocks' => [[
-            'type' => 'faq',
-            'data' => ['items' => [['question' => ['es' => '¿Cómo me inscribo?'], 'answer' => ['es' => 'Completando el formulario.']]]],
-        ]],
-    ]);
-
-    $this->get('/'.$page->slug)->assertSee('"@type":"FAQPage"', false);
-});

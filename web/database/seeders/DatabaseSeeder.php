@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             ConfiguracionSeeder::class,
             CatalogoSeeder::class,
             ContenidoSeeder::class,
-            VendedoresSeeder::class,
             PaginasSeeder::class,
             FotosSeeder::class,
             CatalogoPdfSeeder::class,

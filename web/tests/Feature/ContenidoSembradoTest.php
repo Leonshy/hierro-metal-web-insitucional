@@ -13,7 +13,6 @@ use App\Models\Paso;
 use App\Models\Rubro;
 use App\Models\Servicio;
 use App\Models\SiteSetting;
-use App\Models\Vendedor;
 use App\Rules\MaxWords;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Support\Facades\Storage;
@@ -216,10 +215,6 @@ it('no queda ningún rastro del colegio ni de datos viejos en el contenido sembr
     ], JSON_UNESCAPED_UNICODE);
 
     expect(mb_strtolower($todo))->not->toContain('dante')->not->toContain('alighieri')->not->toContain('admin@hierrometal.com');
-});
-
-it('sin archivo local no se cargan vendedores: son datos personales y no viajan en el repositorio', function () {
-    expect(is_file(database_path('seeders/data/vendedores.local.json')) ? true : Vendedor::query()->count() === 0)->toBeTrue();
 });
 
 it('volver a correr los seeders no duplica nada ni pisa lo que el cliente editó', function () {

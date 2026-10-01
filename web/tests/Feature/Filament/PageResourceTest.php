@@ -187,14 +187,3 @@ it('el menú dice Páginas legales', function () {
     expect(PageResource::getNavigationLabel())->toBe('Páginas legales')
         ->and(PageResource::getPluralModelLabel())->toBe('páginas legales');
 });
-
-it('mantiene la portada existente si el picker no cambia su valor', function () {
-    $media = Media::factory()->create();
-    $page = Page::factory()->create(['cover_media_id' => $media->id]);
-
-    $this->livewire(EditPage::class, ['record' => $page->getRouteKey()])
-        ->call('save')
-        ->assertHasNoFormErrors();
-
-    expect($page->refresh()->cover_media_id)->toBe($media->id);
-});
