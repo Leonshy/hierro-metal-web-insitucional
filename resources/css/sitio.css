@@ -54,5 +54,5 @@ body>main{flex:1 0 auto}
 .cookies-opciones input:hover:not(:disabled){border-color:var(--color-marca)}
 .cookies-opciones input:disabled,.cookies-opciones .opcion-fija{cursor:not-allowed}
 .cookies-opciones input:disabled{opacity:.55}
-.btn-cerrar{background:transparent;color:var(--color-claro);text-decoration:underline;text-underline-offset:4px}
+.btn-cerrar{background:transparent;color:var(--color-claro);text-decoration:none}
 .btn-cerrar:hover{background:transparent;color:var(--color-marca)}
