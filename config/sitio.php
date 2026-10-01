@@ -114,7 +114,7 @@ return [
         'organization_legal_name' => 'Hierro Metal S.R.L.',
         // Sin imagen OG de marca (1200×630) en los insumos de Fase 2 — pendiente
         // de diseño, ver docs/08-seo.md §2. Cuando exista, va en public/images/.
-        'default_og_image' => env('SITIO_DEFAULT_OG_IMAGE'),
+        'default_og_image' => env('SITIO_DEFAULT_OG_IMAGE', 'images/og-hierro-metal.jpg'),
         // `staging`/`local` bloquean indexación por defecto (robots.txt +
         // meta robots) para que nunca haga falta acordarse de "sacar" un
         // Disallow: / a mano antes de salir a producción (CLAUDE.md/docs/08 §4).

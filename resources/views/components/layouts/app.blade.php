@@ -28,6 +28,10 @@
     $blockedByEnvironment = (bool) config('sitio.seo.block_indexing');
     $resolvedIndexable = ($indexable ?? true) && ! $blockedByEnvironment;
     $resolvedOgImage = $ogImage ?: config('sitio.seo.default_og_image');
+    // Debe ser una URL absoluta: las redes sociales no resuelven rutas relativas.
+    if ($resolvedOgImage && ! preg_match('#^https?://#i', $resolvedOgImage)) {
+        $resolvedOgImage = asset($resolvedOgImage);
+    }
     $siteName = \App\Models\SiteSetting::get('site_name', 'Hierro Metal S.R.L.');
     // Los interruptores de activo/inactivo de cada integración viven acá:
     // si están apagados desde el panel, el atributo sale vacío y
