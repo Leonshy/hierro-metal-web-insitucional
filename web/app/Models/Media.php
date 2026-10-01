@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Storage;
  * @property array<string, string>|null $conversions
  */
 #[Fillable([
-    'wp_legacy_id', 'user_id', 'name', 'file_name', 'mime_type', 'path', 'disk', 'size', 'type',
+    'user_id', 'name', 'file_name', 'mime_type', 'path', 'disk', 'size', 'type',
     'alt', 'title', 'caption', 'folder', 'conversions', 'svg_sanitized',
 ])]
 class Media extends Model

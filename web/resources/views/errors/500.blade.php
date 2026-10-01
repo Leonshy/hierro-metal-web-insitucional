@@ -1,4 +1,4 @@
-<x-layouts.app title="Error del servidor — Colegio Dante Alighieri" :indexable="false">
+<x-layouts.app title="Error del servidor — Hierro Metal S.R.L." :indexable="false">
     <main id="contenido" tabindex="-1">
         <div class="not-found">
             <p class="code" aria-hidden="true">500</p>

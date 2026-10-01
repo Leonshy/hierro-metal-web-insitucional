@@ -59,23 +59,6 @@ it('respeta la URL canónica manual cuando está cargada', function () {
         ->assertSee('<link rel="canonical" href="https://dante.edu.py/institucion/historia">', false);
 });
 
-it('incluye JSON-LD NewsArticle en el detalle de una noticia', function () {
-    $post = Post::factory()->create([
-        'slug' => 'noticia-real',
-        'title' => ['es' => 'Una noticia real'],
-        'status' => 'published',
-        'published_at' => now(),
-    ]);
-
-    $this->get('/noticias/'.$post->slug)
-        ->assertSee('"@type":"NewsArticle"', false)
-        ->assertSee('og:type" content="article"', false);
-});
-
-it('incluye JSON-LD WebSite con SearchAction en el inicio', function () {
-    $this->get('/')->assertSee('"@type":"WebSite"', false)->assertSee('SearchAction', false);
-});
-
 it('incluye JSON-LD FAQPage cuando la página tiene un bloque de preguntas frecuentes', function () {
     $page = Page::factory()->create([
         'slug' => 'admisiones-faq',

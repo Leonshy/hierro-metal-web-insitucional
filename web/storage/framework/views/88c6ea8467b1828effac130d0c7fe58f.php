@@ -60,7 +60,7 @@ foreach ($attributes->all() as $__key => $__value) {
 
 unset($__defined_vars, $__key, $__value); ?>
 <?php
-    $resolvedTitle = $title ?? 'Colegio Dante Alighieri';
+    $resolvedTitle = $title ?? 'Hierro Metal S.R.L.';
     $resolvedDescription = $description ?? 'Colegio bilingüe español-italiano en Asunción, afiliado a la Società Dante Alighieri.';
     $resolvedCanonical = $canonical ?: url()->current();
     // "staging"/"local" bloquean indexación siempre, sin importar el toggle de
@@ -70,7 +70,7 @@ unset($__defined_vars, $__key, $__value); ?>
     $blockedByEnvironment = (bool) config('sitio.seo.block_indexing');
     $resolvedIndexable = ($indexable ?? true) && ! $blockedByEnvironment;
     $resolvedOgImage = $ogImage ?: config('sitio.seo.default_og_image');
-    $siteName = \App\Models\SiteSetting::get('site_name', 'Colegio Dante Alighieri');
+    $siteName = \App\Models\SiteSetting::get('site_name', 'Hierro Metal S.R.L.');
     // Los interruptores de activo/inactivo de cada integración viven acá:
     // si están apagados desde el panel, el atributo sale vacío y
     // resources/js/consent.js no carga el script, aunque el ID siga guardado.

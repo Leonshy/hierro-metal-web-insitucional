@@ -39,3 +39,17 @@ Pest en verde. **Cumplida**: 215 de 219 en verde; los 4 restantes son el mapa de
 
 **Condiciones del fork** (de `docs/03` §1): usar PHP 8.3, completar `BACKUP_NOTIFICATION_EMAIL`, versionar `.gitkeep` en las carpetas que el código necesita,
 actualizar `laravel/framework` y `league/commonmark` (3 avisos de seguridad en `composer audit`), forzar 2FA, y un servicio propio para los adjuntos de cotización.
+
+## Ejecución del fork (Fase 3, octubre 2026)
+
+- **Dónde:** `web/`, dentro de este repo. Se copiaron **sólo los archivos versionados** de Dante (commit `e47bcef`, `git archive`), sin
+  vendor, medios ni reportes.
+- **Renombrado:** `config/dante.php` pasó a `config/sitio.php`; `DANTE_*` a `SITIO_*`; cookies, eventos y clases de JS con prefijo `sitio`.
+- **Retirado** (no aplica a Hierro Metal): migración de WordPress y su mapa de redirecciones, comunicados, calendario, galerías,
+  documentos, sedes, pre-inscripción, buscador interno, selector de idioma, ajustes del inicio, bloques de página del colegio y las
+  pruebas de todo eso.
+- **Apagado, no borrado** (según este ADR): **Noticias** (`Post`, `Category` y sus recursos siguen; sin menú ni rutas públicas) y el
+  **segundo idioma** (`sitio.locales = ['es']`; agregar `'it'` lo reactiva).
+- **Línea base:** 135 de 135 pruebas en verde. `composer audit` y `npm audit` en cero (se actualizaron `laravel/framework` 13.34 y
+  `league/commonmark` 2.10.3).
+- **Pendiente del fork:** forzar 2FA (Fase 8), servicio propio de adjuntos de cotización, módulos de dominio (`docs/03` §3).

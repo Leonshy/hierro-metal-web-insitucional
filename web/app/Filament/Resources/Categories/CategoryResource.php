@@ -27,6 +27,12 @@ class CategoryResource extends Resource
 
     protected static ?int $navigationSort = 4;
 
+    /** Noticias queda apagado en Hierro Metal (ADR 0001): el código se conserva, el menú lo oculta. */
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
     public static function form(Schema $schema): Schema
     {
         return CategoryForm::configure($schema);

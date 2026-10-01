@@ -1,9 +1,8 @@
 <?php
 
 use App\Models\Page;
-use App\Models\Post;
 
-it('el sitemap incluye páginas y noticias publicadas e indexables, con lastmod real', function () {
+it('el sitemap incluye páginas publicadas e indexables, con lastmod real', function () {
     config(['sitio.seo.block_indexing' => false]);
 
     $page = Page::factory()->create([
@@ -11,19 +10,12 @@ it('el sitemap incluye páginas y noticias publicadas e indexables, con lastmod 
         'status' => 'published',
         'is_indexable' => true,
     ]);
-    $post = Post::factory()->create([
-        'slug' => 'una-noticia',
-        'status' => 'published',
-        'is_indexable' => true,
-        'published_at' => now(),
-    ]);
 
     $response = $this->get('/sitemap.xml');
 
     $response->assertOk();
     $response->assertHeader('Content-Type', 'text/xml; charset=UTF-8');
     $response->assertSee(url('/institucion/historia'), false);
-    $response->assertSee(route('posts.show', $post->slug), false);
     $response->assertSee('<lastmod>'.$page->updated_at->format('Y-m-d'), false);
 });
 

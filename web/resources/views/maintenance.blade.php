@@ -8,13 +8,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex, nofollow">
-    <title>Sitio en mantenimiento — Colegio Dante Alighieri</title>
+    <title>Sitio en mantenimiento — Hierro Metal S.R.L.</title>
     @fonts
     @vite(['resources/css/app.css'])
 </head>
 <body class="maintenance-body">
     <main class="maintenance-page">
-        <img src="{{ asset('images/logo-dante.svg') }}" alt="Colegio Dante Alighieri" width="211" height="90" class="maintenance-logo">
+        <img src="{{ asset('images/logo-hierro-metal.svg') }}" alt="Hierro Metal S.R.L." width="211" height="90" class="maintenance-logo">
         <span class="maintenance-accent" aria-hidden="true"></span>
         <h1>El sitio está en mantenimiento</h1>
         <p class="body-lg">
