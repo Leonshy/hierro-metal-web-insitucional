@@ -5,7 +5,7 @@
 @endphp
 <x-layouts.app :title="$encabezado->seoTitulo ?: $titulo" :description="$encabezado->seoDescripcion" :indexable="$pagina->is_indexable" :whatsapp="$mensaje">
     <main id="contenido" tabindex="-1">
-        <x-encabezado-pagina :titulo="$titulo" rotulo="Política de calidad" :bajada="$encabezado->bajada" clima="amarilla" :migas="[['Inicio', '/'], ['Calidad', null]]" />
+        <x-encabezado-pagina :titulo="$titulo" :bajada="$encabezado->bajada" clima="amarilla" :migas="[['Inicio', '/'], ['Calidad', null]]" />
 
         @if(trim(strip_tags($introduccion)) !== '')
             <section class="seccion-chica">

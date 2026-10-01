@@ -11,7 +11,6 @@
     <main id="contenido" tabindex="-1">
         <section class="encabezado-pagina amarilla">
             <div class="contenedor">
-                <p class="rotulo">Contacto</p>
                 <h1>Pedí tu cotización</h1>
                 <p class="bajada">Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día. Si preferís hablar, escribinos por WhatsApp o llamanos.</p>
             </div>

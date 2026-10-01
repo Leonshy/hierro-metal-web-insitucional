@@ -16,6 +16,7 @@
 | K3 | Varillas — línea «Varillas lisas, de construcción y cuadradas» | «Varilla nervurada para hormigón armado, más varilla lisa y cuadrada para herrería y rejas.» | Se agrega al final: «También varilla roscada.» | El propio catálogo del cliente la ofrece (págs. 16 y 20) y el sitio no la nombra |
 | K4 | Rótulo del correo (Home 04, Ubicación, Contacto) | «Administración» | «Correo» | El correo elegido es `hierrometalventas@…`, que es de ventas, no de administración |
 | K5 | Privacidad §2 — lista de datos | Nombre, teléfono, empresa, correo y detalle del pedido | Se agrega: «**Los archivos que adjuntes** (plano, despiece o lista), si decidís adjuntar alguno. Se guardan en un espacio privado y sólo los ve el personal que atiende tu pedido.» | El formulario ahora permite adjuntar (M4), y es un dato nuevo que se recopila (`docs/04` C5) |
+| K6 | Encabezado de Servicios, Calidad, Preguntas frecuentes, Ubicación y Contacto — rótulo sobre el título | «Servicios industriales», «Política de calidad», «Preguntas frecuentes», «Ubicación», «Contacto» | Se quita | Repetía el nombre de la sección que ya dicen las migas de pan y el menú, y gastaba espacio arriba del título. Se conservan «Error 404/500» y «Pedido recibido», que informan un estado |
 
 **No se toca nada más.** Entre otras cosas, quedan igual: titulares, bajadas, diferenciales, descripciones de
 líneas y servicios, política de calidad, preguntas frecuentes, pasos «De tu plano a la obra», recuadros

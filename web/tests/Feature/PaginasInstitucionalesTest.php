@@ -103,3 +103,21 @@ it('la página de mantenimiento habla en la voz del sitio y sin referencias a ot
         ->assertSee('Volvé a intentarlo')
         ->assertDontSee('colegio');
 });
+
+it('los encabezados de sección no repiten el nombre de la sección sobre el título', function () {
+    foreach (['/servicios', '/calidad', '/preguntas-frecuentes', '/ubicacion', '/contacto'] as $ruta) {
+        $html = $this->get($ruta)->assertOk()->getContent();
+        $encabezado = substr($html, strpos($html, '<section class="encabezado-pagina'), 900);
+
+        expect($encabezado)->not->toContain('class="rotulo"', "Rótulo redundante en {$ruta}")
+            ->and($encabezado)->toContain('<h1>');
+    }
+});
+
+it('las migas de pan siguen estando encima del título en las secciones', function () {
+    foreach (['/servicios', '/calidad', '/preguntas-frecuentes', '/ubicacion'] as $ruta) {
+        $html = $this->get($ruta)->getContent();
+
+        expect(strpos($html, 'class="migas"'))->toBeLessThan(strpos($html, '<h1>'));
+    }
+});

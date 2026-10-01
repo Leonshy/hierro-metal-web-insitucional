@@ -15,7 +15,7 @@
 @endphp
 <x-layouts.app :title="$encabezado->seoTitulo ?: $titulo" :description="$encabezado->seoDescripcion" :whatsapp="$mensaje">
     <main id="contenido" tabindex="-1">
-        <x-encabezado-pagina :titulo="$titulo" rotulo="Preguntas frecuentes" :bajada="$encabezado->bajada" :migas="[['Inicio', '/'], ['Preguntas frecuentes', null]]" />
+        <x-encabezado-pagina :titulo="$titulo" :bajada="$encabezado->bajada" :migas="[['Inicio', '/'], ['Preguntas frecuentes', null]]" />
 
         <section class="seccion-chica">
             <div class="contenedor">
