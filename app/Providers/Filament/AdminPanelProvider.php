@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             // Logo de Hierro Metal en el login y en la barra lateral (el nombre queda como texto alternativo).
             ->brandLogo(fn (): string => asset('images/logo-hierro-metal.svg'))
             ->brandLogoHeight('2.75rem')
+            ->favicon(asset('favicon.svg'))
             // 2FA por email, opt-in por usuario — ver ADR-003. Nunca
             // obligatorio (`isRequired: false`): quien no lo activó ve la
             // alerta persistente de abajo en vez de quedar bloqueado.
