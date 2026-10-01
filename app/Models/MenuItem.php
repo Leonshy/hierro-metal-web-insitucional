@@ -58,10 +58,6 @@ class MenuItem extends Model
             return '/'.$this->linkable->slug;
         }
 
-        if ($this->linkable_type === Post::class && $this->linkable instanceof Post) {
-            return '/noticias/'.$this->linkable->slug;
-        }
-
         return $this->url ?? '#';
     }
 }

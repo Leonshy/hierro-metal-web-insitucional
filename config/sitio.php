@@ -20,20 +20,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Idiomas soportados
-    |--------------------------------------------------------------------------
-    */
-    // Hierro Metal es sólo español. El segundo idioma queda apagado, no arrancado:
-    // agregar 'it' acá (y su etiqueta) lo reactiva sin reconstruir nada.
-    'locales' => ['es'],
-
-    'locale_labels' => [
-        'es' => 'Español',
-        'it' => 'Italiano',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
     | Cotizaciones
     |--------------------------------------------------------------------------
     | El pedido se guarda SIEMPRE antes de intentar el aviso por correo (regla 8).

@@ -8,7 +8,7 @@
     // Fase 7 (rendimiento, docs/09-rendimiento.md §5): el runtime de Livewire
     // (~126 KB comprimidos, medido en la línea base) solo lo usa de verdad
     // el buscador interno (`App\Livewire\SearchPage`) — home, páginas
-    // institucionales y noticias no tienen ni un solo `wire:` ni
+    // institucionales no tienen ni un solo `wire:` ni
     // `@livewire()`. Cargarlo en todas las plantillas competía por ancho de
     // banda con la imagen del LCP bajo 4G simulada sin ningún beneficio en
     // esas páginas. Por defecto no se incluye; la vista que sí lo necesita
@@ -64,7 +64,7 @@
     <meta property="og:type" content="{{ $ogType }}">
     <meta property="og:url" content="{{ $resolvedCanonical }}">
     <meta property="og:site_name" content="{{ $siteName }}">
-    <meta property="og:locale" content="{{ app()->getLocale() === 'it' ? 'it_IT' : 'es_PY' }}">
+    <meta property="og:locale" content="es_PY">
     @if($resolvedOgImage)
         <meta property="og:image" content="{{ $resolvedOgImage }}">
         <meta name="twitter:card" content="summary_large_image">
