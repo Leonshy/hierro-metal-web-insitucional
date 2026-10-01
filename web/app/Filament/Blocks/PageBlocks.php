@@ -32,7 +32,7 @@ class PageBlocks
                 ->schema([
                     self::bilingual('title', fn (string $name) => TextInput::make($name)->label('Título')->required($name === 'title.es')),
                     self::bilingual('subtitle', fn (string $name) => TextInput::make($name)->label('Bajada')),
-                    FileUpload::make('image')->label('Imagen de fondo')->image()->directory('bloques'),
+                    FileUpload::make('image')->label('Imagen de fondo')->image()->disk('public')->directory('bloques'),
                     self::bilingual('cta_label', fn (string $name) => TextInput::make($name)->label('Texto del botón')),
                     TextInput::make('cta_url')->label('Enlace del botón'),
                 ]),

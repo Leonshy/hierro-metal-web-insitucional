@@ -30,7 +30,7 @@ use Livewire\Component;
  * de otro — sin tocar ningún desplegable (pedido del cliente, Fase 10).
  *
  * Tope de 2 niveles (raíz + submenú, sin submenú-de-submenú): es la misma
- * profundidad que ya renderizan `site-header`/`site-footer` — permitir más
+ * profundidad que ya renderizan `cabecera`/`pie` — permitir más
  * nivel acá crearía enlaces que el sitio público no sabría dibujar.
  */
 class ManageMenuItems extends Component implements HasActions, HasSchemas

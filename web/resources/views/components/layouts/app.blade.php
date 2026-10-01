@@ -14,10 +14,12 @@
     // esas páginas. Por defecto no se incluye; la vista que sí lo necesita
     // pasa `:livewire="true"`.
     'livewire' => false,
+    // Mensaje precargado del botón de WhatsApp (según la página o el rubro).
+    'whatsapp' => 'Hola, quiero pedir una cotización.',
 ])
 @php
     $resolvedTitle = $title ?? 'Hierro Metal S.R.L.';
-    $resolvedDescription = $description ?? 'Colegio bilingüe español-italiano en Asunción, afiliado a la Società Dante Alighieri.';
+    $resolvedDescription = $description ?? \App\Support\Contacto::descripcionCorta();
     $resolvedCanonical = $canonical ?: url()->current();
     // "staging"/"local" bloquean indexación siempre, sin importar el toggle de
     // la página — así el robots.txt/meta robots nunca dependen de que alguien
@@ -79,20 +81,22 @@
     @endif
 </head>
 <body>
-<a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+<a class="saltar" href="#contenido">Saltar al contenido principal</a>
 
 {{-- GTM/GA4 y Meta Pixel solo se inyectan tras consentimiento real —
      resources/js/consent.js crea las etiquetas <script> por código, acá no
      hay ningún <script src="...gtm..."> incondicional (docs/08-seo.md §6). --}}
 <x-cookie-consent />
 
-<x-whatsapp-float />
+<x-whatsapp-float :mensaje="$whatsapp" />
 
-<x-site-header />
+<x-barra-datos />
+
+<x-cabecera :actual="trim(request()->path(), '/')" />
 
 {{ $slot }}
 
-<x-site-footer />
+<x-pie />
 
 @if($livewire)
     @livewireScripts

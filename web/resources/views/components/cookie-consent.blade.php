@@ -1,59 +1,34 @@
-{{--
-    Banner de consentimiento de cookies (docs/08-seo.md §6). Bloquea de verdad
-    los scripts de terceros: GTM/GA4 y Meta Pixel no se cargan con ningún
-    <script src> incondicional en el layout — los inyecta `resources/js/consent.js`
-    recién cuando hay consentimiento guardado, y solo para las categorías
-    aceptadas. "Rechazar todo" es un botón igual de visible que "Aceptar todo"
-    (misma jerarquía visual, un solo clic cada uno).
---}}
-<div
-    x-data="sitioCookieConsent()"
-    x-show="visible"
-    x-cloak
-    x-transition
-    class="cookie-banner"
-    role="dialog"
-    aria-modal="false"
-    aria-label="Preferencias de cookies"
->
-    <template x-if="!configuring">
-        <div>
-            <p>
-                Usamos cookies propias y de terceros para medir el uso del sitio y mostrar
-                contenido de redes sociales. Podés aceptar todas, rechazar todas o elegir cuáles.
-                <a href="{{ url('/institucion/politica-de-cookies') }}" style="text-decoration:underline">Más información</a>.
-            </p>
-            <div class="actions">
-                <x-button variant="secondary" type="button" x-on:click="rejectAll()">Rechazar todo</x-button>
-                <x-button variant="secondary" type="button" x-on:click="configuring = true">Configurar</x-button>
-                <x-button variant="primary" type="button" x-on:click="acceptAll()">Aceptar todo</x-button>
-            </div>
+{{-- Banner de consentimiento (D5). Bloquea GA4 y Meta hasta que la persona acepta (resources/js/consent.js).
+     «Rechazar todo» pesa lo mismo que «Aceptar todo». Texto: docs/07 §3.10. --}}
+<div x-data="sitioCookieConsent()" x-effect="document.body.classList.toggle('cookies-visible', visible)">
+    <div class="cookies" x-show="visible" x-cloak role="dialog" aria-modal="false" aria-label="Preferencias de cookies">
+        <div class="contenedor">
+            <template x-if="! configuring">
+                <div class="cookies-cuerpo">
+                    <p>Usamos cookies para medir cuánta gente visita el sitio y para saber si nuestros anuncios funcionan. Podés aceptar todas, rechazar todas o elegir cuáles. <a href="{{ url('/privacidad') }}">Más información</a></p>
+                    <div class="botonera">
+                        <button class="btn btn-linea-amarilla" type="button" @click="rejectAll()">Rechazar todo</button>
+                        <button class="btn btn-linea-amarilla" type="button" @click="configuring = true">Configurar</button>
+                        <button class="btn btn-amarillo" type="button" @click="acceptAll()">Aceptar todo</button>
+                    </div>
+                </div>
+            </template>
+            <template x-if="configuring">
+                <div class="cookies-cuerpo">
+                    <p>Elegí qué cookies permitís. Las necesarias no se pueden desactivar.</p>
+                    <div class="cookies-opciones">
+                        <label><input type="checkbox" checked disabled> Necesarias (siempre activas)</label>
+                        <label><input type="checkbox" x-model="analytics"> Medición de visitas (Google Analytics)</label>
+                        <label><input type="checkbox" x-model="marketing"> Publicidad (Meta: Facebook e Instagram)</label>
+                    </div>
+                    <div class="botonera">
+                        <button class="btn btn-linea-amarilla" type="button" @click="rejectAll()">Rechazar todo</button>
+                        <button class="btn btn-amarillo" type="button" @click="saveConfigured()">Guardar preferencias</button>
+                    </div>
+                </div>
+            </template>
         </div>
-    </template>
-
-    <template x-if="configuring">
-        <div>
-            <p>Elegí qué categorías de cookies permitís. Las necesarias no se pueden desactivar.</p>
-            <div class="actions" style="flex-direction:column;align-items:flex-start;gap:var(--spacing-2)">
-                <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" checked disabled> Necesarias (siempre activas)</label>
-                <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" x-model="analytics"> Analítica (Google Analytics)</label>
-                <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" x-model="marketing"> Marketing (Meta Pixel)</label>
-            </div>
-            <div class="actions">
-                <x-button variant="secondary" type="button" x-on:click="rejectAll()">Rechazar todo</x-button>
-                <x-button variant="primary" type="button" x-on:click="saveConfigured()">Guardar preferencias</x-button>
-            </div>
-        </div>
-    </template>
+    </div>
+    <button class="cookies-abrir" type="button" x-show="! visible" x-cloak
+            @click="window.dispatchEvent(new CustomEvent('sitio:reopen-consent'))" aria-label="Cambiar preferencias de cookies">Cookies</button>
 </div>
-
-<button
-    type="button"
-    x-data="{ open() { window.dispatchEvent(new CustomEvent('sitio:reopen-consent')) } }"
-    x-on:click="open()"
-    class="btn-link"
-    style="position:fixed;left:var(--spacing-4);bottom:var(--spacing-4);z-index:299;background:#fff;border-radius:var(--radius-md);padding:var(--spacing-2) var(--spacing-3);box-shadow:var(--shadow-md)"
-    aria-label="Cambiar preferencias de cookies"
->
-    Cookies
-</button>
