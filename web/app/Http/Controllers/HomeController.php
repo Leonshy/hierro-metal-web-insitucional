@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Diferencial;
+use App\Models\Familia;
+use App\Models\Servicio;
+use App\Support\Encabezado;
 use Illuminate\View\View;
 
-/**
- * Marcador de posición: el inicio real de Hierro Metal se construye en la Fase 4
- * (frontend), con los módulos de la Fase 3.
- */
+/** Portada: textos de encabezado desde la página «inicio» y el resto desde los módulos del panel. */
 class HomeController extends Controller
 {
     public function index(): View
     {
-        return view('home');
+        return view('home', [
+            'encabezado' => Encabezado::de('inicio'),
+            'diferenciales' => Diferencial::query()->activos()->ordenados()->get(),
+            'familias' => Familia::query()->with('media')->activos()->ordenados()->get(),
+            'servicios' => Servicio::query()->activos()->where('destacado_home', true)->ordenados()->get(),
+        ]);
     }
 }
