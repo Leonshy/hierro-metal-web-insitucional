@@ -18,7 +18,8 @@
 6. En Plesk el `php` y el `composer` por defecto del shell son viejos: se usan
    `/opt/plesk/php/8.3/bin/php` y `/usr/local/psa/var/modules/composer/composer.phar` (el `composer` de
    `/usr/local/bin` es un wrapper, no el `.phar`).
-7. Primero **staging**, después producción.
+7. Primero **staging** (subdominio de prueba, indexación bloqueada), después producción. El servidor de
+   producción se define cuando llegue ese momento.
 
 ## 2. Diferencias con Cateura (importantes)
 
@@ -26,7 +27,7 @@
 |---|---|---|
 | **Cron** | Sin cron (se difería a la VPS) | **Obligatorio.** Los avisos de cotización van en cola y se procesan con `schedule:run` (ver §5). Sin cron, el cliente no recibe ningún correo. También corre los reintentos y los respaldos. |
 | **Carpeta de la app** | Raíz del repo | La app está en `web/` dentro de un repo que también tiene documentación del proyecto. Document root de Plesk: `httpdocs/<carpeta-de-la-app>/public`. |
-| **Repositorio** | Público, clon por HTTPS | **Privado** (`git@github.com:Leonshy/hierro-metal-web-insitucional.git`). El servidor necesita una *deploy key* de sólo lectura. |
+| **Repositorio** | Público, clon por HTTPS | **Privado** (`git@github.com:Leonshy/hierro-metal-web-insitucional.git`). El servidor usa una *deploy key* de sólo lectura y un clon *sparse* de `web/` (decidido: los documentos internos no van al servidor). |
 | **Seeders** | `db:seed` | El contenido se siembra **una sola vez**. Los siguientes deploys **no** corren seeders. |
 | **Administrador** | `app:crear-admin` | `AdminUserSeeder` (seguro de repetir: no cambia la contraseña de un admin existente). |
 | **Panel** | `/admin` | `/panel` (`SITIO_ADMIN_PATH`). |
@@ -47,7 +48,19 @@ git status                             # árbol limpio; .env y .env.* NO están 
 
 1. En Plesk: crear la suscripción/dominio, **PHP 8.3**, base de datos MySQL, SSL (Let's Encrypt) y poner el
    **document root en `<carpeta-de-la-app>/public`** (si queda más arriba, Plesk sirve un 403 y se expondría el `.env`).
-2. Agregar la *deploy key* de sólo lectura al repositorio de GitHub y clonar en `httpdocs/`.
+2. **Repositorio privado, sólo `web/` en el servidor.** Generar en el servidor una clave y agregarla en GitHub
+   como *deploy key* **de sólo lectura**; luego clonar sin traer los documentos internos del proyecto (plan,
+   legajo, presupuesto):
+
+   ```bash
+   cd /var/www/vhosts/<dominio>/httpdocs
+   git clone --no-checkout --filter=blob:none git@github.com:Leonshy/hierro-metal-web-insitucional.git .
+   git sparse-checkout set web          # sólo la carpeta de la app
+   git checkout main
+   ```
+
+   `git pull` seguirá trayendo únicamente `web/`. La app queda en `httpdocs/web/`, así que el
+   **document root de Plesk es `httpdocs/web/public`** y `<carpeta-de-la-app>` = `web`.
 3. `composer install --no-dev --optimize-autoloader` (con el binario de Plesk).
 4. Crear el `.env` de producción **en el servidor** (lo escribe el cliente, nadie más lo ve):
    `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL=https://…`, `DB_*` (MySQL), `MAIL_*`,
