@@ -9,7 +9,7 @@
 @endphp
 <x-layouts.app :title="$encabezado->seoTitulo ?: $titulo" :description="$encabezado->seoDescripcion" :whatsapp="$mensaje">
     <main id="contenido" tabindex="-1">
-        <x-encabezado-pagina :titulo="$titulo" rotulo="Ubicación" :bajada="$encabezado->bajada" :migas="[['Inicio', '/'], ['Ubicación', null]]">
+        <x-encabezado-pagina :titulo="$titulo" :bajada="$encabezado->bajada" :migas="[['Inicio', '/'], ['Ubicación', null]]">
             @if($mapa)<a class="btn btn-amarillo" href="{{ $mapa }}" target="_blank" rel="noopener">Cómo llegar</a>@endif
             <a class="btn btn-linea" href="{{ Contacto::telefonoHref() }}">Llamar antes de venir</a>
         </x-encabezado-pagina>

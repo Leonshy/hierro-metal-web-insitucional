@@ -10,7 +10,7 @@
 @endphp
 <x-layouts.app :title="$encabezado->seoTitulo ?: $titulo" :description="$encabezado->seoDescripcion" :whatsapp="$mensaje">
     <main id="contenido" tabindex="-1">
-        <x-encabezado-pagina :titulo="$titulo" rotulo="Servicios industriales" :bajada="$encabezado->bajada" :migas="[['Inicio', '/'], ['Servicios', null]]">
+        <x-encabezado-pagina :titulo="$titulo" :bajada="$encabezado->bajada" :migas="[['Inicio', '/'], ['Servicios', null]]">
             <a class="btn btn-amarillo" href="{{ url($encabezado->ctaUrl ?: '/contacto') }}">{{ $encabezado->ctaTexto ?: 'Pedir cotización' }}</a>
             <a class="btn btn-linea" href="{{ url('/productos') }}">Ver productos</a>
         </x-encabezado-pagina>
