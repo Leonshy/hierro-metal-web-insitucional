@@ -8,6 +8,7 @@ use App\Models\Rubro;
 use App\Models\SiteSetting;
 use App\Models\User;
 use App\Services\Integrations\MetaConversionsApi;
+use Database\Seeders\DatabaseSeeder;
 use Database\Seeders\PermissionSeeder;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
@@ -440,4 +441,31 @@ it('arma el enlace de «Responder por WhatsApp» con el primer nombre', function
 
     expect($url)->toStartWith('https://wa.me/595981320675?text=')
         ->and(urldecode($url))->toContain('Hola Marcos, te escribimos de Hierro Metal');
+});
+
+it('preselecciona el rubro cuando se llega desde una ficha de familia', function () {
+    $this->seed(DatabaseSeeder::class);
+
+    $this->get('/contacto?rubro=perfiles')
+        ->assertOk()
+        ->assertSee('<option value="perfiles" selected>', false);
+});
+
+it('muestra el estado del horario y el aviso de número único en /contacto', function () {
+    $this->seed(DatabaseSeeder::class);
+
+    $this->get('/contacto')
+        ->assertOk()
+        ->assertSee('Horario de atención')
+        ->assertSee('Ventas se centraliza en un único número corporativo');
+});
+
+it('la página de gracias muestra los pasos que siguen, sin el que ya ocurrió', function () {
+    $this->seed(DatabaseSeeder::class);
+
+    $this->get('/contacto/gracias')
+        ->assertOk()
+        ->assertSee('Qué pasa ahora')
+        ->assertSee('Cotizamos')
+        ->assertDontSee('Nos mandás el pedido');
 });

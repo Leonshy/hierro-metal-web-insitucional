@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CotizacionRequest;
+use App\Models\Horario;
+use App\Models\Paso;
 use App\Models\Rubro;
 use App\Services\Cotizaciones\GuardarCotizacion;
 use Illuminate\Http\RedirectResponse;
@@ -13,7 +15,13 @@ class CotizacionController extends Controller
 {
     public function create(): View
     {
-        return view('contact.show', ['rubros' => Rubro::query()->activos()->ordenados()->get()]);
+        $horarios = Horario::query()->activos()->ordenados()->get();
+
+        return view('contact.show', [
+            'rubros' => Rubro::query()->activos()->ordenados()->get(),
+            'horarios' => $horarios,
+            'estadoHorario' => Horario::estadoAhora(null, $horarios),
+        ]);
     }
 
     public function store(CotizacionRequest $request, GuardarCotizacion $accion): RedirectResponse
@@ -28,6 +36,7 @@ class CotizacionController extends Controller
 
     public function gracias(): View
     {
-        return view('contact.gracias');
+        // El primer paso del cliente es «Nos mandás el pedido»: ya ocurrió, así que se muestran los que siguen.
+        return view('contact.gracias', ['pasos' => Paso::query()->activos()->ordenados()->get()->slice(1)->values()]);
     }
 }
