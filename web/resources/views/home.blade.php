@@ -8,7 +8,12 @@
 @endphp
 <x-layouts.app :title="$encabezado->seoTitulo ?: $titulo" :description="$encabezado->seoDescripcion" :og-image="$foto?->conversionUrl('large') ?? $foto?->url()">
     <main id="contenido" tabindex="-1">
-        <section class="oscura">
+        <section class="oscura @if($foto) portada-con-foto @endif">
+            @if($foto)
+                {{-- Foto del catálogo como fondo del hero, editable desde el panel (página «inicio», bloque hero). Decorativa:
+                     el texto ya dice qué se vende. La capa oscura va en CSS (.portada-con-foto::after) para que se lea el texto. --}}
+                <x-foto :media="$foto" class="foto-portada" sizes="100vw" alt="" :carga-diferida="false" fetchpriority="high" />
+            @endif
             <div class="contenedor">
                 <div class="portada-texto">
                     <span class="insignia">Importación y venta · Mayorista y minorista</span>
@@ -22,12 +27,9 @@
                     <p class="nota-portada">Todas las chapas con certificado de calidad del fabricante</p>
                 </div>
             </div>
-            @if($foto)
-                {{-- Foto del catálogo, editable desde el panel (página «inicio», bloque hero). Decorativa: el texto ya dice qué se vende. --}}
-                <x-foto :media="$foto" class="ilustracion ilustracion-portada foto-portada" sizes="100vw" alt="" :carga-diferida="false" fetchpriority="high" />
-            @else
+            @unless($foto)
                 <x-ilustracion nombre="portada" class="ilustracion ilustracion-portada" />
-            @endif
+            @endunless
         </section>
 
         @if($diferenciales->isNotEmpty())

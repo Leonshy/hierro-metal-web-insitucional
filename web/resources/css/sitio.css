@@ -9,7 +9,14 @@ body>main{flex:1 0 auto}
 .ilustracion-caja svg{display:block;width:100%;height:100%}
 
 /* Fotos del catálogo: recortadas a la caja, sin deformarse. */
-.foto-portada{width:100%;height:auto;aspect-ratio:16/7;object-fit:cover;object-position:center 40%}
+/* Portada con foto: la foto es el fondo del hero y una capa oscura asegura el contraste del texto.
+   La capa es más densa del lado del texto (izquierda) y deja ver la foto hacia la derecha; en pantallas
+   angostas el texto ocupa todo el ancho, así que la capa es pareja. */
+.portada-con-foto{position:relative;isolation:isolate;overflow:hidden}
+.portada-con-foto .foto-portada{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.portada-con-foto::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,color-mix(in srgb,var(--color-tinta) 94%,transparent) 0%,color-mix(in srgb,var(--color-tinta) 82%,transparent) 48%,color-mix(in srgb,var(--color-tinta) 52%,transparent) 100%)}
+.portada-con-foto .portada-texto{padding:clamp(56px,9vw,116px) 0 clamp(52px,8vw,104px)}
+@media (max-width:760px){.portada-con-foto::after{background:color-mix(in srgb,var(--color-tinta) 86%,transparent)}}
 .ficha-foto{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--color-panel)}
 
 /* Contacto: dos columnas con el formulario más ancho que los canales directos. */
