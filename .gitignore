@@ -32,3 +32,11 @@ Thumbs.db
 
 # Datos personales de empleados: no van al repositorio (regla 18)
 /database/seeders/data/*.local.json
+
+# Archivos generados por Laravel (vistas compiladas, caché y sesiones): nunca van al repositorio.
+/storage/framework/views/*
+!/storage/framework/views/.gitkeep
+/storage/framework/cache/data/*
+!/storage/framework/cache/data/.gitkeep
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitkeep
