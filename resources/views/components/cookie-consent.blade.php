@@ -5,7 +5,7 @@
         <div class="contenedor">
             <template x-if="! configuring">
                 <div class="cookies-cuerpo">
-                    <p>Usamos cookies para medir cuánta gente visita el sitio y para saber si nuestros anuncios funcionan. Podés aceptar todas, rechazar todas o elegir cuáles. <a href="{{ url('/privacidad') }}">Más información</a></p>
+                    <p>Usamos cookies para medir cuánta gente visita el sitio y para saber si nuestros anuncios funcionan. Podés aceptar todas, rechazar todas o elegir cuáles. <a href="{{ url('/privacidad') }}">Más información en la política de privacidad</a></p>
                     <div class="botonera">
                         <button class="btn btn-linea-amarilla" type="button" @click="rejectAll()">Rechazar todo</button>
                         <button class="btn btn-linea-amarilla" type="button" @click="configuring = true">Configurar</button>
