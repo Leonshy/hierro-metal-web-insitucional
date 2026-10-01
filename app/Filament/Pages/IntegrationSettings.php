@@ -33,7 +33,7 @@ class IntegrationSettings extends Page
 
     protected static string|UnitEnum|null $navigationGroup = 'Configuraciones';
 
-    protected static ?int $navigationSort = 16;
+    protected static ?int $navigationSort = 19;
 
     protected static ?string $title = 'Integraciones';
 

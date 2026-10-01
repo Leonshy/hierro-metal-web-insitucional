@@ -31,7 +31,7 @@ class HorarioResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Configuraciones';
 
-    protected static ?int $navigationSort = 17;
+    protected static ?int $navigationSort = 15;
 
     public static function form(Schema $schema): Schema
     {

@@ -21,7 +21,7 @@ class ActivityLogResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Configuraciones';
 
-    protected static ?int $navigationSort = 18;
+    protected static ?int $navigationSort = 20;
 
     protected static ?string $modelLabel = 'registro de auditoría';
 
