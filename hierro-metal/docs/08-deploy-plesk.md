@@ -69,9 +69,14 @@ git status                             # árbol limpio; .env y .env.* NO están 
    En **staging** además `SITIO_BLOCK_INDEXING=true` (robots.txt y meta noindex); en producción, `false`.
 5. `php artisan key:generate`, `php artisan migrate --force`, `php artisan db:seed --force` (sólo esta vez),
    `php artisan storage:link`.
-6. Subir `public/build/` por SCP (desde `web/`): ver §6. Verificar con `ls` que quedó en `public/build/` y no anidado.
-7. `chmod -R 775 storage bootstrap/cache`.
-8. Instalar el script y la clave restringida (§7) y el cron (§5).
+6. **Cuenta de mantenimiento de WebParaguay** (`webmaster@webparaguay.com`): se crea con
+   `php artisan usuarios:crear-webmaster` **en la sesión SSH de quien tiene la contraseña**: la pide por
+   pantalla sin mostrarla (mínimo 12 caracteres) y no queda en ningún archivo ni en el repositorio. Es una
+   cuenta protegida: aparece en la lista de usuarios del panel pero no se puede eliminar, desactivar ni
+   cambiarle el correo (ni el administrador del cliente). Es seguro repetir el comando: si existe, no toca nada.
+7. Subir `public/build/` por SCP (desde `web/`): ver §6. Verificar con `ls` que quedó en `public/build/` y no anidado.
+8. `chmod -R 775 storage bootstrap/cache`.
+9. Instalar el script y la clave restringida (§7) y el cron (§5).
 
 ## 5. Cron (obligatorio)
 
