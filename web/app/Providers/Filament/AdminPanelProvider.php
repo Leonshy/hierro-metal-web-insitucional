@@ -31,6 +31,9 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::hex('#191919'),
             ])
             ->brandName('Panel Hierro Metal')
+            // Logo de Hierro Metal en el login y en la barra lateral (el nombre queda como texto alternativo).
+            ->brandLogo(fn (): string => asset('images/logo-hierro-metal.svg'))
+            ->brandLogoHeight('2.75rem')
             // 2FA por email, opt-in por usuario — ver ADR-003. Nunca
             // obligatorio (`isRequired: false`): quien no lo activó ve la
             // alerta persistente de abajo en vez de quedar bloqueado.
@@ -56,6 +59,11 @@ class AdminPanelProvider extends PanelProvider
             ->renderHook(
                 PanelsRenderHook::USER_MENU_BEFORE,
                 fn (): string => view('filament.partials.visit-site-link')->render(),
+            )
+            // En la barra superior el logo va chico; en el login (pantalla sin barra) se muestra más grande.
+            ->renderHook(
+                PanelsRenderHook::HEAD_END,
+                fn (): string => '<style>.fi-simple-layout .fi-logo{height:5.5rem!important;width:auto;margin-inline:auto}</style>',
             )
             ->passwordReset()
             ->profile()
