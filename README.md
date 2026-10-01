@@ -13,7 +13,7 @@ Requiere **PHP 8.3 o superior** (el PHP por defecto de algunas máquinas es 8.2)
 composer install
 cp .env.example .env
 php artisan key:generate
-php artisan migrate --seed
+php artisan migrate --seed   # carga el contenido del cliente: familias, medidas, servicios, FAQ, horarios…
 npm ci && npm run build
 php artisan serve
 ```
@@ -29,9 +29,14 @@ composer audit && npm audit # deben dar 0 vulnerabilidades antes de desplegar
 
 Producción: `composer install --no-dev` y `npm ci` (respetan los lockfiles).
 
+## Datos del administrador y del correo
+
+- `SITIO_ADMIN_EMAIL` y `SITIO_ADMIN_PASSWORD` definen el usuario administrador que crea el seeder.
+- El correo de avisos de cotización se carga en el panel (Configuración). El remitente y el SMTP salen de `MAIL_*`.
+
 ## Estado (Fase 3)
 
 Base importada y podada: se quitó todo lo específico del colegio (comunicados, calendario, galerías,
 documentos, sedes, pre-inscripción, buscador, migración de WordPress). Noticias queda apagado (código
-conservado, oculto del menú). Siguen los módulos de dominio: familias y líneas, servicios, FAQ,
-cotizaciones, etc. (`../hierro-metal/docs/ux-flows/planilla-campos.md`).
+conservado, oculto del menú). Módulos de dominio hechos y sembrados: familias y líneas con medidas, servicios, FAQ,
+horarios, rubros, vendedores y cotizaciones (`../hierro-metal/docs/ux-flows/planilla-campos.md`).

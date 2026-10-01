@@ -14,6 +14,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             AdminUserSeeder::class,
+            ConfiguracionSeeder::class,
+            CatalogoSeeder::class,
+            ContenidoSeeder::class,
+            VendedoresSeeder::class,
+            PaginasSeeder::class,
         ]);
     }
 }

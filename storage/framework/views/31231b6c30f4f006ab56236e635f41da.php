@@ -6,7 +6,7 @@
     $siteName = \App\Models\SiteSetting::get('site_name', 'Hierro Metal S.R.L.');
     $phone = \App\Models\SiteSetting::get('contact_phone');
     $email = \App\Models\SiteSetting::get('contact_email');
-    $address = \App\Models\SiteSetting::get('address_asuncion');
+    $address = \App\Models\SiteSetting::get('direccion_larga');
     $facebook = \App\Models\SiteSetting::get('social_facebook_url');
     $instagram = \App\Models\SiteSetting::get('social_instagram_url');
 
