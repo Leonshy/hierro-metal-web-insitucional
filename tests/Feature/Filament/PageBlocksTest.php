@@ -15,28 +15,15 @@ beforeEach(function () {
     $this->actingAs($this->admin);
 });
 
-it('guarda los bloques del catálogo vigentes (preguntas frecuentes y mapa)', function () {
+it('guarda los bloques vigentes: un encabezado y textos', function () {
     $page = Page::factory()->create();
 
     $this->livewire(EditPage::class, ['record' => $page->getRouteKey()])
         ->fillForm([
             'blocks' => [
-                'bloque-1' => [
-                    'type' => 'faq',
-                    'data' => [
-                        'items' => [
-                            ['question' => ['es' => '¿Cortan a medida?'], 'answer' => ['es' => 'Sí, según tu plano.']],
-                        ],
-                    ],
-                ],
-                'bloque-2' => [
-                    'type' => 'mapa',
-                    'data' => [
-                        'address' => 'Pedro Getto esq. Cadete Sisa, Fernando de la Mora',
-                        'latitude' => -25.3,
-                        'longitude' => -57.55,
-                    ],
-                ],
+                'bloque-1' => ['type' => 'hero', 'data' => ['title' => ['es' => 'Términos y condiciones'], 'subtitle' => ['es' => 'Cómo usamos el sitio.']]],
+                'bloque-2' => ['type' => 'texto', 'data' => ['content' => ['es' => '<p>Primer texto.</p>']]],
+                'bloque-3' => ['type' => 'texto', 'data' => ['content' => ['es' => '<p>Segundo texto.</p>']]],
             ],
         ])
         ->call('save')
@@ -44,13 +31,26 @@ it('guarda los bloques del catálogo vigentes (preguntas frecuentes y mapa)', fu
 
     $page->refresh();
 
-    expect($page->blocks)->toHaveCount(2);
-    expect($page->blocks[0]['data']['items'][0]['question']['es'])->toBe('¿Cortan a medida?');
-    expect($page->blocks[1]['data']['address'])->toBe('Pedro Getto esq. Cadete Sisa, Fernando de la Mora');
+    expect($page->blocks)->toHaveCount(3)
+        ->and($page->blocks[0]['data']['title']['es'])->toBe('Términos y condiciones')
+        ->and($page->blocks[2]['data']['content']['es'])->toBe('<p>Segundo texto.</p>');
 });
 
-it('ya no ofrece los bloques que eran del colegio', function () {
+it('sólo ofrece dos tipos de bloque: encabezado y texto enriquecido', function () {
     $types = collect(PageBlocks::for())->map(fn ($block) => $block->getName());
 
-    expect($types->all())->not->toContain('galeria', 'testimonios', 'formulario', 'listado_comunicados', 'documentos', 'selector_sede', 'listado_noticias');
+    expect($types->all())->toBe(['hero', 'texto']);
+});
+
+it('el encabezado es único por página', function () {
+    expect(PageBlocks::bloque('hero')->getMaxItems())->toBe(1);
+});
+
+it('cada texto se nombra por su primer subtítulo o sus primeras palabras', function () {
+    $etiqueta = new ReflectionMethod(PageBlocks::class, 'etiquetaDeTexto');
+
+    expect($etiqueta->invoke(null, ['content' => ['es' => '<p>Intro</p><h2>Qué datos recopilamos</h2><p>x</p>']]))->toBe('Qué datos recopilamos')
+        ->and($etiqueta->invoke(null, ['content' => ['es' => '<p>Esta política alcanza a todas nuestras actividades de la empresa</p>']]))->toStartWith('Esta política alcanza a todas')
+        ->and($etiqueta->invoke(null, ['content' => ['es' => '']]))->toBe('Texto enriquecido')
+        ->and($etiqueta->invoke(null, null))->toBe('Texto enriquecido');
 });

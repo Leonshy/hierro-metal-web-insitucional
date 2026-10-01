@@ -21,7 +21,7 @@ class PageController extends Controller
         $page = PublicContentCache::rememberPageBySlug(
             $slug,
             fn () => Page::query()
-                ->with(['coverMedia', 'seoImage'])
+                ->with('seoImage')
                 ->where('slug', $slug)
                 ->where('status', 'published')
                 ->first()
@@ -32,19 +32,7 @@ class PageController extends Controller
         $breadcrumbs = $this->breadcrumbsFor($page);
         $blocks = $page->blocksForLocale();
 
-        if ($page->template === 'landing') {
-            return view('pages.landing', compact('page', 'breadcrumbs', 'blocks'));
-        }
-
-        $siblings = $page->parent_id
-            ? Page::query()
-                ->where('parent_id', $page->parent_id)
-                ->where('status', 'published')
-                ->orderBy('sort_order')
-                ->get()
-            : collect();
-
-        return view('pages.show', compact('page', 'breadcrumbs', 'blocks', 'siblings'));
+        return view('pages.show', compact('page', 'breadcrumbs', 'blocks'));
     }
 
     /** @return array<int, array{label: string, url: ?string}> */

@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
  * Tres roles del panel de Hierro Metal:
  *  - administrador: todo, incluidas integraciones, usuarios y redirecciones.
  *  - editor: contenido del sitio (páginas, catálogo, servicios, FAQ…) y medios.
- *  - ventas: atiende las cotizaciones; ve los vendedores. No toca contenido.
+ *  - ventas: atiende las cotizaciones. No toca contenido.
  */
 class PermissionSeeder extends Seeder
 {
@@ -23,7 +23,7 @@ class PermissionSeeder extends Seeder
         'pages', 'media', 'menus',
         'settings', 'users', 'activity_log',
         'familias', 'servicios', 'pasos', 'compromisos', 'faqs', 'diferenciales',
-        'horarios', 'vendedores', 'rubros', 'cotizaciones',
+        'horarios', 'rubros', 'cotizaciones',
     ];
 
     private array $actions = ['view', 'create', 'update', 'delete', 'publish'];
@@ -46,7 +46,6 @@ class PermissionSeeder extends Seeder
 
         Role::findOrCreate('ventas')->syncPermissions([
             ...$this->permissionsFor(['cotizaciones'], ['view', 'update']),
-            ...$this->permissionsFor(['vendedores'], ['view']),
         ]);
     }
 

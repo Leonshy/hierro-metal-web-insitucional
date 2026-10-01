@@ -1,9 +1,9 @@
 @php
     use App\Support\Contacto;
-    // Página de texto del panel (Privacidad y las que cree el cliente): si el primer bloque es un hero, sus textos
-    // arman el encabezado y el resto de los bloques va debajo; si no, el encabezado lleva el título de la página.
-    $hero = ($blocks[0]['type'] ?? null) === 'hero' ? ($blocks[0]['data'] ?? []) : null;
-    $resto = $hero ? array_slice($blocks, 1) : $blocks;
+    // Página de texto del panel (Privacidad y las que cree el cliente): el encabezado sale del bloque de encabezado
+    // y el resto de la página son sus textos, en el orden en que se cargaron.
+    $hero = collect($blocks)->firstWhere('type', 'hero')['data'] ?? [];
+    $textos = collect($blocks)->where('type', 'texto')->values();
     $migas = collect($breadcrumbs)->map(fn ($m, $i) => [$m['label'], $i === count($breadcrumbs) - 1 ? null : $m['url']])->prepend(['Inicio', '/'])->all();
     $titulo = (string) ($hero['title'] ?? $page->title);
 @endphp
@@ -12,14 +12,14 @@
     :description="$page->getTranslation('seo_description', app()->getLocale())"
     :indexable="$page->is_indexable"
     :canonical="$page->canonical_url ?: null"
-    :og-image="$page->seoImage?->conversionUrl('w1200') ?? $page->seoImage?->url() ?? $page->coverMedia?->conversionUrl('w1200') ?? $page->coverMedia?->url()"
+    :og-image="$page->seoImage?->conversionUrl('w1200') ?? $page->seoImage?->url()"
 >
     <main id="contenido" tabindex="-1">
-        <x-encabezado-pagina :titulo="$titulo" :bajada="$hero['subtitle'] ?? null" :migas="$migas">
-            @if(! empty($hero['cta_label']))<a class="btn btn-amarillo" href="{{ url($hero['cta_url'] ?? '/contacto') }}">{{ $hero['cta_label'] }}</a>@endif
-        </x-encabezado-pagina>
+        <x-encabezado-pagina :titulo="$titulo" :bajada="$hero['subtitle'] ?? null" :migas="$migas" />
 
-        <x-page-blocks :blocks="$resto" />
+        @foreach($textos as $texto)
+            <x-blocks.texto :data="$texto['data']" />
+        @endforeach
 
         <section class="seccion-chica alterna">
             <div class="contenedor">

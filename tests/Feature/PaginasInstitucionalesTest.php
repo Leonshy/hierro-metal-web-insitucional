@@ -121,3 +121,28 @@ it('las migas de pan siguen estando encima del título en las secciones', functi
         expect(strpos($html, 'class="migas"'))->toBeLessThan(strpos($html, '<h1>'));
     }
 });
+
+it('una página legal publicada muestra su encabezado y todos sus textos en orden', function () {
+    Page::query()->where('slug', 'privacidad')->update(['status' => 'published', 'published_at' => now()]);
+    $pagina = Page::query()->where('slug', 'privacidad')->first();
+    $pagina->update(['blocks' => [
+        ['type' => 'hero', 'data' => ['title' => ['es' => 'Política de privacidad'], 'subtitle' => ['es' => 'Tus datos.']]],
+        ['type' => 'texto', 'data' => ['content' => ['es' => '<p>Texto uno.</p>']]],
+        ['type' => 'texto', 'data' => ['content' => ['es' => '<p>Texto dos.</p>']]],
+    ]]);
+
+    $html = $this->get('/privacidad')->assertOk()->assertSee('Política de privacidad')->assertSee('Tus datos.')->getContent();
+
+    expect(strpos($html, 'Texto uno.'))->toBeLessThan(strpos($html, 'Texto dos.'));
+});
+
+it('el código heredado de bloques que ya no existen no está en el proyecto', function () {
+    foreach (['imagen-texto', 'tarjetas', 'cta', 'cifras', 'faq', 'video', 'mapa', 'hero'] as $bloque) {
+        expect(file_exists(resource_path("views/components/blocks/{$bloque}.blade.php")))->toBeFalse();
+    }
+
+    expect(file_exists(resource_path('views/components/page-blocks.blade.php')))->toBeFalse()
+        ->and(file_exists(resource_path('views/pages/landing.blade.php')))->toBeFalse()
+        ->and(file_exists(app_path('Models/Vendedor.php')))->toBeFalse()
+        ->and(class_exists('App\\Models\\Post'))->toBeFalse();
+});
