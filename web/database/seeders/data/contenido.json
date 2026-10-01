@@ -1,0 +1,870 @@
+{
+  "familias": [
+    {
+      "slug": "chapas",
+      "nombre": "Chapas de acero",
+      "resumen_home": "Laminadas en frío y caliente, galvanizadas, termoacústicas, inoxidables, antideslizantes, desplegadas y para techo.",
+      "bajada": "Para cubiertas, cerramientos, estructuras, carrocerías, pisos industriales y trabajos de herrería. Todas nuestras chapas llegan con el certificado de calidad del fabricante.",
+      "ilustracion": "chapas",
+      "seo_titulo": "Chapas de acero · Hierro Metal S.R.L.",
+      "seo_descripcion": "Chapas laminadas en frío y caliente, galvanizadas, termoacústicas, inoxidables, antideslizantes y desplegadas, con certificado del fabricante.",
+      "lineas": [
+        {
+          "nombre": "Laminadas en frío y en caliente",
+          "descripcion": "Chapa negra en distintos espesores, base de casi todo trabajo de herrería y estructura metálica.",
+          "usos": [
+            "Estructuras",
+            "Herrería",
+            "Carrocerías"
+          ],
+          "medidas": [
+            {
+              "titulo": "Laminadas en frío",
+              "modo": "tabla",
+              "columnas": [
+                "Espesor",
+                "Largo (mm)",
+                "Ancho (mm)"
+              ],
+              "filas_texto": "N°16 – 1,50\t2000/2400/3000\t1000/1200/1500\nN°18 – 1,2\t2000/2400/3000\t1000/1200/1500\nN°20 – 0,90\t2000/2400/3000\t1000/1200/1500\nN°22 – 0,75\t2000/2400/3000\t1000/1200/1500\nN°24 – 0,54\t2000/2400/3000\t1000/1200/1500\nN°25 – 0,50\t2000/2400/3000\t1000/1200/1500\nN°26 – 0,43\t2000/2400/3000\t1000/1200/1500\nN°27 – 0,40\t2000/2400/3000\t1000/1200/1500\nN°28 – 0,35\t2000/2400/3000\t1000/1200/1500\nN°30 – 0,30\t2000/2400/3000\t1000/1200/1500"
+            },
+            {
+              "titulo": "Laminadas en caliente",
+              "modo": "tabla",
+              "columnas": [
+                "Espesor",
+                "Largo (mm)",
+                "Ancho (mm)"
+              ],
+              "filas_texto": "75 mm · 3\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n63 mm · 2,4\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n50 mm · 1,96\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n45 mm · 1,77\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n40 mm · 1,57\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n38 mm · 1,50\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n32 mm · 1,25\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n25 mm · 0,98\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n22 mm · 0,86\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n20 mm · 0,78\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000\n16 mm · 0,62\"\t2000/2400/3000/6000/12000\t2400/1500/1200/1000"
+            }
+          ],
+          "nota_medidas": "Realizamos servicios de cortes sobre medida según la necesidad."
+        },
+        {
+          "nombre": "Galvanizadas",
+          "descripcion": "Con recubrimiento de zinc para resistir la corrosión en ambientes húmedos o a la intemperie.",
+          "usos": [
+            "Cerramientos",
+            "Intemperie"
+          ],
+          "medidas": [
+            {
+              "titulo": null,
+              "modo": "lista",
+              "columnas": [
+                "Medidas (mm)",
+                "Espesores"
+              ],
+              "filas_texto": "1000 × 2000 · 1200 × 2400 · 1200 × 3000\tN°30 · 28 · 27 · 26 · 24 · 22 · 20 · 18 · 16 · 14 · 12"
+            }
+          ],
+          "nota_medidas": null
+        },
+        {
+          "nombre": "Para techo (trapezoidal y ondulada)",
+          "descripcion": "Láminas metálicas para cubiertas: durables, livianas, fáciles de instalar y disponibles en varios colores.",
+          "usos": [
+            "Techos",
+            "Galpones",
+            "Tinglados"
+          ],
+          "medidas": [],
+          "nota_medidas": null
+        },
+        {
+          "nombre": "Termoacústicas",
+          "descripcion": "Paneles con aislación que reducen el calor y el ruido de la lluvia respecto de una chapa simple.",
+          "usos": [
+            "Techos habitables",
+            "Depósitos"
+          ],
+          "medidas": [],
+          "nota_medidas": "Chapa superior de Galvalume trapezoidal. Relleno de PIR isotérmico con espesor de 0.30, 0.40 y 0.50. Fabricación sobre medida."
+        },
+        {
+          "nombre": "Inoxidables",
+          "descripcion": "Acero inoxidable para ambientes exigentes en higiene o con exposición química permanente.",
+          "usos": [
+            "Alimentación",
+            "Industria",
+            "Mobiliario"
+          ],
+          "medidas": [
+            {
+              "titulo": null,
+              "modo": "lista",
+              "columnas": [
+                "Medidas (mm)",
+                "Espesores (mm)"
+              ],
+              "filas_texto": "1000 × 2000 · 1200 × 2400 · 1200 × 3000 · 1500 × 3000\t16 · 12 · 10 · 8 · 6 · 5 · 4,5 · 4 · 3,5 · 3 · 2,5 · 2 · 1,8 · 1,5 · 1,25 · 1,20 · 1 · 0,90 · 0,80 · 0,70 · 0,60 · 0,50 · 0,40 · 0,35 · 0,30"
+            }
+          ],
+          "nota_medidas": "Se puede realizar cortes sobre medida a partir de 1,2 mm de espesor."
+        },
+        {
+          "nombre": "Antideslizantes",
+          "descripcion": "Chapa con relieve tipo damero, para superficies transitables donde se necesita agarre.",
+          "usos": [
+            "Escaleras",
+            "Pisos",
+            "Plataformas"
+          ],
+          "medidas": [
+            {
+              "titulo": null,
+              "modo": "lista",
+              "columnas": [
+                "Medidas (mm)",
+                "Espesores"
+              ],
+              "filas_texto": "1000 × 2000 · 1200 × 2400 · 1200 × 3000 · 1200 × 6000 · 1500 × 3000 · 1500 × 6000\tN°12 · N°14 · 1/8\" · 3/16\" · 1/4\""
+            }
+          ],
+          "nota_medidas": null
+        },
+        {
+          "nombre": "Desplegadas",
+          "descripcion": "Chapa cortada y estirada en forma de malla, liviana y con paso de aire y luz.",
+          "usos": [
+            "Rejas",
+            "Cerramientos",
+            "Protecciones"
+          ],
+          "medidas": [
+            {
+              "titulo": null,
+              "modo": "lista",
+              "columnas": [
+                "Medidas (mm)",
+                "Espesores"
+              ],
+              "filas_texto": "1000 × 2000 · 1200 × 2400 · 1200 × 3000 · 1500 × 3000\tN°16 · N°14 · N°12 · 1/8\" · 3/16\" · 1/4\""
+            }
+          ],
+          "nota_medidas": null
+        }
+      ]
+    },
+    {
+      "slug": "perfiles",
+      "nombre": "Perfiles y estructurales",
+      "resumen_home": "Perfil IPN y UPN, perfil C y U en chapa doblada, ángulos, planchuelas y hierro Tee.",
+      "bajada": "La perfilería que sostiene la obra. Además de las medidas comerciales de stock, fabricamos perfiles C y U en chapa doblada según la medida que necesites.",
+      "ilustracion": "perfiles",
+      "seo_titulo": "Perfiles y estructurales · Hierro Metal S.R.L.",
+      "seo_descripcion": "Perfiles IPN, UPN, C y U, ángulos, planchuelas y hierro Tee. Perfiles C y U en chapa doblada a medida. Pedí tu cotización.",
+      "lineas": [
+        {
+          "nombre": "Perfil IPN y UPN",
+          "descripcion": "Perfiles laminados doble T y U, para vigas, columnas y estructuras portantes.",
+          "usos": [
+            "Vigas",
+            "Columnas",
+            "Entrepisos"
+          ],
+          "medidas": [
+            {
+              "titulo": null,
+              "modo": "lista",
+              "columnas": [
+                "Perfil",
+                "Alturas (mm)"
+              ],
+              "filas_texto": "IPN\t80 · 100 · 120 · 140 · 160 · 180 · 200 · 220 · 240 · 260 · 280 · 300 · 320 · 340 · 360 · 380 · 400 · 425 · 450 · 475 · 500 · 550 · 600\nUPN\t50 · 60 · 65 · 80 · 100 · 120 · 140 · 160 · 180 · 200 · 220 · 240 · 260 · 280 · 300 · 320 · 350 · 380"
+            }
+          ],
+          "nota_medidas": null
+        },
+        {
+          "nombre": "Perfil C y U en chapa doblada",
+          "descripcion": "Perfilería conformada en frío. La fabricamos a medida en nuestro taller a partir de tu plano.",
+          "usos": [
+            "Correas",
+            "Bastidores",
+            "Steel framing"
+          ],
+          "medidas": [
+            {
+              "titulo": "Perfil C",
+              "modo": "tabla",
+              "columnas": [
+                "Alto × ala × labio × espesor (mm)"
+              ],
+              "filas_texto": "80×40×15×1,6\n80×40×15×2\n100×50×15×2\n120×50×15×2\n140×60×20×2\n140×60×20×2,5\n160×60×20×2\n160×60×20×2,5\n180×70×25×2\n180×70×25×2,5\n180×70×25×3,2\n200×70×25×2\n200×70×25×2,5\n200×70×25×3,2"
+            },
+            {
+              "titulo": "Perfil U",
+              "modo": "tabla",
+              "columnas": [
+                "Alto × ala × espesor (mm)"
+              ],
+              "filas_texto": "80×40×1,6\n80×40×2\n100×40×2,5\n120×40×2,5\n140×60×2,5\n140×60×3,2\n180×70×3,2\n200×70×3,2"
+            }
+          ],
+          "nota_medidas": null
+        },
+        {
+          "nombre": "Ángulos, planchuelas y hierro Tee",
+          "descripcion": "Complementos de estructura y herrería en distintas secciones y espesores.",
+          "usos": [
+            "Herrería",
+            "Refuerzos",
+            "Marcos"
+          ],
+          "medidas": [
+            {
+              "titulo": "Ángulos",
+              "modo": "tabla",
+              "columnas": [
+                "Medida (pulgadas)"
+              ],
+              "filas_texto": "5/8\" × 1/8\"\n3/4\" × 1/8\"\n7/8\" × 1/8\"\n1\" × 1/8\"\n1\" × 3/16\"\n1\" × 1/4\"\n1 1/4\" × 1/8\"\n1 1/4\" × 3/16\"\n1 1/4\" × 1/4\"\n1 1/2\" × 1/8\"\n1 1/2\" × 3/16\"\n1 1/2\" × 1/4\"\n1 3/4\" × 1/8\"\n1 3/4\" × 3/16\"\n2\" × 1/8\"\n2\" × 3/16\"\n2\" × 1/4\"\n2 1/4\" × 3/16\"\n2 1/4\" × 1/4\"\n2 1/2\" × 3/16\"\n2 1/2\" × 1/4\"\n3\" × 1/4\"\n3\" × 5/16\"\n3\" × 3/8\"\n3 1/2\" × 1/4\"\n3 1/2\" × 5/16\"\n3 1/2\" × 3/8\"\n4\" × 1/4\"\n4\" × 5/16\"\n4\" × 3/8\"\n4\" × 1/2\""
+            },
+            {
+              "titulo": "Planchuelas",
+              "modo": "tabla",
+              "columnas": [
+                "Medida (pulgadas)"
+              ],
+              "filas_texto": "5/8\" × 1/8\"\n3/4\" × 1/8\"\n7/8\" × 1/8\"\n1\" × 1/8\"\n1\" × 3/16\"\n1\" × 1/4\"\n1 1/4\" × 1/8\"\n1 1/4\" × 3/16\"\n1 1/4\" × 1/4\"\n1 1/2\" × 1/8\"\n1 1/2\" × 3/16\"\n1 1/2\" × 1/4\"\n1 3/4\" × 1/8\"\n1 3/4\" × 3/16\"\n2\" × 1/8\"\n2\" × 3/16\"\n2\" × 1/4\"\n2 1/4\" × 3/16\"\n2 1/4\" × 1/4\"\n2 1/2\" × 3/16\"\n2 1/2\" × 1/4\"\n3\" × 1/4\"\n3\" × 5/16\"\n3\" × 3/8\"\n3 1/2\" × 1/4\"\n3 1/2\" × 5/16\"\n3 1/2\" × 3/8\"\n4\" × 1/4\"\n4\" × 5/16\"\n4\" × 3/8\"\n4\" × 1/2\""
+            }
+          ],
+          "nota_medidas": null
+        }
+      ]
+    },
+    {
+      "slug": "tubos",
+      "nombre": "Tubos y caños",
+      "resumen_home": "Caños redondos, cuadrados y rectangulares; tubos estructurales con y sin costura SCH10 a SCH80.",
+      "bajada": "Tubería estructural y de conducción, en acabado profesional y amplia gama de diámetros y espesores de pared.",
+      "ilustracion": "tubos",
+      "seo_titulo": "Tubos y caños · Hierro Metal S.R.L.",
+      "seo_descripcion": "Caños redondos, cuadrados y rectangulares y tubos estructurales con y sin costura, SCH10 a SCH80. Consultá medidas y pedí tu cotización.",
+      "lineas": [
+        {
+          "nombre": "Caños redondos, cuadrados y rectangulares",
+          "descripcion": "Tubería metálica para estructuras livianas, cerramientos, barandas y mobiliario.",
+          "usos": [
+            "Estructuras",
+            "Barandas",
+            "Portones"
+          ],
+          "medidas": [
+            {
+              "titulo": null,
+              "modo": "tabla",
+              "columnas": [
+                "Pulgada",
+                "Redondo (mm)",
+                "Cuadrado (mm)",
+                "Rectangular (mm)"
+              ],
+              "filas_texto": "1/2\t12,70\t10×10\t—\n9/16\t14,28\t—\t—\n5/8\t15,87\t12×12\t—\n3/4\t10,05\t15×15\t20×10\n13/16\t20,63\t—\t—\n7/8\t22,22\t17×17\t10×25 y 20×15\n15/16\t23,81\t—\t—\n1\"\t25,40\t20×20\t10×30 y 25×15\n1 1/8\t28,57\t22×22\t30×15\n1 3/16\t30,16\t—\t—\n1 1/4\t31,75\t25×25\t30×20 y 12×38\n1 3/8\t34,92\t27×27\t30×25\n1 1/2\t38,10\t30×30\t40×20 y 25×35\n\t40,00\t—\t—\n1 5/8\t41,27\t32×32\t40×25\n1 3/4\t44,45\t35×35\t50×20 y 40×30\n1 7/8\t47,62\t37×37\t50×25\n2\"\t50,80\t40×40\t50×30 y 60×20\n2 1/8\t53,97\t—\t60×25\n2 1/4\t57,15\t45×45\t60×30 y 50×40\n2 3/8\t60,32\t—\t—\n2 1/2\t63,50\t50×50\t60×40 y 70×30\n2 5/8\t66,67\t—\t—\n2 3/4\t69,85\t55×55\t—\n2 7/8\t73,02\t—\t—\n3\"\t76,20\t60×60\t80×40\n3 1/2\t88,90\t70×70\t100×40\n4\"\t101,69\t80×80\t100×60 y 120×40\n4 1/2\t114,30\t90×90\t100×80 y 140×60\n5\"\t127,00\t100×100\t120×80 y 140×60\n6\"\t152,40\t120×120\t140×100 y 160×80"
+            }
+          ],
+          "nota_medidas": null
+        },
+        {
+          "nombre": "Tubos estructurales con y sin costura · SCH10 a SCH80",
+          "descripcion": "Distintos schedules de espesor de pared, para conducción y estructuras que trabajan a presión o carga.",
+          "usos": [
+            "Conducción",
+            "Industria",
+            "Estructura pesada"
+          ],
+          "medidas": [],
+          "nota_medidas": "Contamos con Tubos SCH40, SCH80, SCH20, SCH10 en distintas medidas."
+        }
+      ]
+    },
+    {
+      "slug": "varillas",
+      "nombre": "Varillas y barras",
+      "resumen_home": "Varillas lisas, de construcción y cuadradas; barras trafiladas SAE 1045/1050/1060 y barras de bronce.",
+      "bajada": "Desde la varilla de construcción de obra civil hasta barras trafiladas para mecanizado.",
+      "ilustracion": "varillas",
+      "seo_titulo": "Varillas y barras · Hierro Metal S.R.L.",
+      "seo_descripcion": "Varillas lisas, de construcción, cuadradas y roscadas, barras trafiladas SAE 1045, 1050 y 1060 y barras de bronce. Pedí tu cotización.",
+      "lineas": [
+        {
+          "nombre": "Varillas lisas, de construcción y cuadradas",
+          "descripcion": "Varilla nervurada para hormigón armado, más varilla lisa y cuadrada para herrería y rejas. También varilla roscada.",
+          "usos": [
+            "Hormigón armado",
+            "Rejas",
+            "Herrería"
+          ],
+          "medidas": [
+            {
+              "titulo": null,
+              "modo": "tabla",
+              "columnas": [
+                "Diámetro nominal (mm)",
+                "Masa nominal (kg/m)",
+                "Sección nominal (mm²)"
+              ],
+              "filas_texto": "6\t0,222\t28,3\n8\t0,395\t50,3\n10\t0,617\t78,5\n12\t0,888\t113\n14\t1,21\t154\n16\t1,58\t201\n20\t2,47\t314\n25\t3,85\t491\n32\t6,31\t804\n40\t9,86\t1.260"
+            }
+          ],
+          "nota_medidas": null
+        },
+        {
+          "nombre": "Barras trafiladas SAE 1045, 1050 y 1060",
+          "descripcion": "Aceros al carbono de mayor resistencia, con tolerancia dimensional apta para mecanizado.",
+          "usos": [
+            "Ejes",
+            "Piezas mecanizadas",
+            "Repuestos"
+          ],
+          "medidas": [],
+          "nota_medidas": "Acero de grado SAE 1045, SAE 1050 y SAE 1060. Fabricado bajo las normas ASTM A510, A510M, ASTM A713 y A713M."
+        },
+        {
+          "nombre": "Barras de bronce",
+          "descripcion": "Para bujes, casquillos y piezas donde se necesita menor fricción y buena maquinabilidad.",
+          "usos": [
+            "Bujes",
+            "Casquillos",
+            "Mantenimiento"
+          ],
+          "medidas": [],
+          "nota_medidas": null
+        }
+      ]
+    },
+    {
+      "slug": "accesorios",
+      "nombre": "Accesorios de cañería",
+      "resumen_home": "Válvulas, codos, tee, bridas, bujes y uniones en inoxidable, galvanizado, acero al carbono y anti-incendio.",
+      "bajada": "Todo lo que une, deriva y corta una línea de cañería, en los cuatro materiales que más se piden en obra e industria.",
+      "ilustracion": "accesorios",
+      "seo_titulo": "Accesorios de cañería · Hierro Metal S.R.L.",
+      "seo_descripcion": "Válvulas, codos, tee, bridas, bujes y uniones en acero inoxidable, galvanizado, acero al carbono y línea anti-incendio. Pedí tu cotización.",
+      "lineas": [
+        {
+          "nombre": "Válvulas, codos, tee, bridas, bujes y uniones",
+          "descripcion": "Disponibles en acero inoxidable, galvanizado, acero al carbono y línea anti-incendio.",
+          "usos": [
+            "Instalaciones",
+            "Industria",
+            "Anti-incendio"
+          ],
+          "medidas": [],
+          "nota_medidas": null
+        }
+      ]
+    }
+  ],
+  "servicios": [
+    {
+      "nombre": "Cortes a medida",
+      "descripcion": "Cortamos chapas, barras, perfiles y tubos según tu plano o tu lista de despiece. Pagás el material que vas a usar y llegás a la obra sin tener que cortar en el lugar.",
+      "usos": [
+        "Chapas",
+        "Barras",
+        "Perfiles",
+        "Tubos"
+      ],
+      "destacado_home": true,
+      "titulo_home": "Cortes y plegados",
+      "resumen_home": "Chapas y barras según tu plano o lista de despiece."
+    },
+    {
+      "nombre": "Plegados",
+      "descripcion": "Doblamos la chapa a los ángulos que necesites, para cerramientos, cubiertas, babetas, cenefas y piezas de terminación.",
+      "usos": [
+        "Cubiertas",
+        "Cerramientos",
+        "Terminaciones"
+      ],
+      "destacado_home": false,
+      "titulo_home": null,
+      "resumen_home": null
+    },
+    {
+      "nombre": "Perforado",
+      "descripcion": "Hacemos las perforaciones donde las marca el plano, listas para bulonar en el montaje.",
+      "usos": [
+        "Uniones bulonadas",
+        "Montaje"
+      ],
+      "destacado_home": false,
+      "titulo_home": null,
+      "resumen_home": null
+    },
+    {
+      "nombre": "Fabricación especial de perfiles",
+      "descripcion": "Fabricamos perfiles C y U en chapa doblada en la medida y el espesor que pidas, cuando la medida comercial no te sirve.",
+      "usos": [
+        "Correas",
+        "Bastidores",
+        "Medidas no comerciales"
+      ],
+      "destacado_home": true,
+      "titulo_home": "Fabricación especial",
+      "resumen_home": "Perfiles C y U en chapa doblada, a medida."
+    },
+    {
+      "nombre": "Galvanización",
+      "descripcion": "Recubrimiento de zinc sobre chapas y perfilería para protegerlas de la corrosión, especialmente en obras a la intemperie o en ambientes húmedos.",
+      "usos": [
+        "Intemperie",
+        "Ambientes húmedos",
+        "Larga duración"
+      ],
+      "destacado_home": true,
+      "titulo_home": "Galvanización",
+      "resumen_home": "Protección contra la corrosión de chapas y perfilería."
+    },
+    {
+      "nombre": "Entrega en obra",
+      "descripcion": "Tenemos flota propia de camiones: coordinamos el día y dejamos el material en el lugar, sin depender de fletes de terceros.",
+      "usos": [
+        "Flota propia",
+        "Todo Paraguay"
+      ],
+      "destacado_home": false,
+      "titulo_home": null,
+      "resumen_home": null
+    }
+  ],
+  "pasos": [
+    {
+      "titulo": "Nos mandás el pedido",
+      "texto": "Plano, lista de despiece o el detalle escrito por WhatsApp, correo o el formulario del sitio."
+    },
+    {
+      "titulo": "Cotizamos",
+      "texto": "Te pasamos precio del material más el trabajo de taller, la disponibilidad y el plazo. En el día."
+    },
+    {
+      "titulo": "Preparamos el material",
+      "texto": "Cortamos, plegamos, perforamos o galvanizamos según lo acordado, y controlamos las medidas."
+    },
+    {
+      "titulo": "Entregamos",
+      "texto": "Retirás por el depósito o lo llevamos a la obra con nuestros camiones, en la fecha coordinada."
+    }
+  ],
+  "compromisos": [
+    {
+      "titulo": "Materia prima certificada",
+      "texto": "Trabajamos con materia prima certificada bajo Normas Internacionales del Acero. Las chapas se entregan con el certificado de calidad del fabricante."
+    },
+    {
+      "titulo": "Control de calidad estricto",
+      "texto": "Controlamos el material al recibirlo y verificamos las medidas de los trabajos de taller antes de despachar cada pedido."
+    },
+    {
+      "titulo": "Infraestructura mantenida",
+      "texto": "Mantenemos el depósito, las máquinas de corte y plegado y la flota de camiones en condiciones de operar de forma segura y precisa."
+    },
+    {
+      "titulo": "Mejora continua",
+      "texto": "Revisamos de forma permanente nuestros productos y procesos para responder mejor y más rápido a lo que pide el mercado."
+    }
+  ],
+  "diferenciales": [
+    {
+      "titulo": "Stock permanente",
+      "texto": "Medidas comerciales todo el año."
+    },
+    {
+      "titulo": "Importación directa",
+      "texto": "Precio mayorista y minorista."
+    },
+    {
+      "titulo": "Corte a medida",
+      "texto": "Cortes, plegados y perforaciones."
+    },
+    {
+      "titulo": "Flota propia",
+      "texto": "Entrega de materiales en obra."
+    }
+  ],
+  "faqs": [
+    {
+      "pregunta": "¿Venden al por mayor y al por menor?",
+      "respuesta": "<p>Sí. Trabajamos con importación directa, lo que nos permite vender tanto al por mayor como al por menor. Atendemos a constructoras, herrerías e industrias, y también a clientes particulares que necesitan una cantidad chica.</p>"
+    },
+    {
+      "pregunta": "¿Cortan el material a medida?",
+      "respuesta": "<p>Sí. Cortamos, plegamos y perforamos chapas, barras, perfiles y tubos según tu plano o tu lista de despiece. Así pagás solo el material que vas a usar y llegás al montaje con las piezas listas.</p><p>Podés ver el detalle en la página de <a href=\"/servicios\">servicios industriales</a>.</p>"
+    },
+    {
+      "pregunta": "¿Entregan el material en obra?",
+      "respuesta": "<p>Sí. Tenemos flota propia de camiones: coordinamos el día de entrega y dejamos el material en el lugar, sin depender de fletes de terceros.</p>"
+    },
+    {
+      "pregunta": "¿Las chapas vienen con certificado de calidad?",
+      "respuesta": "<p>Sí. Trabajamos con materia prima certificada bajo Normas Internacionales del Acero, y las chapas se entregan con el certificado de calidad del fabricante.</p><p>Si necesitás el certificado de una partida en particular para presentar ante una dirección de obra o una fiscalización, pedilo al momento de cotizar y lo entregamos junto con el material.</p>"
+    },
+    {
+      "pregunta": "¿Fabrican perfiles en medidas no comerciales?",
+      "respuesta": "<p>Sí. Fabricamos perfiles C y U en chapa doblada en la medida y el espesor que necesites, para cuando la medida comercial de stock no se adapta a tu proyecto.</p>"
+    },
+    {
+      "pregunta": "¿Ofrecen galvanización?",
+      "respuesta": "<p>Sí. Galvanizamos chapas y perfilería para protegerlas de la corrosión. Es especialmente recomendable en obras a la intemperie o en ambientes húmedos, donde el acero sin protección se deteriora rápido.</p>"
+    },
+    {
+      "pregunta": "¿Cómo pido una cotización?",
+      "respuesta": "<p>De tres maneras, la que te quede más cómoda: completás el <a href=\"/contacto\">formulario de contacto</a>, nos escribís por WhatsApp al <a href=\"https://wa.me/595981320675\">+595 981 320 675</a>, o nos mandás un correo a <a href=\"mailto:hierrometalventas@hotmail.com\">hierrometalventas@hotmail.com</a>.</p><p>Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega.</p>"
+    },
+    {
+      "pregunta": "¿Cuál es el horario de atención?",
+      "respuesta": "<p>De lunes a viernes, de 07:00 a 17:00. Los sábados, de 07:00 a 12:00.</p>"
+    },
+    {
+      "pregunta": "¿Dónde están ubicados?",
+      "respuesta": "<p>Nuestra casa matriz está en Pedro Getto esquina Cadete Sisa, Fernando de la Mora, departamento Central. Podés ver el mapa y cómo llegar en la página de <a href=\"/ubicacion\">ubicación</a>.</p>"
+    },
+    {
+      "pregunta": "¿A qué zonas del país llegan?",
+      "respuesta": "<p>Operamos en todo Paraguay. Para entregas en el interior, avisanos al momento de cotizar y coordinamos el envío según el volumen del pedido.</p>"
+    }
+  ],
+  "horarios": [
+    {
+      "etiqueta": "Lunes a viernes",
+      "dias": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "abre": "07:00",
+      "cierra": "17:00",
+      "cerrado": false
+    },
+    {
+      "etiqueta": "Sábados",
+      "dias": [
+        6
+      ],
+      "abre": "07:00",
+      "cierra": "12:00",
+      "cerrado": false
+    },
+    {
+      "etiqueta": "Domingos y feriados",
+      "dias": [
+        7
+      ],
+      "abre": null,
+      "cierra": null,
+      "cerrado": true
+    }
+  ],
+  "rubros": [
+    {
+      "slug": "chapas",
+      "nombre": "Chapas de acero",
+      "familia": "chapas"
+    },
+    {
+      "slug": "perfiles",
+      "nombre": "Perfiles y estructurales",
+      "familia": "perfiles"
+    },
+    {
+      "slug": "tubos",
+      "nombre": "Tubos y caños",
+      "familia": "tubos"
+    },
+    {
+      "slug": "varillas",
+      "nombre": "Varillas y barras",
+      "familia": "varillas"
+    },
+    {
+      "slug": "accesorios",
+      "nombre": "Accesorios de cañería",
+      "familia": "accesorios"
+    },
+    {
+      "slug": "servicio-corte",
+      "nombre": "Servicio de corte, plegado o perforado",
+      "servicio": "Cortes a medida"
+    },
+    {
+      "slug": "galvanizacion",
+      "nombre": "Galvanización",
+      "servicio": "Galvanización"
+    },
+    {
+      "slug": "varios",
+      "nombre": "Varios materiales / lista completa"
+    },
+    {
+      "slug": "otra-consulta",
+      "nombre": "Otra consulta"
+    }
+  ],
+  "ajustes": [
+    {
+      "key": "site_name",
+      "value": "Hierro Metal S.R.L.",
+      "type": "text",
+      "group": "general",
+      "label": "Nombre del sitio"
+    },
+    {
+      "key": "descripcion_corta",
+      "value": "Importación y venta de materiales de construcción metálicos y metalúrgicos.",
+      "type": "text",
+      "group": "general",
+      "label": "Descripción corta"
+    },
+    {
+      "key": "direccion_corta",
+      "value": "Pedro Getto esq. Cadete Sisa",
+      "type": "text",
+      "group": "contacto",
+      "label": "Dirección corta"
+    },
+    {
+      "key": "direccion_larga",
+      "value": "Pedro Getto esquina Cadete Sisa, Fernando de la Mora, departamento Central, Paraguay",
+      "type": "text",
+      "group": "contacto",
+      "label": "Dirección completa"
+    },
+    {
+      "key": "ciudad",
+      "value": "Fernando de la Mora",
+      "type": "text",
+      "group": "contacto",
+      "label": "Ciudad"
+    },
+    {
+      "key": "departamento",
+      "value": "Central",
+      "type": "text",
+      "group": "contacto",
+      "label": "Departamento"
+    },
+    {
+      "key": "contact_phone",
+      "value": "+595 981 320 675",
+      "type": "text",
+      "group": "contacto",
+      "label": "Teléfono de ventas (como se muestra)"
+    },
+    {
+      "key": "whatsapp_number",
+      "value": "595981320675",
+      "type": "text",
+      "group": "contacto",
+      "label": "WhatsApp (sólo números, con el código del país)"
+    },
+    {
+      "key": "contact_email",
+      "value": "hierrometalventas@hotmail.com",
+      "type": "text",
+      "group": "contacto",
+      "label": "Correo de contacto (el que se muestra en el sitio)"
+    },
+    {
+      "key": "email_notificacion_cotizaciones",
+      "value": "",
+      "type": "text",
+      "group": "contacto",
+      "label": "Correo que recibe el aviso de cada cotización (hasta 3, separados por coma)"
+    },
+    {
+      "key": "maps_url",
+      "value": "https://maps.app.goo.gl/XpbnH8AFw9iJSExs8",
+      "type": "text",
+      "group": "contacto",
+      "label": "Enlace a Google Maps"
+    },
+    {
+      "key": "google_maps_embed_url",
+      "value": "",
+      "type": "text",
+      "group": "contacto",
+      "label": "Enlace para incrustar el mapa (se carga sólo con consentimiento)"
+    },
+    {
+      "key": "social_instagram_url",
+      "value": "https://www.instagram.com/hierrometalsrl/",
+      "type": "text",
+      "group": "redes",
+      "label": "Instagram"
+    },
+    {
+      "key": "social_facebook_url",
+      "value": "https://www.facebook.com/p/Hierro-Metal-SRL-100044982888002/?locale=es_LA",
+      "type": "text",
+      "group": "redes",
+      "label": "Facebook"
+    },
+    {
+      "key": "aviso_numero_unico",
+      "value": "Ventas se centraliza en un único número corporativo. Si alguien te contacta desde otro número diciendo representar a Hierro Metal S.R.L., verificá con nosotros antes de operar.",
+      "type": "text",
+      "group": "contacto",
+      "label": "Aviso de número único"
+    },
+    {
+      "key": "catalogo_texto_boton",
+      "value": "Descargar catálogo",
+      "type": "text",
+      "group": "catalogo",
+      "label": "Texto del botón del catálogo"
+    }
+  ],
+  "paginas": [
+    {
+      "slug": "calidad",
+      "titulo": "Materia prima certificada bajo Normas Internacionales del Acero",
+      "bajada": "El acero no se compra por el precio de la tonelada: se compra por lo que aguanta. Por eso todo lo que entra a nuestro depósito llega con el respaldo del fabricante.",
+      "html": "<p>En <strong>Hierro Metal S.R.L.</strong> importamos y comercializamos materiales de construcción metálicos y metalúrgicos. Nuestro compromiso es que cada chapa, perfil, tubo, varilla y accesorio que sale de nuestro depósito cumpla con lo que el cliente necesita para su obra, y que pueda demostrarlo con documentación del fabricante.</p><h2>Qué significa esto para tu obra</h2><h3>Sabés qué acero estás comprando</h3><p>Cuando el material viene certificado, sabés qué resistencia tiene y podés justificarlo ante una dirección de obra, una fiscalización o un cliente final. Si necesitás el certificado de una partida en particular, pedilo al momento de cotizar y lo entregamos con el material.</p><h3>Las medidas llegan como las pediste</h3><p>Los cortes, plegados y perforaciones se verifican contra el plano o la lista de despiece antes de cargar el camión. Es el paso que evita tener que rehacer piezas en el lugar de montaje.</p><h3>Si algo no está bien, lo resolvemos</h3><p>Si recibís un material que no corresponde con lo cotizado o con lo que pediste, avisanos apenas lo detectes. Es la única manera de corregirlo rápido y de que el problema no se repita con el próximo pedido.</p><h2>Ámbito de aplicación</h2><p>Esta política alcanza a todas nuestras actividades: la importación y compra de materiales, el almacenamiento en depósito, los servicios de corte, plegado, perforado, fabricación de perfiles y galvanización, y la entrega en obra con flota propia.</p>",
+      "estado": "published",
+      "indexable": true,
+      "seo_titulo": "Política de calidad · Hierro Metal S.R.L.",
+      "seo_descripcion": "Materia prima certificada bajo Normas Internacionales del Acero, control de medidas antes de despachar y certificado del fabricante en las chapas."
+    },
+    {
+      "slug": "privacidad",
+      "titulo": "Política de privacidad",
+      "bajada": "Cómo tratamos los datos personales que nos dejás en este sitio.",
+      "html": "<p><strong>Última actualización:</strong> septiembre de 2026.</p>\n      <h2>1. Quiénes somos</h2>\n      <p>El responsable del tratamiento de los datos es <strong>Hierro Metal S.R.L.</strong>, con domicilio en Pedro Getto esquina Cadete Sisa, Fernando de la Mora, departamento Central, Paraguay. Podés contactarnos por correo a <a href=\"mailto:hierrometalventas@hotmail.com\">hierrometalventas@hotmail.com</a> o por teléfono al <a href=\"tel:+595981320675\">+595 981 320 675</a>.</p>\n      <h2>2. Qué datos recopilamos</h2>\n      <p>Solamente los que vos nos entregás al completar el formulario de cotización:</p>\n      <ul>\n        <li><strong>Nombre y apellido</strong> (obligatorio).</li>\n        <li><strong>Teléfono o WhatsApp</strong> (obligatorio).</li>\n        <li><strong>Empresa u obra</strong> (opcional).</li>\n        <li><strong>Correo electrónico</strong> (opcional).</li>\n        <li><strong>El detalle de tu pedido</strong>: la lista de materiales o la consulta que escribas.</li>\n<li><strong>Los archivos que adjuntes</strong> (plano, despiece o lista), si decidís adjuntar alguno. Se guardan en un espacio privado y sólo los ve el personal que atiende tu pedido.</li>\n      </ul>\n      <p>Junto con el envío se registra también la fecha, la hora y la dirección IP desde la que se hizo, como medida técnica contra el envío automatizado de spam.</p>\n      <p>Este sitio <strong>no</strong> pide ni procesa datos de tarjetas, cuentas bancarias ni documentos de identidad. Nunca te vamos a pedir ese tipo de información por el formulario.</p>\n      <h2>3. Para qué los usamos</h2>\n      <p>Usamos tus datos con una única finalidad: <strong>responder tu consulta y elaborar la cotización que pediste</strong>, y hacer el seguimiento comercial de ese pedido concreto.</p>\n      <p>No usamos tus datos para enviarte publicidad no solicitada, no los vendemos, no los alquilamos y no los cedemos a terceros con fines comerciales.</p>\n      <h2>4. Base legal</h2>\n      <p>Tratamos tus datos sobre la base de tu consentimiento, que otorgás al enviar voluntariamente el formulario, y del interés legítimo en atender una consulta comercial que vos iniciaste. Este tratamiento se realiza conforme a la <strong>Ley N.º 6534/2020 de Protección de Datos Personales Crediticios</strong> y a las demás normas aplicables en la República del Paraguay.</p>\n      <h2>5. Con quién los compartimos</h2>\n      <p>Tus datos son tratados por el personal de Hierro Metal S.R.L. que interviene en la atención comercial. Además intervienen técnicamente:</p>\n      <ul>\n        <li><strong>Nuestro proveedor de hosting y correo</strong>, que aloja el sitio y transmite el mensaje del formulario hasta nuestra casilla.</li>\n        <li><strong>Google Maps</strong>, en la página de ubicación. Al cargarse el mapa, Google puede recoger datos de tu navegación (dirección IP, navegador) según sus propias políticas. Si no querés que eso ocurra, no abras la página de ubicación o bloqueá el contenido de terceros en tu navegador.</li>\n      </ul>\n      <p>Fuera de esos casos, no compartimos tus datos con nadie, salvo requerimiento de autoridad competente.</p>\n      <h2>6. Cuánto tiempo los conservamos</h2>\n      <p>Conservamos las consultas por el tiempo necesario para atenderlas y, si se concreta una operación, por el plazo que exijan las obligaciones contables y tributarias. Pasado ese período, los eliminamos.</p>\n      <h2>7. Tus derechos</h2>\n      <p>Podés pedirnos en cualquier momento:</p>\n      <ul>\n        <li><strong>Acceder</strong> a los datos que tenemos sobre vos.</li>\n        <li><strong>Rectificarlos</strong> si están equivocados o incompletos.</li>\n        <li><strong>Suprimirlos</strong>, cuando ya no sean necesarios para la finalidad por la que los diste.</li>\n        <li><strong>Retirar tu consentimiento</strong> para futuros contactos comerciales.</li>\n      </ul>\n      <p>Para ejercer cualquiera de estos derechos, escribinos a <a href=\"mailto:hierrometalventas@hotmail.com\">hierrometalventas@hotmail.com</a> indicando qué querés hacer. Te respondemos en un plazo razonable.</p>\n      <h2>8. Cookies</h2>\n      <p>Este sitio <strong>no instala cookies propias</strong> de seguimiento ni de publicidad. El mapa de Google, en la página de ubicación, puede instalar cookies de terceros al cargarse.</p>\n      <p>Si en el futuro incorporamos herramientas de medición de audiencia, actualizaremos esta política y lo informaremos en esta misma página.</p>\n      <h2>9. Seguridad</h2>\n      <p>El sitio se sirve mediante conexión cifrada (HTTPS) y aplicamos medidas razonables para proteger la información. Aun así, ningún sistema es infalible: te pedimos que no envíes por el formulario información sensible que no sea necesaria para cotizar tu pedido.</p>\n      <h2>10. Cambios en esta política</h2>\n      <p>Si modificamos esta política, publicaremos la versión actualizada en esta página con su nueva fecha. Te recomendamos revisarla cada tanto.</p>\n      <h2>11. Contacto</h2>\n      <p>Cualquier duda sobre esta política podés dirigirla a:</p>\n      <p><strong>Hierro Metal S.R.L.</strong><br>\n      Pedro Getto esq. Cadete Sisa, Fernando de la Mora, Central, Paraguay<br>\n      <a href=\"mailto:hierrometalventas@hotmail.com\">hierrometalventas@hotmail.com</a> · <a href=\"tel:+595981320675\">+595 981 320 675</a></p>\n    </div>\n    <div>\n      <a href=\"#/inicio\">Volver al inicio</a>",
+      "estado": "draft",
+      "indexable": true,
+      "seo_titulo": "Política de privacidad · Hierro Metal S.R.L.",
+      "seo_descripcion": "Cómo tratamos los datos que nos dejás en el formulario de cotización de Hierro Metal S.R.L."
+    }
+  ],
+  "encabezados": [
+    {
+      "slug": "inicio",
+      "titulo": "Materiales metálicos para construir Paraguay",
+      "bajada": "Chapas, perfiles, tubos, varillas y accesorios de acero con stock permanente. Cortamos, plegamos, perforamos y galvanizamos según tu plano, y entregamos en obra con flota propia de camiones.",
+      "cta_label": "Pedir cotización",
+      "cta_url": "/contacto",
+      "indexable": false,
+      "seo_titulo": "Hierro Metal S.R.L. · Chapas, perfiles y tubos de acero",
+      "seo_descripcion": "Importación y venta mayorista y minorista de chapas, perfiles, tubos, varillas y accesorios de acero en Fernando de la Mora. Corte a medida y entrega en obra."
+    },
+    {
+      "slug": "productos",
+      "titulo": "Materiales metálicos y metalúrgicos",
+      "bajada": "Cinco familias con stock permanente en nuestro depósito de Fernando de la Mora. Trabajamos con importación directa, por eso vendemos tanto al por mayor como al por menor. Las medidas y espesores disponibles varían según la línea y el momento: escribinos con tu lista y te confirmamos stock y precio en el día.",
+      "cta_label": "Pedir cotización",
+      "cta_url": "/contacto",
+      "indexable": true,
+      "seo_titulo": "Productos y catálogo · Hierro Metal S.R.L.",
+      "seo_descripcion": "Cinco familias de materiales metálicos con stock permanente: chapas, perfiles, tubos, varillas y accesorios. Descargá el catálogo y pedí tu cotización."
+    },
+    {
+      "slug": "servicios",
+      "titulo": "Trabajamos el material por vos",
+      "bajada": "No vendemos solamente el material: lo preparamos. Cortamos, plegamos, perforamos, fabricamos perfilería a medida, galvanizamos y lo dejamos en tu obra. Así llegás al montaje con las piezas listas y sin desperdicio.",
+      "cta_label": "Pedir cotización",
+      "cta_url": "/contacto",
+      "indexable": true,
+      "seo_titulo": "Servicios industriales · Hierro Metal S.R.L.",
+      "seo_descripcion": "Cortes a medida, plegados, perforado, perfiles C y U especiales, galvanización y entrega en obra con flota propia de camiones."
+    },
+    {
+      "slug": "preguntas-frecuentes",
+      "titulo": "Lo que más nos preguntan",
+      "bajada": "Si tu consulta no está acá, escribinos por WhatsApp y te respondemos.",
+      "cta_label": "Pedir cotización",
+      "cta_url": "/contacto",
+      "indexable": true,
+      "seo_titulo": "Preguntas frecuentes · Hierro Metal S.R.L.",
+      "seo_descripcion": "Venta mayorista y minorista, corte a medida, entrega en obra, certificados, horarios y cómo pedir una cotización en Hierro Metal S.R.L."
+    },
+    {
+      "slug": "ubicacion",
+      "titulo": "Casa matriz en Fernando de la Mora",
+      "bajada": "Depósito, taller y atención comercial en el mismo lugar. Podés venir a retirar tu pedido o coordinamos la entrega en tu obra con nuestros camiones.",
+      "cta_label": "Cómo llegar",
+      "cta_url": "https://maps.app.goo.gl/XpbnH8AFw9iJSExs8",
+      "indexable": true,
+      "seo_titulo": "Ubicación y horarios · Hierro Metal S.R.L.",
+      "seo_descripcion": "Depósito, taller y atención comercial en Pedro Getto esq. Cadete Sisa, Fernando de la Mora. Lunes a viernes 07:00 a 17:00 y sábados 07:00 a 12:00."
+    },
+    {
+      "slug": "contacto",
+      "titulo": "Pedí tu cotización",
+      "bajada": "Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día. Si preferís hablar, escribinos por WhatsApp o llamanos.",
+      "cta_label": "Enviar pedido",
+      "cta_url": "/contacto",
+      "indexable": true,
+      "seo_titulo": "Pedí tu cotización · Hierro Metal S.R.L.",
+      "seo_descripcion": "Mandanos tu lista de materiales, el plano o el despiece y te respondemos con precio, disponibilidad y plazo de entrega en el día."
+    }
+  ],
+  "menus": {
+    "primary": {
+      "nombre": "Navegación principal",
+      "items": [
+        {
+          "label": "Productos",
+          "url": "/productos"
+        },
+        {
+          "label": "Servicios",
+          "url": "/servicios"
+        },
+        {
+          "label": "Calidad",
+          "url": "/calidad"
+        },
+        {
+          "label": "Preguntas frecuentes",
+          "url": "/preguntas-frecuentes"
+        },
+        {
+          "label": "Ubicación",
+          "url": "/ubicacion"
+        },
+        {
+          "label": "Contacto",
+          "url": "/contacto"
+        }
+      ]
+    },
+    "footer_secondary": {
+      "nombre": "Pie de página",
+      "items": [
+        {
+          "label": "Productos y catálogo",
+          "url": "/productos"
+        },
+        {
+          "label": "Servicios industriales",
+          "url": "/servicios"
+        },
+        {
+          "label": "Política de calidad",
+          "url": "/calidad"
+        },
+        {
+          "label": "Preguntas frecuentes",
+          "url": "/preguntas-frecuentes"
+        },
+        {
+          "label": "Ubicación",
+          "url": "/ubicacion"
+        },
+        {
+          "label": "Contacto",
+          "url": "/contacto"
+        },
+        {
+          "label": "Política de privacidad",
+          "url": "/privacidad"
+        }
+      ]
+    }
+  }
+}

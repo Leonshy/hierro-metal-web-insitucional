@@ -254,3 +254,30 @@ de página** editables, no fijos en Blade.
   descarta las cookies que no cifró, así que el servidor nunca veía el consentimiento y el evento a Meta no se habría enviado
   jamás. Se eximieron de cifrado (`bootstrap/app.php`).
 - **Meta:** por defecto el evento no lleva teléfono ni correo (`SITIO_META_ENVIAR_DATOS=false`), y sólo sale con el consentimiento.
+
+
+## 7. Contenido sembrado (Fase 3, octubre 2026)
+
+`php artisan migrate --seed` deja el panel con el **100 % del contenido del inventario** (`docs/01`), las tablas de medidas del catálogo
+2026 (`docs/05`, con las decisiones aplicadas) y el copy final (`docs/07`).
+
+| Qué | Cantidad / detalle |
+|---|---|
+| Familias y líneas | 5 familias, 16 líneas (7·3·2·3·1), 10 líneas con tablas de medidas. Las laminadas en frío y en caliente son una línea con dos tablas |
+| Servicios, pasos, compromisos, diferenciales | 6 · 4 · 4 · 4. Tres servicios destacados en el inicio |
+| Preguntas frecuentes | 10, con enlaces reales y el correo `hierrometalventas@hotmail.com` |
+| Horarios | 3 (lunes a viernes, sábados, domingos y feriados cerrado) |
+| Rubros del formulario | 9, vinculados a su familia o servicio |
+| Configuración global | 16 ajustes (contacto, Maps, redes, aviso de número único, texto del catálogo). **El correo de avisos de cotización queda vacío** hasta que se cargue |
+| Páginas | Calidad (publicada), Privacidad (**borrador**: espera la revisión legal) y el texto de encabezado de cada plantilla |
+| Menús | Principal (6 enlaces) y de pie (7) |
+| Usuario | El administrador sale de `SITIO_ADMIN_EMAIL` y `SITIO_ADMIN_PASSWORD` (si no hay contraseña, se genera y se muestra una vez) |
+
+**Cómo se generó.** `database/seeders/data/contenido.json` sale de los documentos de contenido (no se copió a mano) y los seeders lo leen.
+Cada seeder **crea lo que falta y nunca pisa lo existente**: volver a correrlos en producción no deshace lo que el cliente editó.
+
+**Vendedores:** no viajan en el repositorio (regla 18, son datos de empleados). Si existe `database/seeders/data/vendedores.local.json`
+(ignorado por git, formato `[{"nombre": "…", "telefono": "…"}]`) se cargan **inactivos**.
+
+**Integridad probada:** cada fila de cada tabla de medidas tiene tantas celdas como columnas, y todo texto sembrado cumple los límites
+de palabras que el panel exige, así que se puede volver a guardar al editarlo.

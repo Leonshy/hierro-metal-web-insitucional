@@ -29,3 +29,6 @@ Thumbs.db
 /playwright-report
 /blob-report
 /playwright/.cache
+
+# Datos personales de empleados: no van al repositorio (regla 18)
+/database/seeders/data/*.local.json

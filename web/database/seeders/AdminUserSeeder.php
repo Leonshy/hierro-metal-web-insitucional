@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
         $password = env('SITIO_ADMIN_PASSWORD', Str::password(16));
 
         $user = User::query()->updateOrCreate(
-            ['email' => env('SITIO_ADMIN_EMAIL', 'admin@dante.edu.py')],
+            ['email' => env('SITIO_ADMIN_EMAIL', 'admin@hierro-metal.test')],
             [
                 'name' => 'Administrador Hierro Metal',
                 'password' => $password,
