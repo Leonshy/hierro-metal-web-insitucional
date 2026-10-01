@@ -2,7 +2,7 @@
 
 namespace App\Filament\Widgets;
 
-use App\Filament\Resources\FormSubmissions\FormSubmissionResource;
+use App\Filament\Resources\Cotizaciones\CotizacionResource;
 use App\Filament\Resources\Menus\MenuResource;
 use App\Filament\Resources\Pages\PageResource;
 use Filament\Widgets\Widget;
@@ -25,7 +25,7 @@ class QuickLinksWidget extends Widget
     {
         return [
             ['label' => 'Nueva página', 'url' => PageResource::getUrl('create'), 'icon' => 'heroicon-o-document-duplicate'],
-            ['label' => 'Ver formularios recibidos', 'url' => FormSubmissionResource::getUrl('index'), 'icon' => 'heroicon-o-inbox'],
+            ['label' => 'Ver cotizaciones recibidas', 'url' => CotizacionResource::getUrl('index'), 'icon' => 'heroicon-o-inbox'],
             ['label' => 'Administrar menús', 'url' => MenuResource::getUrl('index'), 'icon' => 'heroicon-o-bars-3'],
         ];
     }

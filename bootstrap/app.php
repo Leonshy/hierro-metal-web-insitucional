@@ -33,6 +33,12 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleRedirects::class,
         ]);
 
+        // Las cookies de consentimiento las escribe el JavaScript del banner, en texto plano
+        // (`resources/js/consent.js`). Sin esta excepción Laravel las descarta por no estar
+        // cifradas y el servidor nunca vería el consentimiento (Meta no recibiría el evento
+        // aunque la persona lo hubiera aceptado). Son un 0 o un 1: nada sensible.
+        $middleware->encryptCookies(except: ['sitio_consent', 'sitio_consent_marketing', 'sitio_consent_analytics']);
+
         $middleware->alias([
             'honeypot' => ProtectAgainstSpam::class,
         ]);

@@ -19,6 +19,8 @@ class DiferencialResource extends Resource
 {
     protected static ?string $model = Diferencial::class;
 
+    protected static ?string $slug = 'diferenciales';
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedStar;
 
     protected static ?string $navigationLabel = 'Diferenciales (franja amarilla)';

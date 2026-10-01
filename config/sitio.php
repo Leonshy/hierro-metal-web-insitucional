@@ -34,6 +34,31 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Cotizaciones
+    |--------------------------------------------------------------------------
+    | El pedido se guarda SIEMPRE antes de intentar el aviso por correo (regla 8).
+    | El remitente y el SMTP salen de MAIL_* del .env; el destinatario se carga en el
+    | panel (ajuste `email_notificacion_cotizaciones`) y, si falta, de esta variable.
+    */
+    'cotizaciones' => [
+        'email_aviso' => env('SITIO_COTIZACIONES_EMAIL'),
+        // Un aviso sin enviar pasado este tiempo lo retoma el comando de reintento.
+        'reintento_minutos' => (int) env('SITIO_COTIZACIONES_REINTENTO_MIN', 15),
+        // Tras tantos intentos fallidos se alerta a webparaguay (log crítico y, si está, correo).
+        'alerta_tras_intentos' => 3,
+        'email_alerta' => env('SITIO_ALERTA_EMAIL'),
+        // Segundos mínimos entre que se muestra el formulario y se envía (por debajo: robot).
+        'segundos_minimos' => 3,
+        'maximo_adjuntos' => 3,
+        'adjunto_max_kb' => 10240,
+        'adjuntos_permitidos' => ['pdf', 'jpg', 'jpeg', 'png', 'webp', 'dwg', 'dxf', 'xlsx'],
+        'disco_adjuntos' => env('SITIO_ADJUNTOS_DISCO', 'local'),
+        // Meta (Conversions API): por defecto sólo avisa el evento, sin teléfono ni correo.
+        'meta_enviar_datos_personales' => (bool) env('SITIO_META_ENVIAR_DATOS', false),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Sanitización de HTML (editor enriquecido)
     |--------------------------------------------------------------------------
     | Lista blanca — ver docs/05-backend-modelo-datos.md §5.
