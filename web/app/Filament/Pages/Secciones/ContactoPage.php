@@ -3,7 +3,6 @@
 namespace App\Filament\Pages\Secciones;
 
 use App\Filament\Secciones\SeccionPage;
-use App\Filament\Secciones\Widgets\RubrosTabla;
 use BackedEnum;
 use Filament\Support\Icons\Heroicon;
 
@@ -20,10 +19,5 @@ class ContactoPage extends SeccionPage
     protected static function paginaSlug(): string
     {
         return 'contacto';
-    }
-
-    protected function getFooterWidgets(): array
-    {
-        return [RubrosTabla::class];
     }
 }

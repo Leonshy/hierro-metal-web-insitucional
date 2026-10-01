@@ -31,7 +31,7 @@ class RubroResource extends Resource
 
     protected static string|UnitEnum|null $navigationGroup = 'Configuraciones';
 
-    protected static ?int $navigationSort = 19;
+    protected static ?int $navigationSort = 16;
 
     public static function form(Schema $schema): Schema
     {
