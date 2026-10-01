@@ -57,6 +57,9 @@
         <meta name="robots" content="noindex, nofollow">
     @endif
     <link rel="canonical" href="{{ $resolvedCanonical }}">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
     {{-- Open Graph / Twitter Cards (docs/08-seo.md §2) --}}
     <meta property="og:title" content="{{ $resolvedTitle }}">
