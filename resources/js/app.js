@@ -1,5 +1,6 @@
 import './consent.js';
 import './formulario.js';
+import './eventos.js';
 
 // Hallazgo real de Fase 9 (QA, docs/11-qa-testing.md §6), encontrado con
 // Playwright: la premisa original de este archivo ("Alpine.js llega
