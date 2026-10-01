@@ -17,7 +17,7 @@ class CotizacionController extends Controller
 {
     public function create(): View
     {
-        abort_unless(Page::seccionPublicada('contacto'), 404);
+        abort_unless(Page::visible('contacto'), 404);
 
         $horarios = Horario::query()->activos()->ordenados()->get();
 

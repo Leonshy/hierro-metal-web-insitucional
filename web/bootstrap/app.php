@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\PublicMaintenanceMode;
 use App\Http\Middleware\SecurityHeaders;
+use App\Http\Middleware\SinCacheEnVistaPrevia;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -27,6 +28,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // (`resources/js/consent.js`). Sin esta excepción Laravel las descarta por no estar
         // cifradas y el servidor nunca vería el consentimiento (Meta no recibiría el evento
         // aunque la persona lo hubiera aceptado). Son un 0 o un 1: nada sensible.
+        $middleware->web(append: [SinCacheEnVistaPrevia::class]);
+
         $middleware->encryptCookies(except: ['sitio_consent', 'sitio_consent_marketing', 'sitio_consent_analytics']);
 
         $middleware->alias([

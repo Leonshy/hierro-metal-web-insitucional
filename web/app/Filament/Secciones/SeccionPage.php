@@ -92,6 +92,26 @@ abstract class SeccionPage extends PaginaDelPanel
         return [];
     }
 
+    /** Dirección pública de la página. */
+    protected static function urlPublica(): string
+    {
+        return '/'.static::paginaSlug();
+    }
+
+    protected function getHeaderActions(): array
+    {
+        $enBorrador = static::permiteBorrador() && ! Page::seccionPublicada(static::paginaSlug());
+
+        return [
+            Action::make('ver')
+                ->label($enBorrador ? 'Vista previa' : 'Ver en el sitio')
+                ->icon($enBorrador ? 'heroicon-o-eye' : 'heroicon-o-arrow-top-right-on-square')
+                ->color('gray')
+                ->url(url(static::urlPublica()))
+                ->openUrlInNewTab(),
+        ];
+    }
+
     public static function canAccess(): bool
     {
         return (bool) auth()->user()?->can('viewAny', Page::class);
