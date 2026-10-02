@@ -63,6 +63,23 @@ class PublicContentCache
         }
     }
 
+    /**
+     * Enlaces a las páginas legales publicadas, para el pie de todas las páginas del sitio. Se guarda la lista ya
+     * resuelta (texto y ruta) y se borra al guardar o borrar cualquier página.
+     *
+     * @param  \Closure(): array<int, array{label: string, url: string}>  $resolver
+     * @return array<int, array{label: string, url: string}>
+     */
+    public static function rememberLegalLinks(\Closure $resolver): array
+    {
+        return Cache::remember('public:legal-links', self::TTL_SECONDS, $resolver);
+    }
+
+    public static function forgetLegalLinks(): void
+    {
+        Cache::forget('public:legal-links');
+    }
+
     // Sin locale en la clave a propósito: el modelo cacheado trae las
     // traducciones de ambos idiomas en sus columnas JSON (ADR-002), la vista
     // resuelve el idioma activo con `getTranslation()` sobre el mismo objeto.

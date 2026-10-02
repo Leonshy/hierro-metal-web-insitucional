@@ -1,9 +1,10 @@
 @php
     use App\Models\Menu;
+    use App\Models\Page;
     use App\Support\Catalogo;
     use App\Support\Contacto;
     $enlaces = collect(Menu::renderTree('footer_secondary'));
-    $privacidad = $enlaces->firstWhere('url', '/privacidad');
+    $legales = Page::enlacesLegales();
     $principales = $enlaces->reject(fn ($e) => $e['url'] === '/privacidad')->values();
     $catalogo = Catalogo::url();
     $email = Contacto::email();
@@ -34,7 +35,11 @@
     <div class="pie-legal">
         <div class="contenedor">
             <p>© {{ now()->year }} Hierro Metal S.R.L. · Todos los derechos reservados</p>
-            @if($privacidad)<a href="{{ url($privacidad['url']) }}">{{ $privacidad['label'] }}</a>@endif
+            @if($legales !== [])
+                <nav class="pie-legales" aria-label="Páginas legales">
+                    @foreach($legales as $legal)<a href="{{ url($legal['url']) }}">{{ $legal['label'] }}</a>@endforeach
+                </nav>
+            @endif
         </div>
     </div>
 </footer>
