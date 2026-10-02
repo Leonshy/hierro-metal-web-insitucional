@@ -143,6 +143,7 @@ input,textarea{caret-color:var(--color-tinta)}
 .ficha-texto{display:block;font-size:var(--text-cuerpo);line-height:var(--leading-cuerpo);color:var(--color-texto)}
 .ficha-enlace{display:inline-block;margin-top:14px;padding:6px 10px;background:var(--color-marca);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--color-tinta)}
 .rejilla>li.ficha-destacada{background:var(--color-tinta);color:var(--color-blanco);box-shadow:none}
+.ficha-destacada .ficha-indice{color:var(--color-claro-2)}
 .ficha-destacada .caja{display:grid;align-content:center;height:100%;padding:30px 22px}
 .ficha-destacada .ficha-titulo{font-size:30px}
 .ficha-destacada .ficha-texto{color:var(--color-claro-2);margin-bottom:20px}
@@ -220,7 +221,7 @@ input,textarea{caret-color:var(--color-tinta)}
 .prosa ul{margin-top:14px;padding-left:20px}
 .prosa li{font-size:var(--text-prosa);line-height:1.7;color:var(--color-texto);margin-bottom:8px}
 .prosa strong{color:var(--color-tinta)}
-.prosa a{text-decoration:underline;text-underline-offset:3px}
+.prosa a,.consentimiento a{text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- Preguntas frecuentes ---------- */
 .faq{max-width:78ch;margin-top:30px}
