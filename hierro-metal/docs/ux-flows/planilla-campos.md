@@ -139,7 +139,7 @@ La pregunta de horario se renderiza desde **Horarios**; la de ubicación y la de
 
 ## 9. Cotizaciones (bandeja del panel)
 
-Campos del formulario: `nombre` (req., 120 car.), `empresa` (120), `telefono` (req., 40), `email` (150), `rubro` (lista), `mensaje` (req., 4000),
+Campos del formulario: `nombre` (req., 120 car.), `ci_ruc` (req., CI `1.234.567` o RUC `80012345-6`; agregado en octubre 2026), `empresa` (120), `telefono` (req., 40), `email` (150), `rubro` (lista), `mensaje` (req., 4000),
 adjuntos (hasta 3 · 10 MB · `pdf, jpg, jpeg, png, webp, dwg, dxf, xlsx`), `consentimiento` (req.), honeypot `sitio_web`.
 Se guardan además `origen` (página), `utm`, `ip`, `user_agent`, `estado`, `asignado_a`, `notas_internas`. Detalle en `docs/03` §3.4.
 

@@ -2,6 +2,8 @@
 
 > Contexto permanente del repo. Leer completo antes de cualquier tarea.
 > Plan operativo: `PLAN.md`. Alcance y negocio: `docs/00-legajo-tecnico.md`.
+> **Estado actual del proyecto, decisiones posteriores y pendientes: `docs/09-estado-del-proyecto.md`.**
+> La app vive en `../web/`; el deploy está en `docs/08-deploy-plesk.md`.
 
 ---
 
@@ -99,11 +101,11 @@ Tres insumos:
 | Framework | Laravel 13 (el mismo major que Dante — si difiere, manda Dante) |
 | Lenguaje | PHP 8.3+ |
 | Base | MySQL 8 |
-| Vistas | Blade + Livewire (islas: formulario, menú móvil, filtros de catálogo) |
+| Vistas | Blade + Alpine; el formulario de cotización es un POST clásico con validación del servidor. Livewire lo usa sobre todo el panel |
 | JS | Alpine.js |
-| CSS | Tailwind CSS v4 con tokens en `@theme` |
+| CSS | Tailwind CSS v4 + hojas propias con tokens (`resources/css/tokens.css`, `componentes.css`, `sitio.css`) |
 | Build | Vite |
-| Panel | El de Dante: **Filament 5** + spatie/permission + spatie/activitylog (2FA por email, opt-in en Dante; acá se fuerza) |
+| Panel | El de Dante: **Filament 5** + spatie/permission + spatie/activitylog (2FA por email, **opt-in** por usuario, igual que en Dante: nunca bloquea, avisa con una alerta persistente) |
 | Tests | Pest (unit/feature) + Playwright (E2E) |
 | Despliegue | Plesk de webparaguay, PHP-FPM, Let's Encrypt |
 | Correo saliente | SMTP del servidor o del dominio del cliente — **confirmar en Fase 0** |
@@ -121,7 +123,8 @@ Tres insumos:
 | `/ubicacion` | `#/ubicacion` | ubicación + mapa |
 | `/contacto` | `#/contacto` y `#/contacto/cotizar` | formulario |
 | `/contacto/gracias` | — | **nueva**: confirmación (medible como conversión) |
-| `/privacidad` | `#/privacidad` | legal |
+| `/privacidad` y otras `/{slug}` | `#/privacidad` | **páginas legales libres** (panel → Páginas legales): cada una publicada se suma sola al pie |
+| `/sitemap.xml`, `/robots.txt` | — | dinámicos; `robots` bloquea todo salvo en producción |
 | `/catalogo.pdf` (o `/descargas/catalogo`) | botón "Descargar PDF" | descarga del PDF cargado en el panel |
 
 ## 5. Convenciones
@@ -143,6 +146,20 @@ Tres insumos:
 | Cotización | Pedido enviado por el formulario. Es el lead del sitio |
 | Rubro | Lo que el visitante elige en "¿Qué necesitás?" del formulario |
 | Despiece | Lista de piezas con medidas y cantidades que manda el cliente |
+| CI o RUC | Documento de quien pide la cotización; obligatorio en el formulario (`ci_ruc`) |
+| Sección | Página estructural del sitio (Inicio, Productos…); no se crea ni se borra, se edita en su pantalla del panel |
+| Página legal | Página «libre» (privacidad, términos…) creada en el panel; no es una sección |
+
+## 5c. Reglas de trabajo aprendidas (octubre 2026)
+
+- **Se commitea después de la auditoría y el QA completos** (Pint, PHPStan, Pest, y Lighthouse si tocó la interfaz).
+  Nunca encadenar `pest; git commit`: usar `&&` y mirar el resultado.
+- **No hay `git push` sin pedido explícito en ese momento**; el push de `deploy-web` también. Nadie ve ni guarda
+  contraseñas: se escriben en el `.env` del servidor o en la sesión SSH de quien las tiene.
+- **PHP 8.3+ en local:** el `php` por defecto de la máquina puede ser 8.2; usar el de Homebrew
+  (`/opt/homebrew/bin/php`) para `artisan`, PHPStan (`--memory-limit=1G`) y Pest.
+- Un texto sembrado vive en la base: cambiar un seeder **no** actualiza staging/producción (ver `docs/08` §10).
+- El contenido del panel se prueba contra el sitio público (el test debe abrir la URL), no sólo contra el formulario.
 
 ## 6. Herramientas del entorno
 

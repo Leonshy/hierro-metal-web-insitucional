@@ -5,6 +5,24 @@
 
 ---
 
+## Estado al 2026-10-02
+
+Construcción terminada y **desplegada en staging** (`https://hierrometal.webparaguay.com`). Foto completa, con lo
+pendiente y lo no verificado, en `docs/09-estado-del-proyecto.md`.
+
+| Fase | Estado |
+|---|---|
+| 0 Descubrimiento · 1 UX · 2 Copy y diseño | Hecho (insumos en `docs/`) |
+| 3 Backend y panel · 4 Frontend · 5 Contenido y catálogo | Hecho. El panel se reorganizó por secciones (con Publicada/Borrador y vista previa) y se sumaron páginas legales dinámicas y el CI/RUC en el formulario |
+| 6 SEO e integraciones · 7 Rendimiento | Hecho. Falta cargar IDs de GTM/Meta y coordenadas |
+| 8 Seguridad | Hecho en código (cabeceras, Turnstile, anti-spam, adjuntos, auditoría, respaldos). **Pendiente:** pentest con `strix` y prueba de restauración de un respaldo |
+| 9 QA | Pest (517), PHPStan, Pint y Lighthouse en verde. **Pendiente:** E2E con Playwright y recepción real del correo por el cliente |
+| 10 Despliegue y cutover | Staging hecho. **Pendiente:** producción, capacitación, manual del panel, monitoreo 30 días |
+
+Los checkboxes de abajo son el plan original (histórico); no se fueron tildando.
+
+---
+
 ## La regla que ordena todo el plan
 
 **Mismo proceso que Dante: cada etapa produce el insumo de la siguiente, y ninguna arranca sin

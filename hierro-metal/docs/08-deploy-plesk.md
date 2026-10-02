@@ -27,7 +27,7 @@
 |---|---|---|
 | **Cron** | Sin cron (se difería a la VPS) | **Obligatorio.** Los avisos de cotización van en cola y se procesan con `schedule:run` (ver §5). Sin cron, el cliente no recibe ningún correo. También corre los reintentos y los respaldos. |
 | **Carpeta de la app** | Raíz del repo | La app está en `web/` dentro de un repo que también tiene documentación del proyecto. Document root de Plesk: `httpdocs/public`. |
-| **Repositorio** | Público, clon por HTTPS | **Privado** (`git@github.com:Leonshy/hierro-metal-web-insitucional.git`). El servidor usa una *deploy key* de sólo lectura y un clon *sparse* de `web/` (decidido: los documentos internos no van al servidor). |
+| **Repositorio** | Público, clon por HTTPS | **Privado** (`git@github.com:Leonshy/hierro-metal-web-insitucional.git`). El servidor usa una *deploy key* de sólo lectura y clona la rama **`deploy-web`** (el contenido de `web/` como raíz, generada con `web/deploy/rama-deploy.sh`): los documentos internos no van al servidor. |
 | **Seeders** | `db:seed` | El contenido se siembra **una sola vez**. Los siguientes deploys **no** corren seeders. |
 | **Administrador** | `app:crear-admin` | `AdminUserSeeder` (seguro de repetir: no cambia la contraseña de un admin existente). |
 | **Panel** | `/admin` | `/panel` (`SITIO_ADMIN_PATH`). |
@@ -131,3 +131,46 @@ location ^~ /build/ { expires 1y; add_header Cache-Control "public, immutable"; 
 - `robots.txt`: staging `Disallow: /`; producción con `Sitemap:`.
 - Cabeceras de caché y compresión (§8) y que el `.env` **no** es accesible por web.
 - Si las URLs salen en `http://` detrás del proxy, configurar `TrustProxies` o forzar el esquema.
+
+## 10. Staging real (2026-10-02) — lo que se hizo y lo que enseñó
+
+Staging: `https://hierrometal.webparaguay.com`, usuario Plesk `hierroprueb`, app directo en `httpdocs/`, document
+root `httpdocs/public`, PHP 8.3, MySQL. Acceso por clave SSH dedicada; clon de `deploy-web` por *deploy key* de sólo lectura.
+
+**Orden que funcionó:** clonar `deploy-web` → `composer install --no-dev -o` → crear el `.env` (el cliente completa
+`DB_*`, `MAIL_*`, correos y admin) → `key:generate` → `migrate --force` → `db:seed --force` → `storage:link` →
+`chmod -R 775 storage bootstrap/cache` → subir `public/build/` → cachés → cron → directivas de nginx.
+
+**Trampas encontradas (no repetir)**
+
+1. **Crear `storage/app/htmlpurifier`** (y `storage/framework/{cache/data,sessions,views}`, `storage/logs`) **antes de
+   sembrar**: el repo no versiona esas carpetas y el seeder falla con «Base directory … htmlpurifier does not exist».
+2. **No correr `config:cache` antes del seed.** `AdminUserSeeder` usa `env()`; con la configuración cacheada devuelve
+   `null` y crea un administrador de relleno (`admin@hierro-metal.test`) con contraseña aleatoria. Orden correcto:
+   seed primero, cachés después. (Si pasa: borrar ese usuario.)
+3. **Se corre el seed una sola vez.** Si falla a la mitad, revisar qué quedó antes de repetirlo.
+4. El `git` del servidor es 1.8 y su OpenSSH es viejo: `StrictHostKeyChecking accept-new` no existe (usar `no` la
+   primera vez). El `git status` del servidor puede mostrar archivos «modificados» sólo por permisos (`chmod`); es ruido.
+5. **nginx de Plesk ignora el `.htaccess`:** sin las directivas de §8 el CSS/JS salen sin gzip. Se pegaron en *Apache y
+   nginx → Directivas adicionales de nginx* y se verificó con `curl -I -H 'Accept-Encoding: gzip'`.
+6. **Cron obligatorio** (`schedule:run`, cada minuto, tipo «Estilo cron» `* * * * *`). Verificado: una cotización de
+   prueba pasó de la cola a «aviso enviado» en menos de un minuto.
+7. Con `scp -r public/build/*` el contenido se mezcla con el existente (no se anida); los archivos viejos con hash
+   quedan sin uso y son inofensivos.
+8. Para la contraseña de una cuenta, usar el panel o `tinker` (el modelo la hashea); nunca el seeder.
+
+**Actualizar staging después del primer deploy** (sin seeders):
+
+```bash
+git pull --ff-only
+/opt/plesk/php/8.3/bin/php /usr/local/psa/var/modules/composer/composer.phar install --no-dev --optimize-autoloader
+/opt/plesk/php/8.3/bin/php artisan migrate --force
+for c in optimize:clear config:cache route:cache view:cache event:cache; do /opt/plesk/php/8.3/bin/php artisan $c; done
+```
+
+Los textos que ya están sembrados en la base **no cambian** con un deploy: si un seeder modifica un texto (como el
+CI/RUC en la política de privacidad), hay que aplicar el cambio en la base de staging (desde el panel o con `tinker`).
+
+**Para producción:** `SITIO_BLOCK_INDEXING=false`, `APP_URL` real, `SESSION_SECURE_COOKIE=true`, contraseñas definitivas
+(quitar `SITIO_ADMIN_PASSWORD` del `.env` después del primer ingreso), revisar el `robots.txt` y el sitemap, y enviar el
+sitemap a Search Console.
