@@ -142,10 +142,16 @@ class Page extends Model
             request()->attributes->remove(self::MEMO_BORRADORES);
             PublicContentCache::forgetPageSlug($page->slug);
             PublicContentCache::forgetPageSlug($page->getOriginal('slug'));
+            PublicContentCache::forgetLegalLinks();
         });
 
         static::deleted(function (self $page) {
             PublicContentCache::forgetPageSlug($page->slug);
+            PublicContentCache::forgetLegalLinks();
+        });
+
+        static::restored(function () {
+            PublicContentCache::forgetLegalLinks();
         });
     }
 
@@ -224,6 +230,25 @@ class Page extends Model
         }
 
         return implode('/', $segments);
+    }
+
+    /**
+     * Enlaces del pie de página: una entrada por cada página legal (las páginas «libres», no las secciones del sitio)
+     * que esté publicada, en el orden en que se crearon. Una página nueva aparece sola al publicarla y se va al
+     * pasarla a borrador o borrarla.
+     *
+     * @return array<int, array{label: string, url: string}>
+     */
+    public static function enlacesLegales(): array
+    {
+        return PublicContentCache::rememberLegalLinks(fn (): array => static::query()
+            ->whereNotIn('slug', self::SECCIONES)
+            ->where('status', 'published')
+            ->orderBy('sort_order')
+            ->orderBy('id')
+            ->get()
+            ->map(fn (self $pagina): array => ['label' => (string) $pagina->title, 'url' => '/'.$pagina->urlPath()])
+            ->all());
     }
 
     /**
