@@ -34,6 +34,7 @@ class GuardarCotizacion
         $cotizacion = Cotizacion::query()->create([
             'nombre' => $datos['nombre'],
             'empresa' => $datos['empresa'] ?? null,
+            'ci_ruc' => $datos['ci_ruc'],
             'telefono' => $datos['telefono'],
             'email' => $datos['email'] ?? null,
             'rubro' => filled($datos['rubro'] ?? null) ? Rubro::query()->where('slug', $datos['rubro'])->value('nombre') : null,

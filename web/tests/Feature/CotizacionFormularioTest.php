@@ -24,6 +24,7 @@ function pedidoValido(array $cambios = []): array
 {
     return array_merge([
         'nombre' => 'Persona de Prueba',
+        'ci_ruc' => '1.234.567',
         'telefono' => '0981 000 000',
         'email' => 'prueba@ejemplo.test',
         'mensaje' => '20 chapas galvanizadas, largo 3 m. Entrega en obra.',
@@ -204,11 +205,12 @@ it('el spam no guarda archivos', function () {
 
 it('exige los datos obligatorios con mensajes en la voz del sitio', function () {
     $this->post('/contacto', ['acepto' => '0'])
-        ->assertSessionHasErrors(['nombre', 'telefono', 'mensaje', 'acepto']);
+        ->assertSessionHasErrors(['nombre', 'ci_ruc', 'telefono', 'mensaje', 'acepto']);
 
     $errores = session('errors');
 
     expect($errores->first('nombre'))->toBe('Decinos tu nombre y apellido.')
+        ->and($errores->first('ci_ruc'))->toBe('Necesitamos tu CI o RUC para preparar la cotización.')
         ->and($errores->first('telefono'))->toBe('Dejanos un teléfono o WhatsApp para responderte.')
         ->and($errores->first('mensaje'))->toBe('Contanos qué materiales necesitás.')
         ->and($errores->first('acepto'))->toBe('Para enviar el pedido tenés que aceptar el uso de tus datos.');
@@ -468,4 +470,21 @@ it('la página de gracias muestra los pasos que siguen, sin el que ya ocurrió',
         ->assertSee('Qué pasa ahora')
         ->assertSee('Cotizamos')
         ->assertDontSee('Nos mandás el pedido');
+});
+
+it('pide el CI o RUC y lo guarda tal como se escribió', function (string $valor) {
+    $this->post('/contacto', pedidoValido(['ci_ruc' => $valor]))->assertSessionHasNoErrors();
+
+    expect(Cotizacion::query()->latest('id')->first()->ci_ruc)->toBe($valor);
+})->with(['CI con puntos' => '1.234.567', 'CI sin puntos' => '1234567', 'RUC con dígito verificador' => '80012345-6']);
+
+it('rechaza un CI o RUC con letras o mal formado', function (string $valor) {
+    $this->post('/contacto', pedidoValido(['ci_ruc' => $valor]))->assertSessionHasErrors('ci_ruc');
+
+    expect(session('errors')->first('ci_ruc'))->toContain('Revisá el CI o RUC')
+        ->and(Cotizacion::query()->count())->toBe(0);
+})->with(['letras' => 'abc1234', 'muy corto' => '123', 'guion mal puesto' => '8001-2345-6', 'script' => '<b>1234567</b>']);
+
+it('el formulario público muestra el campo CI o RUC como obligatorio', function () {
+    $this->get('/contacto')->assertOk()->assertSee('name="ci_ruc"', false)->assertSee('CI o RUC', false);
 });

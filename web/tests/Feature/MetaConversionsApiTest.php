@@ -11,6 +11,7 @@ function pedidoParaMeta(): array
 {
     return [
         'nombre' => 'Persona de Prueba',
+        'ci_ruc' => '1.234.567',
         'telefono' => '0981 000 000',
         'email' => 'prueba@ejemplo.test',
         'mensaje' => 'Necesito chapas.',

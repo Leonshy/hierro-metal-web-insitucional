@@ -24,6 +24,8 @@ class CotizacionRequest extends FormRequest
         return [
             'nombre' => ['required', 'string', 'max:120'],
             'empresa' => ['nullable', 'string', 'max:120'],
+            // CI (1.234.567) o RUC (80012345-6): números, con puntos y guion verificador opcionales.
+            'ci_ruc' => ['required', 'string', 'regex:/^[0-9.]{5,12}(-[0-9])?$/'],
             'telefono' => ['required', 'string', 'max:40', 'regex:/^[0-9+()\-\s.]{6,40}$/'],
             'email' => ['nullable', 'email', 'max:150'],
             'rubro' => ['nullable', 'string', Rule::exists('rubros', 'slug')->where('activo', true)],
@@ -42,6 +44,8 @@ class CotizacionRequest extends FormRequest
     {
         return [
             'nombre.required' => 'Decinos tu nombre y apellido.',
+            'ci_ruc.required' => 'Necesitamos tu CI o RUC para preparar la cotización.',
+            'ci_ruc.regex' => 'Revisá el CI o RUC: usá solo números (el RUC con su guion, por ejemplo 80012345-6).',
             'telefono.required' => 'Dejanos un teléfono o WhatsApp para responderte.',
             'telefono.regex' => 'Revisá el teléfono: parece incompleto.',
             'email.email' => 'Revisá el correo: parece tener un error.',

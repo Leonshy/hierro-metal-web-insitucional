@@ -22,6 +22,7 @@ use Spatie\Activitylog\LogOptions;
  * @property string $uuid
  * @property string $nombre
  * @property string|null $empresa
+ * @property string|null $ci_ruc
  * @property string $telefono
  * @property string $email
  * @property string|null $rubro
@@ -34,7 +35,7 @@ use Spatie\Activitylog\LogOptions;
  * @property-read Collection<int, CotizacionAdjunto> $adjuntos
  * @property-read User|null $asignado
  */
-#[Fillable(['uuid', 'nombre', 'empresa', 'telefono', 'email', 'rubro', 'mensaje', 'origen', 'utm', 'estado', 'asignado_a', 'notas_internas', 'ip', 'user_agent', 'mail_enviado_at', 'mail_intentos', 'alertada_at'])]
+#[Fillable(['uuid', 'nombre', 'empresa', 'ci_ruc', 'telefono', 'email', 'rubro', 'mensaje', 'origen', 'utm', 'estado', 'asignado_a', 'notas_internas', 'ip', 'user_agent', 'mail_enviado_at', 'mail_intentos', 'alertada_at'])]
 class Cotizacion extends Model
 {
     use HasAuditing, HasFactory, SoftDeletes;

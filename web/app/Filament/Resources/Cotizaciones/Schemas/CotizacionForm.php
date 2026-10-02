@@ -23,6 +23,7 @@ class CotizacionForm
                 ->schema([
                     TextInput::make('nombre')->label('Nombre')->disabled()->dehydrated(false),
                     TextInput::make('empresa')->label('Empresa u obra')->disabled()->dehydrated(false),
+                    TextInput::make('ci_ruc')->label('CI o RUC')->disabled()->dehydrated(false),
                     TextInput::make('telefono')->label('Teléfono o WhatsApp')->disabled()->dehydrated(false),
                     TextInput::make('email')->label('Correo')->disabled()->dehydrated(false),
                     TextInput::make('rubro')->label('Rubro')->disabled()->dehydrated(false),
