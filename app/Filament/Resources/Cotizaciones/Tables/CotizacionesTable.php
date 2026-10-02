@@ -34,6 +34,7 @@ class CotizacionesTable
             ->columns([
                 TextColumn::make('created_at')->label('Recibida')->dateTime('d/m/Y H:i')->timezone('America/Asuncion')->sortable(),
                 TextColumn::make('nombre')->label('Nombre')->searchable()->weight('bold'),
+                TextColumn::make('ci_ruc')->label('CI o RUC')->searchable()->placeholder('—')->copyable(),
                 TextColumn::make('empresa')->label('Empresa u obra')->searchable()->placeholder('—')->toggleable(),
                 TextColumn::make('telefono')->label('Teléfono')->searchable()->copyable(),
                 TextColumn::make('rubro')->label('Rubro')->badge()->color('gray')->placeholder('—'),

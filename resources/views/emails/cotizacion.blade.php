@@ -1,6 +1,7 @@
 <div style="font-family:Arial,Helvetica,sans-serif;color:#231f20;max-width:560px">
     <h2 style="margin:0 0 12px">Nueva cotización</h2>
     <p style="margin:0 0 4px"><strong>{{ $cotizacion->nombre }}</strong>@if($cotizacion->empresa) · {{ $cotizacion->empresa }}@endif</p>
+    @if($cotizacion->ci_ruc)<p style="margin:0 0 4px">CI o RUC: {{ $cotizacion->ci_ruc }}</p>@endif
     <p style="margin:0 0 4px">Teléfono: <a href="{{ $cotizacion->whatsappUrl() }}">{{ $cotizacion->telefono }}</a> (WhatsApp)</p>
     @if($cotizacion->email)<p style="margin:0 0 4px">Correo: {{ $cotizacion->email }}</p>@endif
     @if($cotizacion->rubro)<p style="margin:0 0 4px">Rubro: {{ $cotizacion->rubro }}</p>@endif

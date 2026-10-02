@@ -1,5 +1,7 @@
 Nueva cotización
 {{ $cotizacion->nombre }}{{ $cotizacion->empresa ? ' · '.$cotizacion->empresa : '' }}
+@if($cotizacion->ci_ruc)CI o RUC: {{ $cotizacion->ci_ruc }}
+@endif
 Teléfono: {{ $cotizacion->telefono }}
 @if($cotizacion->email)Correo: {{ $cotizacion->email }}
 @endif

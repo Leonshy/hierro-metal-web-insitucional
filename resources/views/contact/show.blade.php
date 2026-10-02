@@ -48,6 +48,12 @@
                             </div>
 
                             <div class="campo">
+                                <label for="ci_ruc">CI o RUC <span class="req" aria-hidden="true">*</span></label>
+                                <input id="ci_ruc" name="ci_ruc" type="text" inputmode="numeric" autocomplete="off" placeholder="1.234.567 o 80012345-6" maxlength="20" required aria-required="true" value="{{ old('ci_ruc') }}" @error('ci_ruc') aria-invalid="true" aria-describedby="ci_ruc-error" @enderror>
+                                @error('ci_ruc')<span class="mensaje-error" id="ci_ruc-error">{{ $message }}</span>@enderror
+                            </div>
+
+                            <div class="campo">
                                 <label for="empresa">Empresa u obra</label>
                                 <input id="empresa" name="empresa" type="text" maxlength="120" value="{{ old('empresa') }}" @error('empresa') aria-invalid="true" aria-describedby="empresa-error" @enderror>
                                 @error('empresa')<span class="mensaje-error" id="empresa-error">{{ $message }}</span>@enderror

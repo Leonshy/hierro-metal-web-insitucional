@@ -16,6 +16,7 @@ class CotizacionFactory extends Factory
         return [
             'nombre' => fake()->name(),
             'empresa' => fake()->optional()->company(),
+            'ci_ruc' => fake()->numerify('#.###.###'),
             'telefono' => '09'.fake()->numerify('## ### ###'),
             'email' => fake()->optional()->safeEmail(),
             'rubro' => 'Chapas de acero',

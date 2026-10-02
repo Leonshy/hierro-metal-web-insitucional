@@ -33,14 +33,14 @@ class ListCotizaciones extends ListRecords
         return response()->streamDownload(function () use ($consulta): void {
             $salida = fopen('php://output', 'w');
             fwrite($salida, "\xEF\xBB\xBF"); // para que Excel abra bien las tildes
-            fputcsv($salida, ['Recibida', 'Estado', 'Nombre', 'Empresa', 'Teléfono', 'Correo', 'Rubro', 'Pedido', 'Origen', 'Asignado a', 'Adjuntos', 'Aviso enviado']);
+            fputcsv($salida, ['Recibida', 'Estado', 'Nombre', 'CI o RUC', 'Empresa', 'Teléfono', 'Correo', 'Rubro', 'Pedido', 'Origen', 'Asignado a', 'Adjuntos', 'Aviso enviado']);
 
             $consulta->chunk(200, function (Collection $cotizaciones) use ($salida): void {
                 foreach ($cotizaciones->whereInstanceOf(Cotizacion::class) as $c) {
                     fputcsv($salida, array_map([self::class, 'celdaSegura'], [
                         $c->created_at->format('Y-m-d H:i'),
                         Cotizacion::ESTADOS[$c->estado] ?? $c->estado,
-                        $c->nombre, $c->empresa, $c->telefono, $c->email, $c->rubro,
+                        $c->nombre, $c->ci_ruc, $c->empresa, $c->telefono, $c->email, $c->rubro,
                         $c->mensaje, $c->origen, $c->asignado?->name,
                         $c->adjuntos->count(),
                         $c->mail_enviado_at ? 'Sí' : 'No',
