@@ -7,6 +7,7 @@ use App\Models\Familia;
 use App\Models\Faq;
 use App\Models\Horario;
 use App\Models\Linea;
+use App\Models\Novedad;
 use App\Models\Page;
 use App\Models\Paso;
 use App\Models\Servicio;
@@ -36,6 +37,7 @@ class SitemapController extends Controller
         'servicios' => [Servicio::class, Paso::class],
         'preguntas-frecuentes' => [Faq::class],
         'calidad' => [Compromiso::class],
+        'novedades' => [Novedad::class],
         'ubicacion' => [Horario::class],
     ];
 
@@ -53,6 +55,8 @@ class SitemapController extends Controller
             ->where('status', 'published')
             ->where('is_indexable', true)
             ->get()
+            // Sin ninguna novedad visible, la sección no existe: tampoco va en el mapa del sitio.
+            ->reject(fn (Page $page): bool => $page->slug === 'novedades' && ! Novedad::hayPublicadas())
             ->each(function (Page $page) use ($sitemap): void {
                 $sitemap->add(
                     Url::create(url('/'.$page->urlPath()))
@@ -71,6 +75,18 @@ class SitemapController extends Controller
                     ->setPriority(0.8)
             );
         });
+
+        // Cada novedad visible, con la fecha en que se editó por última vez.
+        if (Page::seccionPublicada('novedades')) {
+            Novedad::query()->publicadas()->recientes()->get()->each(function (Novedad $novedad) use ($sitemap): void {
+                $sitemap->add(
+                    Url::create(route('novedades.show', $novedad->slug))
+                        ->setLastModificationDate($novedad->updated_at ?? $novedad->publicada_en)
+                        ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+                        ->setPriority(0.6)
+                );
+            });
+        }
 
         if (Page::seccionPublicada('contacto')) {
             $sitemap->add(Url::create(route('contact.show'))->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY));

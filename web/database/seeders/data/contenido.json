@@ -787,6 +787,16 @@
       "seo_descripcion": "Cortes a medida, plegados, perforado, perfiles C y U especiales, galvanización y entrega en obra con flota propia de camiones."
     },
     {
+      "slug": "novedades",
+      "titulo": "Novedades",
+      "bajada": "Lo último de Hierro Metal: llegadas de material, nuevos servicios y avisos para nuestros clientes.",
+      "cta_label": null,
+      "cta_url": null,
+      "indexable": true,
+      "seo_titulo": "Novedades · Hierro Metal S.R.L.",
+      "seo_descripcion": "Novedades de Hierro Metal S.R.L.: llegadas de material, servicios nuevos y avisos para clientes de chapas, perfiles y tubos de acero."
+    },
+    {
       "slug": "preguntas-frecuentes",
       "titulo": "Lo que más nos preguntan",
       "bajada": "Si tu consulta no está acá, escribinos por WhatsApp y te respondemos.",
@@ -834,6 +844,10 @@
           "url": "/calidad"
         },
         {
+          "label": "Novedades",
+          "url": "/novedades"
+        },
+        {
           "label": "Preguntas frecuentes",
           "url": "/preguntas-frecuentes"
         },
@@ -861,6 +875,10 @@
         {
           "label": "Política de calidad",
           "url": "/calidad"
+        },
+        {
+          "label": "Novedades",
+          "url": "/novedades"
         },
         {
           "label": "Preguntas frecuentes",

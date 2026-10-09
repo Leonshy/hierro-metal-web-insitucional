@@ -3,12 +3,14 @@
 use App\Filament\Pages\Secciones\CalidadPage;
 use App\Filament\Pages\Secciones\ContactoPage;
 use App\Filament\Pages\Secciones\InicioPage;
+use App\Filament\Pages\Secciones\NovedadesPage;
 use App\Filament\Pages\Secciones\PreguntasFrecuentesPage;
 use App\Filament\Pages\Secciones\ProductosPage;
 use App\Filament\Pages\Secciones\ServiciosPage;
 use App\Filament\Pages\Secciones\UbicacionPage;
 use App\Filament\Resources\Pages\Pages\CreatePage;
 use App\Filament\Resources\Pages\Pages\EditPage;
+use App\Models\Novedad;
 use App\Models\Page;
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
@@ -20,6 +22,8 @@ beforeEach(function () {
     Storage::fake('local');
     config(['sitio.seo.block_indexing' => false]);
     $this->seed(DatabaseSeeder::class);
+    // Novedades desaparece sola sin novedades visibles: con una publicada, el resto de las pruebas parte de «todo publicado».
+    Novedad::factory()->create();
     $this->admin = User::factory()->create(['is_active' => true]);
     $this->admin->assignRole('administrador');
     $this->actingAs($this->admin);
@@ -40,6 +44,7 @@ dataset('secciones con estado', [
     'Productos' => [ProductosPage::class, 'productos', '/productos'],
     'Servicios' => [ServiciosPage::class, 'servicios', '/servicios'],
     'Calidad' => [CalidadPage::class, 'calidad', '/calidad'],
+    'Novedades' => [NovedadesPage::class, 'novedades', '/novedades'],
     'Preguntas frecuentes' => [PreguntasFrecuentesPage::class, 'preguntas-frecuentes', '/preguntas-frecuentes'],
     'Ubicación' => [UbicacionPage::class, 'ubicacion', '/ubicacion'],
 ]);

@@ -19,7 +19,7 @@ class SeccionInicio extends Model
     protected $table = 'secciones_inicio';
 
     /** Claves que la portada sabe dibujar. */
-    public const CLAVES = ['productos', 'servicios', 'calidad', 'contacto'];
+    public const CLAVES = ['productos', 'servicios', 'calidad', 'novedades', 'contacto'];
 
     protected function casts(): array
     {

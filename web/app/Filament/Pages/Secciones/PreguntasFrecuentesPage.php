@@ -13,7 +13,7 @@ class PreguntasFrecuentesPage extends SeccionPage
 
     protected static ?string $navigationLabel = 'Preguntas frecuentes';
 
-    protected static ?int $navigationSort = 5;
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $title = 'Preguntas frecuentes';
 

@@ -61,3 +61,26 @@ body>main{flex:1 0 auto}
 .vista-previa{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;justify-content:center;padding:10px var(--margen);background:var(--color-marca);color:var(--color-tinta);font-size:14px;line-height:1.4;text-align:center;border-bottom:var(--borde-boton-marca) solid var(--color-tinta)}
 .vista-previa a{color:var(--color-tinta);font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .vista-previa a:hover{color:var(--color-tinta-hover)}
+
+/* ---- Novedades ---- */
+/* Con una o dos notas las tarjetas conservan su ancho en vez de estirarse a toda la fila. */
+.rejilla-novedades{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.novedad-foto{margin-bottom:28px;aspect-ratio:16/9}
+.paginacion{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-top:34px;font-family:var(--font-mono);font-size:var(--text-rotulo);letter-spacing:.1em;text-transform:uppercase;color:var(--color-gris)}
+.paginacion a{color:var(--color-tinta);text-decoration:underline;text-underline-offset:3px}
+.paginacion [aria-disabled]{opacity:.45}
+
+/* ---- Pop-up de imagen (administrable desde el panel) ---- */
+.popup{margin:auto;padding:0;border:0;background:transparent;max-width:min(92vw,640px);max-height:90vh;overflow:visible;color:var(--color-tinta)}
+.popup::backdrop{background:color-mix(in srgb,var(--color-tinta) 78%,transparent)}
+.popup-enlace{display:block}
+.popup-imagen{display:block;width:100%;height:auto;max-height:86vh;object-fit:contain;background:var(--color-blanco);border-bottom:3px solid var(--color-marca)}
+.popup-cerrar{position:absolute;top:-16px;right:-16px;z-index:1;display:grid;place-items:center;width:48px;height:48px;border:0;background:var(--color-marca);border-bottom:3px solid var(--color-tinta);font-size:18px;font-weight:700;line-height:1;color:var(--color-tinta);cursor:pointer}
+.popup-cerrar:hover{background:var(--color-marca-hover)}
+@media (max-width:760px){.popup-cerrar{top:6px;right:6px}}
+@media (prefers-reduced-motion:no-preference){
+  .popup[open]{animation:hm-popup .28s var(--ease-salida) both}
+  .popup[open]::backdrop{animation:hm-popup-fondo .28s linear both}
+}
+@keyframes hm-popup{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes hm-popup-fondo{from{opacity:0}to{opacity:1}}

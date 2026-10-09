@@ -114,6 +114,8 @@
 
 <x-pie />
 
+<x-popup />
+
 @if($livewire)
     @livewireScripts
 @endif

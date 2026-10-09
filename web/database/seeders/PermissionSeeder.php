@@ -16,14 +16,14 @@ class PermissionSeeder extends Seeder
 {
     /** Contenido que edita el rol `editor`. */
     private const CONTENIDO = [
-        'familias', 'servicios', 'pasos', 'compromisos', 'faqs', 'diferenciales', 'horarios',
+        'familias', 'servicios', 'pasos', 'compromisos', 'faqs', 'diferenciales', 'horarios', 'novedades', 'popups',
     ];
 
     private array $modules = [
         'pages', 'media', 'menus',
         'settings', 'users', 'activity_log',
         'familias', 'servicios', 'pasos', 'compromisos', 'faqs', 'diferenciales',
-        'horarios', 'rubros', 'cotizaciones',
+        'horarios', 'rubros', 'cotizaciones', 'novedades', 'popups',
     ];
 
     private array $actions = ['view', 'create', 'update', 'delete', 'publish'];
