@@ -33,7 +33,7 @@ class Page extends Model
      * Páginas estructurales del sitio: cada una tiene su propia ruta y su propia pantalla en el panel (menú «Contenido»).
      * No son «páginas libres»: no se crean ni se borran, y no aparecen en «Páginas legales».
      */
-    public const SECCIONES = ['inicio', 'productos', 'servicios', 'calidad', 'preguntas-frecuentes', 'ubicacion', 'contacto'];
+    public const SECCIONES = ['inicio', 'productos', 'servicios', 'calidad', 'novedades', 'preguntas-frecuentes', 'ubicacion', 'contacto'];
 
     public array $translatable = ['title', 'seo_title', 'seo_description'];
 
@@ -53,7 +53,8 @@ class Page extends Model
 
     /**
      * Slugs de las secciones del sitio que están en borrador: no se ven en el sitio, ni en los menús ni en el sitemap.
-     * La portada no tiene estado: siempre se muestra.
+     * La portada no tiene estado: siempre se muestra. Novedades se comporta igual que un borrador mientras no haya
+     * ninguna novedad visible: sin novedades no hay sección, ni menú, ni bloque en la portada.
      *
      * @return array<int, string>
      */
@@ -62,14 +63,26 @@ class Page extends Model
         $atributos = request()->attributes;
 
         if (! $atributos->has(self::MEMO_BORRADORES)) {
-            $atributos->set(self::MEMO_BORRADORES, self::query()
+            $borradores = self::query()
                 ->whereIn('slug', array_diff(self::SECCIONES, self::SIEMPRE_PUBLICAS))
                 ->where('status', '!=', 'published')
                 ->pluck('slug')
-                ->all());
+                ->all();
+
+            if (! in_array('novedades', $borradores, true) && ! Novedad::hayPublicadas()) {
+                $borradores[] = 'novedades';
+            }
+
+            $atributos->set(self::MEMO_BORRADORES, $borradores);
         }
 
         return $atributos->get(self::MEMO_BORRADORES);
+    }
+
+    /** Olvida la lista de secciones en borrador de esta petición (cambió algo que la define, como las novedades). */
+    public static function olvidarBorradores(): void
+    {
+        request()->attributes->remove(self::MEMO_BORRADORES);
     }
 
     /** ¿La persona con sesión puede ver los borradores en el sitio? Sí, quien tiene acceso a las páginas del panel. */

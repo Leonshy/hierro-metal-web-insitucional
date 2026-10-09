@@ -6,6 +6,7 @@ use App\Http\Controllers\CatalogoController;
 use App\Http\Controllers\CotizacionController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NovedadController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\RobotsController;
@@ -25,6 +26,8 @@ Route::get('/productos', [ProductoController::class, 'index'])->name('productos.
 Route::get('/productos/{slug}', [ProductoController::class, 'show'])->where('slug', '[a-z0-9\-]+')->name('productos.show');
 
 Route::get('/servicios', [ServicioController::class, 'index'])->name('servicios.index');
+Route::get('/novedades', [NovedadController::class, 'index'])->name('novedades.index');
+Route::get('/novedades/{slug}', [NovedadController::class, 'show'])->where('slug', '[a-z0-9\-]+')->name('novedades.show');
 Route::get('/calidad', [CalidadController::class, 'index'])->name('calidad.index');
 Route::get('/preguntas-frecuentes', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/ubicacion', [UbicacionController::class, 'index'])->name('ubicacion.index');

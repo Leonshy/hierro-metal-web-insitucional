@@ -12,7 +12,7 @@ class ContactoPage extends SeccionPage
 
     protected static ?string $navigationLabel = 'Contacto';
 
-    protected static ?int $navigationSort = 7;
+    protected static ?int $navigationSort = 8;
 
     protected static ?string $title = 'Contacto';
 
