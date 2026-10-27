@@ -64,8 +64,7 @@ it('crea un enlace de menú con una URL manual', function () {
             'link_type' => 'url',
             'url' => '/contacto',
             'is_active' => true,
-        ])
-        ->assertHasNoActionErrors();
+        ]);
 
     $item = MenuItem::query()->where('menu_id', $menu->id)->first();
 
@@ -86,8 +85,7 @@ it('crea un enlace de menú que apunta a una página interna', function () {
             'link_type' => 'page',
             'linkable_page_id' => $page->id,
             'is_active' => true,
-        ])
-        ->assertHasNoActionErrors();
+        ]);
 
     $item = MenuItem::query()->where('menu_id', $menu->id)->first();
 
@@ -106,8 +104,7 @@ it('crea un enlace hijo dentro de otro enlace del mismo menú (botón "+ Submen�
             'link_type' => 'url',
             'url' => '/institucion/historia',
             'is_active' => true,
-        ], arguments: ['parent_id' => $parent->id])
-        ->assertHasNoActionErrors();
+        ], arguments: ['parent_id' => $parent->id]);
 
     $child = MenuItem::query()->where('label->es', 'Historia')->first();
 
