@@ -2,6 +2,7 @@
 
 namespace App\Services\Cotizaciones;
 
+use App\Jobs\EnviarConfirmacionCotizacion;
 use App\Jobs\NotificarNuevaCotizacion;
 use App\Models\Cotizacion;
 use App\Models\CotizacionAdjunto;
@@ -135,6 +136,25 @@ class GuardarCotizacion
             NotificarNuevaCotizacion::dispatch($cotizacion->id);
         } catch (Throwable $e) {
             Log::error('Cotización: no se pudo enviar el aviso (queda pendiente de reintento)', [
+                'cotizacion' => $cotizacion->id,
+                'error' => $e->getMessage(),
+            ]);
+        }
+
+        $this->confirmar($cotizacion);
+    }
+
+    /** «Pedido recibido» para quien dejó su correo. Aparte del aviso interno: si falla, el pedido y el aviso no se ven afectados. */
+    private function confirmar(Cotizacion $cotizacion): void
+    {
+        if (blank($cotizacion->email)) {
+            return;
+        }
+
+        try {
+            EnviarConfirmacionCotizacion::dispatch($cotizacion->id);
+        } catch (Throwable $e) {
+            Log::error('Cotización: no se pudo encolar el correo de pedido recibido', [
                 'cotizacion' => $cotizacion->id,
                 'error' => $e->getMessage(),
             ]);
