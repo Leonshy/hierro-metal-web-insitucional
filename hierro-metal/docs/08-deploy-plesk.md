@@ -174,3 +174,44 @@ CI/RUC en la política de privacidad), hay que aplicar el cambio en la base de s
 **Para producción:** `SITIO_BLOCK_INDEXING=false`, `APP_URL` real, `SESSION_SECURE_COOKIE=true`, contraseñas definitivas
 (quitar `SITIO_ADMIN_PASSWORD` del `.env` después del primer ingreso), revisar el `robots.txt` y el sitemap, y enviar el
 sitemap a Search Console.
+
+## 11. Producción (2026-10-27) — lo que se hizo y lo que enseñó
+
+Producción: `https://hierrometal.com`, Plesk en `64.176.19.59` (usuario del sistema `hierrometal.com_j9et7w6kd9m`, SSH puerto 22 con la
+clave dedicada `~/.ssh/hierro_prod`), app directo en `httpdocs/`, document root `httpdocs/public`, base `hierrome_web_db`.
+Plesk muestra PHP 8.4 para el dominio, pero el cron y los comandos usan `/opt/plesk/php/8.3/bin/php` (igual que staging).
+**La base es MariaDB 10.6** (staging era MariaDB 10.2): importar hacia una versión más nueva no dio problemas.
+
+**Orden que funcionó:** agregar la clave SSH (desde el *SSH Terminal* de Plesk) → generar la *deploy key* de sólo lectura en el servidor y
+cargarla en GitHub → clonar `deploy-web` (borrando antes el `index.html` de relleno) → `composer install --no-dev -o` → carpetas de
+`storage/` → `npm run build` local y `scp -r public/build/*` → `.env` (lo escribe el cliente) + `key:generate` → cron en Plesk →
+importar el volcado → copiar medios y catálogo → `storage:link`, `migrate --force` (nada que migrar) y cachés.
+
+**Trampas encontradas (no repetir)**
+
+1. **Auditar antes de desplegar:** `npm audit` y `composer audit` mostraron 6 avisos nuevos desde el deploy anterior (Vite, Filament,
+   Livewire, svg-sanitize). Se cerraron antes de seguir: Filament 5.8.3 (el mínimo parcheado), Livewire 4.4.8, svg-sanitize 1.1 y Vite.
+2. **El lockfile tiene que resolverse para PHP 8.3.** Generado con el PHP 8.5 de la máquina, Composer eligió Symfony 8.x (exige PHP ≥ 8.4.1)
+   y `composer install` falló en el servidor. Ahora `composer.json` fija `config.platform.php = 8.3.0` y se corre Composer con `php@8.3`.
+   Usar `-w` y versiones exactas (`composer update filament/filament:5.8.3 …`), no `--with-all-dependencies` a ciegas.
+3. **Datos (Opción A, copia de staging):** volcado con `mysqldump` **sin los datos** de `cotizaciones`, `cotizacion_adjuntos`, `activity_log`,
+   `sessions`, `cache`, `cache_locks`, `jobs`, `failed_jobs` y `job_batches` (sí con su estructura). Antes de importar se reemplazó la **URL canónica de la
+   portada** (apuntaba a staging). Las credenciales se pasan con un archivo `--defaults-extra-file` que genera Laravel desde su propia
+   configuración (permisos 600, se borra al terminar): `source .env` en el shell rompe contraseñas con `$` o `#`. No borrar el volcado de origen
+   hasta verificar que la copia llegó.
+4. **El catálogo PDF vive en `storage/app/private/catalogo/`**, no en la carpeta pública: sin él `/catalogo.pdf` da 404. En ese mismo directorio
+   hay respaldos locales (~790 MB) y los adjuntos de las cotizaciones de prueba: **no se copian**. Los medios van en `storage/app/public/`.
+5. **Independencia de staging verificada** (se puede despublicar): sin referencias a `hierrometal.webparaguay.com` en la base completa (sólo el
+   correo `webmaster@webparaguay.com`, que es un usuario), en `app/`, `config/`, `resources/`, `routes/`, `database/` y `public/`, ni en el HTML
+   de las 18 páginas servidas. El HTML sólo enlaza a `hierrometal.com`, WhatsApp, Instagram, Facebook y Google Maps.
+6. Revisar que `key:generate` realmente escribió `APP_KEY` (una vez quedó vacío) y que el `.env` quede en 600 (`nano` lo deja en 644).
+7. **`SESSION_SECURE_COOKIE=true`:** el login del panel no funciona hasta que haya HTTPS (esperado antes del cutover).
+8. **Correo:** con `MAIL_MAILER=log` los avisos de cotización se escriben en `storage/logs` y no salen. El cliente usa correo de Hostinger: cargar
+   `MAIL_*` y `SITIO_COTIZACIONES_EMAIL` en el `.env` antes de entregar.
+9. En zsh no guardar opciones de `curl`/`ssh`/`scp` en variables (no se separan las palabras): usar una función.
+
+**Cutover (pendiente).** El dominio está registrado en Hostinger con sus servidores de nombres de *dns-parking* y hoy apunta a una página de
+«dominio estacionado» (`2.57.91.91`): no hay un sitio vivo que romper. El correo también está en Hostinger (MX `mx1`/`mx2.hostinger.com`,
+SPF `include:_spf.mail.hostinger.com`): **cambiar únicamente el registro A de `@` a `64.176.19.59`**, sin tocar MX ni TXT (no hay AAAA).
+Con el DNS propagado: Let's Encrypt en Plesk, repetir el rastreo, probar el login del panel y una cotización de punta a punta (y borrarla),
+cambiar las contraseñas provisorias y enviar el sitemap a Search Console.

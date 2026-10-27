@@ -159,6 +159,8 @@ Tres insumos:
   Nunca encadenar `pest; git commit`: usar `&&` y mirar el resultado.
 - **No hay `git push` sin pedido explícito en ese momento**; el push de `deploy-web` también. Nadie ve ni guarda
   contraseñas: se escriben en el `.env` del servidor o en la sesión SSH de quien las tiene.
+- **El `composer.lock` se resuelve para PHP 8.3** (`config.platform.php = 8.3.0` en `composer.json`): con el PHP 8.5 de la máquina
+  Composer eligió Symfony 8, que exige 8.4.1, y el servidor lo rechazó. Correr `composer` con `/opt/homebrew/opt/php@8.3/bin/php`.
 - **PHP 8.3+ en local:** el `php` por defecto de la máquina puede ser 8.2; usar el de Homebrew
   (`/opt/homebrew/bin/php`) para `artisan`, PHPStan (`--memory-limit=1G`) y Pest.
 - Un texto sembrado vive en la base: cambiar un seeder **no** actualiza staging/producción (ver `docs/08` §10).

@@ -11,14 +11,14 @@
 |---|---|---|
 | Local | `http://localhost:8000` (`php artisan serve`) | Al día con `main` |
 | **Staging** | `https://hierrometal.webparaguay.com` (Plesk de webparaguay, PHP 8.3, MySQL) | En línea, `noindex`, con el contenido real cargado. Verificado el 2026-10-27: al día con `main` (commit `c08b750`, Novedades y pop-ups), migraciones corridas, cron y respaldos activos |
-| Producción | — | **Sin definir** (se decide después de la aprobación del cliente) |
+| **Producción** | `https://hierrometal.com` (Plesk, IP `64.176.19.59`, PHP 8.3, MariaDB 10.6) | **Desplegada y verificada el 2026-10-27, todavía sin publicar:** falta apuntar el DNS (hoy en Hostinger, estacionado en `2.57.91.91`) y emitir el SSL. Detalle en `08-deploy-plesk.md` §11 |
 
 - **Repositorio:** `git@github.com:Leonshy/hierro-metal-web-insitucional.git` (privado). `main` es el trabajo; `deploy-web`
   es el contenido de `web/` como raíz, lo genera `web/deploy/rama-deploy.sh` y es lo único que baja el servidor.
 - **Panel:** `/panel` (`SITIO_ADMIN_PATH`). Cuentas: el administrador del cliente (`admin@hierrometal.com.py`) y la
   cuenta protegida de mantenimiento (`webmaster@webparaguay.com`). **Las contraseñas no se guardan en el repo**;
   las tiene el equipo y las de staging son provisorias (cambiarlas antes de producción).
-- **Calidad medida al cierre:** 561 tests Pest en verde (2.520 aserciones), PHPStan nivel 5 sin errores (sin ignores ni baseline),
+- **Calidad medida al cierre:** 561 tests Pest en verde (2.514 aserciones), PHPStan nivel 5 sin errores (sin ignores ni baseline),
   Pint limpio, `composer audit` y `npm audit` en 0. Lighthouse móvil: accesibilidad 100 y buenas prácticas 100 en
   home, ficha de producto, ubicación, servicios y contacto (el SEO marca 69 sólo por el `noindex` de los entornos
   de prueba; en producción desaparece).
@@ -108,7 +108,12 @@ Reglas de comportamiento del panel (verificadas con tests):
 
 **Del cliente o del equipo (no es código)**
 
-- Definir **producción** (servidor y dominio real) y el cutover; hasta entonces staging se queda `noindex`.
+- **Cutover de producción:** en Hostinger (Zona DNS) cambiar **sólo el registro A de `@`** a `64.176.19.59`; **no tocar MX ni TXT**
+  (el correo del cliente está en Hostinger). Después emitir Let's Encrypt en Plesk y repetir el rastreo de `08` §11.
+- **Antes de entregar producción:** cambiar las contraseñas provisorias de `admin@hierrometal.com` y `webmaster@webparaguay.com`
+  (se copiaron de staging) y cargar el SMTP real del cliente en el `.env` (hoy `MAIL_MAILER=log`: los avisos de cotización
+  **no salen por correo** hasta entonces) junto con `SITIO_COTIZACIONES_EMAIL`.
+- Staging puede despublicarse: producción no depende de él (verificado en `08` §11.5).
 - Que el cliente revise la **política de privacidad** (referencia legal, R5 del legajo); en staging ya está publicada.
 - Confirmar la **recepción real del correo** de cotización en la casilla del cliente.
 - Cargar **IDs de GTM/GA4 y Meta** y las **claves de Turnstile** (si se decide activarlo) en Integraciones, y las
@@ -119,7 +124,7 @@ Reglas de comportamiento del panel (verificadas con tests):
 
 - Pentest con `strix` y E2E con Playwright (Fases 8–9 del plan): no se corrieron; la cobertura es Pest + Lighthouse.
 - **Prueba de restauración de un respaldo** (los respaldos corren de noche; falta probar restaurar uno).
-- Dependencias con versión nueva disponible, sin urgencia (p. ej. Filament 5.9, Pest 5): actualizar en un paso aparte,
+- Dependencias con versión nueva disponible, sin urgencia (Filament está fijado en 5.8.3 por el lockfile; hay 5.11): actualizar en un paso aparte,
   con la suite completa.
 - Verificar el aspecto de Novedades y pop-ups con Lighthouse (el 100/100 de arriba se midió antes de sumarlos).
 - Columnas heredadas de la tabla `pages` que ya no se usan (`site_section`, `site`, `template`, `cover_media_id`).
