@@ -41,10 +41,21 @@ it('manda el pedido recibido a quien dejó su correo, además del aviso interno'
     expect(Cotizacion::query()->firstOrFail()->confirmacion_enviada_at)->not->toBeNull();
 });
 
-it('no manda el pedido recibido si no dejó correo, pero sí el aviso interno', function () {
+it('el correo es obligatorio: sin él no se guarda el pedido ni sale ningún correo', function () {
     Mail::fake();
 
-    $this->post('/contacto', pedidoConCorreo(['email' => '']))->assertRedirect(route('cotizaciones.gracias'));
+    $this->post('/contacto', pedidoConCorreo(['email' => '']))->assertSessionHasErrors('email');
+
+    expect(Cotizacion::query()->count())->toBe(0);
+    Mail::assertNothingSent();
+});
+
+it('un pedido anterior sin correo no recibe confirmación, pero sigue con su aviso interno', function () {
+    Mail::fake();
+    $cotizacion = Cotizacion::factory()->create(['email' => null]);
+
+    (new EnviarConfirmacionCotizacion($cotizacion->id))->handle();
+    (new NotificarNuevaCotizacion($cotizacion->id))->handle();
 
     Mail::assertNotSent(CotizacionConfirmada::class);
     Mail::assertSent(CotizacionRecibida::class);
@@ -66,15 +77,6 @@ it('encola el pedido recibido aparte del aviso interno', function () {
 
     Queue::assertPushed(NotificarNuevaCotizacion::class);
     Queue::assertPushed(EnviarConfirmacionCotizacion::class);
-});
-
-it('no encola el pedido recibido sin correo', function () {
-    Queue::fake();
-
-    $this->post('/contacto', pedidoConCorreo(['email' => '']));
-
-    Queue::assertPushed(NotificarNuevaCotizacion::class);
-    Queue::assertNotPushed(EnviarConfirmacionCotizacion::class);
 });
 
 it('manda el pedido recibido una sola vez aunque el trabajo se repita', function () {

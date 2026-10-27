@@ -206,13 +206,14 @@ it('el spam no guarda archivos', function () {
 
 it('exige los datos obligatorios con mensajes en la voz del sitio', function () {
     $this->post('/contacto', ['acepto' => '0'])
-        ->assertSessionHasErrors(['nombre', 'ci_ruc', 'telefono', 'mensaje', 'acepto']);
+        ->assertSessionHasErrors(['nombre', 'ci_ruc', 'telefono', 'email', 'mensaje', 'acepto']);
 
     $errores = session('errors');
 
     expect($errores->first('nombre'))->toBe('Decinos tu nombre y apellido.')
         ->and($errores->first('ci_ruc'))->toBe('Necesitamos tu CI o RUC para preparar la cotización.')
         ->and($errores->first('telefono'))->toBe('Dejanos un teléfono o WhatsApp para responderte.')
+        ->and($errores->first('email'))->toBe('Dejanos tu correo para mandarte la confirmación del pedido.')
         ->and($errores->first('mensaje'))->toBe('Contanos qué materiales necesitás.')
         ->and($errores->first('acepto'))->toBe('Para enviar el pedido tenés que aceptar el uso de tus datos.');
     expect(Cotizacion::query()->count())->toBe(0);
