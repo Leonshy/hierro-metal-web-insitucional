@@ -66,9 +66,9 @@
                             </div>
 
                             <div class="campo">
-                                <label for="email">Correo electrónico</label>
-                                <input id="email" name="email" type="email" autocomplete="email" maxlength="150" value="{{ old('email') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
-                                @error('email')<span class="mensaje-error" id="email-error">{{ $message }}</span>@else<span class="ayuda">Opcional, pero nos ayuda a mandarte la cotización por escrito.</span>@enderror
+                                <label for="email">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+                                <input id="email" name="email" type="email" autocomplete="email" maxlength="150" required aria-required="true" value="{{ old('email') }}" @error('email') aria-invalid="true" aria-describedby="email-error" @enderror>
+                                @error('email')<span class="mensaje-error" id="email-error">{{ $message }}</span>@else<span class="ayuda">Te mandamos la confirmación del pedido y, si hace falta, la cotización por escrito.</span>@enderror
                             </div>
 
                             <div class="campo">
