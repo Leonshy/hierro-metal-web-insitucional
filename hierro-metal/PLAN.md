@@ -16,8 +16,8 @@ pendiente y lo no verificado, en `docs/09-estado-del-proyecto.md`.
 | 3 Backend y panel · 4 Frontend · 5 Contenido y catálogo | Hecho. El panel se reorganizó por secciones (con Publicada/Borrador y vista previa) y se sumaron páginas legales dinámicas el CI/RUC en el formulario, Novedades (blog) y pop-ups de imagen |
 | 6 SEO e integraciones · 7 Rendimiento | Hecho. Falta cargar IDs de GTM/Meta y coordenadas |
 | 8 Seguridad | Hecho en código (cabeceras, Turnstile, anti-spam, adjuntos, auditoría, respaldos). **Pendiente:** pentest con `strix` y prueba de restauración de un respaldo |
-| 9 QA | Pest (561), PHPStan, Pint y Lighthouse en verde. **Pendiente:** E2E con Playwright y recepción real del correo por el cliente |
-| 10 Despliegue y cutover | Staging y **producción desplegados** (2026-10-27, `hierrometal.com`). **Pendiente:** DNS y SSL, SMTP del cliente, cambio de contraseñas, capacitación, manual del panel, monitoreo 30 días |
+| 9 QA | Pest (570), PHPStan, Pint y Lighthouse en verde. **Pendiente:** E2E con Playwright y recepción real del correo por el cliente |
+| 10 Despliegue y cutover | Staging y **producción en línea** (`https://hierrometal.com.py`, 2026-10-27). **Pendiente:** cambiar contraseñas provisorias, SPF y entrega real del correo, texto del correo de confirmación y política de privacidad, capacitación, manual del panel, monitoreo 30 días |
 
 Los checkboxes de abajo son el plan original (histórico); no se fueron tildando.
 

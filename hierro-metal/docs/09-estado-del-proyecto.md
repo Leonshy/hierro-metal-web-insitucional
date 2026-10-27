@@ -11,14 +11,14 @@
 |---|---|---|
 | Local | `http://localhost:8000` (`php artisan serve`) | Al día con `main` |
 | **Staging** | `https://hierrometal.webparaguay.com` (Plesk de webparaguay, PHP 8.3, MySQL) | En línea, `noindex`, con el contenido real cargado. Verificado el 2026-10-27: al día con `main` (commit `c08b750`, Novedades y pop-ups), migraciones corridas, cron y respaldos activos |
-| **Producción** | `https://hierrometal.com` (Plesk, IP `64.176.19.59`, PHP 8.3, MariaDB 10.6) | **Desplegada y verificada el 2026-10-27, todavía sin publicar:** falta apuntar el DNS (hoy en Hostinger, estacionado en `2.57.91.91`) y emitir el SSL. Detalle en `08-deploy-plesk.md` §11 |
+| **Producción** | `https://hierrometal.com.py` (Plesk, IP `64.176.19.59`, PHP 8.3, MariaDB 10.6) | **En línea desde el 2026-10-27**, con SSL (Let's Encrypt), cron y correo por el SMTP de Hostinger, indexable. Detalle y trampas en `08-deploy-plesk.md` §11 |
 
 - **Repositorio:** `git@github.com:Leonshy/hierro-metal-web-insitucional.git` (privado). `main` es el trabajo; `deploy-web`
   es el contenido de `web/` como raíz, lo genera `web/deploy/rama-deploy.sh` y es lo único que baja el servidor.
-- **Panel:** `/panel` (`SITIO_ADMIN_PATH`). Cuentas: el administrador del cliente (`admin@hierrometal.com.py`) y la
+- **Panel:** `/panel` (`SITIO_ADMIN_PATH`). Cuentas: el administrador del cliente (`admin@hierrometal.com`) y la
   cuenta protegida de mantenimiento (`webmaster@webparaguay.com`). **Las contraseñas no se guardan en el repo**;
-  las tiene el equipo y las de staging son provisorias (cambiarlas antes de producción).
-- **Calidad medida al cierre:** 561 tests Pest en verde (2.514 aserciones), PHPStan nivel 5 sin errores (sin ignores ni baseline),
+  las tiene el equipo y las de staging son provisorias y **se copiaron a producción: hay que cambiarlas** (cada usuario desde su perfil del panel).
+- **Calidad medida al cierre:** 570 tests Pest en verde (2.539 aserciones), PHPStan nivel 5 sin errores (sin ignores ni baseline),
   Pint limpio, `composer audit` y `npm audit` en 0. Lighthouse móvil: accesibilidad 100 y buenas prácticas 100 en
   home, ficha de producto, ubicación, servicios y contacto (el SEO marca 69 sólo por el `noindex` de los entornos
   de prueba; en producción desaparece).
@@ -89,6 +89,12 @@ Reglas de comportamiento del panel (verificadas con tests):
   día o siempre) y período de vigencia. Si hay varios vigentes se muestra uno (el primero en el orden del panel).
   **Nunca aparece en `/contacto`**, donde la persona está llenando el formulario. La frecuencia se recuerda en el
   navegador (`sessionStorage`/`localStorage`), sin cookies. Staging hoy tiene 0 pop-ups cargados.
+- **El correo es obligatorio en el formulario de cotización** (antes era opcional). Quien lo completa recibe un correo de
+  **«Recibimos tu pedido»** (`EnviarConfirmacionCotizacion` / `CotizacionConfirmada`): sale una sola vez por pedido
+  (`cotizaciones.confirmacion_enviada_at`), nunca por spam, en un trabajo aparte del aviso interno (un fallo de uno no afecta
+  al otro), con `Reply-To` al correo que recibe las cotizaciones. **No repite lo que escribió la persona** (el correo sale
+  desde la casilla del cliente y el formulario no debe servir para mandar texto ajeno a cualquier dirección): sólo un saludo
+  con el primer nombre, filtrado a letras, y los datos de contacto. Los pedidos anteriores, sin correo, siguen existiendo.
 - Favicon con el logo (`public/favicon.svg`, `favicon.ico`, `apple-touch-icon.png`), también en el panel.
 - Cambios de contraste de la auditoría final: rótulo de la tarjeta oscura del catálogo y enlace subrayado en el
   texto de consentimiento del formulario.
@@ -108,12 +114,18 @@ Reglas de comportamiento del panel (verificadas con tests):
 
 **Del cliente o del equipo (no es código)**
 
-- **Cutover de producción:** en Hostinger (Zona DNS) cambiar **sólo el registro A de `@`** a `64.176.19.59`; **no tocar MX ni TXT**
-  (el correo del cliente está en Hostinger). Después emitir Let's Encrypt en Plesk y repetir el rastreo de `08` §11.
-- **Antes de entregar producción:** cambiar las contraseñas provisorias de `admin@hierrometal.com` y `webmaster@webparaguay.com`
-  (se copiaron de staging) y cargar el SMTP real del cliente en el `.env` (hoy `MAIL_MAILER=log`: los avisos de cotización
-  **no salen por correo** hasta entonces) junto con `SITIO_COTIZACIONES_EMAIL`.
-- Staging puede despublicarse: producción no depende de él (verificado en `08` §11.5).
+- **Contraseñas provisorias:** `admin@hierrometal.com` y `webmaster@webparaguay.com` heredaron las de staging. Cambiarlas desde
+  el perfil de cada usuario en el panel (la de `webmaster@` la cambia quien mantiene la cuenta).
+- **Correo:** confirmar que los avisos y las confirmaciones llegan a la bandeja (no a spam) y que el dominio tiene SPF
+  (`v=spf1 include:_spf.mail.hostinger.com ~all`) y DKIM; el DKIM de Hostinger ya está, el SPF no se pudo verificar.
+- **Redactar con el cliente** el texto del correo «Recibimos tu pedido» (lo escribió el equipo, con voseo y sin plazos) y
+  **actualizar la política de privacidad** para mencionar que el correo se usa para enviar esa confirmación.
+- En Plesk: poner `hierrometal.com.py` como *Preferred domain* (hoy `www` y el dominio sin `www` responden 200 los dos; la canónica
+  ya apunta al dominio sin `www`).
+- **Sitio sobrante `hierrometal.com`** (primer intento de producción, dominio equivocado): borrar la suscripción de Plesk (también
+  borra su base) y quitar su *deploy key* en GitHub, o convertirla en redirección 301 hacia `.com.py` si el cliente quiere que
+  ese dominio también lleve al sitio. El correo `@hierrometal.com` está en Hostinger y no depende de esa suscripción.
+- Staging puede despublicarse: producción no depende de él (verificado en `08` §11).
 - Que el cliente revise la **política de privacidad** (referencia legal, R5 del legajo); en staging ya está publicada.
 - Confirmar la **recepción real del correo** de cotización en la casilla del cliente.
 - Cargar **IDs de GTM/GA4 y Meta** y las **claves de Turnstile** (si se decide activarlo) en Integraciones, y las

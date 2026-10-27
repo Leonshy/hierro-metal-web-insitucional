@@ -177,15 +177,22 @@ sitemap a Search Console.
 
 ## 11. Producción (2026-10-27) — lo que se hizo y lo que enseñó
 
-Producción: `https://hierrometal.com`, Plesk en `64.176.19.59` (usuario del sistema `hierrometal.com_j9et7w6kd9m`, SSH puerto 22 con la
-clave dedicada `~/.ssh/hierro_prod`), app directo en `httpdocs/`, document root `httpdocs/public`, base `hierrome_web_db`.
-Plesk muestra PHP 8.4 para el dominio, pero el cron y los comandos usan `/opt/plesk/php/8.3/bin/php` (igual que staging).
-**La base es MariaDB 10.6** (staging era MariaDB 10.2): importar hacia una versión más nueva no dio problemas.
+Producción: **`https://hierrometal.com.py`**, Plesk en `64.176.19.59` (el mismo servidor donde se armó primero, por error, una suscripción
+para `hierrometal.com`: ver «El dominio equivocado»). Suscripción del `.com.py`: usuario del sistema `hierrome`, SSH puerto 22 con la clave
+dedicada `~/.ssh/hierro_prod` (la agrega el cliente desde el *SSH Terminal* de Plesk), app directo en `httpdocs/`, **document root
+`httpdocs/public`**, base `hierrome_db_web`. Plesk muestra PHP 8.4 para el dominio, pero el cron y los comandos usan
+`/opt/plesk/php/8.3/bin/php` (igual que staging). **La base es MariaDB 10.6** (staging era MariaDB 10.2): importar hacia una versión más
+nueva no dio problemas. Cada suscripción de Plesk es un usuario aislado: hay que autorizar la clave SSH y generar una *deploy key* de
+GitHub **por suscripción** (GitHub no deja repetir la misma clave en un repo).
 
-**Orden que funcionó:** agregar la clave SSH (desde el *SSH Terminal* de Plesk) → generar la *deploy key* de sólo lectura en el servidor y
-cargarla en GitHub → clonar `deploy-web` (borrando antes el `index.html` de relleno) → `composer install --no-dev -o` → carpetas de
-`storage/` → `npm run build` local y `scp -r public/build/*` → `.env` (lo escribe el cliente) + `key:generate` → cron en Plesk →
-importar el volcado → copiar medios y catálogo → `storage:link`, `migrate --force` (nada que migrar) y cachés.
+**Orden que funcionó:** agregar la clave SSH → generar la *deploy key* de sólo lectura en el servidor y cargarla en GitHub → clonar
+`deploy-web` (borrando antes el `index.html` de relleno) → `composer install --no-dev -o` → carpetas de `storage/` → `npm run build` local
+y `scp -r public/build/*` → `.env` (lo escribe el cliente) + `key:generate` → importar el volcado → copiar medios y catálogo →
+`storage:link`, `migrate --force` y cachés → **verificar el document root** → cron en Plesk → SSL → correo (SMTP) → cotización de prueba.
+
+**El dominio equivocado.** El primer intento se armó en `hierrometal.com` y después se aclaró que producción es `hierrometal.com.py`. Se rehízo
+en una suscripción nueva copiando la base, los medios y el catálogo del sitio ya armado. Para no repetirlo: confirmar el dominio de producción
+con el cliente **antes** de crear la suscripción. La suscripción de `hierrometal.com` quedó sobrante (ver `09` §6).
 
 **Trampas encontradas (no repetir)**
 
@@ -194,24 +201,41 @@ importar el volcado → copiar medios y catálogo → `storage:link`, `migrate -
 2. **El lockfile tiene que resolverse para PHP 8.3.** Generado con el PHP 8.5 de la máquina, Composer eligió Symfony 8.x (exige PHP ≥ 8.4.1)
    y `composer install` falló en el servidor. Ahora `composer.json` fija `config.platform.php = 8.3.0` y se corre Composer con `php@8.3`.
    Usar `-w` y versiones exactas (`composer update filament/filament:5.8.3 …`), no `--with-all-dependencies` a ciegas.
-3. **Datos (Opción A, copia de staging):** volcado con `mysqldump` **sin los datos** de `cotizaciones`, `cotizacion_adjuntos`, `activity_log`,
-   `sessions`, `cache`, `cache_locks`, `jobs`, `failed_jobs` y `job_batches` (sí con su estructura). Antes de importar se reemplazó la **URL canónica de la
-   portada** (apuntaba a staging). Las credenciales se pasan con un archivo `--defaults-extra-file` que genera Laravel desde su propia
-   configuración (permisos 600, se borra al terminar): `source .env` en el shell rompe contraseñas con `$` o `#`. No borrar el volcado de origen
-   hasta verificar que la copia llegó.
-4. **El catálogo PDF vive en `storage/app/private/catalogo/`**, no en la carpeta pública: sin él `/catalogo.pdf` da 404. En ese mismo directorio
-   hay respaldos locales (~790 MB) y los adjuntos de las cotizaciones de prueba: **no se copian**. Los medios van en `storage/app/public/`.
-5. **Independencia de staging verificada** (se puede despublicar): sin referencias a `hierrometal.webparaguay.com` en la base completa (sólo el
+3. **Document root: verificarlo antes de que el dominio reciba tráfico.** La suscripción nueva quedó con la raíz en `httpdocs/` y no en
+   `httpdocs/public/`: la app no arrancaba (403/404 de Plesk) y el código fuente quedó público (`/artisan` daba 200; `.env` y `.git` daban 403 por las
+   reglas de nginx para archivos ocultos). Prueba obligatoria tras crear la suscripción: `/artisan`, `/composer.json` y `/app/Models/User.php`
+   deben dar 403/404, y `/` debe dar 200.
+4. **El firewall del servidor bloquea la IP** de quien prueba rutas típicas de escáner (`/.env`, `/.git/config`, `/vendor/…`) o hace muchas
+   pruebas seguidas: puertos 80/443 «rechazados» mientras SSH sigue abierto. Lo levanta el cliente desde Plesk. No probar esas rutas contra producción.
+5. **Datos (copia de otro entorno):** volcado con `mysqldump` **sin los datos** de `cotizaciones`, `cotizacion_adjuntos`, `activity_log`,
+   `sessions`, `cache`, `cache_locks`, `jobs`, `failed_jobs` y `job_batches` (sí con su estructura). Si el origen ya recibió visitas, también quitar
+   sus `sessions` y `cache` (son residuos de las pruebas). Antes de importar se reemplaza la **URL canónica de la portada** y cualquier dominio
+   del entorno de origen. Las credenciales se pasan con un archivo `--defaults-extra-file` que genera Laravel desde su propia configuración
+   (permisos 600, se borra al terminar): `source .env` en el shell rompe contraseñas con `$` o `#`. No borrar el volcado de origen hasta
+   verificar que la copia llegó. Entre suscripciones del mismo servidor los archivos pasan por la máquina local con `tar` por `ssh | ssh`.
+6. **El catálogo PDF vive en `storage/app/private/catalogo/`**, no en la carpeta pública: sin él `/catalogo.pdf` da 404. En ese mismo
+   directorio hay respaldos locales (~790 MB en staging) y los adjuntos de las cotizaciones de prueba: **no se copian**. Los medios van en `storage/app/public/`.
+7. **Independencia de staging verificada** (se puede despublicar): sin referencias a `hierrometal.webparaguay.com` en la base completa (sólo el
    correo `webmaster@webparaguay.com`, que es un usuario), en `app/`, `config/`, `resources/`, `routes/`, `database/` y `public/`, ni en el HTML
-   de las 18 páginas servidas. El HTML sólo enlaza a `hierrometal.com`, WhatsApp, Instagram, Facebook y Google Maps.
-6. Revisar que `key:generate` realmente escribió `APP_KEY` (una vez quedó vacío) y que el `.env` quede en 600 (`nano` lo deja en 644).
-7. **`SESSION_SECURE_COOKIE=true`:** el login del panel no funciona hasta que haya HTTPS (esperado antes del cutover).
-8. **Correo:** con `MAIL_MAILER=log` los avisos de cotización se escriben en `storage/logs` y no salen. El cliente usa correo de Hostinger: cargar
-   `MAIL_*` y `SITIO_COTIZACIONES_EMAIL` en el `.env` antes de entregar.
-9. En zsh no guardar opciones de `curl`/`ssh`/`scp` en variables (no se separan las palabras): usar una función.
+   de las 18 páginas servidas. El HTML sólo enlaza al dominio propio, WhatsApp, Instagram, Facebook y Google Maps.
+8. **`.env`:** el bloque que lo crea no debe incluir `key:generate` (una vez dejó `APP_KEY` vacío): correrlo aparte y comprobar que escribió
+   `APP_KEY=base64:…`. `nano` deja el archivo en 644: `chmod 600`. Los comandos `artisan` se corren **desde `~/httpdocs`** (desde la carpeta
+   personal da «Could not open input file: artisan»). Un `sed` que edita `.env` deja un `.env.bak` con la contraseña de la base: borrarlo.
+   Después de tocar el `.env`: `php artisan config:cache`.
+9. **`SESSION_SECURE_COOKIE=true`:** el login del panel no funciona sin HTTPS (esperado hasta emitir el SSL).
+10. **Correo (SMTP del cliente en Hostinger):** `MAIL_MAILER=smtp`, `MAIL_SCHEME=smtps`, `MAIL_HOST=smtp.hostinger.com`, `MAIL_PORT=465`
+    (o 587 con `MAIL_SCHEME=smtp`), `MAIL_USERNAME` = la casilla completa y `MAIL_FROM_ADDRESS` = **esa misma casilla** (Hostinger rechaza
+    remitentes que no son suyos). El destinatario de los avisos se carga en el panel (Configuraciones → Generales) o en
+    `SITIO_COTIZACIONES_EMAIL`. Con `MAIL_MAILER=log` los avisos no salen: la app lo deja en el log («no hay correo de notificación
+    configurado») sin perder el pedido. Comprobar antes que el servidor llega al SMTP (`/dev/tcp/smtp.hostinger.com/465`).
+11. **Prueba de punta a punta de la cotización:** enviar el formulario con datos ficticios (nombre «PRUEBA TECNICA - borrar») y un correo del
+    cliente, esperar el cron (cada minuto) y mirar `mail_enviado_at` y `confirmacion_enviada_at` en la fila; después borrarla con `forceDelete()`
+    (la papelera la conserva) y vaciar `storage/logs/laravel.log`. Que el correo **llegue a la bandeja** lo confirma una persona: la app sólo sabe
+    que Hostinger lo aceptó.
+12. En zsh no guardar opciones de `curl`/`ssh`/`scp` en variables (no se separan las palabras): usar una función. En comandos `ssh '…'`
+    con `tinker --execute="…"` hay que escapar `\$` y `\"`; un `for c in …; do artisan \$c` mal escapado ejecuta `artisan "$c"` y falla en silencio.
 
-**Cutover (pendiente).** El dominio está registrado en Hostinger con sus servidores de nombres de *dns-parking* y hoy apunta a una página de
-«dominio estacionado» (`2.57.91.91`): no hay un sitio vivo que romper. El correo también está en Hostinger (MX `mx1`/`mx2.hostinger.com`,
-SPF `include:_spf.mail.hostinger.com`): **cambiar únicamente el registro A de `@` a `64.176.19.59`**, sin tocar MX ni TXT (no hay AAAA).
-Con el DNS propagado: Let's Encrypt en Plesk, repetir el rastreo, probar el login del panel y una cotización de punta a punta (y borrarla),
-cambiar las contraseñas provisorias y enviar el sitemap a Search Console.
+**Cutover.** El dominio `.com.py` ya apuntaba al servidor (registro A de `@` y `www`, servidores de nombres *dns-parking* de Hostinger); el
+correo del cliente está en Hostinger (MX `mx1`/`mx2.hostinger.com`, DKIM de Hostinger): **no se toca el MX ni el TXT**. Se emitió Let's
+Encrypt en Plesk (válido hasta 2027-01-25) y se verificó desde internet: HTTPS válido, `http` → `https` con 301, gzip, caché de assets
+de 1 año, 14 páginas en 200 y el rastreo de 18 páginas sin referencias a otros dominios. Falta enviar el sitemap a Search Console.

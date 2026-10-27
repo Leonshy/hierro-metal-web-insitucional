@@ -65,6 +65,9 @@ Tres insumos:
 10. **Adjuntos (plano/despiece):** lista blanca `pdf, jpg, jpeg, png, webp, dwg, dxf, xlsx`,
     máximo 10 MB por archivo y 3 archivos. Se guardan fuera de `public/`, se sirven sólo
     autenticado desde el panel. Nunca se ejecutan ni se renderizan inline sin sanitizar.
+10 bis. **El correo del formulario es obligatorio** y quien lo completa recibe «Recibimos tu pedido» (una vez por pedido, nunca
+    por spam, aparte del aviso interno). Ese correo **no repite lo que escribió la persona**: sale desde la casilla del cliente y
+    el formulario no debe poder usarse para mandar texto ajeno a cualquier dirección.
 
 ### Diseño y frontend
 
@@ -165,6 +168,12 @@ Tres insumos:
   (`/opt/homebrew/bin/php`) para `artisan`, PHPStan (`--memory-limit=1G`) y Pest.
 - Un texto sembrado vive en la base: cambiar un seeder **no** actualiza staging/producción (ver `docs/08` §10).
 - El contenido del panel se prueba contra el sitio público (el test debe abrir la URL), no sólo contra el formulario.
+
+- **Producción es `hierrometal.com.py`** (no `.com`). Antes del primer pedido a un sitio nuevo, comprobar que el *document root*
+  es `httpdocs/public` (`/artisan` debe dar 404): con la raíz en `httpdocs/` el código queda público. No probar rutas de escáner
+  (`/.env`, `/.git/config`, `/vendor/…`) contra producción: el firewall del servidor bloqueó la IP por eso.
+- Los textos de la interfaz que cambian por una decisión de producto (p. ej. «Opcional» → obligatorio) se registran en `docs/04-mejoras.md`
+  o `docs/09` y se avisan al cliente: su contenido es la fuente de verdad.
 
 ## 6. Herramientas del entorno
 
