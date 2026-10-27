@@ -118,6 +118,7 @@ Tres insumos:
 | `/productos` | `#/productos` | listado de familias |
 | `/productos/{familia}` | anclas `#chapas`, `#perfiles`… | **nueva**: ficha de familia (ver `docs/04-mejoras.md` M3) |
 | `/servicios` | `#/servicios` | servicios |
+| `/novedades` y `/novedades/{slug}` | — | **nueva**: blog administrado desde el panel; la sección se oculta (404) mientras no haya novedades visibles |
 | `/calidad` | `#/calidad` | prosa + compromisos |
 | `/preguntas-frecuentes` | `#/faq` | FAQ |
 | `/ubicacion` | `#/ubicacion` | ubicación + mapa |
@@ -148,6 +149,8 @@ Tres insumos:
 | Despiece | Lista de piezas con medidas y cantidades que manda el cliente |
 | CI o RUC | Documento de quien pide la cotización; obligatorio en el formulario (`ci_ruc`) |
 | Sección | Página estructural del sitio (Inicio, Productos…); no se crea ni se borra, se edita en su pantalla del panel |
+| Novedad | Entrada del blog (`/novedades`); visible si está activa y su fecha ya llegó |
+| Pop-up | Imagen con enlace que se muestra al visitante según vigencia y frecuencia; nunca en `/contacto` |
 | Página legal | Página «libre» (privacidad, términos…) creada en el panel; no es una sección |
 
 ## 5c. Reglas de trabajo aprendidas (octubre 2026)

@@ -1,4 +1,4 @@
-# 09 — Estado del proyecto (octubre 2026)
+# 09 — Estado del proyecto (octubre 2026, actualizado 2026-10-27)
 
 > Foto del proyecto al cierre de la construcción y del primer deploy a staging. Es el documento para
 > retomar el trabajo sin haber estado: qué existe, cómo está armado, qué se decidió en el camino, qué se
@@ -10,7 +10,7 @@
 | Entorno | Dirección | Estado |
 |---|---|---|
 | Local | `http://localhost:8000` (`php artisan serve`) | Al día con `main` |
-| **Staging** | `https://hierrometal.webparaguay.com` (Plesk de webparaguay, PHP 8.3, MySQL) | En línea, `noindex`, con el contenido real cargado |
+| **Staging** | `https://hierrometal.webparaguay.com` (Plesk de webparaguay, PHP 8.3, MySQL) | En línea, `noindex`, con el contenido real cargado. Verificado el 2026-10-27: al día con `main` (commit `c08b750`, Novedades y pop-ups), migraciones corridas, cron y respaldos activos |
 | Producción | — | **Sin definir** (se decide después de la aprobación del cliente) |
 
 - **Repositorio:** `git@github.com:Leonshy/hierro-metal-web-insitucional.git` (privado). `main` es el trabajo; `deploy-web`
@@ -18,7 +18,7 @@
 - **Panel:** `/panel` (`SITIO_ADMIN_PATH`). Cuentas: el administrador del cliente (`admin@hierrometal.com.py`) y la
   cuenta protegida de mantenimiento (`webmaster@webparaguay.com`). **Las contraseñas no se guardan en el repo**;
   las tiene el equipo y las de staging son provisorias (cambiarlas antes de producción).
-- **Calidad medida al cierre:** 517 tests Pest en verde, PHPStan nivel 5 sin errores (sin ignores ni baseline),
+- **Calidad medida al cierre:** 561 tests Pest en verde (2.520 aserciones), PHPStan nivel 5 sin errores (sin ignores ni baseline),
   Pint limpio, `composer audit` y `npm audit` en 0. Lighthouse móvil: accesibilidad 100 y buenas prácticas 100 en
   home, ficha de producto, ubicación, servicios y contacto (el SEO marca 69 sólo por el `noindex` de los entornos
   de prueba; en producción desaparece).
@@ -31,7 +31,7 @@ translatable). El sitio es sólo en español; los textos traducibles se guardan 
 segundo idioma sea configuración y no reconstrucción.
 
 **Modelos de dominio:** `Familia`, `Linea` (con tablas de medidas), `Servicio`, `Paso`, `Compromiso`, `Diferencial`,
-`Faq`, `Horario`, `Rubro`, `Cotizacion` (+ `CotizacionAdjunto`), `Page` (páginas de sección y legales), `SeccionInicio`
+`Faq`, `Horario`, `Rubro`, `Novedad`, `Popup`, `Cotizacion` (+ `CotizacionAdjunto`), `Page` (páginas de sección y legales), `SeccionInicio`
 (orden y activación de las secciones de la portada), `SiteSetting`, `IntegrationSetting`, `Media`, `Menu`/`MenuItem`, `User`.
 
 **Capas que conviene conocer**
@@ -47,10 +47,12 @@ segundo idioma sea configuración y no reconstrucción.
 
 ## 3. El panel
 
-Menú **Contenido**: una pantalla por sección del sitio — Inicio (activar y ordenar las secciones de la portada),
+Menú **Contenido**: una pantalla por sección del sitio — Inicio (activar y ordenar las secciones de la portada, Novedades incluida),
 Productos (familias, líneas, medidas, fotos, botón de catálogo), Servicios (servicios y pasos), Calidad (política en
 bloques editables + compromisos + franja), Preguntas frecuentes, Ubicación, Contacto. Cada pantalla edita
 encabezado, textos y SEO, y tiene **Publicada / Borrador** con botón **Vista previa**.
+
+Además, en **Contenido**: **Novedades** (blog) y **Pop-ups** (ver §4).
 
 Menú **Páginas legales**: páginas libres (política de privacidad, términos…) con constructor de bloques.
 **Cotizaciones**: bandeja con estados, asignado, notas internas, adjuntos, búsqueda por CI/RUC, exportación CSV.
@@ -77,6 +79,16 @@ Reglas de comportamiento del panel (verificadas con tests):
   muestra en la bandeja, el correo de aviso y el CSV; no se envía a Meta. La política de privacidad lo menciona.
 - **El pie lista solas las páginas legales publicadas** (`Page::enlacesLegales()`): al publicar una nueva aparece
   al lado de la anterior, separada por un punto; al pasarla a borrador o borrarla, desaparece.
+- **Novedades (blog)** — `/novedades` y `/novedades/{slug}`, administradas en Contenido → Novedades (título, resumen,
+  contenido con editor saneado, foto, fecha de publicación, SEO). Una novedad se ve si está activa y su fecha ya llegó
+  (una fecha futura la deja programada). Las últimas 3 aparecen en la portada si la sección de Inicio está activa y
+  entran al sitemap. **Mientras no haya ninguna visible, la sección entera desaparece** (menú, pie, portada, sitemap y
+  la ruta responde 404): es el comportamiento esperado, no un error. Staging hoy tiene 0 novedades cargadas.
+- **Pop-ups de imagen con enlace** — Contenido → Pop-ups. Imagen, texto alternativo, enlace (interno o externo, con
+  opción de nueva pestaña), dónde se muestra (sólo inicio o todo el sitio), frecuencia (una vez por visita, una vez al
+  día o siempre) y período de vigencia. Si hay varios vigentes se muestra uno (el primero en el orden del panel).
+  **Nunca aparece en `/contacto`**, donde la persona está llenando el formulario. La frecuencia se recuerda en el
+  navegador (`sessionStorage`/`localStorage`), sin cookies. Staging hoy tiene 0 pop-ups cargados.
 - Favicon con el logo (`public/favicon.svg`, `favicon.ico`, `apple-touch-icon.png`), también en el panel.
 - Cambios de contraste de la auditoría final: rótulo de la tarjeta oscura del catálogo y enlace subrayado en el
   texto de consentimiento del formulario.
@@ -109,6 +121,7 @@ Reglas de comportamiento del panel (verificadas con tests):
 - **Prueba de restauración de un respaldo** (los respaldos corren de noche; falta probar restaurar uno).
 - Dependencias con versión nueva disponible, sin urgencia (p. ej. Filament 5.9, Pest 5): actualizar en un paso aparte,
   con la suite completa.
+- Verificar el aspecto de Novedades y pop-ups con Lighthouse (el 100/100 de arriba se midió antes de sumarlos).
 - Columnas heredadas de la tabla `pages` que ya no se usan (`site_section`, `site`, `template`, `cover_media_id`).
 - El servidor responde `X-Powered-By: PleskLin` (lo agrega Plesk/nginx, no la app); se puede ocultar en el panel de Plesk.
 
