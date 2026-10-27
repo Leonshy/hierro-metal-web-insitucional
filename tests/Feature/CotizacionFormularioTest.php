@@ -140,7 +140,8 @@ it('sin correo de notificación configurado el pedido igual se guarda y queda pe
 
     $this->post('/contacto', pedidoValido())->assertRedirect(route('cotizaciones.gracias'));
 
-    Mail::assertNothingSent();
+    // El aviso interno queda pendiente; quien pidió la cotización igual recibe su «pedido recibido».
+    Mail::assertNotSent(CotizacionRecibida::class);
     expect(Cotizacion::query()->firstOrFail()->mail_enviado_at)->toBeNull();
 
     SiteSetting::set('email_notificacion_cotizaciones', 'ventas@ejemplo.test');
