@@ -28,7 +28,7 @@ El panel queda en `/{SITIO_ADMIN_PATH}` (por defecto `/panel`).
 ```bash
 vendor/bin/pint --test
 vendor/bin/phpstan analyse --memory-limit=1G     # nivel 5, sin ignores ni baseline
-vendor/bin/pest --parallel                        # 517 tests
+vendor/bin/pest --parallel                        # 561 tests
 composer audit && npm audit                       # 0 vulnerabilidades antes de desplegar
 ```
 
@@ -44,7 +44,7 @@ compilan en local y se suben por SCP; nunca se corre Node en el servidor.
 
 ## Qué hay
 
-Sitio público de 8 páginas más páginas legales dinámicas, catálogo con fichas y medidas, formulario de cotización
+Sitio público de 8 páginas más páginas legales dinámicas, catálogo con fichas y medidas, novedades (blog) y pop-ups administrables, formulario de cotización
 (con CI/RUC, adjuntos y anti-spam), panel por secciones con Publicada/Borrador y vista previa, bandeja de
 cotizaciones, integraciones con consentimiento (GTM, Meta, Turnstile), SEO (sitemap, JSON-LD, Open Graph) y
 respaldos. Detalle en `docs/09`.
